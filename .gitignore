@@ -1,0 +1,62 @@
+# ============================================================================
+# scycle-pipeline .gitignore
+# Goal: commit the tool + config + small normalized validation artifacts.
+# Exclude large/regenerable data (DBs, downloads, per-genome pipeline outputs).
+# NOTE: resources/blast_db/ holds cached BLAST reference seqs (incl. 4 S proteins
+# whose UniProt accessions were since deleted) — archive it SEPARATELY (e.g.
+# Zenodo) and footnote in methods; it is intentionally NOT committed here.
+# ============================================================================
+
+# ---- Python / Snakemake / OS cruft ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.snakemake/
+.DS_Store
+*.log
+
+# ---- Local agent / planning state (not part of the public tool) ----
+.claude/
+
+# ---- Large regenerable resources (archive separately) ----
+resources/.cache/
+resources/hmm/
+resources/blast_db/
+
+# ---- Pipeline run outputs ----
+results/
+
+# ---- Validation: KEGG API cache ----
+validation/.kegg_cache/
+
+# ---- Validation MAG-realism study ----
+# Keep labeled *.fna + reports; drop per-sample pipeline scratch.
+results_p3_mags/*/
+!results_p3_mags/figures/
+
+# ---- Comparators: heavy scratch ----
+*.zip
+
+# Vendored third-party SCycDB (Yu et al.) — do NOT redistribute; user supplies it.
+# build_scycdb_tsv.py regenerates the normalized scycdb.tsv we keep.
+comparators/SCyc/data/
+comparators/scycdb_out/
+
+# GTDB-500 concordance: keep normalized *.tsv (incl. metabolic.tsv), reports,
+# DIR_*/CONCORDANCE outputs, selection.tsv, query faa/blast, select script;
+# drop downloads, proteomes, per-tool run dirs.
+comparators/gtdb500_s/gtdb_dl/
+comparators/gtdb500_s/proteomes/
+comparators/gtdb500_s/results/
+comparators/gtdb500_s/scycdb_out/
+
+# METABOLIC GTDB-500 reproduction: keep the 2 scripts (run_batches.sh,
+# merge_metabolic.sh); drop batches/out/kegg_all scratch + intermediate rows.
+comparators/metabolic_gtdb500/batches/
+comparators/metabolic_gtdb500/out/
+comparators/metabolic_gtdb500/kegg_all/
+comparators/metabolic_gtdb500/*_rows*.tsv
+
+# Disabled/swapped-out validation inputs (scratch)
+*.swapped_out

@@ -1,0 +1,7 @@
+Bin Id	Marker lineage	# genomes	# markers	# marker sets	Completeness	Contamination	Strain heterogeneity	Genome size (bp)	# ambiguous bases	# scaffolds	# contigs	N50 (scaffolds)	N50 (contigs)	Mean scaffold length (bp)	Mean contig length (bp)	Longest scaffold (bp)	Longest contig (bp)	GC	GC std (scaffolds > 1kbp)	Coding density	Translation table	# predicted genes	0	1	2	3	4	5+
+O1_Sulfurovum_Auka	k__Bacteria (UID3060)	138	335	244	87.59	3.81	42.86	1872987	0	411	411	6216	6216	4557	4557	25917	25917	38.2	3.03	92.02	11	2114	40	281	14	0	0	0
+O2_Thioglobus_Saanich	p__Proteobacteria (UID3880)	1495	242	151	98.01	0.66	100.00	1225351	0	85	85	23203	23203	14415	14415	62090	62090	39.3	1.67	94.15	11	1394	3	238	1	0	0	0
+O3_Parabeggiatoa_Guaymas	c__Gammaproteobacteria (UID4267)	119	544	284	79.50	3.52	13.33	8783141	0	1343	1343	7669	7669	6539	6539	45324	45324	41.8	2.57	70.26	11	6958	113	420	9	2	0	0
+R1_Desulfofervidus_Auka	k__Bacteria (UID3060)	138	338	246	75.03	4.94	25.00	1934283	0	628	628	3910	3910	3080	3080	19036	19036	38.6	3.74	90.33	11	2302	76	248	13	1	0	0
+R2_Thermodesulfobacterium_AUK139	k__Bacteria (UID3060)	138	331	240	78.96	1.04	66.67	1146682	0	137	137	10397	10397	8369	8369	27233	27233	32.7	1.18	94.72	11	1268	73	255	3	0	0	0
+R3_Desulfobacteraceae_4572-130_Guaymas	c__Deltaproteobacteria (UID3216)	83	247	155	80.65	0.00	0.00	1943540	10	24	24	118521	118521	80980	80980	236472	236472	29.5	1.22	85.54	11	1727	77	170	0	0	0	0

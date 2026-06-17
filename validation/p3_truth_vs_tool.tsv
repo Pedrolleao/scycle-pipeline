@@ -1,0 +1,9 @@
+sample	expected_phenotype	scycle_direction	metabolic_dsrAB_KOs	metabolic_sox_KOs	dram_dissim_SR(and_ox)	dram_Sox	direction_resolution
+R1_Desulfofervidus_Auka	reductive	ambiguous	K11180	-	True	False	honest non-call
+R2_Thermodesulfobacterium_AUK139	reductive	reductive	K11181	-	True	False	✓
+R3_Desulfobacteraceae_4572-130_Guaymas	reductive	reductive	K11180,K11181	-	True	False	✓
+O1_Sulfurovum_Auka	Sox-only (no rDsr)	(no dsr)	-	K17226,K17227	False	True	(no dsr, n/a)
+O2_Thioglobus_Saanich	oxidative	oxidative	K11180,K11181	K17222,K17223,K17226,K17227	True	True	✓
+O3_Parabeggiatoa_Guaymas	oxidative	oxidative	K11180,K11181	K17222,K17223,K17226	True	True	✓
+Bacteroides_fragilis_NCTC9343	none (neg)	(no dsr)	-	-	False	False	(no dsr, n/a)
+Prochlorococcus_marinus_MED4	none (neg)	(no dsr)	-	-	False	False	(no dsr, n/a)

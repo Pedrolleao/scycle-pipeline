@@ -1,0 +1,401 @@
+resolution	tool	subset	metric	value	ci_lo	ci_hi	delta_vs_scycle	d_lo	d_hi	boot_p	mcnemar_p
+subunit	scycle	ALL	precision	0.952	0.934	0.968					
+subunit	scycle	ALL	recall	0.909	0.876	0.939					
+subunit	scycle	ALL	specificity	0.986	0.981	0.991					
+subunit	scycle	ALL	f1	0.930	0.910	0.947					
+subunit	scycle	ALL	mcc	0.910	0.886	0.931					
+subunit	kofam	ALL	precision	0.399	0.362	0.433	0.554	0.520	0.589	0.0000	0.0000
+subunit	kofam	ALL	recall	0.884	0.858	0.907	0.024	-0.011	0.060	0.1880	0.0000
+subunit	kofam	ALL	specificity	0.592	0.560	0.626	0.394	0.361	0.426	0.0000	0.0000
+subunit	kofam	ALL	f1	0.550	0.511	0.584	0.380	0.344	0.418	0.0000	0.0000
+subunit	kofam	ALL	mcc	0.404	0.375	0.431	0.506	0.470	0.541	0.0000	0.0000
+subunit	metabolic	ALL	precision	0.904	0.878	0.929	0.048	0.028	0.068	0.0000	0.0000
+subunit	metabolic	ALL	recall	0.508	0.476	0.541	0.401	0.358	0.438	0.0000	0.0000
+subunit	metabolic	ALL	specificity	0.984	0.978	0.989	0.002	-0.001	0.007	0.2724	0.0000
+subunit	metabolic	ALL	f1	0.651	0.622	0.680	0.279	0.248	0.309	0.0000	0.0000
+subunit	metabolic	ALL	mcc	0.616	0.585	0.648	0.294	0.259	0.325	0.0000	0.0000
+subunit	dram	ALL	precision	0.719	0.653	0.786	0.233	0.165	0.297	0.0000	0.0000
+subunit	dram	ALL	recall	0.585	0.519	0.649	0.324	0.253	0.394	0.0000	0.0000
+subunit	dram	ALL	specificity	0.930	0.906	0.952	0.056	0.034	0.079	0.0000	0.0000
+subunit	dram	ALL	f1	0.645	0.590	0.696	0.285	0.228	0.342	0.0000	0.0000
+subunit	dram	ALL	mcc	0.556	0.493	0.619	0.354	0.284	0.424	0.0000	0.0000
+subunit	scycdb	ALL	precision	0.404	0.362	0.441	0.549	0.513	0.587	0.0000	0.0000
+subunit	scycdb	ALL	recall	0.933	0.882	0.966	-0.024	-0.073	0.036	0.3686	0.0000
+subunit	scycdb	ALL	specificity	0.578	0.545	0.613	0.408	0.374	0.439	0.0000	0.0000
+subunit	scycdb	ALL	f1	0.563	0.519	0.602	0.367	0.326	0.411	0.0000	0.0000
+subunit	scycdb	ALL	mcc	0.435	0.397	0.467	0.475	0.433	0.520	0.0000	0.0000
+subunit	scycle	trap	precision	0.973	0.934	1.000					
+subunit	scycle	trap	recall	0.901	0.855	0.952					
+subunit	scycle	trap	specificity	0.996	0.989	1.000					
+subunit	scycle	trap	f1	0.936	0.909	0.965					
+subunit	scycle	trap	mcc	0.926	0.895	0.960					
+subunit	kofam	trap	precision	0.211	0.151	0.273	0.762	0.690	0.834	0.0000	0.0000
+subunit	kofam	trap	recall	0.617	0.554	0.684	0.284	0.213	0.364	0.0000	0.0000
+subunit	kofam	trap	specificity	0.609	0.562	0.658	0.387	0.335	0.436	0.0000	0.0000
+subunit	kofam	trap	f1	0.314	0.242	0.382	0.621	0.547	0.708	0.0000	0.0000
+subunit	kofam	trap	mcc	0.161	0.093	0.230	0.765	0.690	0.845	0.0000	0.0000
+subunit	metabolic	trap	precision	0.618	0.479	0.726	0.355	0.238	0.493	0.0000	0.0000
+subunit	metabolic	trap	recall	0.420	0.337	0.481	0.481	0.393	0.590	0.0000	0.0000
+subunit	metabolic	trap	specificity	0.956	0.942	0.970	0.040	0.024	0.056	0.0000	0.0000
+subunit	metabolic	trap	f1	0.500	0.400	0.571	0.436	0.356	0.547	0.0000	0.0000
+subunit	metabolic	trap	mcc	0.444	0.341	0.525	0.482	0.393	0.598	0.0000	0.0000
+subunit	dram	trap	precision	0.794	0.646	0.922	0.180	0.061	0.324	0.0002	0.0000
+subunit	dram	trap	recall	0.617	0.474	0.728	0.284	0.152	0.453	0.0000	0.0000
+subunit	dram	trap	specificity	0.973	0.949	0.992	0.023	0.006	0.046	0.0036	0.0000
+subunit	dram	trap	f1	0.694	0.568	0.787	0.241	0.142	0.380	0.0000	0.0000
+subunit	dram	trap	mcc	0.657	0.530	0.760	0.270	0.162	0.408	0.0000	0.0000
+subunit	scycdb	trap	precision	0.378	0.299	0.448	0.596	0.523	0.680	0.0000	0.0000
+subunit	scycdb	trap	recall	0.914	0.841	0.974	-0.012	-0.090	0.083	0.8830	0.0000
+subunit	scycdb	trap	specificity	0.745	0.708	0.781	0.251	0.213	0.288	0.0000	0.0000
+subunit	scycdb	trap	f1	0.534	0.448	0.604	0.402	0.321	0.501	0.0000	0.0000
+subunit	scycdb	trap	mcc	0.486	0.417	0.545	0.441	0.369	0.527	0.0000	0.0000
+subunit	scycle	nontrap	precision	0.949	0.928	0.967					
+subunit	scycle	nontrap	recall	0.910	0.871	0.944					
+subunit	scycle	nontrap	specificity	0.983	0.976	0.989					
+subunit	scycle	nontrap	f1	0.929	0.906	0.949					
+subunit	scycle	nontrap	mcc	0.905	0.877	0.932					
+subunit	kofam	nontrap	precision	0.438	0.396	0.477	0.511	0.476	0.550	0.0000	0.0000
+subunit	kofam	nontrap	recall	0.925	0.898	0.947	-0.015	-0.055	0.024	0.4982	0.0000
+subunit	kofam	nontrap	specificity	0.587	0.556	0.619	0.396	0.366	0.426	0.0000	0.0000
+subunit	kofam	nontrap	f1	0.595	0.553	0.632	0.334	0.295	0.377	0.0000	0.0000
+subunit	kofam	nontrap	mcc	0.450	0.421	0.477	0.455	0.416	0.495	0.0000	0.0000
+subunit	metabolic	nontrap	precision	0.959	0.932	0.980	-0.010	-0.028	0.008	0.3010	0.0000
+subunit	metabolic	nontrap	recall	0.522	0.485	0.559	0.388	0.340	0.434	0.0000	0.0000
+subunit	metabolic	nontrap	specificity	0.992	0.987	0.997	-0.009	-0.014	-0.005	0.0000	0.0000
+subunit	metabolic	nontrap	f1	0.676	0.642	0.708	0.254	0.217	0.288	0.0000	0.0000
+subunit	metabolic	nontrap	mcc	0.647	0.615	0.680	0.258	0.220	0.295	0.0000	0.0000
+subunit	dram	nontrap	precision	0.709	0.643	0.775	0.240	0.174	0.303	0.0000	0.0000
+subunit	dram	nontrap	recall	0.580	0.514	0.643	0.330	0.258	0.401	0.0000	0.0000
+subunit	dram	nontrap	specificity	0.917	0.889	0.943	0.066	0.040	0.093	0.0000	0.0000
+subunit	dram	nontrap	f1	0.638	0.586	0.687	0.291	0.238	0.347	0.0000	0.0000
+subunit	dram	nontrap	mcc	0.533	0.471	0.597	0.373	0.302	0.440	0.0000	0.0000
+subunit	scycdb	nontrap	precision	0.408	0.362	0.452	0.541	0.502	0.583	0.0000	0.0000
+subunit	scycdb	nontrap	recall	0.936	0.884	0.970	-0.026	-0.076	0.036	0.3586	0.0000
+subunit	scycdb	nontrap	specificity	0.526	0.491	0.565	0.457	0.421	0.489	0.0000	0.0000
+subunit	scycdb	nontrap	f1	0.568	0.520	0.612	0.361	0.316	0.410	0.0000	0.0000
+subunit	scycdb	nontrap	mcc	0.412	0.373	0.447	0.493	0.447	0.542	0.0000	0.0000
+step	scycle	ALL	precision	0.935	0.896	0.970					
+step	scycle	ALL	recall	0.949	0.908	0.980					
+step	scycle	ALL	specificity	0.976	0.961	0.990					
+step	scycle	ALL	f1	0.942	0.908	0.969					
+step	scycle	ALL	mcc	0.921	0.877	0.958					
+step	kofam	ALL	precision	0.381	0.330	0.431	0.554	0.499	0.612	0.0000	0.0000
+step	kofam	ALL	recall	0.971	0.940	0.993	-0.022	-0.067	0.021	0.3950	0.0000
+step	kofam	ALL	specificity	0.430	0.373	0.487	0.546	0.486	0.603	0.0000	0.0000
+step	kofam	ALL	f1	0.547	0.492	0.598	0.395	0.343	0.450	0.0000	0.0000
+step	kofam	ALL	mcc	0.378	0.326	0.428	0.543	0.479	0.605	0.0000	0.0000
+step	metabolic	ALL	precision	0.957	0.916	0.990	-0.022	-0.055	0.007	0.1492	0.0000
+step	metabolic	ALL	recall	0.650	0.594	0.708	0.299	0.220	0.368	0.0000	0.0000
+step	metabolic	ALL	specificity	0.989	0.979	0.997	-0.013	-0.025	-0.003	0.0090	0.0000
+step	metabolic	ALL	f1	0.774	0.733	0.815	0.168	0.118	0.214	0.0000	0.0000
+step	metabolic	ALL	mcc	0.734	0.687	0.784	0.187	0.128	0.239	0.0000	0.0000
+step	dram	ALL	precision	0.962	0.904	1.000	-0.026	-0.075	0.023	0.2892	0.0000
+step	dram	ALL	recall	0.365	0.315	0.421	0.584	0.505	0.651	0.0000	0.0000
+step	dram	ALL	specificity	0.995	0.987	1.000	-0.018	-0.032	-0.008	0.0010	0.0000
+step	dram	ALL	f1	0.529	0.471	0.585	0.413	0.338	0.482	0.0000	0.0000
+step	dram	ALL	mcc	0.528	0.474	0.581	0.393	0.315	0.462	0.0000	0.0000
+step	scycdb	ALL	precision	0.342	0.291	0.391	0.593	0.540	0.650	0.0000	0.0000
+step	scycdb	ALL	recall	0.956	0.898	0.993	-0.007	-0.066	0.061	0.8696	0.0000
+step	scycdb	ALL	specificity	0.335	0.286	0.389	0.641	0.588	0.690	0.0000	0.0000
+step	scycdb	ALL	f1	0.504	0.447	0.557	0.438	0.387	0.495	0.0000	0.0000
+step	scycdb	ALL	mcc	0.294	0.242	0.339	0.627	0.567	0.689	0.0000	0.0000
+step	scycle	assim_sulfate_reduction	precision	0.964	0.880	1.000					
+step	scycle	assim_sulfate_reduction	recall	1.000	1.000	1.000					
+step	scycle	assim_sulfate_reduction	specificity	0.938	0.800	1.000					
+step	scycle	assim_sulfate_reduction	f1	0.982	0.936	1.000					
+step	scycle	assim_sulfate_reduction	mcc	0.951	0.844	1.000					
+step	kofam	assim_sulfate_reduction	precision	0.750	0.605	0.886	0.214	0.088	0.355	0.0000	0.0078
+step	kofam	assim_sulfate_reduction	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0078
+step	kofam	assim_sulfate_reduction	specificity	0.438	0.190	0.688	0.500	0.250	0.750	0.0002	0.0078
+step	kofam	assim_sulfate_reduction	f1	0.857	0.755	0.939	0.125	0.046	0.220	0.0000	0.0078
+step	kofam	assim_sulfate_reduction	mcc	0.573	0.371	0.769	0.378	0.183	0.584	0.0004	0.0078
+step	metabolic	assim_sulfate_reduction	precision	0.964	0.880	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	assim_sulfate_reduction	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	assim_sulfate_reduction	specificity	0.938	0.789	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	assim_sulfate_reduction	f1	0.982	0.936	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	assim_sulfate_reduction	mcc	0.951	0.844	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	assim_sulfate_reduction	precision	0.960	0.870	1.000	0.004	0.000	0.020	0.7934	0.2500
+step	dram	assim_sulfate_reduction	recall	0.889	0.760	1.000	0.111	0.000	0.240	0.0850	0.2500
+step	dram	assim_sulfate_reduction	specificity	0.938	0.789	1.000	0.000	0.000	0.000	1.0000	0.2500
+step	dram	assim_sulfate_reduction	f1	0.923	0.833	0.983	0.059	0.000	0.137	0.0870	0.2500
+step	dram	assim_sulfate_reduction	mcc	0.810	0.618	0.954	0.141	0.000	0.295	0.0922	0.2500
+step	scycdb	assim_sulfate_reduction	precision	0.619	0.476	0.762	0.345	0.209	0.488	0.0000	0.0000
+step	scycdb	assim_sulfate_reduction	recall	0.963	0.880	1.000	0.037	0.000	0.125	0.7198	0.0000
+step	scycdb	assim_sulfate_reduction	specificity	0.000	0.000	0.000	0.938	0.789	1.000	0.0000	0.0000
+step	scycdb	assim_sulfate_reduction	f1	0.754	0.635	0.853	0.228	0.131	0.344	0.0000	0.0000
+step	scycdb	assim_sulfate_reduction	mcc	-0.119	-0.244	-0.090	1.070	0.968	1.211	0.0000	0.0000
+step	scycle	dissim_sulfate_reduction	precision	0.917	0.714	1.000					
+step	scycle	dissim_sulfate_reduction	recall	0.917	0.727	1.000					
+step	scycle	dissim_sulfate_reduction	specificity	0.968	0.893	1.000					
+step	scycle	dissim_sulfate_reduction	f1	0.917	0.762	1.000					
+step	scycle	dissim_sulfate_reduction	mcc	0.884	0.693	1.000					
+step	kofam	dissim_sulfate_reduction	precision	0.286	0.163	0.429	0.631	0.460	0.810	0.0000	0.0000
+step	kofam	dissim_sulfate_reduction	recall	1.000	1.000	1.000	-0.083	-0.273	0.000	0.7338	0.0000
+step	kofam	dissim_sulfate_reduction	specificity	0.032	0.000	0.107	0.935	0.839	1.000	0.0000	0.0000
+step	kofam	dissim_sulfate_reduction	f1	0.444	0.261	0.600	0.472	0.299	0.668	0.0000	0.0000
+step	kofam	dissim_sulfate_reduction	mcc	0.096	0.068	0.200	0.788	0.587	0.915	0.0000	0.0000
+step	metabolic	dissim_sulfate_reduction	precision	1.000	1.000	1.000	-0.083	-0.278	0.000	0.7186	1.0000
+step	metabolic	dissim_sulfate_reduction	recall	0.917	0.714	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	dissim_sulfate_reduction	specificity	1.000	1.000	1.000	-0.032	-0.107	0.000	0.7500	1.0000
+step	metabolic	dissim_sulfate_reduction	f1	0.957	0.833	1.000	-0.040	-0.143	0.000	0.7392	1.0000
+step	metabolic	dissim_sulfate_reduction	mcc	0.942	0.808	1.000	-0.058	-0.186	0.000	0.7224	1.0000
+step	dram	dissim_sulfate_reduction	precision	0.917	0.714	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	dissim_sulfate_reduction	recall	0.917	0.714	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	dissim_sulfate_reduction	specificity	0.968	0.897	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	dissim_sulfate_reduction	f1	0.917	0.762	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	dissim_sulfate_reduction	mcc	0.884	0.699	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	scycdb	dissim_sulfate_reduction	precision	0.300	0.171	0.447	0.617	0.445	0.800	0.0000	0.0000
+step	scycdb	dissim_sulfate_reduction	recall	1.000	1.000	1.000	-0.083	-0.273	0.000	0.7406	0.0000
+step	scycdb	dissim_sulfate_reduction	specificity	0.097	0.000	0.212	0.871	0.742	0.970	0.0000	0.0000
+step	scycdb	dissim_sulfate_reduction	f1	0.462	0.286	0.618	0.455	0.273	0.648	0.0000	0.0000
+step	scycdb	dissim_sulfate_reduction	mcc	0.170	0.085	0.280	0.714	0.516	0.881	0.0000	0.0000
+step	scycle	dmsp_cleavage	precision	0.667	0.222	1.000					
+step	scycle	dmsp_cleavage	recall	0.800	0.333	1.000					
+step	scycle	dmsp_cleavage	specificity	0.947	0.868	1.000					
+step	scycle	dmsp_cleavage	f1	0.727	0.333	1.000					
+step	scycle	dmsp_cleavage	mcc	0.691	0.283	1.000					
+step	kofam	dmsp_cleavage	precision	0.250	0.059	0.471	0.417	0.129	0.818	0.0329	0.0020
+step	kofam	dmsp_cleavage	recall	0.800	0.333	1.000	0.000	0.000	0.000	1.0000	0.0020
+step	kofam	dmsp_cleavage	specificity	0.684	0.526	0.829	0.263	0.128	0.410	0.0002	0.0020
+step	kofam	dmsp_cleavage	f1	0.381	0.118	0.632	0.346	0.150	0.583	0.0000	0.0020
+step	kofam	dmsp_cleavage	mcc	0.321	-0.007	0.573	0.370	0.173	0.602	0.0000	0.0020
+step	metabolic	dmsp_cleavage	precision	0.667	0.250	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	dmsp_cleavage	recall	0.800	0.333	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	dmsp_cleavage	specificity	0.947	0.868	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	dmsp_cleavage	f1	0.727	0.333	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	dmsp_cleavage	mcc	0.691	0.283	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	dmsp_cleavage	precision	NA	NA	NA	NA	NA	NA	nan	0.6875
+step	dram	dmsp_cleavage	recall	0.000	0.000	0.000	0.800	0.333	1.000	0.0195	0.6875
+step	dram	dmsp_cleavage	specificity	1.000	1.000	1.000	-0.053	-0.132	0.000	0.2612	0.6875
+step	dram	dmsp_cleavage	f1	NA	NA	NA	NA	NA	NA	nan	0.6875
+step	dram	dmsp_cleavage	mcc	NA	NA	NA	NA	NA	NA	nan	0.6875
+step	scycdb	dmsp_cleavage	precision	0.132	0.028	0.250	0.535	0.150	0.912	0.0270	0.0000
+step	scycdb	dmsp_cleavage	recall	1.000	1.000	1.000	-0.200	-0.667	0.000	0.7101	0.0000
+step	scycdb	dmsp_cleavage	specificity	0.132	0.028	0.250	0.816	0.684	0.925	0.0000	0.0000
+step	scycdb	dmsp_cleavage	f1	0.233	0.056	0.400	0.495	0.179	0.778	0.0010	0.0000
+step	scycdb	dmsp_cleavage	mcc	0.132	0.056	0.222	0.560	0.175	0.871	0.0174	0.0000
+step	scycle	dmsp_demethylation	precision	1.000	1.000	1.000					
+step	scycle	dmsp_demethylation	recall	1.000	1.000	1.000					
+step	scycle	dmsp_demethylation	specificity	1.000	1.000	1.000					
+step	scycle	dmsp_demethylation	f1	1.000	1.000	1.000					
+step	scycle	dmsp_demethylation	mcc	1.000	1.000	1.000					
+step	kofam	dmsp_demethylation	precision	0.222	0.000	0.556	0.778	0.444	0.917	0.0005	0.0156
+step	kofam	dmsp_demethylation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0156
+step	kofam	dmsp_demethylation	specificity	0.829	0.707	0.929	0.171	0.071	0.289	0.0008	0.0156
+step	kofam	dmsp_demethylation	f1	0.364	0.154	0.714	0.636	0.273	0.846	0.0005	0.0156
+step	kofam	dmsp_demethylation	mcc	0.429	0.248	0.705	0.571	0.301	0.752	0.0012	0.0156
+step	metabolic	dmsp_demethylation	precision	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	metabolic	dmsp_demethylation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.5000
+step	metabolic	dmsp_demethylation	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.5000
+step	metabolic	dmsp_demethylation	f1	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	metabolic	dmsp_demethylation	mcc	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	dram	dmsp_demethylation	precision	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	dram	dmsp_demethylation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.5000
+step	dram	dmsp_demethylation	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.5000
+step	dram	dmsp_demethylation	f1	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	dram	dmsp_demethylation	mcc	NA	NA	NA	NA	NA	NA	nan	0.5000
+step	scycdb	dmsp_demethylation	precision	0.087	0.000	0.217	0.913	0.778	0.963	0.0000	0.0000
+step	scycdb	dmsp_demethylation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	scycdb	dmsp_demethylation	specificity	0.488	0.333	0.643	0.512	0.357	0.667	0.0000	0.0000
+step	scycdb	dmsp_demethylation	f1	0.160	0.071	0.364	0.840	0.630	0.929	0.0000	0.0000
+step	scycdb	dmsp_demethylation	mcc	0.206	0.119	0.356	0.794	0.643	0.881	0.0000	0.0000
+step	scycle	organosulfonate	precision	1.000	1.000	1.000					
+step	scycle	organosulfonate	recall	1.000	1.000	1.000					
+step	scycle	organosulfonate	specificity	1.000	1.000	1.000					
+step	scycle	organosulfonate	f1	1.000	1.000	1.000					
+step	scycle	organosulfonate	mcc	1.000	1.000	1.000					
+step	kofam	organosulfonate	precision	0.550	0.333	0.773	0.450	0.231	0.667	0.0000	0.0039
+step	kofam	organosulfonate	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0039
+step	kofam	organosulfonate	specificity	0.719	0.556	0.871	0.281	0.128	0.444	0.0006	0.0039
+step	kofam	organosulfonate	f1	0.710	0.500	0.867	0.290	0.130	0.500	0.0000	0.0039
+step	kofam	organosulfonate	mcc	0.629	0.451	0.814	0.371	0.192	0.549	0.0004	0.0039
+step	metabolic	organosulfonate	precision	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	organosulfonate	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	organosulfonate	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	organosulfonate	f1	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	metabolic	organosulfonate	mcc	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	organosulfonate	precision	NA	NA	NA	NA	NA	NA	nan	0.0010
+step	dram	organosulfonate	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0010
+step	dram	organosulfonate	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0010
+step	dram	organosulfonate	f1	NA	NA	NA	NA	NA	NA	nan	0.0010
+step	dram	organosulfonate	mcc	NA	NA	NA	NA	NA	NA	nan	0.0010
+step	scycdb	organosulfonate	precision	0.282	0.150	0.432	0.718	0.575	0.854	0.0000	0.0000
+step	scycdb	organosulfonate	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	scycdb	organosulfonate	specificity	0.125	0.029	0.250	0.875	0.750	0.971	0.0000	0.0000
+step	scycdb	organosulfonate	f1	0.440	0.255	0.600	0.560	0.396	0.739	0.0000	0.0000
+step	scycdb	organosulfonate	mcc	0.188	0.089	0.297	0.812	0.703	0.912	0.0000	0.0000
+step	scycle	polysulfide_transformation	precision	0.750	0.000	1.000					
+step	scycle	polysulfide_transformation	recall	1.000	1.000	1.000					
+step	scycle	polysulfide_transformation	specificity	0.975	0.921	1.000					
+step	scycle	polysulfide_transformation	f1	0.857	0.500	1.000					
+step	scycle	polysulfide_transformation	mcc	0.855	0.563	1.000					
+step	kofam	polysulfide_transformation	precision	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	kofam	polysulfide_transformation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.6250
+step	kofam	polysulfide_transformation	specificity	1.000	1.000	1.000	-0.025	-0.077	0.000	0.7254	0.6250
+step	kofam	polysulfide_transformation	f1	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	kofam	polysulfide_transformation	mcc	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	metabolic	polysulfide_transformation	precision	1.000	1.000	1.000	-0.250	-0.667	0.000	0.7328	1.0000
+step	metabolic	polysulfide_transformation	recall	0.667	0.000	1.000	0.333	0.000	1.000	0.6621	1.0000
+step	metabolic	polysulfide_transformation	specificity	1.000	1.000	1.000	-0.025	-0.079	0.000	0.7046	1.0000
+step	metabolic	polysulfide_transformation	f1	0.800	0.400	1.000	0.057	-0.500	0.500	0.9490	1.0000
+step	metabolic	polysulfide_transformation	mcc	0.806	0.482	1.000	0.049	-0.437	0.437	0.9394	1.0000
+step	dram	polysulfide_transformation	precision	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	dram	polysulfide_transformation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.6250
+step	dram	polysulfide_transformation	specificity	1.000	1.000	1.000	-0.025	-0.079	0.000	0.7104	0.6250
+step	dram	polysulfide_transformation	f1	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	dram	polysulfide_transformation	mcc	NA	NA	NA	NA	NA	NA	nan	0.6250
+step	scycdb	polysulfide_transformation	precision	0.167	0.000	0.417	0.583	0.000	1.000	0.0631	0.0020
+step	scycdb	polysulfide_transformation	recall	0.667	0.000	1.000	0.333	0.000	1.000	0.6722	0.0020
+step	scycdb	polysulfide_transformation	specificity	0.750	0.610	0.878	0.225	0.100	0.361	0.0002	0.0020
+step	scycdb	polysulfide_transformation	f1	0.267	0.118	0.560	0.590	0.286	0.867	0.0000	0.0020
+step	scycdb	polysulfide_transformation	mcc	0.237	-0.122	0.532	0.618	0.274	1.071	0.0000	0.0020
+step	scycle	sox_thiosulfate_oxidation	precision	1.000	1.000	1.000					
+step	scycle	sox_thiosulfate_oxidation	recall	1.000	1.000	1.000					
+step	scycle	sox_thiosulfate_oxidation	specificity	1.000	1.000	1.000					
+step	scycle	sox_thiosulfate_oxidation	f1	1.000	1.000	1.000					
+step	scycle	sox_thiosulfate_oxidation	mcc	1.000	1.000	1.000					
+step	kofam	sox_thiosulfate_oxidation	precision	0.484	0.310	0.667	0.516	0.345	0.694	0.0000	0.0000
+step	kofam	sox_thiosulfate_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	kofam	sox_thiosulfate_oxidation	specificity	0.429	0.241	0.621	0.571	0.385	0.750	0.0000	0.0000
+step	kofam	sox_thiosulfate_oxidation	f1	0.652	0.474	0.793	0.348	0.207	0.535	0.0000	0.0000
+step	kofam	sox_thiosulfate_oxidation	mcc	0.455	0.306	0.618	0.545	0.379	0.697	0.0000	0.0000
+step	metabolic	sox_thiosulfate_oxidation	precision	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.1250
+step	metabolic	sox_thiosulfate_oxidation	recall	0.733	0.500	0.938	0.267	0.062	0.500	0.0328	0.1250
+step	metabolic	sox_thiosulfate_oxidation	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.1250
+step	metabolic	sox_thiosulfate_oxidation	f1	0.846	0.667	0.968	0.154	0.032	0.333	0.0318	0.1250
+step	metabolic	sox_thiosulfate_oxidation	mcc	0.801	0.621	0.951	0.199	0.049	0.381	0.0270	0.1250
+step	dram	sox_thiosulfate_oxidation	precision	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	sox_thiosulfate_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	sox_thiosulfate_oxidation	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	sox_thiosulfate_oxidation	f1	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	dram	sox_thiosulfate_oxidation	mcc	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	1.0000
+step	scycdb	sox_thiosulfate_oxidation	precision	0.395	0.243	0.553	0.605	0.447	0.757	0.0000	0.0000
+step	scycdb	sox_thiosulfate_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	scycdb	sox_thiosulfate_oxidation	specificity	0.179	0.038	0.333	0.821	0.677	0.958	0.0000	0.0000
+step	scycdb	sox_thiosulfate_oxidation	f1	0.566	0.391	0.710	0.434	0.288	0.609	0.0000	0.0000
+step	scycdb	sox_thiosulfate_oxidation	mcc	0.265	0.132	0.403	0.735	0.597	0.863	0.0000	0.0000
+step	scycle	sulfide_oxidation	precision	0.962	0.875	1.000					
+step	scycle	sulfide_oxidation	recall	1.000	1.000	1.000					
+step	scycle	sulfide_oxidation	specificity	0.944	0.812	1.000					
+step	scycle	sulfide_oxidation	f1	0.980	0.930	1.000					
+step	scycle	sulfide_oxidation	mcc	0.953	0.855	1.000					
+step	kofam	sulfide_oxidation	precision	0.595	0.442	0.744	0.366	0.228	0.512	0.0000	0.0000
+step	kofam	sulfide_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	kofam	sulfide_oxidation	specificity	0.056	0.000	0.188	0.889	0.722	1.000	0.0000	0.0000
+step	kofam	sulfide_oxidation	f1	0.746	0.613	0.853	0.234	0.135	0.361	0.0000	0.0000
+step	kofam	sulfide_oxidation	mcc	0.182	0.144	0.374	0.771	0.566	0.842	0.0000	0.0000
+step	metabolic	sulfide_oxidation	precision	0.933	0.778	1.000	0.028	0.000	0.103	0.7290	0.0010
+step	metabolic	sulfide_oxidation	recall	0.560	0.360	0.750	0.440	0.250	0.640	0.0000	0.0010
+step	metabolic	sulfide_oxidation	specificity	0.944	0.812	1.000	0.000	0.000	0.000	1.0000	0.0010
+step	metabolic	sulfide_oxidation	f1	0.700	0.514	0.844	0.280	0.137	0.464	0.0000	0.0010
+step	metabolic	sulfide_oxidation	mcc	0.522	0.297	0.719	0.431	0.255	0.610	0.0000	0.0010
+step	dram	sulfide_oxidation	precision	NA	NA	NA	NA	NA	NA	nan	0.0000
+step	dram	sulfide_oxidation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0000
+step	dram	sulfide_oxidation	specificity	1.000	1.000	1.000	-0.056	-0.188	0.000	0.7258	0.0000
+step	dram	sulfide_oxidation	f1	NA	NA	NA	NA	NA	NA	nan	0.0000
+step	dram	sulfide_oxidation	mcc	NA	NA	NA	NA	NA	NA	nan	0.0000
+step	scycdb	sulfide_oxidation	precision	0.657	0.500	0.811	0.304	0.164	0.462	0.0000	0.0002
+step	scycdb	sulfide_oxidation	recall	0.920	0.800	1.000	0.080	0.000	0.200	0.2648	0.0002
+step	scycdb	sulfide_oxidation	specificity	0.333	0.118	0.562	0.611	0.375	0.833	0.0000	0.0002
+step	scycdb	sulfide_oxidation	f1	0.767	0.633	0.873	0.214	0.111	0.346	0.0000	0.0002
+step	scycdb	sulfide_oxidation	mcc	0.321	0.021	0.581	0.632	0.371	0.942	0.0000	0.0002
+step	scycle	sulfite_oxidation	precision	0.909	0.700	1.000					
+step	scycle	sulfite_oxidation	recall	1.000	1.000	1.000					
+step	scycle	sulfite_oxidation	specificity	0.970	0.900	1.000					
+step	scycle	sulfite_oxidation	f1	0.952	0.824	1.000					
+step	scycle	sulfite_oxidation	mcc	0.939	0.795	1.000					
+step	kofam	sulfite_oxidation	precision	0.250	0.125	0.390	0.659	0.480	0.846	0.0000	0.0000
+step	kofam	sulfite_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	kofam	sulfite_oxidation	specificity	0.091	0.000	0.206	0.879	0.758	0.971	0.0000	0.0000
+step	kofam	sulfite_oxidation	f1	0.400	0.217	0.561	0.552	0.398	0.733	0.0000	0.0000
+step	kofam	sulfite_oxidation	mcc	0.151	0.071	0.252	0.788	0.642	0.915	0.0000	0.0000
+step	metabolic	sulfite_oxidation	precision	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	metabolic	sulfite_oxidation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0117
+step	metabolic	sulfite_oxidation	specificity	1.000	1.000	1.000	-0.030	-0.097	0.000	0.7318	0.0117
+step	metabolic	sulfite_oxidation	f1	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	metabolic	sulfite_oxidation	mcc	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	dram	sulfite_oxidation	precision	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	dram	sulfite_oxidation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0117
+step	dram	sulfite_oxidation	specificity	1.000	1.000	1.000	-0.030	-0.100	0.000	0.7156	0.0117
+step	dram	sulfite_oxidation	f1	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	dram	sulfite_oxidation	mcc	NA	NA	NA	NA	NA	NA	nan	0.0117
+step	scycdb	sulfite_oxidation	precision	0.429	0.217	0.647	0.481	0.267	0.720	0.0000	0.0005
+step	scycdb	sulfite_oxidation	recall	0.900	0.667	1.000	0.100	0.000	0.333	0.7283	0.0005
+step	scycdb	sulfite_oxidation	specificity	0.636	0.469	0.794	0.333	0.176	0.500	0.0002	0.0005
+step	scycdb	sulfite_oxidation	f1	0.581	0.333	0.769	0.372	0.200	0.586	0.0000	0.0005
+step	scycdb	sulfite_oxidation	mcc	0.453	0.206	0.667	0.486	0.274	0.736	0.0000	0.0005
+step	scycle	tetrathionate_oxidation	precision	0.846	0.625	1.000					
+step	scycle	tetrathionate_oxidation	recall	1.000	1.000	1.000					
+step	scycle	tetrathionate_oxidation	specificity	0.938	0.844	1.000					
+step	scycle	tetrathionate_oxidation	f1	0.917	0.762	1.000					
+step	scycle	tetrathionate_oxidation	mcc	0.891	0.732	1.000					
+step	kofam	tetrathionate_oxidation	precision	0.314	0.167	0.471	0.532	0.357	0.735	0.0000	0.0000
+step	kofam	tetrathionate_oxidation	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	kofam	tetrathionate_oxidation	specificity	0.250	0.107	0.407	0.688	0.519	0.844	0.0000	0.0000
+step	kofam	tetrathionate_oxidation	f1	0.478	0.286	0.642	0.438	0.289	0.615	0.0000	0.0000
+step	kofam	tetrathionate_oxidation	mcc	0.280	0.160	0.410	0.610	0.450	0.773	0.0000	0.0000
+step	metabolic	tetrathionate_oxidation	precision	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	metabolic	tetrathionate_oxidation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0225
+step	metabolic	tetrathionate_oxidation	specificity	1.000	1.000	1.000	-0.062	-0.156	0.000	0.2612	0.0225
+step	metabolic	tetrathionate_oxidation	f1	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	metabolic	tetrathionate_oxidation	mcc	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	dram	tetrathionate_oxidation	precision	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	dram	tetrathionate_oxidation	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0225
+step	dram	tetrathionate_oxidation	specificity	1.000	1.000	1.000	-0.062	-0.156	0.000	0.2592	0.0225
+step	dram	tetrathionate_oxidation	f1	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	dram	tetrathionate_oxidation	mcc	NA	NA	NA	NA	NA	NA	nan	0.0225
+step	scycdb	tetrathionate_oxidation	precision	0.250	0.125	0.390	0.596	0.416	0.800	0.0000	0.0000
+step	scycdb	tetrathionate_oxidation	recall	0.909	0.700	1.000	0.091	0.000	0.300	0.7310	0.0000
+step	scycdb	tetrathionate_oxidation	specificity	0.062	0.000	0.156	0.875	0.750	0.971	0.0000	0.0000
+step	scycdb	tetrathionate_oxidation	f1	0.392	0.213	0.552	0.525	0.373	0.696	0.0000	0.0000
+step	scycdb	tetrathionate_oxidation	mcc	-0.049	-0.394	0.190	0.939	0.637	1.300	0.0000	0.0000
+step	scycle	tetrathionate_reduction	precision	1.000	1.000	1.000					
+step	scycle	tetrathionate_reduction	recall	1.000	1.000	1.000					
+step	scycle	tetrathionate_reduction	specificity	1.000	1.000	1.000					
+step	scycle	tetrathionate_reduction	f1	1.000	1.000	1.000					
+step	scycle	tetrathionate_reduction	mcc	1.000	1.000	1.000					
+step	kofam	tetrathionate_reduction	precision	0.158	0.053	0.282	0.842	0.718	0.947	0.0000	0.0000
+step	kofam	tetrathionate_reduction	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	kofam	tetrathionate_reduction	specificity	0.135	0.029	0.250	0.865	0.750	0.971	0.0000	0.0000
+step	kofam	tetrathionate_reduction	f1	0.273	0.100	0.440	0.727	0.560	0.900	0.0000	0.0000
+step	kofam	tetrathionate_reduction	mcc	0.146	0.060	0.236	0.854	0.757	0.940	0.0000	0.0000
+step	metabolic	tetrathionate_reduction	precision	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	metabolic	tetrathionate_reduction	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0312
+step	metabolic	tetrathionate_reduction	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0312
+step	metabolic	tetrathionate_reduction	f1	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	metabolic	tetrathionate_reduction	mcc	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	dram	tetrathionate_reduction	precision	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	dram	tetrathionate_reduction	recall	0.000	0.000	0.000	1.000	1.000	1.000	0.0000	0.0312
+step	dram	tetrathionate_reduction	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0312
+step	dram	tetrathionate_reduction	f1	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	dram	tetrathionate_reduction	mcc	NA	NA	NA	NA	NA	NA	nan	0.0312
+step	scycdb	tetrathionate_reduction	precision	0.167	0.056	0.297	0.833	0.703	0.944	0.0000	0.0000
+step	scycdb	tetrathionate_reduction	recall	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0000
+step	scycdb	tetrathionate_reduction	specificity	0.189	0.077	0.324	0.811	0.676	0.923	0.0000	0.0000
+step	scycdb	tetrathionate_reduction	f1	0.286	0.105	0.458	0.714	0.542	0.895	0.0000	0.0000
+step	scycdb	tetrathionate_reduction	mcc	0.178	0.080	0.280	0.822	0.720	0.920	0.0000	0.0000
+step	scycle	thiosulfate_reduction	precision	1.000	1.000	1.000					
+step	scycle	thiosulfate_reduction	recall	0.500	0.167	0.833					
+step	scycle	thiosulfate_reduction	specificity	1.000	1.000	1.000					
+step	scycle	thiosulfate_reduction	f1	0.667	0.308	0.909					
+step	scycle	thiosulfate_reduction	mcc	0.659	0.383	0.885					
+step	kofam	thiosulfate_reduction	precision	0.250	0.122	0.390	0.750	0.610	0.878	0.0000	0.0000
+step	kofam	thiosulfate_reduction	recall	1.000	1.000	1.000	-0.500	-0.818	-0.167	0.0098	0.0000
+step	kofam	thiosulfate_reduction	specificity	0.091	0.000	0.200	0.909	0.800	1.000	0.0000	0.0000
+step	kofam	thiosulfate_reduction	f1	0.400	0.217	0.561	0.267	-0.083	0.609	0.1450	0.0000
+step	kofam	thiosulfate_reduction	mcc	0.151	0.074	0.252	0.508	0.229	0.772	0.0000	0.0000
+step	metabolic	thiosulfate_reduction	precision	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.1250
+step	metabolic	thiosulfate_reduction	recall	0.900	0.667	1.000	-0.400	-0.727	-0.100	0.0308	0.1250
+step	metabolic	thiosulfate_reduction	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.1250
+step	metabolic	thiosulfate_reduction	f1	0.947	0.800	1.000	-0.281	-0.600	-0.058	0.0330	0.1250
+step	metabolic	thiosulfate_reduction	mcc	0.935	0.783	1.000	-0.276	-0.533	-0.066	0.0304	0.1250
+step	dram	thiosulfate_reduction	precision	NA	NA	NA	NA	NA	NA	nan	0.0625
+step	dram	thiosulfate_reduction	recall	0.000	0.000	0.000	0.500	0.167	0.833	0.0110	0.0625
+step	dram	thiosulfate_reduction	specificity	1.000	1.000	1.000	0.000	0.000	0.000	1.0000	0.0625
+step	dram	thiosulfate_reduction	f1	NA	NA	NA	NA	NA	NA	nan	0.0625
+step	dram	thiosulfate_reduction	mcc	NA	NA	NA	NA	NA	NA	nan	0.0625
+step	scycdb	thiosulfate_reduction	precision	0.526	0.300	0.750	0.474	0.238	0.696	0.0000	0.4240
+step	scycdb	thiosulfate_reduction	recall	1.000	1.000	1.000	-0.500	-0.833	-0.182	0.0094	0.4240
+step	scycdb	thiosulfate_reduction	specificity	0.727	0.567	0.871	0.273	0.129	0.429	0.0000	0.4240
+step	scycdb	thiosulfate_reduction	f1	0.690	0.455	0.857	-0.023	-0.383	0.324	0.8628	0.4240
+step	scycdb	thiosulfate_reduction	mcc	0.619	0.437	0.801	0.040	-0.274	0.359	0.8351	0.4240

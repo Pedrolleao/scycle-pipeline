@@ -1,0 +1,740 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# targets.yaml — single source of truth for the sulfur-cycle detection pipeline.
+#
+# Modeled on Nitrogen_Cycle/ncycle-pipeline/config/targets.yaml (which itself
+# descends from Holomicrobiome-ewaste/ewaste-pipeline). Three blocks:
+#   targets:    individual enzymes/genes. Each carries KO (primary anchor),
+#               Pfam/InterPro and TIGRFAM/NCBIfam HMM anchors, an optional
+#               custom-HMM tier, and a BLAST fallback/confirmation gate.
+#   complexes:  obligatory multi-subunit assemblies. Scored n/N per MAG by the
+#               complex-completeness step.
+#   synergies:  process-completeness modules (complete sulfate reduction, Sox
+#               oxidation, assimilation, DMSP cycling, ...) flagged in gap-analysis.
+#
+# Detection is KO-primary: build_hmm_db.py extracts the KOfam profile + adaptive
+# threshold for every `ko:` here. All KO numbers below were verified against the
+# cached KOfam `ko_list` (release 2026-05-24) — e.g. K11179 is NOT dsrC (it is a
+# tRNA-thiouridine protein), so dsrC/dsrD are anchored on Pfam instead. See
+# Info-sulfur.md for the narrative atlas and ⚠️ rationale.
+#
+# Curated `blast_refs_uniprot` for soxB/C/D/X/Y/Z, sqr, sdo, tth, doxD, dsrA, dsrB
+# are LIFTED VERBATIM from the validated ewaste-pipeline targets.yaml (function-
+# verified accessions). The trained custom HMMs for soxB/soxD/soxX/tth/doxD are
+# lifted from ewaste-pipeline/targets/{tid}/. Empty `blast_refs_uniprot: []` with a
+# `ref_query:` hint means seeds are to be CURATED in the hardening phase (never guessed).
+#
+# ⚠️ HOMOLOGY / DIRECTIONALITY TRAPS:
+#   dsrAB        reductive (sulfate reducers) vs reverse/oxidative rDSR (sulfur
+#                oxidizers) — SAME genes/KO, opposite direction. Resolved by operon
+#                synteny (dsrD/qmo proximity) in apply_rules.resolve_dsr_direction
+#                (nucleotide/MAG input only) + the reverse_dsr_sulfur_oxidation synergy.
+#   sat, aprAB   shared across dissimilatory / assimilatory / oxidative S metabolism —
+#                direction inferred at the complex/synergy layer, not per gene.
+#   soxC         PF03473 (MOSC molybdopterin) broad; KO K17225 is specific, BLAST seeds corroborate.
+#   sqr / fccB   PF07992 (Pyr_redox_2 FAD) broad — BLAST gate to canonical SQR seeds.
+#   sdo          PF00753 (metallo-β-lactamase) broad — BLAST gate to bacterial Sdo seeds.
+# ─────────────────────────────────────────────────────────────────────────────
+
+targets:
+
+  # ── 1. Dissimilatory sulfate reduction (SO4²⁻ → SO3²⁻ → H2S) ───────────────
+  - id: sat
+    name: Sulfate adenylyltransferase (ATP sulfurylase)
+    category: dissimilatory_sulfate_reduction
+    ko: [K00958]
+    pfam: [PF01747]
+    interpro: [IPR024951]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND sat[gene]"
+    notes: "Entry/exit point of dissimilatory AND assimilatory sulfate metabolism (SO4²⁻ → APS). Shared KO; direction set by partner genes (aprAB+dsr ⇒ dissimilatory; cysNCDH ⇒ assimilatory)."
+  - id: aprA
+    name: Adenylylsulfate reductase subunit A (APS reductase, flavoprotein)
+    category: dissimilatory_sulfate_reduction
+    ko: [K00394]
+    pfam: [PF00890]
+    interpro: [IPR012744]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND aprA[gene]"
+    notes: "APS → sulfite (reductive) or reverse (oxidative, sulfur oxidizers). Diagnostic of dissimilatory S metabolism with dsrAB."
+  - id: aprB
+    name: Adenylylsulfate reductase subunit B (Fe-S)
+    category: dissimilatory_sulfate_reduction
+    ko: [K00395]
+    pfam: []
+    interpro: [IPR012675]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND aprB[gene]"
+  - id: dsrA
+    name: Dissimilatory sulfite reductase alpha subunit
+    category: dissimilatory_sulfate_reduction
+    ko: [K11180]
+    pfam: [PF01077]
+    interpro: [IPR003794]
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [P45574, Q59109, O33998, S0FXQ9, Q9F4A3]   # ewaste-curated canonical DsrA: D.vulgaris/A.fulgidus/A.vinosum/D.desulfuricans/D.phosphitoxidans (spans sulfate-reducer + reverse-Dsr)
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrA[gene]"
+    notes: "⚠️ DIRECTION TRAP: same gene in sulfate reducers (reductive) and sulfur oxidizers (reverse/rDSR). KO K11180 is dsr-specific (separates from nitrite reductases at the KO tier, unlike the shared PF01077). BLAST gate drops broad nitrite-reductase paralogs; reductive-vs-oxidative call is made by operon synteny (dsrD proximity) + the reverse_dsr synergy."
+  - id: dsrB
+    name: Dissimilatory sulfite reductase beta subunit
+    category: dissimilatory_sulfate_reduction
+    ko: [K11181]
+    pfam: [PF01077, PF03460]
+    pfam_logic: all
+    interpro: [IPR011806]
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [P45575, Q59110, D3RSN2, S0G5M9, Q9F4A2]   # ewaste-curated canonical DsrB
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrB[gene]"
+    notes: "⚠️ Both PF01077+PF03460 (logic:all) discriminate dsrB from dsrA. Same direction trap as dsrA."
+  - id: dsrC
+    name: Dissimilatory sulfite reductase subunit C (DsrC sulfur carrier)
+    category: dissimilatory_sulfate_reduction
+    ko: []                  # ⚠️ no KOfam KO (K11179 is a tRNA-thiouridine protein, NOT dsrC)
+    pfam: [PF04358]
+    interpro: [IPR007453]
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrC[gene]"
+    notes: "⚠️ Pfam-only (PF04358 DsrC). Small carrier; essential to the Dsr cycle. Present in both reductive and oxidative Dsr."
+  - id: dsrD
+    name: Dissimilatory sulfite reductase protein D (reductive-direction marker)
+    category: dissimilatory_sulfate_reduction
+    ko: []                  # no KOfam KO
+    pfam: [PF08679]
+    interpro: [IPR014096]
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrD[gene]"
+    notes: "⚠️ Pfam-only (PF08679 DsrD). KEY DIRECTIONALITY MARKER: dsrD is characteristic of REDUCTIVE (sulfate-reducing) Dsr and typically absent from reverse/oxidative rDSR — used by resolve_dsr_direction to call dsrAB direction."
+  - id: dsrM
+    name: DsrMKJOP membrane complex subunit M ([DsrC]-trisulfide reductase M)
+    category: dissimilatory_sulfate_reduction
+    ko: [K27187]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrM[gene]"
+    notes: "Membrane electron-transfer module that recycles DsrC trisulfide; co-occurs with reductive dsrAB."
+  - id: dsrK
+    name: DsrMKJOP membrane complex subunit K ([DsrC]-trisulfide reductase K)
+    category: dissimilatory_sulfate_reduction
+    ko: [K27188]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND dsrK[gene]"
+  - id: qmoA
+    name: Quinone-modifying oxidoreductase subunit A (Qmo complex)
+    category: dissimilatory_sulfate_reduction
+    ko: [K16885]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND qmoA[gene]"
+    notes: "Qmo couples APS reductase to the menaquinone pool; presence with aprAB+dsrAB marks a complete dissimilatory sulfate reducer."
+  - id: qmoB
+    name: Quinone-modifying oxidoreductase subunit B
+    category: dissimilatory_sulfate_reduction
+    ko: [K16886]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND qmoB[gene]"
+  - id: qmoC
+    name: Quinone-modifying oxidoreductase subunit C
+    category: dissimilatory_sulfate_reduction
+    ko: [K16887]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Desulfovibrio vulgaris Hildenborough[organism] AND qmoC[gene]"
+
+  # ── 2. Sulfur oxidation (H2S / S⁰ / S2O3²⁻ → SO4²⁻) ────────────────────────
+  - id: soxA
+    name: SoxA L-cysteine S-thiosulfotransferase (Sox core)
+    category: sulfur_oxidation
+    ko: [K17222]
+    pfam: []
+    interpro: [IPR025519]
+    # SP2 (2026-05-25): dropped requires_blast_for_confirmation. K17222 is SoxA-specific and
+    # S6 handles the blast-only E. coli FP that motivated the gate, which was instead causing
+    # the Sulfurimonas (epsilonproteobacterial) SoxA FN. Seeds stay as corroboration.
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [O33434, Q1W3E4, Q8KDM7, D7A6E5, Q08IS0]   # S2-curated, EC 2.8.5.2-verified clade-spread SoxA: Paracoccus pantotrophus + Allochromatium vinosum + Chlorobaculum tepidum + Starkeya novella + Hydrogenophilus thermoluteolus
+    ref_query: "Paracoccus pantotrophus[organism] AND soxA[gene]"
+    notes: "⚠️ Periplasmic thiosulfate-oxidizing Sox system. The gene name 'soxA' is shared with sarcosine oxidase, dibenzothiophene monooxygenase (dszA), and the human SOX21 TF — the name-fetched UniProt set pulled those → an E. coli cyt-c FP. Curated to EC 2.8.5.2 SoxA only + BLAST gate; the Paracoccus seed covers the panel's P. denitrificans positive. soxA + soxXYZ + soxB (+soxCD) = complete thiosulfate oxidation with no S⁰ intermediate."
+  - id: soxB
+    name: SoxB sulfate thiohydrolase
+    category: sulfur_oxidation
+    ko: [K17224]
+    pfam: [PF00149, PF02872]
+    custom_hmm: true
+    blast_fallback: true
+    blast_refs_uniprot: [A0AAE6TS95, Q1W3E6, Q8RLW8, Q9LAH6, Q5LUQ6]   # ewaste-curated
+    ref_query: "Acidithiobacillus thiooxidans[organism] AND soxB"
+    notes: "Lifted ewaste custom HMM (TC=868.9). ⚠️ knife-edge calibration — a methylotroph soxB-family orphan paralogue sits ~65 bits below the lowest real positive."
+  - id: soxC
+    name: SoxC sulfane dehydrogenase / sulfite dehydrogenase
+    category: sulfur_oxidation
+    ko: [K17225]
+    pfam: [PF03473]
+    interpro: [IPR004030]
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [A0A1N6IZI5, A0A7W6D3V6, A0ABN8AQG0, A0A1G7C664, A0A1H5X941]   # ewaste-curated Sox-cluster SoxC
+    ref_query: "Paracoccus pantotrophus[organism] AND soxC"
+    notes: "⚠️ PF03473 (MOSC molybdopterin) is broad; KO K17225 is SoxC-specific. BLAST seeds corroborate and drop Mo-cofactor paralog FPs."
+  - id: soxD
+    name: SoxD diheme cytochrome c
+    category: sulfur_oxidation
+    ko: []                  # no KOfam KO
+    pfam: []   # SP2: dropped PF00034 (generic cyt c); custom HMM + BLAST gate are the anchors
+    custom_hmm: true
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_refs_uniprot: [Q5LUQ4, O07819, Q5ZQM8, Q16A43]   # ewaste-curated
+    ref_query: "Paracoccus pantotrophus[organism] AND soxD"
+    notes: "Lifted ewaste custom HMM (TC=351.7). ⚠️ PF00034 (cyt c) is generic — custom HMM + BLAST gate make the SoxCD-specific call."
+  - id: soxX
+    name: SoxX monoheme cytochrome c (Sox core)
+    category: sulfur_oxidation
+    ko: [K17223]
+    pfam: []   # SP2: dropped PF00034 (generic cyt c → 14 FP); custom HMM + KO K17223 are the anchors
+    custom_hmm: true
+    hmm_min_qcov: 0.6
+    blast_fallback: true
+    blast_refs_uniprot: [Q5LUR0, A0A1I5IPQ3, Q1W3E5, Q8KDN0, Q9LCV0]   # ewaste-curated
+    ref_query: "Paracoccus pantotrophus[organism] AND soxX"
+    notes: "Lifted ewaste custom HMM (TC=64.5, hmm_min_qcov:0.6). ⚠️ Shares PF00034 — custom HMM/BLAST needed for the SoxX-specific call."
+  - id: soxY
+    name: SoxY sulfur carrier protein (Sox core)
+    category: sulfur_oxidation
+    ko: [K17226]
+    pfam: [PF13501]
+    interpro: [IPR025976]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Paracoccus pantotrophus[organism] AND soxY"
+    notes: "Carries the substrate sulfur on a conserved C-terminal cysteine; obligate Sox-core subunit."
+  - id: soxZ
+    name: SoxZ sulfur-compound chelating subunit (Sox core)
+    category: sulfur_oxidation
+    ko: [K17227]
+    pfam: [PF08770]
+    interpro: [IPR014804]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Paracoccus pantotrophus[organism] AND soxZ"
+  - id: sqr
+    name: Sulfide:quinone oxidoreductase
+    category: sulfur_oxidation
+    ko: [K17218]
+    pfam: [PF07992]
+    interpro: [IPR003711]
+    # SP2 (2026-05-25): dropped requires_blast_for_confirmation. K17218 is SQR-specific at
+    # the KO tier (gor/lpdA are separate KOs), and S6 now makes any blast-only hit non-calling,
+    # so the gate was redundant for FP control while causing 8 FN — the narrow acidophile/
+    # archaeal seed set rejected genuine SQRs of other types (Archaeoglobus, Sulfurimonas,
+    # Roseobacter). Rely on the specific KO; seeds stay as corroboration only (ncycle nirA/nirK precedent).
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [Q7ZAG8, O67931, B7JBP8, A0AAX1UQ46]   # ewaste-curated canonical SQR (Acidianus/Aquifex/Acidithiobacillus/Cereibacter)
+    ref_query: "Acidithiobacillus ferrooxidans[organism] AND sqr"
+    notes: "⚠️ PF07992 (Pyr_redox_2 FAD) catches all flavoprotein disulfide reductases; BLAST gate to canonical SQR drops gor/lpdA paralog FPs. First step of sulfide oxidation (H2S → S⁰)."
+  - id: fccB
+    name: Flavocytochrome c sulfide dehydrogenase, flavoprotein chain
+    category: sulfur_oxidation
+    ko: [K17229]
+    pfam: [PF00890]
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Allochromatium vinosum[organism] AND fccB[gene]"
+    notes: "⚠️ FAD-binding chain shared with sqr/gor family — BLAST corroboration. Alternative sulfide-oxidation route to sqr."
+  - id: fccA
+    name: Flavocytochrome c sulfide dehydrogenase, cytochrome subunit
+    category: sulfur_oxidation
+    ko: [K17230]
+    pfam: []   # SP2: dropped PF00034 (generic cyt c, fired in ~every genome → 19 FP)
+    requires_blast_for_confirmation: true   # SP2: K17230 (small cyt subunit) over-fires (9 FP); gate to real fcc-cytochrome seeds
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [Q06529, Q8KAS5, P20958]   # SP2-curated, verified "cytochrome subunit of sulfide dehydrogenase" (FCSD): Allochromatium vinosum + Chlorobaculum tepidum/thiosulfatiphilum
+    ref_query: "Allochromatium vinosum[organism] AND fccA[gene]"
+    notes: "⚠️ PF00034 (cyt c) ubiquitous — obligate partner of fccB; corroborate via fcc operon."
+  - id: sdo
+    name: Sulfur dioxygenase (persulfide dioxygenase)
+    category: sulfur_oxidation
+    ko: [K17725]
+    pfam: [PF00753]
+    interpro: [IPR001279]
+    requires_blast_for_confirmation: true
+    blast_identity_min: 60   # SP6: raised 40→60. K17725/PF00753 (metallo-β-lactamase fold) is broad — at 40 the gate let through generic "MBL fold metallo-hydrolase" paralogs (T. denitrificans 52%, Nostoc 55%, Synechocystis 53%, all KEGG-absent / glyoxalase-II-class). The one genuine, characterized SDO in the panel (A. ferrooxidans) hits the curated Acidithiobacillus/Methylococcus Sdo seeds at 96%, so 60 cleanly keeps it and drops the ambiguous ~52-55% MBL paralogs.
+    blast_fallback: true
+    blast_refs_uniprot: [A0A068L794, A0ACD5IKA7, A0AA35XSJ0, A0ABM9I5H7, A0ABW8MI34]   # ewaste-curated, all verified "Sulfur dioxygenase" (A. caldus / A. ferruginosus / Methylococcus capsulatus / Methylocaldum szegediense / Caballeronia udeis) — none is A. ferrooxidans (the panel positive), so detection is non-circular.
+    ref_query: "Acidithiobacillus caldus[organism] AND sulfur dioxygenase"
+    notes: "⚠️ PF00753 (metallo-β-lactamase fold) is broad (shared with glyoxalase-II); BLAST gate ≥60% to characterized bacterial Sdo makes the call. Oxidizes glutathione persulfide (S⁰ → sulfite)."
+  - id: soeA
+    name: Sulfite dehydrogenase (quinone) subunit SoeA
+    category: sulfur_oxidation
+    ko: [K21307]
+    pfam: [PF00384, PF01568]
+    pfam_logic: all
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Allochromatium vinosum[organism] AND soeA[gene]"
+    notes: "⚠️ Broad Mo-bis-MGD oxidoreductase family (PF00384) — KO K21307 anchors it. Membrane sulfite → sulfate oxidation (cytoplasmic), alternative to periplasmic SorAB / Sox-associated."
+  - id: soeB
+    name: Sulfite dehydrogenase (quinone) subunit SoeB (Fe-S)
+    category: sulfur_oxidation
+    ko: [K21308]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Allochromatium vinosum[organism] AND soeB[gene]"
+  - id: soeC
+    name: Sulfite dehydrogenase (quinone) subunit SoeC (membrane anchor)
+    category: sulfur_oxidation
+    ko: [K21309]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Allochromatium vinosum[organism] AND soeC[gene]"
+  - id: sorA
+    name: Sulfite dehydrogenase (cytochrome) subunit A (SorAB)
+    category: sulfur_oxidation
+    ko: [K05301]
+    pfam: [PF03473]
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Starkeya novella[organism] AND sorA[gene]"
+    notes: "⚠️ Shares PF03473 (MOSC) with soxC — KO K05301 separates; periplasmic sulfite → sulfate oxidation."
+  - id: tsdA
+    name: Thiosulfate dehydrogenase (diheme cytochrome c)
+    category: sulfur_oxidation
+    ko: [K19713]
+    pfam: []   # SP2: dropped PF00034 (generic cyt c → 14 FP); KO K19713 is the anchor
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Allochromatium vinosum[organism] AND tsdA[gene]"
+    notes: "⚠️ PF00034 (cyt c) generic — BLAST corroboration. Thiosulfate → tetrathionate oxidation."
+  - id: sor
+    name: Sulfur oxygenase/reductase
+    category: sulfur_oxidation
+    ko: [K16952]
+    pfam: []
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Acidianus ambivalens[organism] AND sulfur oxygenase reductase"
+    notes: "Cytoplasmic S⁰ disproportionation in thermoacidophiles (Acidianus/Sulfolobus)."
+
+  # ── 3. Assimilatory sulfate reduction (SO4²⁻ → H2S → cysteine) ─────────────
+  - id: cysN
+    name: Sulfate adenylyltransferase subunit 1 (assimilatory ATP sulfurylase)
+    category: assimilatory_sulfate_reduction
+    ko: [K00956, K00955]   # K00955 = bifunctional cysNC fusion, which provides the cysN (ATP-sulfurylase) function; KEGG assigns the fusion only K00955, so without this the cysNC genomes (pae/avn/pde) score as cysN-FP
+    pfam: [PF00009]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysN[gene]"
+    notes: "Assimilatory entry (SO4²⁻ → APS). cysND pair; cysNC is the bifunctional fusion."
+  - id: cysD
+    name: Sulfate adenylyltransferase subunit 2 (assimilatory)
+    category: assimilatory_sulfate_reduction
+    ko: [K00957]
+    pfam: [PF01747]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysD[gene]"
+  - id: cysNC
+    name: Bifunctional sulfate adenylyltransferase / APS kinase (CysN/CysC)
+    category: assimilatory_sulfate_reduction
+    ko: [K00955]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Mycobacterium tuberculosis[organism] AND cysNC[gene]"
+  - id: cysC
+    name: Adenylylsulfate kinase (APS → PAPS)
+    category: assimilatory_sulfate_reduction
+    ko: [K00860, K00955]   # K00955 = bifunctional cysNC fusion, which provides the cysC (APS-kinase) function; KEGG assigns the fusion only K00955, so without this the cysNC genomes (pde/sme) score as cysC-FP
+    pfam: [PF01583]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysC[gene]"
+  - id: cysH
+    name: Phosphoadenosine-phosphosulfate / APS reductase (PAPS → sulfite)
+    category: assimilatory_sulfate_reduction
+    ko: [K00390]
+    pfam: [PF01507]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysH[gene]"
+    notes: "Committing assimilatory step; reduces (P)APS to sulfite."
+  - id: cysJ
+    name: Sulfite reductase (NADPH) flavoprotein alpha-component
+    category: assimilatory_sulfate_reduction
+    ko: [K00380]
+    pfam: [PF00258, PF00667]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysJ[gene]"
+  - id: cysI
+    name: Sulfite reductase (NADPH) hemoprotein beta-component (siroheme)
+    category: assimilatory_sulfate_reduction
+    ko: [K00381]
+    pfam: [PF01077, PF03460]
+    pfam_logic: all
+    interpro: [IPR011786]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysI[gene]"
+    notes: "⚠️ Siroheme NIR_SIR fold (PF01077+PF03460) shared with dsrAB/nitrite reductases — KO K00381 is assimilatory-specific. Sulfite → sulfide for cysteine biosynthesis."
+  - id: sir
+    name: Sulfite reductase (ferredoxin) — plant/cyanobacterial assimilatory
+    category: assimilatory_sulfate_reduction
+    ko: [K00392]
+    pfam: [PF01077, PF03460]
+    pfam_logic: all
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Synechocystis sp. PCC 6803[organism] AND sir[gene]"
+    notes: "⚠️ NIR_SIR fold; ferredoxin-dependent alternative to cysJI (cyanobacteria, plants)."
+  - id: cysK
+    name: Cysteine synthase A (O-acetylserine sulfhydrylase)
+    category: assimilatory_sulfate_reduction
+    ko: [K01738]
+    pfam: [PF00291]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysK[gene]"
+    notes: "Terminal assimilatory step: sulfide + O-acetylserine → L-cysteine."
+  - id: cysM
+    name: Cysteine synthase B (S-sulfocysteine synthase)
+    category: assimilatory_sulfate_reduction
+    ko: [K12339]
+    pfam: [PF00291]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND cysM[gene]"
+
+  # ── 4. Thiosulfate / tetrathionate / polysulfide ──────────────────────────
+  - id: phsA
+    name: Thiosulfate / polysulfide reductase chain A (PhsA/PsrA)
+    category: thiosulfate_polysulfide
+    ko: [K08352]
+    pfam: [PF00384, PF01568]
+    pfam_logic: all
+    interpro: [IPR006657]
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [P37600]
+    # CURATED 2026-05-27 (audit): the gene-name fallback had pulled the WRONG-function homonym
+    # Q53692 (Streptomyces O-aminophenol oxidase) into the gate. Dropped it; kept the only reviewed
+    # PhsA — P37600 (Salmonella Typhimurium LT2, "Thiosulfate reductase Mo subunit PhsA", EC 1.8.5.5).
+    # ⚠️ NON-INDEPENDENCE: P37600 IS the panel genome Styphimurium_LT2 — no non-panel reviewed PhsA
+    # exists in SwissProt, so Styphimurium's phsA is a self-seed (tracked in validation/trap_independence.py).
+    ref_query: "Salmonella enterica[organism] AND phsA[gene]"
+    notes: "⚠️ Broad Mo-bis-MGD oxidoreductase family (PF00384, shared with narG/nxrA/napA/dmsA) — KO K08352 + BLAST gate. Thiosulfate → sulfite + sulfide (respiratory)."
+  - id: phsB
+    name: Thiosulfate reductase electron transport protein (PhsB, Fe-S)
+    category: thiosulfate_polysulfide
+    ko: [K08353]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Salmonella enterica[organism] AND phsB[gene]"
+  - id: phsC
+    name: Thiosulfate reductase cytochrome b subunit (PhsC, membrane anchor)
+    category: thiosulfate_polysulfide
+    ko: [K08354]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Salmonella enterica[organism] AND phsC[gene]"
+  - id: ttrA
+    name: Tetrathionate reductase subunit A
+    category: thiosulfate_polysulfide
+    ko: [K08357]
+    pfam: [PF00384, PF01568]
+    pfam_logic: all
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [Q9Z4S6, O30078]
+    # CURATED 2026-05-27 (audit): replaces the gene-name fallback. Both are the only reviewed TtrA in
+    # SwissProt — Q9Z4S6 (Salmonella Typhimurium LT2) + O30078 (Archaeoglobus fulgidus), both "Tetrathionate
+    # reductase subunit A" (Mo subunit). ⚠️ NON-INDEPENDENCE: these ARE panel genomes Styphimurium_LT2 +
+    # Afulgidus_DSM4304 (no non-panel reviewed TtrA exists) → those ttrA cells are self-seeds (see trap_independence.py).
+    ref_query: "Salmonella enterica[organism] AND ttrA[gene]"
+    notes: "⚠️ Broad Mo-bis-MGD family — KO K08357 + BLAST gate. Tetrathionate → thiosulfate (anaerobic respiration)."
+  - id: ttrB
+    name: Tetrathionate reductase subunit B (Fe-S)
+    category: thiosulfate_polysulfide
+    ko: [K08358]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Salmonella enterica[organism] AND ttrB[gene]"
+  - id: ttrC
+    name: Tetrathionate reductase subunit C (membrane anchor)
+    category: thiosulfate_polysulfide
+    ko: [K08359]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Salmonella enterica[organism] AND ttrC[gene]"
+  - id: doxA
+    name: Thiosulfate:quinone oxidoreductase subunit A (TQO/DoxA)
+    category: thiosulfate_polysulfide
+    ko: [K16936]
+    pfam: []
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Acidianus ambivalens[organism] AND doxA[gene]"
+    notes: "Thiosulfate → tetrathionate (acidophile/thermophile sulfur oxidation)."
+  - id: doxD
+    name: Thiosulfate:quinone oxidoreductase subunit D (TQO/DoxD)
+    category: thiosulfate_polysulfide
+    ko: [K16937]
+    pfam: []
+    custom_hmm: true
+    blast_fallback: true
+    blast_refs_uniprot: [B7J3E5, B7J3E9, P97207]   # ewaste-curated (A.fer + Pseudomonas naphthalene-dioxygenase neg anchor)
+    ref_query: "Acidianus ambivalens[organism] AND doxD[gene]"
+    notes: "Lifted ewaste custom HMM (TC=116.2). Bacterial ~360 aa + archaeal ~180 aa doxD."
+  - id: tth
+    name: Tetrathionate hydrolase
+    category: thiosulfate_polysulfide
+    ko: [K27925]
+    pfam: []
+    custom_hmm: true
+    blast_fallback: true
+    blast_refs_uniprot: [B7J3C9, A0A088STN8, G8YXZ9]   # ewaste-curated (Acidithiobacillus + Sulfolobales + Acidiferrobacter)
+    ref_query: "Acidithiobacillus ferrooxidans[organism] AND tetrathionate hydrolase"
+    notes: "Lifted ewaste custom HMM (TC=350.3). Tetrathionate → thiosulfate + sulfate + S⁰ (acidophile periplasm)."
+  - id: otr
+    name: Octaheme tetrathionate reductase
+    category: thiosulfate_polysulfide
+    ko: []                  # no KOfam KO
+    pfam: []                # ⚠️ octaheme cytochrome c clan — no dedicated Pfam
+    blast_fallback: true
+    blast_identity_min: 48   # raised 45→48 (SP2 FP cleanup): the real S. oneidensis otr hits its seed at 51.3%, but the seeds cross-react with a D. vulgaris multiheme cyt c at 45.2% (FP — D. vulgaris is a sulfate reducer with no tetrathionate reductase). 48 separates them with margin on both sides.
+    blast_refs_uniprot: [A0A0P0A2L7, A0A6S6LVS0, W9V959, A0A0E9LV17, A0A286RFN6]   # S3-curated, clade-spread "Octaheme tetrathionate reductase" (TrEMBL — no reviewed Otr exists): Celeribacter marinus / Citrifermentans bremense / Imhoffiella purpurea / Geofilum rubicundum / Thermogutta terrifontis. Deliberately EXCLUDES Shewanella Otr (Q8E9W8) so detection of the panel's S. oneidensis otr is a genuine cross-lineage test, not circular.
+    ref_query: "Shewanella oneidensis[organism] AND octaheme tetrathionate reductase"
+    notes: "⚠️ Tier-3: octaheme cyt c (HAO/Nrf-family fold), no clean Pfam or KO — BLAST-only (identity ≥45 to limit multiheme-cyt-c cross-reactivity). S3-curated 5-lineage seed set; train a custom HMM in SP3 if BLAST proves insufficient."
+  - id: sseA
+    name: Thiosulfate sulfurtransferase (rhodanese, 3-mercaptopyruvate)
+    category: thiosulfate_polysulfide
+    ko: [K01011]
+    pfam: [PF00581]
+    interpro: [IPR001763]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND sseA[gene]"
+    notes: "⚠️ Rhodanese (PF00581) is a broad, multi-domain superfamily — KO K01011 anchors the thiosulfate sulfurtransferase. Sulfur trafficking / detox."
+  - id: sreA
+    name: Sulfur reductase molybdopterin subunit (SreA)
+    category: thiosulfate_polysulfide
+    ko: [K17219]
+    pfam: [PF00384, PF01568]
+    pfam_logic: all
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: [Q97XX8, A0A2U9ICQ8, A0A1W6JYQ1, A0A2U9ILC1]   # SP6-curated SreA Mo-bis-MGD catalytic subunit (~1035-1050 aa; PF04879+PF00384+PF01568) from non-ambivalens Sulfolobales — Saccharolobus solfataricus + Acidianus brierleyi/manzaensis/sulfidivorans — the characterized thermoacidophilic-archaeal sulfur-reductase clade. EXCLUDES the test positive A. ambivalens (cross-genus, non-circular). Each verified by length+Pfam to be the genuine Mo subunit; KEGG K17219 itself mis-assigns SOR (PF07682) and short proteins, so name/KO alone is unreliable.
+    ref_query: "Acidianus ambivalens[organism] AND sulfur reductase"
+    notes: "⚠️ Broad Mo-bis-MGD family (K17219 fires in ~21/24 panel genomes on FDH/Nar paralogs) — the BLAST gate to the archaeal-SreA clade is what makes the call. S⁰ → H2S respiration (thermoacidophiles)."
+
+  # ── 5. Organic sulfur — DMSP / DMS / methanethiol ─────────────────────────
+  - id: dmdA
+    name: Dimethylsulfoniopropionate demethylase (DMSP demethylation)
+    category: organic_sulfur_dmsp
+    ko: [K17486]
+    pfam: [PF01571]
+    requires_blast_for_confirmation: true
+    blast_fallback: true
+    blast_identity_min: 45
+    blast_refs_uniprot: [Q4FP21, Q5LS57]   # S1-curated, EC 2.1.1.269-verified: Pelagibacter ubique HTCC1062 (SAR11) + Ruegeria pomeroyi DSS-3 (Roseobacter) — the two dominant marine DMSP-demethylating lineages
+    ref_query: "Ruegeria pomeroyi DSS-3[organism] AND dmdA[gene]"
+    notes: "⚠️ Demethylation branch of DMSP catabolism (C/S → MeSH). K17486's Pfam PF01571 is GcvT (glycine-cleavage T, a housekeeping family) — broad. Without curated seeds the name-fetched UniProt set pulled GcvT-family cross-hits → 2 FP (D. vulgaris, W. succinogenes). Curated to EC-verified DmdA + BLAST gate (≥45%). Seed set is thin (2 reviewed); expand in SP1 when DMSP genomes enter the panel."
+  - id: dddP
+    name: DMSP lyase (dddP / dddQ / dddL family)
+    category: organic_sulfur_dmsp
+    ko: [K28072, K28073]
+    pfam: []
+    custom_hmm: true   # SP6b: dedicated DddP HMM (targets/dddP/, TC=277.5; 21 CD-HIT reps of 113 characterized DddP; calibrated vs 293 M24 peptidases). The primary signature — K28073 alone over-fires the M24 moonlighting family.
+    requires_blast_for_confirmation: true   # 2nd filter: ≥50% to characterized DddP enforces DMSP-lyase specificity (an M24 paralog can score on the HMM fold but stays <50% BLAST — e.g. S. meliloti 40% → disqualified)
+    blast_fallback: true
+    blast_identity_min: 50
+    blast_refs_uniprot: [A3SK19, A0A1L3I5D0, A0A1V0RKM2, A0A0B3RT99]   # SP6b-curated DddP (EC 4.4.1.3, M24 fam): Roseovarius nubinhibens ISM (A3SK19, founding DddP, reviewed) / Phaeobacter porticola / Roseovarius mucosus / Mameliella alba. EXCLUDES Roseobacter denitrificans Q166H0 (the panel's dddP+ test genome) — rde DddP is 77% to these (passes gate, non-circular).
+    ref_query: "Roseovarius nubinhibens ISM[organism] AND DMSP lyase DddP"
+    notes: "⚠️ M24B metallopeptidase moonlighting family — K28073 has no clean single-KO positive (Ruegeria pomeroyi DSS-3 itself lacks the KEGG assignment). Detected by custom HMM + ≥50% DddP BLAST gate. Panel positive: Roseobacter denitrificans (RdDddP/Q166H0, a crystallized M24B DMSP lyase) via a documented function-correction (KEGG marks it absent). Cleavage branch of DMSP → DMS."
+  - id: mddA
+    name: Methanethiol S-methyltransferase (MeSH → DMS)
+    category: organic_sulfur_dmsp
+    ko: [K21310]
+    pfam: []
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Pseudomonas deceptionensis[organism] AND mddA[gene]"
+  - id: mtoX
+    name: Methanethiol oxidase (MeSH → formaldehyde + H2S)
+    category: organic_sulfur_dmsp
+    ko: [K17285]
+    pfam: []
+    blast_fallback: true
+    blast_identity_min: 40
+    blast_refs_uniprot: []
+    ref_query: "Hyphomicrobium[organism] AND methanethiol oxidase"
+
+  # ── 6. Sulfonate / taurine (organosulfonate assimilation) ─────────────────
+  - id: tauD
+    name: Taurine dioxygenase (alpha-ketoglutarate-dependent)
+    category: sulfonate_taurine
+    ko: [K03119]
+    pfam: [PF02668]
+    interpro: [IPR003819]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND tauD[gene]"
+    notes: "Sulfur scavenging from taurine under sulfate starvation; releases sulfite."
+  - id: tauA
+    name: Taurine ABC transporter substrate-binding protein
+    category: sulfonate_taurine
+    ko: [K15551]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND tauA[gene]"
+  - id: tauB
+    name: Taurine ABC transporter ATP-binding protein
+    category: sulfonate_taurine
+    ko: [K10831]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND tauB[gene]"
+  - id: tauC
+    name: Taurine ABC transporter permease
+    category: sulfonate_taurine
+    ko: [K15552]
+    pfam: []
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND tauC[gene]"
+  - id: ssuD
+    name: Alkanesulfonate monooxygenase
+    category: sulfonate_taurine
+    ko: [K04091]
+    pfam: [PF00296]
+    interpro: [IPR011251]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND ssuD[gene]"
+    notes: "⚠️ Luciferase-like (PF00296) is broad — KO K04091 anchors. Desulfonation of alkanesulfonates under S starvation."
+  - id: ssuE
+    name: FMN reductase (alkanesulfonate utilization, SsuE)
+    category: sulfonate_taurine
+    ko: [K00299]
+    pfam: [PF04055]
+    blast_fallback: false
+    blast_refs_uniprot: []
+    ref_query: "Escherichia coli[organism] AND ssuE[gene]"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Obligatory complexes — must find ALL members for the function to be present.
+# ─────────────────────────────────────────────────────────────────────────────
+complexes:
+  aps_reductase:
+    members: [aprA, aprB]
+    obligatory: true
+    application: "APS <=> sulfite; dissimilatory (with dsr) or reverse (sulfur oxidizers)"
+  dsr_reductase:
+    members: [dsrA, dsrB]
+    obligatory: true
+    application: "Dissimilatory sulfite reduction (SO3²⁻ => H2S); ⚠️ reductive vs reverse direction set by synteny/synergy"
+  sox_core:
+    members: [soxA, soxB, soxX, soxY, soxZ]
+    obligatory: true
+    application: "Thiosulfate oxidation (S2O3²⁻ => SO4²⁻) with no S⁰ intermediate; the canonical Sox pathway"
+  sox_dehydrogenase:
+    members: [soxC, soxD]
+    obligatory: true
+    application: "SoxCD sulfane dehydrogenase; its absence (soxB+ soxCD-) marks the S⁰-storing branched Sox of green/purple sulfur bacteria"
+  qmo_complex:
+    members: [qmoA, qmoB, qmoC]
+    obligatory: true
+    application: "Couples APS reductase to menaquinone in dissimilatory sulfate reducers"
+  soe_sulfite_dh:
+    members: [soeA, soeB, soeC]
+    obligatory: true
+    application: "Membrane sulfite => sulfate oxidation (quinone-linked)"
+  assim_atp_sulfurylase:
+    members: [cysN, cysD]
+    obligatory: true
+    application: "Assimilatory SO4²⁻ => APS (cysNC bifunctional fusion is an alternative)"
+  assim_sulfite_reductase:
+    members: [cysJ, cysI]
+    obligatory: true
+    application: "Assimilatory NADPH sulfite => sulfide (sir/Fd-type is an alternative)"
+  tetrathionate_reductase:
+    members: [ttrA, ttrB, ttrC]
+    obligatory: true
+    application: "Tetrathionate => thiosulfate respiration"
+  thiosulfate_reductase:
+    members: [phsA, phsB, phsC]
+    obligatory: true
+    application: "Thiosulfate => sulfite + sulfide respiration"
+  taurine_transporter:
+    members: [tauA, tauB, tauC]
+    obligatory: true
+    application: "Taurine uptake feeding tauD desulfonation"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Process-completeness modules — scored as completeness fractions, interpreted in
+# the gap-analysis report. Alternative/redundant members noted per module.
+# ─────────────────────────────────────────────────────────────────────────────
+synergies:
+  - name: complete_sulfate_reduction
+    requires: [sat, aprA, aprB, dsrA, dsrB]
+    benefit: "Full dissimilatory sulfate reduction (SO4²⁻ => H2S). qmoABC + dsrMK + dsrD confirm a canonical sulfate reducer (reductive direction)."
+  - name: reverse_dsr_sulfur_oxidation
+    requires: [dsrA, dsrB, aprA, sat]
+    benefit: "Reverse-Dsr sulfur oxidation (H2S/S⁰ => SO4²⁻) in sulfur oxidizers. Distinguished from sulfate reduction by ABSENCE of dsrD + presence of sox/sqr (see resolve_dsr_direction)."
+  - name: complete_sox_oxidation
+    requires: [soxA, soxB, soxX, soxY, soxZ]
+    benefit: "Complete thiosulfate oxidation to sulfate (no S⁰ intermediate); add soxCD for the full Kelly-Friedrich Sox cycle."
+  - name: sulfide_oxidation
+    requires: [sqr]
+    benefit: "Sulfide => S⁰/polysulfide entry to oxidation. fccAB is an alternative to sqr; sdo handles the S⁰ => sulfite step downstream."
+  - name: assimilatory_complete
+    requires: [cysN, cysH, cysI, cysK]
+    benefit: "End-to-end biosynthetic sulfur (SO4²⁻ => sulfide => cysteine). cysNC counts for cysN; sir for cysI; cysM for cysK."
+  - name: thiosulfate_disproportionation
+    requires: [phsA, soxB]
+    benefit: "Thiosulfate disproportionation/respiration: phs/ttr reductive arm co-occurring with sox/sdo oxidative arm."
+  - name: dmsp_demethylation
+    requires: [dmdA]
+    benefit: "DMSP demethylation branch (carbon/sulfur retained as MeSH); dominant marine DMSP fate, suppresses DMS climate flux."
+  - name: dmsp_cleavage
+    requires: [dddP]
+    benefit: "DMSP cleavage branch => DMS (climate-active gas). Balance of dddP vs dmdA sets the marine DMS yield."
+  - name: organosulfonate_scavenging
+    requires: [tauD, ssuD]
+    benefit: "Sulfur scavenging from taurine + alkanesulfonates under sulfate starvation (releases sulfite back into the cycle)."

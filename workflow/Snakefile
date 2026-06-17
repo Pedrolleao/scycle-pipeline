@@ -1,0 +1,67 @@
+# ewaste-pipeline — top-level Snakefile.
+# Includes mode-specific rule files. The `all` rule branches per-sample
+# based on each sample's kind (protein | nucleotide | fastq).
+
+import os
+import re
+from pathlib import Path
+
+configfile: os.environ.get("SCYCLE_CONFIG", "config/config.yaml")
+
+SAMPLES = config.get("samples") or {}
+RESULTS = Path(config["paths"]["results_dir"])
+
+# Per-mode sample name sets — used as wildcard constraints so that
+# Mode-A rules only fire on protein/nucleotide samples and Mode-B rules
+# only fire on fastq samples. Without this, snakemake's rule-DAG picks
+# `apply_rules_protein` for fastq via the ruleorder and prodigal crashes
+# on the FASTQ.
+PROTEIN_SAMPLES = [
+    n for n, m in SAMPLES.items() if m.get("kind") in ("protein", "nucleotide")
+]
+READ_SAMPLES = [n for n, m in SAMPLES.items() if m.get("kind") == "fastq"]
+PROTEIN_SAMPLES_RE = "|".join(re.escape(s) for s in PROTEIN_SAMPLES) or "__NONE__"
+READ_SAMPLES_RE = "|".join(re.escape(s) for s in READ_SAMPLES) or "__NONE__"
+
+# Pathway categories — single source of truth, used by both the per-pathway
+# rule's wildcard_constraints (in rules/report.smk) and the rule-all target
+# list (cross_sample_figures, defined further below).
+PATHWAY_CATEGORIES = [
+    "dissimilatory_sulfate_reduction", "sulfur_oxidation",
+    "assimilatory_sulfate_reduction", "thiosulfate_polysulfide",
+    "organic_sulfur_dmsp", "sulfonate_taurine",
+]
+
+include: "rules/common.smk"
+include: "rules/protein_mode.smk"
+include: "rules/report.smk"
+
+
+def per_sample_target(name, meta):
+    """Final artefact for one sample = its gap_analysis.txt."""
+    return str(RESULTS / name / "report" / "gap_analysis.txt")
+
+
+def cross_sample_figures():
+    """Per-pathway + complex + synergy + applications figures in results/figures/.
+    Each figure co-renders as SVG (vector) + PNG (300 DPI raster preview)."""
+    if not SAMPLES:
+        return []
+    figdir = RESULTS / "figures"
+    bases = (
+        [f"pathway_{p}" for p in PATHWAY_CATEGORIES]
+        + ["complexes", "synergies", "applications"]
+    )
+    return [str(figdir / f"{b}.{ext}") for b in bases for ext in ("svg", "png")]
+
+
+rule all:
+    input:
+        # Per-sample reports.
+        [per_sample_target(n, m) for n, m in SAMPLES.items()],
+        # Cross-sample products (only meaningful with >=1 sample).
+        (str(RESULTS / "multisample_matrix.tsv") if SAMPLES else []),
+        (str(RESULTS / "multisample_heatmap.svg") if SAMPLES else []),
+        (str(RESULTS / "multisample_heatmap.png") if SAMPLES else []),
+        # Focused figures (10 SVGs + 10 PNGs in results/figures/).
+        cross_sample_figures(),

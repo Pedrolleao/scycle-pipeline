@@ -1,0 +1,1256 @@
+target_id: tth
+tier: 2
+cdhit_threshold: 0.85
+seed_accessions:
+- B7J3C9
+- A0A088STN8
+- A4ZV25
+- A0A060URH6
+- G8YXZ9
+negatives:
+- Q9R758
+- A0A2K9VRN2
+- P15877
+- I0JWN7
+expanded_candidates:
+- acc: B7J3C9
+  organism: Acidithiobacillus ferrooxidans (strain ATCC 23270 / DSM 14882 / CIP 104768
+    / NCIMB 8455)
+  length: 499
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: A0A088STN8
+  organism: Acidithiobacillus caldus
+  length: 467
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: A4ZV25
+  organism: Acidithiobacillus caldus
+  length: 517
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: A0A060URH6
+  organism: Acidithiobacillus ferrivorans
+  length: 503
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: G8YXZ9
+  organism: Acidianus ambivalens
+  length: 535
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: F9ZNI0
+  organism: Acidithiobacillus caldus
+  length: 503
+  phmmer_score: 1156.9
+  keep: true
+  note: Acidithiobacillus caldus (503 aa, score 1156.9)
+- acc: UPI0025B7C10D
+  organism: Acidithiobacillus sp.
+  length: 503
+  phmmer_score: 1059.2
+  keep: false
+  note: UPI*
+- acc: UPI0025BDA335
+  organism: Acidithiobacillus sp.
+  length: 499
+  phmmer_score: 1036.1
+  keep: false
+  note: UPI*
+- acc: A0A5P9XS05
+  organism: Acidithiobacillus
+  length: 503
+  phmmer_score: 978.1
+  keep: true
+  note: Acidithiobacillus (503 aa, score 978.1)
+- acc: UPI00289DD3A9
+  organism: Candidatus Igneacidithiobacillus taiwanensis
+  length: 501
+  phmmer_score: 926.4
+  keep: false
+  note: UPI*
+- acc: A0AAE2YS57
+  organism: Acidithiobacillaceae
+  length: 497
+  phmmer_score: 914.7
+  keep: false
+  note: unclassified taxonomy
+- acc: UPI0034E4E017
+  organism: Acidithiobacillus sp. IBUN Pt1247-S3
+  length: 497
+  phmmer_score: 896.7
+  keep: false
+  note: UPI*
+- acc: A0A2U9IJ17
+  organism: Acidianus brierleyi
+  length: 508
+  phmmer_score: 896.5
+  keep: true
+  note: Acidianus brierleyi (508 aa, score 896.5)
+- acc: A0A2U9IL93
+  organism: Acidianus
+  length: 541
+  phmmer_score: 895.6
+  keep: true
+  note: Acidianus (541 aa, score 895.6)
+- acc: A0A031LLD2
+  organism: Acidianus
+  length: 534
+  phmmer_score: 831.5
+  keep: true
+  note: Acidianus (534 aa, score 831.5)
+- acc: A0A519BHB8
+  organism: Acididesulfobacter guangdongensis
+  length: 510
+  phmmer_score: 821.0
+  keep: true
+  note: Acididesulfobacter guangdongensis (510 aa, score 821.0)
+- acc: UPI002630481D
+  organism: Acidiferrobacter sp.
+  length: 503
+  phmmer_score: 806.4
+  keep: false
+  note: UPI*
+- acc: A0A510E1X2
+  organism: Sulfuracidifex tepidarius
+  length: 536
+  phmmer_score: 797.2
+  keep: true
+  note: Sulfuracidifex tepidarius (536 aa, score 797.2)
+- acc: A0A6A9QQK3
+  organism: Sulfuracidifex metallicus
+  length: 537
+  phmmer_score: 794.7
+  keep: true
+  note: Sulfuracidifex metallicus (537 aa, score 794.7)
+- acc: A0A4S3KDG2
+  organism: Metallibacterium scheffleri
+  length: 506
+  phmmer_score: 774.2
+  keep: true
+  note: Metallibacterium scheffleri (506 aa, score 774.2)
+- acc: A0AAW9DP59
+  organism: Acidiphilium acidophilum
+  length: 510
+  phmmer_score: 739.3
+  keep: true
+  note: Acidiphilium acidophilum (510 aa, score 739.3)
+- acc: A0AAQ4CVT6
+  organism: Saccharolobus
+  length: 536
+  phmmer_score: 735.4
+  keep: true
+  note: Saccharolobus (536 aa, score 735.4)
+- acc: A0AAT9GQV1
+  organism: Sulfurisphaera javensis
+  length: 529
+  phmmer_score: 732.5
+  keep: true
+  note: Sulfurisphaera javensis (529 aa, score 732.5)
+- acc: Q972G6
+  organism: Sulfolobaceae
+  length: 532
+  phmmer_score: 730.9
+  keep: true
+  note: Sulfolobaceae (532 aa, score 730.9)
+- acc: UPI00307F1D1E
+  organism: Stygiolobus sp. CP850M
+  length: 535
+  phmmer_score: 714.2
+  keep: false
+  note: UPI*
+- acc: A0A8D5ZGM4
+  organism: Stygiolobus caldivivus
+  length: 535
+  phmmer_score: 704.0
+  keep: true
+  note: Stygiolobus caldivivus (535 aa, score 704.0)
+- acc: UPI00307E26ED
+  organism: Acidihalobacter sp.
+  length: 509
+  phmmer_score: 669.2
+  keep: false
+  note: UPI*
+- acc: A4YEX7
+  organism: Metallosphaera
+  length: 536
+  phmmer_score: 663.7
+  keep: true
+  note: Metallosphaera (536 aa, score 663.7)
+- acc: F4G3L5
+  organism: Metallosphaera
+  length: 537
+  phmmer_score: 660.2
+  keep: true
+  note: Metallosphaera (537 aa, score 660.2)
+- acc: H2C2S2
+  organism: Metallosphaera yellowstonensis MK1
+  length: 536
+  phmmer_score: 659.6
+  keep: true
+  note: Metallosphaera yellowstonensis MK1 (536 aa, score 659.6)
+- acc: A0A6N0NZU1
+  organism: Metallosphaera tengchongensis
+  length: 535
+  phmmer_score: 656.1
+  keep: false
+  note: genus cap 3
+- acc: A0A2U9II54
+  organism: Acidianus brierleyi
+  length: 532
+  phmmer_score: 640.5
+  keep: false
+  note: genus cap 3
+- acc: A0A1V0PKV8
+  organism: Acidithiobacillus caldus
+  length: 345
+  phmmer_score: 633.9
+  keep: false
+  note: length 345 outside 460-545 aa band
+- acc: A0A031LQ26
+  organism: Acidianus
+  length: 530
+  phmmer_score: 628.2
+  keep: false
+  note: genus cap 3
+- acc: A0A2T2X5R5
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 511
+  phmmer_score: 625.2
+  keep: true
+  note: Sulfobacillus thermosulfidooxidans (511 aa, score 625.2)
+- acc: A0A368HFV7
+  organism: Acidiferrobacter
+  length: 497
+  phmmer_score: 606.7
+  keep: true
+  note: Acidiferrobacter (497 aa, score 606.7)
+- acc: UPI000414DCDD
+  organism: Thermithiobacillus tepidarius
+  length: 508
+  phmmer_score: 602.2
+  keep: false
+  note: UPI*
+- acc: Q6L099
+  organism: Picrophilus torridus (strain ATCC 700027 / DSM 9790 / JCM 10055 / NBRC
+    100828 / KAW 2/3)
+  length: 532
+  phmmer_score: 594.1
+  keep: true
+  note: Picrophilus torridus (strain ATCC 700027 (532 aa, score 594.1)
+- acc: A0A401JD06
+  organism: Sulfuriferula
+  length: 514
+  phmmer_score: 580.7
+  keep: false
+  note: post-cap
+- acc: UPI001B873D3C
+  organism: Acidiferrobacter thiooxydans
+  length: 339
+  phmmer_score: 577.6
+  keep: false
+  note: post-cap
+- acc: A0A7C3QYA7
+  organism: Leptospirillum ferriphilum
+  length: 539
+  phmmer_score: 570.6
+  keep: false
+  note: post-cap
+- acc: A0A6F8ZJD5
+  organism: Candidatus Hydrogenisulfobacillus filiaventi
+  length: 508
+  phmmer_score: 570.2
+  keep: false
+  note: post-cap
+- acc: A0A368HFD5
+  organism: Acidiferrobacter
+  length: 333
+  phmmer_score: 569.2
+  keep: false
+  note: post-cap
+- acc: I0IQQ2
+  organism: Leptospirillum ferrooxidans (strain C2-3)
+  length: 497
+  phmmer_score: 568.2
+  keep: false
+  note: post-cap
+- acc: C6HUY6
+  organism: Leptospirillum ferrodiazotrophum
+  length: 502
+  phmmer_score: 567.6
+  keep: false
+  note: post-cap
+- acc: UPI0021095474
+  organism: Sulfuracidifex tepidarius
+  length: 349
+  phmmer_score: 561.9
+  keep: false
+  note: post-cap
+- acc: A0A094YNN1
+  organism: Leptospirillum
+  length: 496
+  phmmer_score: 556.3
+  keep: false
+  note: post-cap
+- acc: UPI000ADA1158
+  organism: Acidithiobacillus
+  length: 490
+  phmmer_score: 525.3
+  keep: false
+  note: post-cap
+- acc: A0ABP9XF69
+  organism: Deinococcus aluminii
+  length: 500
+  phmmer_score: 524.2
+  keep: false
+  note: post-cap
+- acc: A0A510DXK2
+  organism: Sulfuracidifex tepidarius
+  length: 544
+  phmmer_score: 506.3
+  keep: false
+  note: post-cap
+- acc: A0A1P8UG63
+  organism: Acidihalobacter ferrooxydans
+  length: 341
+  phmmer_score: 465.9
+  keep: false
+  note: post-cap
+- acc: A0A5P9XPU3
+  organism: Acidithiobacillus thiooxidans ATCC 19377
+  length: 235
+  phmmer_score: 455.0
+  keep: false
+  note: post-cap
+- acc: UPI0012FA81F5
+  organism: Sulfuriferula sp. AH1
+  length: 415
+  phmmer_score: 444.5
+  keep: false
+  note: post-cap
+- acc: A0A6F9EDR2
+  organism: Kyrpidia
+  length: 627
+  phmmer_score: 424.7
+  keep: false
+  note: post-cap
+- acc: A0A6F8ZDA4
+  organism: Candidatus Hydrogenisulfobacillus filiaventi
+  length: 646
+  phmmer_score: 393.5
+  keep: false
+  note: post-cap
+- acc: UPI00237983F8
+  organism: Alicyclobacillus sp. ALC3
+  length: 1040
+  phmmer_score: 390.4
+  keep: false
+  note: post-cap
+- acc: A0A1M4YJS0
+  organism: Ferrithrix thermotolerans DSM 19514
+  length: 586
+  phmmer_score: 388.4
+  keep: false
+  note: post-cap
+- acc: A0ABU5ZFX8
+  organism: Ferviditalea candida
+  length: 626
+  phmmer_score: 383.0
+  keep: false
+  note: post-cap
+- acc: UPI001F47C8EB
+  organism: Alicyclobacillus tolerans
+  length: 631
+  phmmer_score: 382.9
+  keep: false
+  note: post-cap
+- acc: A0A6F8ZKC8
+  organism: Candidatus Hydrogenisulfobacillus filiaventi
+  length: 1006
+  phmmer_score: 381.3
+  keep: false
+  note: post-cap
+- acc: A0A2T2X8X7
+  organism: Sulfobacillus benefaciens
+  length: 633
+  phmmer_score: 378.9
+  keep: false
+  note: post-cap
+- acc: A0A2T2X0S1
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 633
+  phmmer_score: 378.2
+  keep: false
+  note: post-cap
+- acc: A0ABM6RVN0
+  organism: Sulfobacillus
+  length: 630
+  phmmer_score: 374.7
+  keep: false
+  note: post-cap
+- acc: A0A650CJP7
+  organism: Sulfolobaceae
+  length: 559
+  phmmer_score: 361.5
+  keep: false
+  note: post-cap
+- acc: G8TY05
+  organism: Sulfobacillus acidophilus (strain ATCC 700253 / DSM 10332 / NAL)
+  length: 616
+  phmmer_score: 357.9
+  keep: false
+  note: post-cap
+- acc: A0AAQ4CQL9
+  organism: Saccharolobus
+  length: 554
+  phmmer_score: 356.5
+  keep: false
+  note: post-cap
+- acc: Q96XP7
+  organism: Sulfurisphaera
+  length: 485
+  phmmer_score: 355.6
+  keep: false
+  note: post-cap
+- acc: A0A8D5U5W6
+  organism: Stygiolobus caldivivus
+  length: 587
+  phmmer_score: 352.1
+  keep: false
+  note: post-cap
+- acc: UPI0006B44E00
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 1008
+  phmmer_score: 350.4
+  keep: false
+  note: post-cap
+- acc: UPI003D026FC8
+  organism: Acidiphilium sp.
+  length: 472
+  phmmer_score: 342.3
+  keep: false
+  note: post-cap
+- acc: A0A5C4M3B3
+  organism: Amycolatopsis alkalitolerans
+  length: 500
+  phmmer_score: 332.0
+  keep: false
+  note: post-cap
+- acc: A0A6A9QRK2
+  organism: Sulfuracidifex metallicus
+  length: 577
+  phmmer_score: 330.0
+  keep: false
+  note: post-cap
+- acc: A0A2U9ICJ7
+  organism: Acidianus brierleyi
+  length: 336
+  phmmer_score: 321.0
+  keep: false
+  note: post-cap
+- acc: E6Q021
+  organism: mine drainage metagenome
+  length: 492
+  phmmer_score: 316.9
+  keep: false
+  note: post-cap
+- acc: UPI0006781762
+  organism: Halopiger goleimassiliensis
+  length: 2045
+  phmmer_score: 316.3
+  keep: false
+  note: post-cap
+- acc: A0A519BGJ5
+  organism: Acididesulfobacter guangdongensis
+  length: 545
+  phmmer_score: 312.7
+  keep: false
+  note: post-cap
+- acc: A0A8J4HAA2
+  organism: Acidicaldus sp.
+  length: 472
+  phmmer_score: 306.8
+  keep: false
+  note: post-cap
+- acc: A0ABM6RRX0
+  organism: Sulfobacillus
+  length: 467
+  phmmer_score: 303.6
+  keep: false
+  note: post-cap
+- acc: E6QSQ1
+  organism: mine drainage metagenome
+  length: 489
+  phmmer_score: 300.4
+  keep: false
+  note: post-cap
+- acc: UPI002616C8A0
+  organism: Rhodoblastus sp.
+  length: 492
+  phmmer_score: 296.8
+  keep: false
+  note: post-cap
+- acc: UPI001C5AD067
+  organism: Methylovirgula sp. HY1
+  length: 480
+  phmmer_score: 287.2
+  keep: false
+  note: post-cap
+- acc: A0A4R3YCC3
+  organism: Sulfurirhabdus autotrophica
+  length: 983
+  phmmer_score: 283.4
+  keep: false
+  note: post-cap
+- acc: UPI002276BA76
+  organism: Sulfuracidifex metallicus
+  length: 356
+  phmmer_score: 279.1
+  keep: false
+  note: post-cap
+- acc: UPI00214C3490
+  organism: Acidithiobacillus ferrooxidans
+  length: 282
+  phmmer_score: 267.8
+  keep: false
+  note: post-cap
+- acc: A0A368HBV3
+  organism: Acidiferrobacter thiooxydans
+  length: 204
+  phmmer_score: 262.7
+  keep: false
+  note: post-cap
+- acc: UPI001AE5D2D2
+  organism: Methanolinea mesophila
+  length: 1918
+  phmmer_score: 254.4
+  keep: false
+  note: post-cap
+- acc: A0A2T2WT53
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 470
+  phmmer_score: 249.0
+  keep: false
+  note: post-cap
+- acc: A0A2T2X0A1
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 627
+  phmmer_score: 245.9
+  keep: false
+  note: post-cap
+- acc: UPI003F6BF59C
+  organism: Haloarchaeobius sp. DT45
+  length: 1940
+  phmmer_score: 236.2
+  keep: false
+  note: post-cap
+- acc: UPI002406DDA5
+  organism: Haloarcula laminariae
+  length: 1080
+  phmmer_score: 236.2
+  keep: false
+  note: post-cap
+- acc: UPI00069FD208
+  organism: Streptomyces viridochromogenes
+  length: 997
+  phmmer_score: 235.5
+  keep: false
+  note: post-cap
+- acc: A0A2R4X0Y9
+  organism: Halococcoides cellulosivorans
+  length: 774
+  phmmer_score: 231.7
+  keep: false
+  note: post-cap
+- acc: A0A368HLW8
+  organism: Acidiferrobacter
+  length: 512
+  phmmer_score: 231.4
+  keep: false
+  note: post-cap
+- acc: A0A1W1WBI3
+  organism: Sulfobacillus thermosulfidooxidans (strain DSM 9293 / VKM B-1269 / AT-1)
+  length: 686
+  phmmer_score: 230.6
+  keep: false
+  note: post-cap
+- acc: A0A8J7YVX4
+  organism: Candidatus Altarchaeum hamiconexum
+  length: 385
+  phmmer_score: 229.1
+  keep: false
+  note: post-cap
+- acc: A0ABD5XB04
+  organism: Halovenus rubra
+  length: 1714
+  phmmer_score: 228.1
+  keep: false
+  note: post-cap
+- acc: UPI00262B49DB
+  organism: Acidiferrobacter sp.
+  length: 472
+  phmmer_score: 227.9
+  keep: false
+  note: post-cap
+- acc: A0A519BDP4
+  organism: Candidatus Acidulodesulfobacterium ferriphilum
+  length: 472
+  phmmer_score: 226.1
+  keep: false
+  note: post-cap
+- acc: A0A519BHR2
+  organism: Acididesulfobacter guangdongensis
+  length: 453
+  phmmer_score: 224.7
+  keep: false
+  note: post-cap
+- acc: A0A519BKM7
+  organism: Candidatus Acididesulfobacter diazotrophicus
+  length: 454
+  phmmer_score: 220.2
+  keep: false
+  note: post-cap
+- acc: UPI003F54912E
+  organism: Halosimplex marinum
+  length: 779
+  phmmer_score: 213.9
+  keep: false
+  note: post-cap
+- acc: UPI00214C9EBD
+  organism: Acidithiobacillus ferrooxidans
+  length: 183
+  phmmer_score: 213.3
+  keep: false
+  note: post-cap
+- acc: UPI00282D338E
+  organism: Candidatus Bathycorpusculum sp.
+  length: 714
+  phmmer_score: 211.3
+  keep: false
+  note: post-cap
+- acc: UPI0009DC0090
+  organism: Salinarchaeum sp. Harcht-Bsk1
+  length: 798
+  phmmer_score: 209.9
+  keep: false
+  note: post-cap
+- acc: UPI002330E8BE
+  organism: Halorubrum ezzemoulense
+  length: 1072
+  phmmer_score: 207.0
+  keep: false
+  note: post-cap
+- acc: A0A6F8ZDD5
+  organism: Candidatus Hydrogenisulfobacillus filiaventi
+  length: 613
+  phmmer_score: 203.9
+  keep: false
+  note: post-cap
+- acc: UPI0025BA7647
+  organism: Acidithiobacillus sp.
+  length: 481
+  phmmer_score: 202.6
+  keep: false
+  note: post-cap
+- acc: A0A8J3N3P9
+  organism: Reticulibacter mediterranei
+  length: 663
+  phmmer_score: 201.0
+  keep: false
+  note: post-cap
+- acc: H9UB14
+  organism: Fervidobacterium
+  length: 1436
+  phmmer_score: 200.0
+  keep: false
+  note: post-cap
+- acc: A0A402ASA5
+  organism: Dictyobacter kobayashii
+  length: 644
+  phmmer_score: 199.2
+  keep: false
+  note: post-cap
+- acc: A0A256JEW3
+  organism: Halorubrum ezzemoulense
+  length: 1025
+  phmmer_score: 198.2
+  keep: false
+  note: post-cap
+- acc: A0A402B181
+  organism: Dictyobacter alpinus
+  length: 659
+  phmmer_score: 195.8
+  keep: false
+  note: post-cap
+- acc: A0ABT4Z0E6
+  organism: Halorubrum ezzemoulense
+  length: 1043
+  phmmer_score: 195.1
+  keep: false
+  note: post-cap
+- acc: A0A5P9XME9
+  organism: Acidithiobacillus thiooxidans ATCC 19377
+  length: 107
+  phmmer_score: 194.4
+  keep: false
+  note: post-cap
+- acc: UPI003748E815
+  organism: uncultured Methanoregula sp.
+  length: 399
+  phmmer_score: 190.2
+  keep: false
+  note: post-cap
+- acc: A0A5P9XRT2
+  organism: Acidithiobacillus
+  length: 450
+  phmmer_score: 187.8
+  keep: false
+  note: post-cap
+- acc: UPI0032E3E5A4
+  organism: Methanoregula sp. UBA64
+  length: 448
+  phmmer_score: 186.9
+  keep: false
+  note: post-cap
+- acc: A0A1I6KHP5
+  organism: Halomicrobium zhouii
+  length: 423
+  phmmer_score: 186.1
+  keep: false
+  note: post-cap
+- acc: UPI00332C45CB
+  organism: Streptosporangium sp. NPDC002524
+  length: 677
+  phmmer_score: 185.8
+  keep: false
+  note: post-cap
+- acc: A0A1C2I436
+  organism: Acidithiobacillus thiooxidans
+  length: 450
+  phmmer_score: 184.9
+  keep: false
+  note: post-cap
+- acc: UPI001D0171DD
+  organism: Acidithiobacillus thiooxidans
+  length: 157
+  phmmer_score: 182.9
+  keep: false
+  note: post-cap
+- acc: UPI000A89C86E
+  organism: Acidithiobacillus ferrooxidans
+  length: 450
+  phmmer_score: 182.3
+  keep: false
+  note: post-cap
+- acc: A0A8J3I7K5
+  organism: Ktedonobacteraceae
+  length: 659
+  phmmer_score: 181.5
+  keep: false
+  note: post-cap
+- acc: UPI00210C3724
+  organism: Sulfuracidifex tepidarius
+  length: 199
+  phmmer_score: 180.7
+  keep: false
+  note: post-cap
+- acc: UPI0033E05DCC
+  organism: Nonomuraea sp. NPDC050643
+  length: 728
+  phmmer_score: 180.4
+  keep: false
+  note: post-cap
+- acc: UPI00232C765F
+  organism: Halorubrum ezzemoulense
+  length: 462
+  phmmer_score: 179.9
+  keep: false
+  note: post-cap
+- acc: UPI001916C080
+  organism: Ktedonobacter sp. SOSP1-52
+  length: 659
+  phmmer_score: 179.7
+  keep: false
+  note: post-cap
+- acc: UPI00242CE889
+  organism: Acidithiobacillus thiooxidans
+  length: 450
+  phmmer_score: 179.3
+  keep: false
+  note: post-cap
+- acc: A0A6N8U1Y9
+  organism: Salinicoccus hispanicus
+  length: 417
+  phmmer_score: 176.9
+  keep: false
+  note: post-cap
+- acc: A0A1P8UG72
+  organism: Acidihalobacter ferrooxydans
+  length: 116
+  phmmer_score: 176.5
+  keep: false
+  note: post-cap
+- acc: A0A220U1X7
+  organism: Virgibacillus phasianinus
+  length: 457
+  phmmer_score: 176.5
+  keep: false
+  note: post-cap
+- acc: UPI000E255C66
+  organism: unclassified Haloferax
+  length: 2309
+  phmmer_score: 176.4
+  keep: false
+  note: post-cap
+- acc: D6U242
+  organism: Ktedonobacter racemifer DSM 44963
+  length: 659
+  phmmer_score: 176.3
+  keep: false
+  note: post-cap
+- acc: UPI000B441CB2
+  organism: Virgibacillus dakarensis
+  length: 416
+  phmmer_score: 175.7
+  keep: false
+  note: post-cap
+- acc: A0A2T2XAX2
+  organism: Sulfobacillus benefaciens
+  length: 432
+  phmmer_score: 175.5
+  keep: false
+  note: post-cap
+- acc: F9ZL27
+  organism: Acidithiobacillus caldus
+  length: 485
+  phmmer_score: 175.0
+  keep: false
+  note: post-cap
+- acc: UPI0018E75B8D
+  organism: Alicyclobacillus sp. SO9
+  length: 472
+  phmmer_score: 172.9
+  keep: false
+  note: post-cap
+- acc: UPI0023301FEF
+  organism: Halorubrum ezzemoulense
+  length: 1056
+  phmmer_score: 172.9
+  keep: false
+  note: post-cap
+- acc: C7MI03
+  organism: Brachybacterium faecium (strain ATCC 43885 / DSM 4810 / JCM 11609 / LMG
+    19847 / NBRC 14762 / NCIMB 9860 / 6-10)
+  length: 475
+  phmmer_score: 170.5
+  keep: false
+  note: post-cap
+- acc: UPI000BD18279
+  organism: Acidiphilium
+  length: 446
+  phmmer_score: 170.4
+  keep: false
+  note: post-cap
+- acc: A0A265N8N9
+  organism: Virgibacillus indicus
+  length: 461
+  phmmer_score: 169.5
+  keep: false
+  note: post-cap
+- acc: UPI00261BD9D9
+  organism: Thiomonas sp.
+  length: 449
+  phmmer_score: 168.6
+  keep: false
+  note: post-cap
+- acc: UPI001F23F2A4
+  organism: Lentibacillus sp. Marseille-P4043
+  length: 443
+  phmmer_score: 167.9
+  keep: false
+  note: post-cap
+- acc: UPI001AEFFCD9
+  organism: Halorhabdus rudnickae
+  length: 437
+  phmmer_score: 167.6
+  keep: false
+  note: post-cap
+- acc: A0AAT9GPT3
+  organism: Sulfurisphaera javensis
+  length: 735
+  phmmer_score: 166.0
+  keep: false
+  note: post-cap
+- acc: A0A5R9EY84
+  organism: Exobacillus caeni
+  length: 495
+  phmmer_score: 166.0
+  keep: false
+  note: post-cap
+- acc: A0A1W1WK68
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 431
+  phmmer_score: 165.2
+  keep: false
+  note: post-cap
+- acc: UPI002D53B0CF
+  organism: Alloacidobacterium sp.
+  length: 541
+  phmmer_score: 165.1
+  keep: false
+  note: post-cap
+- acc: UPI003CFF453F
+  organism: Acidiphilium sp.
+  length: 449
+  phmmer_score: 164.8
+  keep: false
+  note: post-cap
+- acc: UPI0019628C87
+  organism: Arthrobacter roseus
+  length: 473
+  phmmer_score: 164.8
+  keep: false
+  note: post-cap
+- acc: UPI003C70282F
+  organism: Halorientalis pallida
+  length: 2927
+  phmmer_score: 164.3
+  keep: false
+  note: post-cap
+- acc: A0A1I1XV31
+  organism: Lentibacillus persicus
+  length: 455
+  phmmer_score: 164.2
+  keep: false
+  note: post-cap
+- acc: A0A3N5B9X1
+  organism: Aquisalibacillus elongatus
+  length: 454
+  phmmer_score: 163.4
+  keep: false
+  note: post-cap
+- acc: A0A059ZUG1
+  organism: Acidithiobacillus caldus
+  length: 486
+  phmmer_score: 163.3
+  keep: false
+  note: post-cap
+- acc: E6PJU1
+  organism: Thiomonas sp. X19
+  length: 467
+  phmmer_score: 163.1
+  keep: false
+  note: post-cap
+- acc: UPI002DBF406B
+  organism: Virgibacillus halodenitrificans
+  length: 461
+  phmmer_score: 163.0
+  keep: false
+  note: post-cap
+- acc: A0AAC9J5P6
+  organism: Virgibacillus halodenitrificans
+  length: 461
+  phmmer_score: 162.5
+  keep: false
+  note: post-cap
+- acc: A0A944GXG0
+  organism: Mesobacillus boroniphilus
+  length: 433
+  phmmer_score: 162.5
+  keep: false
+  note: post-cap
+- acc: A0A897N504
+  organism: Halapricum desulfuricans
+  length: 498
+  phmmer_score: 162.5
+  keep: false
+  note: post-cap
+- acc: UPI00036BA66B
+  organism: Salinicoccus albus
+  length: 427
+  phmmer_score: 162.0
+  keep: false
+  note: post-cap
+- acc: UPI001787FC5E
+  organism: Halorussus halophilus
+  length: 892
+  phmmer_score: 162.0
+  keep: false
+  note: post-cap
+- acc: A0ABW3ZZ12
+  organism: Lentibacillus salinarum
+  length: 458
+  phmmer_score: 161.7
+  keep: false
+  note: post-cap
+- acc: A0A2T2X3H8
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 435
+  phmmer_score: 161.0
+  keep: false
+  note: post-cap
+- acc: A0A2T2XIK7
+  organism: Sulfobacillus benefaciens
+  length: 574
+  phmmer_score: 160.7
+  keep: false
+  note: post-cap
+- acc: A0A4Q2USF6
+  organism: Spirosoma
+  length: 462
+  phmmer_score: 160.7
+  keep: false
+  note: post-cap
+- acc: UPI0027E45F17
+  organism: Acidithiobacillus sp. AMEEHan
+  length: 455
+  phmmer_score: 160.3
+  keep: false
+  note: post-cap
+- acc: A0A9D1QGE3
+  organism: Candidatus Salinicoccus stercoripullorum
+  length: 419
+  phmmer_score: 160.2
+  keep: false
+  note: post-cap
+- acc: UPI0039EE9AA8
+  organism: Mesobacillus sp.
+  length: 457
+  phmmer_score: 159.9
+  keep: false
+  note: post-cap
+- acc: A0A7Y0Q1P3
+  organism: Sulfobacillus harzensis
+  length: 567
+  phmmer_score: 159.7
+  keep: false
+  note: post-cap
+- acc: A0A265EB96
+  organism: Salinicoccus
+  length: 438
+  phmmer_score: 159.5
+  keep: false
+  note: post-cap
+- acc: A0A179BM47
+  organism: Pseudomonadota
+  length: 449
+  phmmer_score: 159.3
+  keep: false
+  note: post-cap
+- acc: UPI000EF555E7
+  organism: Virgibacillus halodenitrificans
+  length: 460
+  phmmer_score: 159.0
+  keep: false
+  note: post-cap
+- acc: UPI001EF8C4C9
+  organism: Virgibacillus halotolerans
+  length: 461
+  phmmer_score: 158.5
+  keep: false
+  note: post-cap
+- acc: E6PP13
+  organism: mine drainage metagenome
+  length: 447
+  phmmer_score: 158.3
+  keep: false
+  note: post-cap
+- acc: UPI00240772D7
+  organism: Haloarcula laminariae
+  length: 1146
+  phmmer_score: 157.8
+  keep: false
+  note: post-cap
+- acc: UPI0013563289
+  organism: Halosegnis longus
+  length: 525
+  phmmer_score: 157.8
+  keep: false
+  note: post-cap
+- acc: A0A1F2UFI0
+  organism: Candidatus Aquicultor primus
+  length: 755
+  phmmer_score: 157.7
+  keep: false
+  note: post-cap
+- acc: UPI00398B6FBA
+  organism: Salinicoccus sp. HZC-1
+  length: 424
+  phmmer_score: 157.6
+  keep: false
+  note: post-cap
+- acc: UPI0023013E88
+  organism: Salinicoccus roseus
+  length: 444
+  phmmer_score: 157.6
+  keep: false
+  note: post-cap
+- acc: A0ABD5XA56
+  organism: Halovenus rubra
+  length: 613
+  phmmer_score: 156.4
+  keep: false
+  note: post-cap
+- acc: A0A921JX33
+  organism: Dietzia timorensis
+  length: 434
+  phmmer_score: 156.1
+  keep: false
+  note: post-cap
+- acc: UPI000DE27318
+  organism: Nonomuraea lactucae
+  length: 655
+  phmmer_score: 156.1
+  keep: false
+  note: post-cap
+- acc: A0ABS4HI76
+  organism: Virgibacillus litoralis
+  length: 405
+  phmmer_score: 154.7
+  keep: false
+  note: post-cap
+- acc: UPI0008248113
+  organism: Gracilibacillus
+  length: 451
+  phmmer_score: 154.7
+  keep: false
+  note: post-cap
+- acc: A0A6N0NVG4
+  organism: Metallosphaera tengchongensis
+  length: 530
+  phmmer_score: 154.5
+  keep: false
+  note: post-cap
+- acc: UPI00061C6D28
+  organism: Paraliobacillus sp. PM-2
+  length: 409
+  phmmer_score: 154.5
+  keep: false
+  note: post-cap
+- acc: UPI00344BD62D
+  organism: Streptosporangium sp. NPDC051023
+  length: 651
+  phmmer_score: 154.1
+  keep: false
+  note: post-cap
+- acc: UPI002EDAA6E7
+  organism: Virgibacillus sp. MG-45
+  length: 445
+  phmmer_score: 154.0
+  keep: false
+  note: post-cap
+- acc: A0A495A464
+  organism: Oceanobacillus halophilus
+  length: 450
+  phmmer_score: 153.9
+  keep: false
+  note: post-cap
+- acc: A0A498L0U2
+  organism: Halorientalis pallida
+  length: 572
+  phmmer_score: 153.9
+  keep: false
+  note: post-cap
+- acc: UPI0035A1BBAB
+  organism: Methanospirillum sp.
+  length: 704
+  phmmer_score: 153.7
+  keep: false
+  note: post-cap
+- acc: A0A4D6HR00
+  organism: Natronorubrum bangense
+  length: 473
+  phmmer_score: 153.7
+  keep: false
+  note: post-cap
+- acc: UPI0036D931AA
+  organism: Streptomyces
+  length: 590
+  phmmer_score: 153.7
+  keep: false
+  note: post-cap
+- acc: A0A1W1WG26
+  organism: Sulfobacillus thermosulfidooxidans
+  length: 573
+  phmmer_score: 153.2
+  keep: false
+  note: post-cap
+- acc: A0A5R9EZH5
+  organism: Exobacillus caeni
+  length: 464
+  phmmer_score: 152.9
+  keep: false
+  note: post-cap
+- acc: A0A927B2Q1
+  organism: Spirosoma validum
+  length: 398
+  phmmer_score: 152.9
+  keep: false
+  note: post-cap
+- acc: A0A0A2UT58
+  organism: Pontibacillus
+  length: 469
+  phmmer_score: 152.5
+  keep: false
+  note: post-cap
+- acc: A0A0A2TFH3
+  organism: Pontibacillus yanchengensis
+  length: 496
+  phmmer_score: 152.2
+  keep: false
+  note: post-cap
+- acc: UPI0020C98C5B
+  organism: Natronosalvus amylolyticus
+  length: 1743
+  phmmer_score: 152.1
+  keep: false
+  note: post-cap
+- acc: A0A1G7LWN5
+  organism: Halorientalis regularis
+  length: 604
+  phmmer_score: 151.9
+  keep: false
+  note: post-cap
+- acc: UPI00300EF148
+  organism: Haloarcula sp. CGMCC 1.2071
+  length: 798
+  phmmer_score: 151.9
+  keep: false
+  note: post-cap
+- acc: F4B982
+  organism: Acidianus
+  length: 726
+  phmmer_score: 151.6
+  keep: false
+  note: post-cap
+- acc: UPI002AD2070E
+  organism: unclassified Frankia
+  length: 755
+  phmmer_score: 151.4
+  keep: false
+  note: post-cap
+- acc: UPI002E324CA2
+  organism: Streptomyces sp. NBC_01478
+  length: 684
+  phmmer_score: 151.2
+  keep: false
+  note: post-cap
+- acc: A0A0A8X8K4
+  organism: Mesobacillus
+  length: 500
+  phmmer_score: 151.2
+  keep: false
+  note: post-cap
+tc_bitscore: 350.3
+tc_rationale: 'clean gap: min_positive=663.3 > max_negative=37.3; TC = midpoint =
+  350.3'
+n_seqs_final: 20
+curator: pedro.leao.ru@gmail.com
+curation_date: '2026-05-21'
+notes: Tetrathionate hydrolase. Acidithiobacillus + Sulfolobales + related acidophiles.
+  Discriminates from tet(H) tetracycline efflux.

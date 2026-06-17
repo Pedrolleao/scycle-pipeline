@@ -1,0 +1,1529 @@
+target_id: soxB
+tier: 2
+cdhit_threshold: 0.85
+seed_accessions:
+- A0AAE6TS95
+- Q1W3E6
+- Q8RLW8
+- Q9LAH6
+- Q5SIF2
+- A0A1J0LTR4
+- A0A0A2WXI3
+- A0A7C3I060
+negatives:
+- C5ASA1
+- C5AYW1
+- C5ASH8
+- C5AWR8
+- C5AWH2
+- P07024
+- P08331
+- Q8EFH1
+- Q8EBF3
+- Q8EC27
+- Q1LQW8
+- Q1LCG3
+- Q1LID4
+- P55798
+- P05637
+- Q97VG9
+expanded_candidates:
+- acc: A0AAE6TS95
+  organism: Paracoccus pantotrophus
+  length: 564
+  phmmer_score: null
+  keep: true
+  note: seed; type Sox-pathway organism (Friedrich/Bardischewsky biochem characterisation
+    lineage)
+- acc: Q1W3E6
+  organism: Allochromatium vinosum
+  length: 594
+  phmmer_score: null
+  keep: true
+  note: seed; purple sulfur gammaproteobacterium reference; PF02872+PF00149 architecture
+- acc: Q8RLW8
+  organism: Chlorobium limicola
+  length: 584
+  phmmer_score: null
+  keep: true
+  note: seed; green sulfur bacterium reference
+- acc: Q9LAH6
+  organism: Ancylobacter novellus
+  length: 568
+  phmmer_score: null
+  keep: true
+  note: seed; chemolithoautotroph (=Starkeya novella synonym, classical sox lineage)
+- acc: A0A5C4S040
+  organism: Chlorobiaceae
+  length: 584
+  phmmer_score: 1348.3
+  keep: true
+  note: 2nd green-sulfur Chlorobiaceae rep (vs C. limicola seed); top phmmer score
+    in pool
+- acc: A0A6N8EBS6
+  organism: Allochromatium
+  length: 594
+  phmmer_score: 1274.1
+  keep: true
+  note: 2nd Allochromatium isolate; parallels soxX D3RVS6 (2nd purple-sulfur Allochromatium)
+- acc: UPI0021B01CA5
+  organism: Chlorobaculum sp. MV4-Y
+  length: 584
+  phmmer_score: 1228.8
+  keep: false
+  note: UPI* accession filtered per WORK_PLAN convention; Chlorobaculum role covered
+    by Q8KDM5
+- acc: Q8KDM5
+  organism: Chlorobaculum
+  length: 616
+  phmmer_score: 1219.9
+  keep: true
+  note: Chlorobaculum tepidum-class soxB; parallels soxX/soxD Q8KDN0/Q5ZQM8 Chlorobaculum
+    kept set
+- acc: B3QNI1
+  organism: Chlorobiaceae
+  length: 585
+  phmmer_score: 1210.0
+  keep: true
+  note: 3rd green-sulfur Chlorobiaceae rep; broadens green-sulfur sampling
+- acc: A0A3P5XBC3
+  organism: Paracoccaceae
+  length: 564
+  phmmer_score: 1185.9
+  keep: true
+  note: 2nd Paracoccus-genus rep (Paracoccaceae); parallels soxX/soxD 3-Paracoccus
+    kept-set
+- acc: A0A9W6JB81
+  organism: Ancylobacter
+  length: 564
+  phmmer_score: 1174.3
+  keep: true
+  note: 2nd Ancylobacter rep (vs Q9LAH6 seed A. novellus); intra-genus diversity in
+    classical lineage
+- acc: A0A398BY59
+  organism: Gemmobacter
+  length: 564
+  phmmer_score: 1163.3
+  keep: true
+  note: Gemmobacter rep; parallels soxX A0A1N7MDE4 / soxD A0A1N7MDE9 (Gemmobacter
+    kept across batch)
+- acc: A0ABU0B9N1
+  organism: Ancylobacter
+  length: 564
+  phmmer_score: 1151.0
+  keep: false
+  note: 3rd Ancylobacter; 2 already kept (Q9LAH6 seed + A0A9W6JB81), redundant at
+    cdhit 0.85
+- acc: A0A1N7MDG6
+  organism: Gemmobacter
+  length: 563
+  phmmer_score: 1150.3
+  keep: false
+  note: 2nd Gemmobacter; A0A398BY59 already kept
+- acc: UPI001907D779
+  organism: Thiocystis violacea
+  length: 593
+  phmmer_score: 1149.3
+  keep: false
+  note: UPI* filtered; Thiocystis role covered by G2E2I3 / I3YAY2 (non-UPI)
+- acc: A0A2T4JWS4
+  organism: Cereibacter changlensis
+  length: 564
+  phmmer_score: 1145.9
+  keep: true
+  note: Cereibacter rep (formerly Rhodobacter sphaeroides clade); parallels soxX A0A2T4JWN2
+    / soxD A0A2T4JX11
+- acc: UPI001D972AC0
+  organism: Albidovulum sp.
+  length: 564
+  phmmer_score: 1138.2
+  keep: false
+  note: UPI* filtered
+- acc: A0A6M0K0V3
+  organism: Chromatiaceae
+  length: 593
+  phmmer_score: 1130.9
+  keep: false
+  note: generic Chromatiaceae; Chromatiaceae purple-sulfur role covered by Allochromatium
+    kept seqs + Thiocystis (I3YAY2) + Thiohalocapsa (A0A5M8FG03)
+- acc: A0ABU1F2J0
+  organism: Ruixingdingia sedimenti
+  length: 564
+  phmmer_score: 1130.8
+  keep: false
+  note: Ruixingdingia; obscure Rhodobacteraceae, redundant at cdhit 0.85
+- acc: UPI001645FA1B
+  organism: unclassified Stappia
+  length: 563
+  phmmer_score: 1120.6
+  keep: false
+  note: UPI* filtered
+- acc: A0ABT2NI73
+  organism: Albidovulum sediminis
+  length: 564
+  phmmer_score: 1119.8
+  keep: false
+  note: Albidovulum; not in soxX/soxD kept-set, redundant at cdhit 0.85
+- acc: G2E2I3
+  organism: Chromatiaceae
+  length: 593
+  phmmer_score: 1119.0
+  keep: true
+  note: "Chromatiaceae purple-sulfur rep (Thiocystis-class 593 aa) \u2014 extends\
+    \ gammaproteobacterial purple-sulfur sampling beyond A. vinosum seed"
+- acc: UPI000D0F6C0A
+  organism: Pannonibacter
+  length: 563
+  phmmer_score: 1118.9
+  keep: false
+  note: UPI* filtered
+- acc: A0A376AA31
+  organism: Rhizobiaceae
+  length: 563
+  phmmer_score: 1116.1
+  keep: false
+  note: generic Rhizobiaceae; redundant
+- acc: A0A444MB40
+  organism: Falsigemmobacter intermedius
+  length: 564
+  phmmer_score: 1107.6
+  keep: false
+  note: Falsigemmobacter; Gemmobacter-relative, redundant
+- acc: I3YAY2
+  organism: Thiocystis
+  length: 593
+  phmmer_score: 1106.5
+  keep: false
+  note: 2nd Thiocystis; G2E2I3 (Chromatiaceae 593) already covers this 593-aa purple-sulfur
+    class
+- acc: A0ABT2YXW3
+  organism: Albidovulum
+  length: 563
+  phmmer_score: 1104.9
+  keep: false
+  note: 2nd Albidovulum; redundant
+- acc: UPI000494C5D3
+  organism: Bosea sp. 117
+  length: 564
+  phmmer_score: 1103.5
+  keep: false
+  note: UPI* filtered
+- acc: A0A5M8FG03
+  organism: Thiohalocapsa marina
+  length: 595
+  phmmer_score: 1103.0
+  keep: true
+  note: "Thiohalocapsa rep; haloalkaliphilic purple-sulfur lineage \u2014 broadens\
+    \ Chromatiaceae diversity beyond Allochromatium/Thiocystis"
+- acc: A0A6M1U8K5
+  organism: Paracoccaceae
+  length: 564
+  phmmer_score: 1100.7
+  keep: false
+  note: 3rd Paracoccaceae generic; A0A3P5XBC3 already kept
+- acc: A0A9X0WIB2
+  organism: Thiocapsa imhoffii
+  length: 592
+  phmmer_score: 1099.8
+  keep: true
+  note: Thiocapsa rep (classical purple-sulfur genus); 592-aa Chromatiaceae class
+- acc: A0A844BD62
+  organism: Rhodovulum strictum
+  length: 563
+  phmmer_score: 1099.7
+  keep: true
+  note: "Rhodovulum rep \u2014 explicitly listed positive Sox-pathway lineage; parallels\
+    \ soxX A0A844BA00"
+- acc: A0A8X8KP65
+  organism: Paracoccaceae
+  length: 563
+  phmmer_score: 1097.3
+  keep: false
+  note: 4th Paracoccaceae generic; redundant
+- acc: F9UI26
+  organism: Thiocapsa
+  length: 592
+  phmmer_score: 1096.6
+  keep: false
+  note: 2nd Thiocapsa; A0A9X0WIB2 already kept
+- acc: UPI0004773362
+  organism: Lamprocystis
+  length: 593
+  phmmer_score: 1093.7
+  keep: false
+  note: UPI* filtered
+- acc: A0A832PQR0
+  organism: Bacteria
+  length: 562
+  phmmer_score: 1092.4
+  keep: false
+  note: generic 'Bacteria' assignment; no taxonomic specificity
+- acc: UPI0019115BD3
+  organism: Thiorhodovibrio
+  length: 595
+  phmmer_score: 1091.6
+  keep: false
+  note: UPI* filtered
+- acc: UPI001D085EA1
+  organism: Rhodobacter sp. Har01
+  length: 563
+  phmmer_score: 1089.5
+  keep: false
+  note: UPI* filtered
+- acc: A0ABS1CBD1
+  organism: Thiohalocapsa
+  length: 595
+  phmmer_score: 1089.4
+  keep: false
+  note: 2nd Thiohalocapsa; A0A5M8FG03 already kept
+- acc: A0A6L8VKC0
+  organism: Frigidibacter
+  length: 563
+  phmmer_score: 1084.3
+  keep: false
+  note: Frigidibacter; obscure Rhodobacteraceae, low priority
+- acc: A0A9X0WCC9
+  organism: Chromatiaceae
+  length: 595
+  phmmer_score: 1084.0
+  keep: false
+  note: generic Chromatiaceae; redundant with named Chromatiaceae reps already kept
+- acc: UPI003750CA79
+  organism: Cypionkella sp.
+  length: 563
+  phmmer_score: 1083.1
+  keep: false
+  note: UPI* filtered
+- acc: UPI0019060B27
+  organism: Rhabdochromatium marinum
+  length: 595
+  phmmer_score: 1081.2
+  keep: false
+  note: UPI* filtered
+- acc: A0A2K9MGX0
+  organism: Paracoccus jeotgali
+  length: 563
+  phmmer_score: 1080.7
+  keep: true
+  note: "3rd Paracoccus species (P. jeotgali); intra-genus diversity \u2014 mirrors\
+    \ soxX/soxD 3-Paracoccus pattern"
+- acc: UPI000FFBB730
+  organism: Tabrizicola thermarum
+  length: 563
+  phmmer_score: 1080.7
+  keep: false
+  note: UPI* filtered
+- acc: W0DXR1
+  organism: Marichromatium
+  length: 593
+  phmmer_score: 1079.2
+  keep: false
+  note: Marichromatium; covered by other Chromatiaceae reps
+- acc: A0A411Z220
+  organism: Pseudotabrizicola
+  length: 563
+  phmmer_score: 1079.1
+  keep: false
+  note: Pseudotabrizicola; obscure Roseobacter-clade, redundant
+- acc: UPI003978F944
+  organism: Halochromatium sp.
+  length: 586
+  phmmer_score: 1078.8
+  keep: false
+  note: UPI* filtered
+- acc: UPI002F93FCEB
+  organism: Paracoccaceae
+  length: 564
+  phmmer_score: 1078.0
+  keep: false
+  note: UPI* filtered
+- acc: B4SEL4
+  organism: Pelodictyon phaeoclathratiforme (strain DSM 5477 / BU-1)
+  length: 586
+  phmmer_score: 1077.3
+  keep: true
+  note: "Pelodictyon rep; green-sulfur Chlorobi sister-lineage to Chlorobium \u2014\
+    \ broadens green-sulfur sampling beyond Chlorobium/Chlorobaculum"
+- acc: UPI000DD9D5F0
+  organism: Paracoccus endophyticus
+  length: 563
+  phmmer_score: 1075.3
+  keep: false
+  note: UPI* filtered
+- acc: A0AAJ0XCW0
+  organism: Halochromatium glycolicum
+  length: 595
+  phmmer_score: 1074.9
+  keep: false
+  note: Halochromatium; Chromatiaceae diversity already covered
+- acc: A0A1H2TQQ6
+  organism: Paracoccus
+  length: 564
+  phmmer_score: 1070.6
+  keep: false
+  note: "4th Paracoccus; 3 already kept (A0AAE6TS95 seed, A0A3P5XBC3, A0A2K9MGX0)\
+    \ \u2014 soxX/soxD precedent is 3 Paracoccus, this would be 4th, redundant"
+- acc: A0A1I3H5J8
+  organism: Albimonas
+  length: 563
+  phmmer_score: 1070.3
+  keep: false
+  note: Albimonas; obscure Rhodobacteraceae, redundant
+- acc: UPI000A55E05E
+  organism: Candidatus Thiosymbion oneisti
+  length: 593
+  phmmer_score: 1068.9
+  keep: false
+  note: UPI* filtered
+- acc: A0A6G7VF10
+  organism: Caldichromatium japonicum
+  length: 590
+  phmmer_score: 1065.1
+  keep: false
+  note: Caldichromatium; Chromatiaceae thermal, but 4 Chromatiaceae purple-sulfur
+    reps already kept (Allochromatium seed, A0A6N8EBS6, G2E2I3, A0A5M8FG03, A0A9X0WIB2)
+- acc: A0A1N7IXU3
+  organism: Rhodobacter
+  length: 564
+  phmmer_score: 1064.9
+  keep: false
+  note: Rhodobacter; Cereibacter A0A2T4JWS4 covers Rhodobacter-Cereibacter clade
+- acc: UPI004027C0F1
+  organism: Rhodobacter capsulatus
+  length: 563
+  phmmer_score: 1061.1
+  keep: false
+  note: UPI* filtered
+- acc: A0A2A4CT42
+  organism: Rhodobacterales
+  length: 563
+  phmmer_score: 1060.9
+  keep: false
+  note: generic Rhodobacterales; redundant with named-genus reps
+- acc: A0A657PM66
+  organism: Candidatus Sedimenticola endophacoides
+  length: 591
+  phmmer_score: 1056.6
+  keep: true
+  note: Sedimenticola/sulfur-oxidising symbiont rep; gammaproteobacterial symbiont
+    sulfur biology broadens Chromatiaceae-dominant gamma pool
+- acc: UPI002633256F
+  organism: uncultured Paracoccus sp.
+  length: 564
+  phmmer_score: 1055.5
+  keep: false
+  note: UPI* filtered + uncultured
+- acc: Q3APA0
+  organism: Chlorobium chlorochromatii (strain CaD3)
+  length: 585
+  phmmer_score: 1052.7
+  keep: true
+  note: 2nd Chlorobium species (vs C. limicola Q8RLW8 seed); intra-genus green-sulfur
+    diversity
+- acc: A0A4S3MR75
+  organism: Aliigemmobacter aestuarii
+  length: 564
+  phmmer_score: 1049.1
+  keep: false
+  note: Aliigemmobacter; Gemmobacter-relative, redundant
+- acc: A0A4Q2TV81
+  organism: Hyphomicrobiales
+  length: 563
+  phmmer_score: 1048.3
+  keep: false
+  note: generic Hyphomicrobiales; redundant
+- acc: A0A418ZS58
+  organism: Paracoccus aestuarii
+  length: 563
+  phmmer_score: 1048.1
+  keep: false
+  note: 5th Paracoccus species; redundant (soxX dropped this same species at this
+    position)
+- acc: A0A7Z0VQG5
+  organism: Candidatus Thiodiazotropha
+  length: 591
+  phmmer_score: 1047.2
+  keep: true
+  note: "Thiodiazotropha rep; nitrogen-fixing sulfur-oxidising gammaproteobacterial\
+    \ symbiont \u2014 diversifies sulfur-symbiont gamma branch"
+- acc: A0A831RQ03
+  organism: Sedimenticola thiotaurini
+  length: 588
+  phmmer_score: 1046.1
+  keep: false
+  note: 2nd Sedimenticola; A0A657PM66 already kept
+- acc: A0A2T5K698
+  organism: Rhodobacterales
+  length: 563
+  phmmer_score: 1044.8
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: UPI00106F2EE6
+  organism: Paracoccus luteus
+  length: 563
+  phmmer_score: 1041.1
+  keep: false
+  note: UPI* filtered
+- acc: A0A2T4JGN5
+  organism: Phaeovulum veldkampii DSM 11550
+  length: 563
+  phmmer_score: 1040.7
+  keep: false
+  note: Phaeovulum; obscure Roseobacter-clade, low priority
+- acc: A0A0F7K515
+  organism: Sedimenticola thiotaurini
+  length: 591
+  phmmer_score: 1038.6
+  keep: false
+  note: 3rd Sedimenticola variant; Sedimenticola role already covered
+- acc: UPI002649BC32
+  organism: Pseudorhodobacter sp.
+  length: 563
+  phmmer_score: 1036.3
+  keep: false
+  note: UPI* filtered
+- acc: A0A285T9Z6
+  organism: Rhodobacter
+  length: 564
+  phmmer_score: 1033.3
+  keep: false
+  note: Rhodobacter; redundant with Cereibacter A0A2T4JWS4
+- acc: G2FFX5
+  organism: Gammaproteobacteria
+  length: 592
+  phmmer_score: 1032.2
+  keep: false
+  note: generic Gammaproteobacteria; redundant
+- acc: A0A4P8EF01
+  organism: Pseudorhodobacter
+  length: 563
+  phmmer_score: 1031.9
+  keep: false
+  note: Pseudorhodobacter; obscure Roseobacter-clade, redundant
+- acc: A0A7U6JIF8
+  organism: Thiolapillus
+  length: 588
+  phmmer_score: 1030.8
+  keep: false
+  note: Thiolapillus; obscure thiosulfate-oxidising lineage but coverage already provided
+    by Sedimenticola/Thiodiazotropha
+- acc: UPI003D0A6413
+  organism: Paenirhodobacter sp.
+  length: 563
+  phmmer_score: 1029.6
+  keep: false
+  note: UPI* filtered
+- acc: A0A9E4KCE1
+  organism: Candidatus Thiodiazotropha
+  length: 591
+  phmmer_score: 1028.7
+  keep: false
+  note: 2nd Thiodiazotropha; A0A7Z0VQG5 already kept
+- acc: A0A1T2KU37
+  organism: Solemya velesiana gill symbiont
+  length: 591
+  phmmer_score: 1026.1
+  keep: false
+  note: Solemya gill sulfur-oxidising symbiont; covered by Thiodiazotropha/Sedimenticola
+- acc: A0A2N6CYU8
+  organism: Sedimenticola
+  length: 591
+  phmmer_score: 1024.4
+  keep: false
+  note: 4th Sedimenticola; redundant
+- acc: A0A369CFH1
+  organism: Thioalbus denitrificans
+  length: 587
+  phmmer_score: 1020.1
+  keep: false
+  note: Thioalbus; obscure thiosulfate-oxidising lineage, redundant with symbiont
+    reps
+- acc: A0A557SBN0
+  organism: Sedimenticola
+  length: 592
+  phmmer_score: 1017.2
+  keep: false
+  note: 5th Sedimenticola; redundant
+- acc: A0A370E130
+  organism: Gammaproteobacteria
+  length: 592
+  phmmer_score: 1016.8
+  keep: false
+  note: generic Gammaproteobacteria; redundant
+- acc: UPI001552F238
+  organism: Mangrovicoccus
+  length: 563
+  phmmer_score: 1016.3
+  keep: false
+  note: UPI* filtered
+- acc: A0A285CU16
+  organism: Cereibacter ovatus
+  length: 562
+  phmmer_score: 1015.4
+  keep: false
+  note: 2nd Cereibacter species; A0A2T4JWS4 already kept
+- acc: UPI00215A7E8C
+  organism: Frigidibacter sp. ROC022
+  length: 563
+  phmmer_score: 1015.0
+  keep: false
+  note: UPI* filtered
+- acc: A0A0B0H593
+  organism: sulfur-oxidizing symbionts
+  length: 592
+  phmmer_score: 1012.9
+  keep: false
+  note: generic sulfur-oxidising symbionts; covered by named Thiodiazotropha/Sedimenticola
+- acc: A0A8K0VB32
+  organism: Szabonella alba
+  length: 563
+  phmmer_score: 1004.2
+  keep: false
+  note: Szabonella; obscure Rhodobacteraceae, redundant
+- acc: UPI003C7C63F3
+  organism: unclassified Meridianimarinicoccus
+  length: 565
+  phmmer_score: 1002.8
+  keep: false
+  note: UPI* filtered
+- acc: UPI001293AD81
+  organism: Magnetovirga frankeli
+  length: 587
+  phmmer_score: 1000.4
+  keep: false
+  note: UPI* filtered
+- acc: A0A1U7D164
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 1000.1
+  keep: false
+  note: generic Roseobacteraceae; redundant with named-genus Rhodobacteraceae reps
+- acc: A0A1G5PZB9
+  organism: Thiohalomonas denitrificans
+  length: 597
+  phmmer_score: 999.5
+  keep: false
+  note: Thiohalomonas; obscure halophilic sulfur-oxidiser, redundant
+- acc: A0A1W2E3Z5
+  organism: Primorskyibacter
+  length: 565
+  phmmer_score: 999.4
+  keep: false
+  note: Primorskyibacter; obscure Roseobacter-clade, redundant
+- acc: A0A3L6ZZL7
+  organism: Xanthobacter
+  length: 564
+  phmmer_score: 999.1
+  keep: false
+  note: "Xanthobacter; chemoautotrophic Hyphomicrobiales \u2014 would add lineage\
+    \ diversity but pool is already at ~20 keeps; deferred unless calibration shows\
+    \ non-Rhodobacteraceae alpha gap"
+- acc: A0A085U1Y7
+  organism: Thioclava
+  length: 563
+  phmmer_score: 998.8
+  keep: false
+  note: Thioclava (thiosulfate-oxidising) - low priority given dense Roseobacter coverage
+- acc: A0ABW3TAS1
+  organism: Seohaeicola
+  length: 565
+  phmmer_score: 998.7
+  keep: false
+  note: Seohaeicola; obscure Roseobacter-clade, redundant
+- acc: A0A317T8Z0
+  organism: Prosthecochloris
+  length: 584
+  phmmer_score: 998.1
+  keep: true
+  note: "Prosthecochloris rep; green-sulfur Chlorobi genus distinct from Chlorobium/Chlorobaculum/Pelodictyon\
+    \ \u2014 broadens green-sulfur sampling to 4 genera"
+- acc: A0A1G8LNL0
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 997.8
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: A0A2T7UUS5
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 997.7
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: A0A1N7JJ44
+  organism: Phaeovulum vinaykumarii
+  length: 563
+  phmmer_score: 997.5
+  keep: false
+  note: 2nd Phaeovulum; obscure Roseobacter, low priority
+- acc: Q0FI44
+  organism: Salipiger
+  length: 565
+  phmmer_score: 997.1
+  keep: false
+  note: Salipiger; obscure Roseobacter-clade, redundant
+- acc: A0A975ZQP5
+  organism: Marinovum
+  length: 565
+  phmmer_score: 994.9
+  keep: false
+  note: Marinovum; obscure Roseobacter-clade, redundant
+- acc: UPI001F12EABC
+  organism: Candidatus Vondammii sp. HM_W22
+  length: 592
+  phmmer_score: 994.7
+  keep: false
+  note: UPI* filtered
+- acc: UPI0010F8C3C9
+  organism: Marimonas lutisalis
+  length: 565
+  phmmer_score: 994.6
+  keep: false
+  note: UPI* filtered
+- acc: A0A5A9ZSY4
+  organism: Aquicoccus
+  length: 565
+  phmmer_score: 994.1
+  keep: false
+  note: Aquicoccus; obscure Roseobacter-clade, redundant
+- acc: A0A074KJC6
+  organism: Thioclava
+  length: 563
+  phmmer_score: 993.3
+  keep: false
+  note: 2nd Thioclava; redundant
+- acc: A0A1G8Q6G3
+  organism: Salipiger marinus
+  length: 565
+  phmmer_score: 992.0
+  keep: false
+  note: 2nd Salipiger species; redundant
+- acc: A0A974PPF0
+  organism: Xanthobacteraceae
+  length: 563
+  phmmer_score: 991.1
+  keep: false
+  note: generic Xanthobacteraceae; redundant
+- acc: A0A8J7J9D0
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 990.0
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: UPI0039BF8147
+  organism: Xanthobacter sp. AM11
+  length: 564
+  phmmer_score: 988.0
+  keep: false
+  note: UPI* filtered
+- acc: A0ABT3H111
+  organism: Pararhodobacter zhoushanensis
+  length: 565
+  phmmer_score: 987.2
+  keep: false
+  note: Pararhodobacter; obscure Roseobacter-clade, redundant
+- acc: UPI00290C4364
+  organism: Aestuariicoccus sp. MJ-SS9
+  length: 565
+  phmmer_score: 986.8
+  keep: false
+  note: UPI* filtered
+- acc: UPI003727B1DE
+  organism: Xanthobacter nonsaccharivorans
+  length: 564
+  phmmer_score: 985.3
+  keep: false
+  note: UPI* filtered
+- acc: UPI002AFFE367
+  organism: Pararhodobacter sp.
+  length: 565
+  phmmer_score: 985.0
+  keep: false
+  note: UPI* filtered
+- acc: A0ABV7WNK7
+  organism: Reinekea marina
+  length: 582
+  phmmer_score: 984.4
+  keep: false
+  note: Reinekea; gammaproteobacterial but obscure, redundant
+- acc: A0A2K8KES3
+  organism: Paracoccaceae
+  length: 565
+  phmmer_score: 984.2
+  keep: false
+  note: generic Paracoccaceae; redundant
+- acc: I1X4F3
+  organism: uncultured bacterium ws101A12
+  length: 565
+  phmmer_score: 984.1
+  keep: false
+  note: uncultured; insufficient taxonomy
+- acc: A0A8J8B8C0
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 984.1
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: UPI00374F66AA
+  organism: Xanthobacter
+  length: 564
+  phmmer_score: 983.6
+  keep: false
+  note: UPI* filtered
+- acc: A0A3B0M3C6
+  organism: Roseinatronobacter
+  length: 564
+  phmmer_score: 983.5
+  keep: false
+  note: Roseinatronobacter; obscure Roseobacter-clade, redundant
+- acc: UPI00290DA8B2
+  organism: Aliisedimentitalea sp. MJ-SS2
+  length: 565
+  phmmer_score: 982.7
+  keep: false
+  note: UPI* filtered
+- acc: A0A844WB01
+  organism: Pseudooceanicola pacificus
+  length: 565
+  phmmer_score: 982.4
+  keep: false
+  note: Pseudooceanicola; obscure Roseobacter-clade, redundant
+- acc: A0A844CQZ6
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 981.5
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0A2S0MN13
+  organism: Pukyongiella litopenaei
+  length: 565
+  phmmer_score: 981.5
+  keep: false
+  note: Pukyongiella; obscure Roseobacter-clade, redundant
+- acc: A0A1M5NGB4
+  organism: Marivita
+  length: 565
+  phmmer_score: 981.2
+  keep: false
+  note: Marivita; obscure Roseobacter-clade, redundant
+- acc: A0ABU0LER4
+  organism: Xanthobacter agilis
+  length: 564
+  phmmer_score: 981.0
+  keep: false
+  note: Xanthobacter; redundant
+- acc: A0ABS6N8L8
+  organism: Thalassococcus arenae
+  length: 565
+  phmmer_score: 980.6
+  keep: false
+  note: Thalassococcus; obscure Roseobacter-clade, redundant
+- acc: A0A2T0RYU4
+  organism: Aliiruegeria haliotis
+  length: 567
+  phmmer_score: 980.3
+  keep: false
+  note: "Aliiruegeria; Ruegeria-relative \u2014 Q5LUQ6 Ruegeria already kept"
+- acc: UPI003524CDA4
+  organism: unclassified Rhodosalinus
+  length: 565
+  phmmer_score: 980.0
+  keep: false
+  note: UPI* filtered
+- acc: UPI0031B579C4
+  organism: Ostreiculturibacter nitratireducens
+  length: 563
+  phmmer_score: 979.3
+  keep: false
+  note: UPI* filtered
+- acc: A0AAJ1U8L4
+  organism: Rhodalgimonas zhirmunskyi
+  length: 565
+  phmmer_score: 978.9
+  keep: false
+  note: Rhodalgimonas; obscure Roseobacter-clade, redundant
+- acc: A0A0A0EGF6
+  organism: Pseudooceanicola atlanticus
+  length: 565
+  phmmer_score: 978.8
+  keep: false
+  note: 2nd Pseudooceanicola; redundant
+- acc: UPI003D7FE8D6
+  organism: Pseudooceanicola sp. C21-150M6
+  length: 565
+  phmmer_score: 978.7
+  keep: false
+  note: UPI* filtered
+- acc: A0ABT3BGT1
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 978.5
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: A0A940S2H0
+  organism: Roseobacteraceae
+  length: 566
+  phmmer_score: 978.5
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0A6C1KFH4
+  organism: Xanthobacter
+  length: 564
+  phmmer_score: 978.1
+  keep: false
+  note: Xanthobacter; redundant
+- acc: UPI002600FA81
+  organism: uncultured Paracoccus sp.
+  length: 563
+  phmmer_score: 977.8
+  keep: false
+  note: UPI* filtered + uncultured
+- acc: A0A0L6CVF7
+  organism: Roseovarius
+  length: 565
+  phmmer_score: 977.7
+  keep: false
+  note: Roseovarius; obscure Roseobacter-clade, redundant
+- acc: A0A850PZM6
+  organism: Donghicola
+  length: 565
+  phmmer_score: 977.0
+  keep: false
+  note: Donghicola; obscure Roseobacter-clade, redundant
+- acc: UPI003D730EB1
+  organism: Palleronia sp. KMU-117
+  length: 565
+  phmmer_score: 977.0
+  keep: false
+  note: UPI* filtered
+- acc: A0A4R5ESY6
+  organism: Paracoccaceae
+  length: 565
+  phmmer_score: 975.8
+  keep: false
+  note: generic Paracoccaceae; redundant
+- acc: A0A2V4MRP7
+  organism: Litorivita
+  length: 565
+  phmmer_score: 974.7
+  keep: false
+  note: Litorivita; obscure Roseobacter-clade, redundant
+- acc: A0A0T5PCQ7
+  organism: Roseovarius
+  length: 565
+  phmmer_score: 974.6
+  keep: false
+  note: 2nd Roseovarius; redundant
+- acc: A0A0P1HCK6
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 974.6
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0A1G9LIW1
+  organism: Roseobacteraceae
+  length: 567
+  phmmer_score: 974.5
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0ABT2KAT0
+  organism: Paracoccus
+  length: 562
+  phmmer_score: 974.1
+  keep: false
+  note: 5th Paracoccus candidate; redundant
+- acc: A0A9Q2S3P2
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 973.7
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: UPI003727A159
+  organism: Roseixanthobacter
+  length: 565
+  phmmer_score: 973.6
+  keep: false
+  note: UPI* filtered
+- acc: UPI0018A25DA0
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 973.5
+  keep: false
+  note: UPI* filtered + generic family
+- acc: A0A291GB31
+  organism: Celeribacter
+  length: 565
+  phmmer_score: 973.5
+  keep: false
+  note: Celeribacter; covered by soxX A0A1I3JHP5 in batch parity; for soxB low priority
+    since 3 named Rhodobacteraceae genera (Gemmobacter, Cereibacter, Rhodovulum) already
+    kept
+- acc: A0A4S3MAK4
+  organism: Thalassovita
+  length: 565
+  phmmer_score: 972.6
+  keep: false
+  note: Thalassovita; obscure Roseobacter-clade, redundant
+- acc: A0A1X7BXX5
+  organism: Roseovarius
+  length: 565
+  phmmer_score: 972.1
+  keep: false
+  note: redundant Roseovarius
+- acc: UPI001C098DEA
+  organism: Lentibacter algarum
+  length: 565
+  phmmer_score: 972.1
+  keep: false
+  note: UPI* filtered
+- acc: A0A1H8QF51
+  organism: Salinihabitans flavidus
+  length: 565
+  phmmer_score: 971.7
+  keep: false
+  note: Salinihabitans; obscure Roseobacter-clade, redundant
+- acc: A0A074JF98
+  organism: Thioclava
+  length: 563
+  phmmer_score: 971.6
+  keep: false
+  note: 3rd Thioclava; redundant
+- acc: UPI000C33A62A
+  organism: Roseovarius salinarum
+  length: 565
+  phmmer_score: 971.5
+  keep: false
+  note: UPI* filtered
+- acc: S9SH65
+  organism: Salipiger mucosus DSM 16094
+  length: 565
+  phmmer_score: 971.5
+  keep: false
+  note: 3rd Salipiger species; redundant
+- acc: UPI000B523823
+  organism: Oceanicola sp. 22II-s10i
+  length: 565
+  phmmer_score: 971.5
+  keep: false
+  note: UPI* filtered
+- acc: UPI001CD5DC0F
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 971.4
+  keep: false
+  note: UPI* filtered
+- acc: A0A4R6B3D7
+  organism: Meridianimarinicoccus
+  length: 565
+  phmmer_score: 971.3
+  keep: false
+  note: Meridianimarinicoccus; obscure Roseobacter-clade, redundant
+- acc: A0A1Y5SWS5
+  organism: Roseovarius
+  length: 565
+  phmmer_score: 970.8
+  keep: false
+  note: redundant Roseovarius
+- acc: UPI00080AAFF8
+  organism: Prosthecochloris sp. CIB 2401
+  length: 584
+  phmmer_score: 970.6
+  keep: false
+  note: UPI* filtered; Prosthecochloris already covered by A0A317T8Z0
+- acc: UPI0010248F0C
+  organism: Thalassococcus sp. S3
+  length: 565
+  phmmer_score: 970.6
+  keep: false
+  note: UPI* filtered
+- acc: UPI00310543C8
+  organism: Pelagimonas sp. KU-00592-HH
+  length: 565
+  phmmer_score: 970.4
+  keep: false
+  note: UPI* filtered
+- acc: UPI001D0C08BA
+  organism: Cognatishimia sp. F0-27
+  length: 565
+  phmmer_score: 970.3
+  keep: false
+  note: UPI* filtered
+- acc: A0A2S5JE84
+  organism: Albidovulum inexpectatum
+  length: 563
+  phmmer_score: 969.9
+  keep: false
+  note: redundant Albidovulum
+- acc: A0A6I6J535
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 969.9
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0A1H3K6Z5
+  organism: Lentibacter
+  length: 565
+  phmmer_score: 969.2
+  keep: false
+  note: Lentibacter; obscure Roseobacter-clade, redundant
+- acc: A0A1B0ZMP5
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 969.1
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: A0A7C9HKU4
+  organism: Sediminimonas
+  length: 565
+  phmmer_score: 968.6
+  keep: false
+  note: Sediminimonas; obscure Roseobacter-clade, redundant
+- acc: UPI000DADE96C
+  organism: Meridianimarinicoccus zhengii
+  length: 565
+  phmmer_score: 968.5
+  keep: false
+  note: UPI* filtered
+- acc: UPI001BAC07D5
+  organism: Actibacterium sp. MT2.3-13A
+  length: 563
+  phmmer_score: 968.2
+  keep: false
+  note: UPI* filtered
+- acc: A0A3D9BQC6
+  organism: Rhodosalinus
+  length: 565
+  phmmer_score: 968.1
+  keep: false
+  note: Rhodosalinus; obscure Roseobacter-clade, redundant
+- acc: A0A2V1P3J7
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 967.9
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: UPI002A0FF16D
+  organism: Cognatiyoonia sp. IB215182
+  length: 567
+  phmmer_score: 967.6
+  keep: false
+  note: UPI* filtered
+- acc: A0A0P1GG86
+  organism: Thalassovita
+  length: 567
+  phmmer_score: 967.5
+  keep: false
+  note: redundant Thalassovita
+- acc: A0A845M1K5
+  organism: Maritimibacter
+  length: 565
+  phmmer_score: 967.4
+  keep: false
+  note: Maritimibacter; obscure Roseobacter-clade, redundant
+- acc: A0A4U0R558
+  organism: Paracoccus gahaiensis
+  length: 563
+  phmmer_score: 967.3
+  keep: false
+  note: 6th Paracoccus candidate; redundant
+- acc: A0A4Q9G0H2
+  organism: Paracoccus
+  length: 563
+  phmmer_score: 967.2
+  keep: false
+  note: 7th Paracoccus candidate; redundant
+- acc: UPI0021BB5580
+  organism: Pseudoruegeria sp. SHC-113
+  length: 565
+  phmmer_score: 966.5
+  keep: false
+  note: UPI* filtered
+- acc: A0A1H2UY28
+  organism: Rhodobacterales
+  length: 565
+  phmmer_score: 966.4
+  keep: false
+  note: generic Rhodobacterales; redundant
+- acc: A0ABV7DZQ3
+  organism: Tabrizicola
+  length: 563
+  phmmer_score: 966.3
+  keep: false
+  note: Tabrizicola; obscure Roseobacter-clade, redundant
+- acc: A0A640VPQ2
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 966.1
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: A0A8J7M6C6
+  organism: Thermohalobaculum
+  length: 563
+  phmmer_score: 965.7
+  keep: false
+  note: Thermohalobaculum; thermal context interesting but redundant within Rhodobacteraceae
+    sampling
+- acc: UPI003A98543C
+  organism: Salipiger sp.
+  length: 565
+  phmmer_score: 965.7
+  keep: false
+  note: UPI* filtered
+- acc: UPI002B277F80
+  organism: Leisingera
+  length: 565
+  phmmer_score: 965.7
+  keep: false
+  note: UPI* filtered (Leisingera role would parallel soxX/soxD V9VR85/A0A0P1HC84
+    but UPI here; drop)
+- acc: A0A2G8RAM4
+  organism: Puniceibacterium
+  length: 565
+  phmmer_score: 965.1
+  keep: false
+  note: Puniceibacterium; obscure Roseobacter-clade, redundant
+- acc: A0A1Y5RKH2
+  organism: Pacificibacter
+  length: 565
+  phmmer_score: 964.9
+  keep: false
+  note: Pacificibacter; obscure Roseobacter-clade, redundant
+- acc: A0A0P1FE49
+  organism: Thalassovita
+  length: 567
+  phmmer_score: 964.8
+  keep: false
+  note: redundant Thalassovita
+- acc: A0AAE4B5J6
+  organism: Marimonas arenosa
+  length: 565
+  phmmer_score: 964.5
+  keep: false
+  note: Marimonas; obscure Roseobacter-clade, redundant
+- acc: UPI0037CBA822
+  organism: Roseovarius salis
+  length: 565
+  phmmer_score: 964.4
+  keep: false
+  note: UPI* filtered
+- acc: A0A0T5NWS5
+  organism: Roseovarius
+  length: 565
+  phmmer_score: 964.0
+  keep: false
+  note: redundant Roseovarius
+- acc: UPI001F2B4E8B
+  organism: Paracoccus salsus
+  length: 562
+  phmmer_score: 964.0
+  keep: false
+  note: UPI* filtered
+- acc: UPI003C7CB657
+  organism: Primorskyibacter sp. S187A
+  length: 565
+  phmmer_score: 963.8
+  keep: false
+  note: UPI* filtered
+- acc: UPI0011098269
+  organism: Poseidonocella sp. HB161398
+  length: 563
+  phmmer_score: 963.7
+  keep: false
+  note: UPI* filtered
+- acc: A0A1I1PCW7
+  organism: Tropicimonas
+  length: 567
+  phmmer_score: 963.6
+  keep: false
+  note: Tropicimonas; obscure Roseobacter-clade, redundant
+- acc: A0A1I1KTI2
+  organism: Pseudooceanicola
+  length: 565
+  phmmer_score: 963.3
+  keep: false
+  note: 3rd Pseudooceanicola; redundant
+- acc: S9QBQ7
+  organism: Roseobacteraceae
+  length: 565
+  phmmer_score: 962.6
+  keep: false
+  note: generic Roseobacteraceae; redundant
+- acc: UPI000A173AA9
+  organism: Planktotalea
+  length: 565
+  phmmer_score: 962.6
+  keep: false
+  note: UPI* filtered
+- acc: A0A2R8B1N6
+  organism: Albidovulum
+  length: 563
+  phmmer_score: 962.5
+  keep: false
+  note: redundant Albidovulum
+- acc: Q5LUQ6
+  organism: Ruegeria
+  length: 567
+  phmmer_score: 962.3
+  keep: true
+  note: "Ruegeria rep (Q5LUQ6 = R. pomeroyi DSS-3 SPO0995 \u2014 adjacent locus to\
+    \ soxD Q5LUQ4 and soxX Q5LUR0; full operon-context model organism). Mirrors soxX\
+    \ Q5LUR0 / soxD Q5LUQ4 kept-set"
+- acc: A0ABU6HD67
+  organism: Mesobacterium hydrothermale
+  length: 565
+  phmmer_score: 961.5
+  keep: false
+  note: Mesobacterium; obscure, redundant
+- acc: A0A2R8AJJ4
+  organism: Aliiroseovarius
+  length: 565
+  phmmer_score: 961.4
+  keep: false
+  note: Aliiroseovarius; obscure Roseobacter-clade, redundant
+- acc: A0A0P1I4I4
+  organism: Shimia
+  length: 565
+  phmmer_score: 961.3
+  keep: false
+  note: Shimia; obscure Roseobacter-clade, redundant (soxD A0A1M6P350 kept Shimia
+    but soxB drops to manage Roseobacter-clade size)
+- acc: Q5SIF2
+  organism: Thermus thermophilus (strain ATCC 27634 / DSM 579 / HB8)
+  length: 573
+  phmmer_score: null
+  keep: true
+  note: 'task #15 broadening: panel positive Tthermophilus_HB8; canonical Deinococcota
+    Sox-pathway SoxB (PF02872 metallophosphatase); 573-aa class adjacent to TTHA1416
+    soxX'
+- acc: A0A1J0LTR4
+  organism: Thermus brockianus
+  length: 573
+  phmmer_score: null
+  keep: true
+  note: 'task #15: T. brockianus soxB; intra-Thermus diversity vs HB8'
+- acc: A0A0A2WXI3
+  organism: Thermus filiformis
+  length: 568
+  phmmer_score: null
+  keep: true
+  note: 'task #15: T. filiformis soxB; broader Thermus species coverage (568 aa)'
+- acc: A0A7C3I060
+  organism: Meiothermus ruber
+  length: 568
+  phmmer_score: null
+  keep: true
+  note: 'task #15: Meiothermus ruber soxB; Deinococcota sister-genus to Thermus'
+tc_bitscore: 433.4
+tc_rationale: "SP3 re-calibration (2026-05-26) on the SP1 22-genome sulfur panel. The lifted
+  ewaste TC=758.7 was a min_positive*0.95 fallback calibrated on alphaproteobacterial/Thermus
+  training refs, and it sat ABOVE a genuine panel positive: epsilonproteobacterial Sulfurimonas
+  denitrificans soxB scores 683.8 (a true SOB, soxB GT-present) while the highest panel true
+  negative (B. subtilis) scores only 182.9. TC = midpoint(683.8, 182.9) = 433.4 captures all 5
+  panel soxB positives (683.8-934.4) via the HMM with a >250-bit margin to the top negative.
+  The soxB KO K17224 previously rescued Sulfurimonas (masking the HMM's training-clade bias);
+  the HMM now generalizes to the epsilon clade standalone. Verified on all 22 panel proteomes."
+n_seqs_final: 19
+curator: pedro.leao.ru@gmail.com
+curation_date: '2026-05-22'
+notes: "Priority B #10 \u2014 soxB = ~564-594 aa periplasmic sulfate thiohydrolase\n\
+  with dinuclear Mn centre. Releases sulfate from SoxYZ-bound sulfonate,\nregenerating\
+  \ the SoxYZ acceptor. Domain architecture: PF00149 (Metallophos,\ncalcineurin-like\
+  \ phosphoesterase) + PF02872 (5'-Nucleotidase C-terminal).\nCustom HMM must replace\
+  \ v1's broad PF00149/PF02872 single-Pfam call, which\nfalse-positive-confirmed sox_core\
+  \ 'complete' in M. extorquens AM1.\n\nNOTE on Pfam: brief flagged 'PF04879' as the\
+  \ broad superfamily, but\nverification against canonical soxB seeds (A0AAE6TS95\
+  \ / Q1W3E6 / Q8RLW8)\nshows the actual soxB Pfams are PF00149 (Metallophos) + PF02872\n\
+  (5'-nucleotidase C-term). PF04879 is the 'Molybdopterin oxidoreductase\nFe4S4 domain'\
+  \ family (DMSO/nitrate/FDH reductases) \u2014 a separate broad\nfamily. The v1 false-positive\
+  \ mechanism is the same in principle: PF00149\nis hugely broad (calcineurin-family\
+  \ Ser/Thr phosphatases, PhoX-family\nphosphatases, 5'-nucleotidases, UshA, CpdB,\
+  \ lpxH, apaH, sbcD, etc.) so\nany organism's PF00149-bearing housekeeping protein\
+  \ trips it.\n\n==========================================================================\n\
+  Curation (2026-05-20, P. Le\xE3o): 23 keeps total = 4 seeds + 19 additions.\n==========================================================================\n\
+  Lineage breakdown (mirrors soxX/soxD lineage choices for batch parity):\n- Paracoccus:\
+  \ 3 (A0AAE6TS95 seed P. pantotrophus, A0A3P5XBC3 Paracoccaceae,\n   A0A2K9MGX0 P.\
+  \ jeotgali) \u2014 same 3-Paracoccus pattern as soxX/soxD\n- Allochromatium (purple\
+  \ sulfur 594 aa): 2 (Q1W3E6 seed + A0A6N8EBS6)\n- Other Chromatiaceae purple-sulfur:\
+  \ 3 (G2E2I3 Thiocystis-class 593 aa,\n   A0A5M8FG03 Thiohalocapsa marina 595 aa,\
+  \ A0A9X0WIB2 Thiocapsa imhoffii 592 aa)\n- Chlorobium/Chlorobiaceae green-sulfur:\
+  \ 3 (Q8RLW8 seed C. limicola,\n   A0A5C4S040 Chlorobiaceae, Q3APA0 C. chlorochromatii)\
+  \ + Q8KDM5 Chlorobaculum +\n   B3QNI1 (3rd Chlorobiaceae) + B4SEL4 Pelodictyon +\
+  \ A0A317T8Z0 Prosthecochloris\n   = 7 green-sulfur reps across 5 genera (Chlorobium,\
+  \ Chlorobaculum,\n   Pelodictyon, Prosthecochloris, generic Chlorobiaceae). Green-sulfur\
+  \ is\n   over-represented because the seed set is 3/4 alpha+gamma and Chlorobi\n\
+  \   diversity is biologically distinct enough to warrant ~30% of keeps.\n- Ancylobacter/Starkeya\
+  \ (chemolithoautotrophic alpha): 2 (Q9LAH6 seed\n   A. novellus = Starkeya novella\
+  \ synonym + A0A9W6JB81 Ancylobacter)\n- Cereibacter / Rhodobacter clade: 1 (A0A2T4JWS4\
+  \ C. changlensis) \u2014 mirrors\n   soxX A0A2T4JWN2 / soxD A0A2T4JX11\n- Gemmobacter:\
+  \ 1 (A0A398BY59) \u2014 mirrors soxX A0A1N7MDE4 / soxD A0A1N7MDE9\n- Ruegeria: 1\
+  \ (Q5LUQ6 R. pomeroyi SPO0995, adjacent locus to soxD Q5LUQ4 +\n   soxX Q5LUR0 \u2014\
+  \ full operon-context model organism)\n- Rhodovulum: 1 (A0A844BD62 R. strictum)\
+  \ \u2014 brief-listed positive lineage;\n   mirrors soxX A0A844BA00\n- Sulfur-oxidising\
+  \ gammaproteobacterial symbionts: 2 (A0A657PM66 Sedimenticola\n   endophacoides\
+  \ + A0A7Z0VQG5 Thiodiazotropha) \u2014 broadens gammaproteobacterial\n   sulfur\
+  \ biology beyond canonical Chromatiaceae\n\nTotal = 4 seeds + 3 Paracoccus(non-seed)\
+  \ + 2 Allochromatium(seed+1) + 3 Chromatiaceae\n+ 7 Chlorobi(4 of which are Chlorobium/Chlorobiaceae/Chlorobaculum)\
+  \ + 2 Ancylobacter(seed+1) +\nCereibacter + Gemmobacter + Ruegeria + Rhodovulum\
+  \ + 2 sulfur-symbionts = 23.\n\nLength distribution: 562-616 aa across kept seqs,\
+  \ all within the 530-620 aa\ncanonical soxB window (the 616-aa Q8KDM5 Chlorobaculum\
+  \ is at the upper edge).\nNo fusion-size or fragment outliers in the kept set.\n\
+  \nGaps relative to brief's lineage list:\n  - Sulfitobacter: NO Sulfitobacter in\
+  \ the expanded_candidates pool (the\n   pool tails off at score 961). UniProt search\
+  \ confirmed only one named-\n   Sulfitobacter soxB exists (A0A927HH45, 565 aa, PF02872+PF00149).\
+  \ Not\n   added \u2014 pool already at 24 keeps; if calibration shows Sulfitobacter-\n\
+  \   class gap, re-seed in future iteration.\n- Aquifex aeolicus / Hydrogenobacter\
+  \ (thermophilic Aquificales): NOT added\n   for parity with soxX/soxD batch (neither\
+  \ manifest added Aquificales).\n   UniProt search confirmed O67671 (A. aeolicus\
+  \ soxB, 592 aa) exists. Brief\n   for soxB suggested 'possibly Aquificales' but\
+  \ for batch consistency\n   defer to future iteration if a thermal-genome metagenome\
+  \ misses Aquifex.\n- Sulfurimonas (epsilonproteobacterial sulfur-oxidiser): UniProt\
+  \ search\n   found 9 Sulfurimonas soxB entries (A0A7M1B1Y8 etc., 586-589 aa). NOT\n\
+  \   added for batch parity with soxX/soxD (which did not include epsilon-\n   proteobacterial\
+  \ reps). Defer to future iteration.\n\nRoseobacter-clade pruning: even with 4 named\
+  \ Rhodobacteraceae genera kept\n(Paracoccus\xD73, Gemmobacter, Cereibacter, Ruegeria,\
+  \ Rhodovulum) plus seed\nParacoccus, we excluded all UPI* + all generic 'Roseobacteraceae'\
+  \ /\n'Rhodobacterales' + obscure named genera (Phaeovulum, Salipiger, Roseovarius,\n\
+  Thioclava, etc.). This matches soxX's documented 20-keep cap and soxD's\n22-keep\
+  \ cap, scaling slightly larger here at 23 because the green-sulfur\nChlorobi diversity\
+  \ is richer in the soxB pool (Pelodictyon, Prosthecochloris\nreps not available\
+  \ in soxX expansion).\n\n==========================================================================\n\
+  cdhit_threshold: 0.85 \u2014 matches soxX / soxD / hcnA / mtrC / cyc2 precedent\n\
+  ==========================================================================\nMetallophosphoesterase\
+  \ + 5'-nucleotidase fusion is moderately conserved\nwithin the Sox-pathway sub-family.\
+  \ 0.85 splits species-level identity while\ncollapsing strain duplicates and intra-Paracoccus\
+  \ / intra-Chlorobi\nredundancy. Expect 16-20 clusters after CD-HIT @0.85.\n\nmin_seqs_override\
+  \ NOT set: 23 keeps \u2192 expected 15-19 clusters at 0.85,\nwell above MIN_SEQS=8.\
+  \ No floor concern.\n\n==========================================================================\n\
+  hmm_min_qcov: NOT set (per brief recommendation)\n==========================================================================\n\
+  Brief notes soxB HMM will be ~570 aa LENG, large enough to enforce full-\nlength\
+  \ match against canonical soxB without an explicit qcov filter. Same\nsize class\
+  \ as cyc2 (449), mtrC, soxD (~370). The qcov filter was needed\nfor small (<250\
+  \ aa) HMMs hitting single domains of large multidomain\nproteins (hcnA precedent,\
+  \ soxX precedent at 0.6). soxB at ~570 aa LENG\nis in the no-qcov-needed class.\n\
+  \nCalibration safety net: if validation shows false positives \u2014 particularly\n\
+  via the ~280-450 aa M. extorquens single-domain metallophosphoesterases\nhitting\
+  \ via the PF00149 sub-region only \u2014 set hmm_min_qcov: 0.7\nretrospectively.\
+  \ Initial expectation: not needed because the C-terminal\nPF02872 5'-nucleotidase\
+  \ domain is the diagnostic discriminator that\nsingle-domain phosphoesterases lack.\n\
+  \n==========================================================================\nNegatives\
+  \ set (15) \u2014 designed to lock the HMM specifically to Sox-pathway\nsulfate\
+  \ thiohydrolase vs the broad PF00149/PF02872 superfamily of\nmetallophosphoesterases,\
+  \ 5'-nucleotidases, and calcineurin-like phosphatases.\n==========================================================================\n\
+  THIS IS THE MOST CRITICAL NEGATIVES SET IN THE SOX BATCH. The v1 false-\npositive\
+  \ sox_core in M. extorquens was driven specifically by soxB matching\ngeneric metallophosphoesterases\
+  \ \u2014 the soxX/soxD PF00034 hits would not\nalone have called sox_core 'complete'\
+  \ without soxB also tripping.\n\nTest-genome M. extorquens AM1 anchors (5) \u2014\
+  \ the v1 FP culprits:\n  1. C5ASA1 \u2014 *** THE smoking-gun v1 FP driver. M. extorquens\
+  \ AM1 'soxB'-\n    annotated paralog (Tat-pathway signal, 559 aa, PF02872, EC 3.1.3.5).\n\
+  \    UniProt annotation classifies it as 'sulfur/thiosulfate oxidation\n    protein\
+  \ SoxB' BY HOMOLOGY, but M. extorquens is a methylotroph with\n    no functional\
+  \ Sox pathway (no soxA/soxX in operon context). This\n    protein is a soxB-family\
+  \ orphan paralogue in non-Sox-operon context.\n    Calibration MUST place C5ASA1\
+  \ below TC; if it scores above, the v1\n    bug is unfixed. *** HIGH HARD-NEGATIVE\
+  \ RISK *** \u2014 C5ASA1 shares the\n    canonical PF02872 domain at the canonical\
+  \ position, so it will likely\n    score close to positives. May force TC to be\
+  \ set very close to min_pos\n    (loss of margin). Document outcome carefully in\
+  \ calibration.\n  2. C5AYW1 \u2014 M. extorquens 5'-nucleotidase / CpdB-like, 500\
+  \ aa,\n    PF00149+PF02872. Closest non-Sox architecture match (both Pfams\n   \
+  \ present, similar length). High-value discrimination anchor.\n  3. C5ASH8 \u2014\
+  \ M. extorquens metallophosphoesterase, 444 aa, PF00149 only.\n    Large single-PF00149-domain\
+  \ phosphoesterase; tests whether HMM\n    discriminates fusion (PF00149+PF02872)\
+  \ from single-domain PF00149.\n  4. C5AWR8 \u2014 M. extorquens metallophosphatase,\
+  \ 315 aa, PF00149.\n    Mid-size single-PF00149 outgroup.\n  5. C5AWH2 \u2014 M.\
+  \ extorquens metallophosphoesterase, 377 aa, PF00149.\n    Second mid-size single-PF00149\
+  \ outgroup; M. extorquens has 21 PF00149\n    proteins total \u2014 these 5 anchors\
+  \ cover the diversity (different sizes,\n    domain architectures, annotation classes).\n\
+  \nTest-genome E. coli K-12 anchors (2) \u2014 PF00149+PF02872 fusion family in\n\
+  a non-sulfur-oxidising context:\n  6. P07024 \u2014 E. coli UshA (UDP-sugar hydrolase\
+  \ / 5'-nucleotidase), 550 aa,\n    PF00149+PF02872. CRITICAL: SAME domain architecture\
+  \ as soxB, SAME\n    length range (550 vs 564 soxB seed). The toughest possible\
+  \ discrimination\n    test in the test-genome panel \u2014 'fusion architecture,\
+  \ non-Sox biology'.\n  7. P08331 \u2014 E. coli CpdB (2',3'-cyclic-nucleotide 2'-phosphodiesterase),\n\
+  \    647 aa, PF00149+PF02872. 2nd fusion-architecture E. coli anchor.\n\nTest-genome\
+  \ S. oneidensis MR-1 anchors (3) \u2014 fusion family in another\ntest genome with\
+  \ zero Sox biology:\n  8. Q8EFH1 \u2014 S. oneidensis UshA, 569 aa, PF00149+PF02872.\
+  \ Mirrors P07024.\n  9. Q8EBF3 \u2014 S. oneidensis CpdB, 685 aa, PF00149+PF02872.\n\
+  \  10. Q8EC27 \u2014 S. oneidensis 5'-nucleotidase, 583 aa, PF00149+PF02872.\n \
+  \   THIS is the closest size match to canonical soxB (583 vs 564 aa) of\n    any\
+  \ test-genome PF00149+PF02872 protein. If any non-Sox 5'-nucleotidase\n    is going\
+  \ to FP, this is the most likely candidate.\n\nTest-genome C. metallidurans CH34\
+  \ anchors (3):\n  11. Q1LQW8 \u2014 C. metallidurans CpdB, 702 aa, PF00149+PF02872.\n\
+  \  12. Q1LCG3 \u2014 C. metallidurans metallophosphoesterase, 509 aa, PF00149.\n\
+  \    Single-domain large PF00149-only protein at a size class close to\n    soxB\
+  \ (509 vs 564 aa).\n  13. Q1LID4 \u2014 C. metallidurans predicted membrane-bound\n\
+  \    metallophosphoesterase, 380 aa, PF00149.\n\nBroad-superfamily PF00149-only\
+  \ outgroups (2):\n  14. P55798 \u2014 E. coli pphA Ser/Thr protein phosphatase 1,\
+  \ 218 aa, PF00149.\n    Small calcineurin-fold outgroup; verifies HMM rejects PP1-family\n\
+  \    phosphatases with high confidence.\n  15. P05637 \u2014 E. coli apaH Bis(5'-nucleosyl)-tetraphosphatase,\
+  \ 280 aa,\n    PF00149. Distant-function PF00149 outgroup.\n\nTest-genome anchor\
+  \ coverage summary: 13 of 15 negatives are test-genome\nproteins (5 M. extorquens,\
+  \ 2 E. coli, 3 S. oneidensis, 3 C. metallidurans).\nThis is the densest test-genome\
+  \ anchoring of any target in the batch \u2014\nappropriate because soxB is the documented\
+  \ v1 FP driver for M. extorquens.\n\nA. ferrooxidans: NO test-genome anchor added.\
+  \ Same reasoning as soxX/soxD \u2014\nA. ferrooxidans is a sulfur-oxidiser BUT uses\
+  \ heterodisulfide-reductase\n(Hdr)-like architectures, not canonical SoxXAYZ-CDB.\
+  \ Textbook-correct\nsox_core call is ABSENT. Pre-emptively negativing risks hiding\
+  \ a real\nHdr-related sulfate-hydrolase paralogue. If HMM scores any A. ferrooxidans\n\
+  protein above TC during validation, flag for biology review.\n\n==========================================================================\n\
+  A. ferrooxidans biology note (brief nuance \u2014 same as soxX/soxD)\n==========================================================================\n\
+  A. ferrooxidans ATCC 23270 is a chemolithoautotrophic sulfur-oxidiser BUT\nhistorically\
+  \ reported to lack the canonical Paracoccus-style SoxXAYZ-CDB\nsystem; it uses Hdr-like\
+  \ architectures instead. Textbook-correct call for\nsox_core in A. ferrooxidans\
+  \ is therefore ABSENT.\n\nValidation behaviour expected:\n  - Expected 0 TP / 5\
+  \ TN (none of the 5 test genomes are canonical SoxB-\n   pathway organisms; M. extorquens\
+  \ C5ASA1 is a non-functional paralog).\n   M. extorquens MUST go from v1 FP-confirmed\
+  \ to v2 TN \u2014 primary success\n   criterion for the entire Sox batch.\n- IF\
+  \ the HMM scores an A. ferrooxidans protein above TC, flag for biology\n   review\
+  \ (Hdr-related paralog vs cross-reactivity).\n\n==========================================================================\n\
+  Predicted calibration outcome\n==========================================================================\n\
+  Hypothesis:\n  - Positives bitscore band: ~800-1350 (phmmer self-similarity scores\n\
+  \   962-1348 from expansion against seeds suggest most kept seqs will land\n   in\
+  \ the 900-1300 range against a self-built HMM). The 3 sulfur-symbiont\n   gamma\
+  \ reps (Sedimenticola, Thiodiazotropha) and Prosthecochloris green-\n   sulfur may\
+  \ sit at the low end (~700-900) being most divergent.\n- Negatives bitscore band:\
+  \ C5ASA1 M. extorquens soxB-orphan is the closest\n   threat (full PF02872 domain,\
+  \ soxB-family fold) \u2014 predicted ~400-700\n   against a real soxB HMM. UshA\
+  \ / CpdB / 5'-nucleotidase fusions\n   (P07024, P08331, Q8EFH1, Q8EBF3, Q8EC27,\
+  \ Q1LQW8) ~150-350 (same Pfam\n   architecture but non-Sox sequence). Single-domain\
+  \ PF00149 metallophos-\n   phoesterases ~30-150 (only one domain matches).\n- Predicted\
+  \ clean gap of ~150-300 bits between min_pos (~800) and max_neg\n   (~500-700 driven\
+  \ by C5ASA1). TC likely 550-700 \u2014 narrower margin than\n   soxX/soxD due to\
+  \ C5ASA1 hardness.\n\nConfidence: MEDIUM-HIGH that a clean gap emerges. The 13 test-genome\n\
+  anchors are diverse-function PF00149+PF02872 / PF00149-only proteins from\norganisms\
+  \ with no Sox operon. The 19 non-seed kept seqs are operon-confirmed\ncanonical\
+  \ soxB from organisms with documented Sox biology.\n\nMEDIUM on the 5-genome test\
+  \ (expected 0 TP / 5 TN). Primary risks:\n  - C5ASA1 (M. extorquens 'soxB') scoring\
+  \ above TC. If this happens, options:\n   (a) raise TC to min_pos \u2212 30 bits\
+  \ (smaller margin, may miss real positives\n   in metagenomes); (b) accept M. extorquens\
+  \ 'soxB' as a true-by-homology\n   hit but downgrade by requiring operon context\
+  \ (soxA/soxX/soxY in same\n   contig) \u2014 out of scope for v2 HMM-only approach;\
+  \ (c) set hmm_min_qcov:\n   0.8 to require near-full-length match (C5ASA1 IS full-length,\
+  \ so may\n   not help). PRIMARY MITIGATION: ensure HMM consensus is built from\n\
+  \   operon-confirmed seqs only (current keeps are all operon-confirmed).\n- 5'-nucleotidase\
+  \ fusions (UshA / CpdB / Q8EC27) scoring at the upper-\n   negatives band. These\
+  \ are the closest architectural analogs. If any\n   exceed TC, raise threshold to\
+  \ min_pos \u2212 20 bits.\n- M. extorquens has 21 PF00149 proteins; only 5 are in\
+  \ negatives. If a\n   6th paralogue (e.g. C5B4R6 270-aa metallophosphoesterase)\
+  \ scores high,\n   the v1 FP returns. The 5 anchors cover size diversity (270-559\
+  \ aa) but\n   exhaustive coverage of all 21 is impractical. Monitor in validation.\n\
+  \nBelow-floor risk: 23 keeps \u2192 expected 15-19 clusters at CD-HIT 0.85,\nwell\
+  \ above MIN_SEQS=8. No floor concern.\n\n==========================================================================\n\
+  Sox-batch parity check (soxB / soxX / soxD)\n==========================================================================\n\
+  All three Sox-batch manifests share the following organism reps (where\nthe protein\
+  \ is present in the respective expansion pool):\n  - Paracoccus pantotrophus / denitrificans\
+  \ / 3rd species \u2014 present in all 3\n- Ruegeria pomeroyi DSS-3 (operon-context:\
+  \ SPO0993 soxX, SPO0995 soxB,\n   SPO0999 soxD) \u2014 present in all 3\n- Gemmobacter\
+  \ / Cereibacter \u2014 present in all 3\n- Rhodovulum (brief-listed) \u2014 soxX\
+  \ A0A844BA00, soxB A0A844BD62 (both R. strictum)\n- Chlorobaculum tepidum (or close)\
+  \ \u2014 present in all 3\n- Allochromatium vinosum \u2014 present in all 3\n\n\
+  Differences:\n  - soxD added 3 non-Rhodobacteraceae alpha reps (Hoeflea, Nitratireductor,\n\
+  \   Pseudorhizobium) for diversity; soxB/soxX did not because the equivalent\n \
+  \  accessions weren't present in their pools.\n- soxB added Prosthecochloris + Pelodictyon\
+  \ green-sulfur reps because the\n   pool was richer in Chlorobi; soxX/soxD pools\
+  \ were not.\n- soxX added 117-aa Chlorobiaceae class (length-divergent); soxB green-sulfur\n\
+  \   is at canonical 584-585 aa, so no length-class subdivision needed.\n\n==========================================================================\n\
+  v1 ref bug heritage (none for soxB seeds)\n==========================================================================\n\
+  The 4 soxB seeds (A0AAE6TS95 / Q1W3E6 / Q8RLW8 / Q9LAH6) were verified\nagainst\
+  \ UniProt manually: all 4 are 564-594 aa, all 4 have PF02872 (and\nPF00149 where\
+  \ annotated), all 4 are from documented Sox-pathway organisms.\nNo off-by-locus\
+  \ accession corruption pattern (unlike cyc2/cycA/hcnA/soxX/soxD\nv1 refs). seed_accessions\
+  \ accepted as-is.\n"

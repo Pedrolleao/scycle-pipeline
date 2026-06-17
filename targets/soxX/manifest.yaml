@@ -1,0 +1,410 @@
+target_id: soxX
+tier: 2
+cdhit_threshold: 0.85
+hmm_min_qcov: 0.6
+seed_accessions:
+- Q5LUR0
+- A0A1I5IPQ3
+- Q1W3E5
+- Q8KDN0
+- Q9LCV0
+- Q0K5U8
+- A0A2L0XB92
+- A0A7X2HQG1
+- A0A454TX52
+- Q5SIF3
+- A0A7V4E5Z7
+- A0A831UIW6
+- A0A7C3DDL6
+negatives:
+- C5ASB2
+- C5AYX9
+- Q8E8J8
+- Q8EA61
+- Q1LI70
+- Q1LKS2
+- P00097
+- P00098
+- P0C0X8
+- P00120
+- P00154
+- P00099
+- P00102
+- P00080
+expanded_candidates:
+- acc: Q5LUR0
+  organism: Ruegeria pomeroyi (strain ATCC 700808 / DSM 15171 / DSS-3)
+  length: 161
+  phmmer_score: null
+  keep: true
+  note: seed; canonical R. pomeroyi soxX (SPO0993), Roseobacter-clade marine model
+- acc: A0A1I5IPQ3
+  organism: Paracoccus pantotrophus
+  length: 157
+  phmmer_score: null
+  keep: true
+  note: seed; type Sox-pathway organism (Friedrich/Bardischewsky biochem characterisation)
+- acc: Q1W3E5
+  organism: Allochromatium vinosum
+  length: 128
+  phmmer_score: null
+  keep: true
+  note: seed; purple sulfur bacterium reference; 128-aa class
+- acc: Q8KDN0
+  organism: Chlorobaculum tepidum (strain ATCC 49652 / DSM 12025 / NBRC 103806 / TLS)
+  length: 144
+  phmmer_score: null
+  keep: true
+  note: seed; green sulfur bacterium reference
+- acc: Q9LCV0
+  organism: Paracoccus denitrificans
+  length: 157
+  phmmer_score: null
+  keep: true
+  note: seed; second Paracoccus species (P. denitrificans)
+- acc: A0A3D8PBR1
+  organism: Paracoccus thiocyanatus
+  length: 157
+  phmmer_score: 311.9
+  keep: true
+  note: 3rd Paracoccus species (P. thiocyanatus, sulfur-oxidising); intra-genus diversity
+- acc: A0A3P5WT61
+  organism: Pseudogemmobacter humi
+  length: 157
+  phmmer_score: 306.7
+  keep: true
+  note: Pseudogemmobacter rep; high-scoring Rhodobacteraceae diversity
+- acc: A0ABT2WTT9
+  organism: Ruegeria marisflavi
+  length: 157
+  phmmer_score: 282.5
+  keep: true
+  note: 2nd Ruegeria species (vs R. pomeroyi seed); Roseobacter intra-genus diversity
+- acc: D3RVS6
+  organism: Allochromatium
+  length: 128
+  phmmer_score: 278.9
+  keep: true
+  note: 2nd Allochromatium isolate; reinforces 128-aa purple-sulfur class against
+    Roseobacter-clade 157-aa dominance
+- acc: A0A1N7MDE4
+  organism: Gemmobacter megaterium
+  length: 157
+  phmmer_score: 276.5
+  keep: true
+  note: Gemmobacter rep; distinct Rhodobacteraceae genus
+- acc: A0A1G6RZM9
+  organism: Ruegeria marina
+  length: 157
+  phmmer_score: 263.2
+  keep: true
+  note: 3rd Ruegeria species; deeper Ruegeria phylogenetic sampling
+- acc: A0A2T4JWN2
+  organism: Cereibacter changlensis
+  length: 157
+  phmmer_score: 253.8
+  keep: true
+  note: Cereibacter rep (formerly Rhodobacter sphaeroides clade); a-proteobacterial
+    diversity
+- acc: A0A0H5D1F7
+  organism: Phaeobacter italicus
+  length: 158
+  phmmer_score: 239.8
+  keep: true
+  note: Phaeobacter rep; marine Roseobacter sublineage
+- acc: V9VR85
+  organism: Leisingera
+  length: 158
+  phmmer_score: 237.3
+  keep: true
+  note: Leisingera rep; marine Roseobacter genus distinct from Ruegeria
+- acc: A0A1I1ZEQ0
+  organism: Sulfitobacter brevis
+  length: 157
+  phmmer_score: 229.7
+  keep: true
+  note: Sulfitobacter rep; brief explicitly listed Sulfitobacter as a positive Sox-pathway
+    lineage
+- acc: A0A1D8D023
+  organism: Chlorobaculum limnaeum
+  length: 117
+  phmmer_score: 219.7
+  keep: true
+  note: 2nd Chlorobaculum species (117-aa class); green-sulfur intra-genus diversity
+    vs C. tepidum seed
+- acc: Q8RLX3
+  organism: Chlorobiaceae
+  length: 117
+  phmmer_score: 216.4
+  keep: true
+  note: 3rd green-sulfur (broader Chlorobiaceae) rep, 117-aa class
+- acc: A0A844BA00
+  organism: Rhodovulum strictum
+  length: 157
+  phmmer_score: 213.6
+  keep: true
+  note: Rhodovulum rep; brief explicitly listed Rhodovulum as a positive Sox-pathway
+    lineage
+- acc: A0A285TAY4
+  organism: Rhodobacter
+  length: 157
+  phmmer_score: 220.8
+  keep: true
+  note: Rhodobacter rep (purple non-sulfur classical lineage)
+- acc: A0A1I3JHP5
+  organism: Celeribacter neptunius
+  length: 158
+  phmmer_score: 216.2
+  keep: true
+  note: Celeribacter rep; additional Rhodobacteraceae genus
+- acc: A0A2R8BEI9
+  organism: Ascidiaceihabitans
+  length: 158
+  phmmer_score: 225.3
+  keep: false
+  note: Ascidiaceihabitans is yet another Roseobacter; redundant with existing Rhodobacteraceae
+    reps (Phaeobacter, Leisingera, Gemmobacter, Celeribacter) at cdhit 0.85
+- acc: A0A2T7G8F3
+  organism: Pelagivirga sediminicola
+  length: 159
+  phmmer_score: 219.7
+  keep: false
+  note: Roseobacter-clade redundant; drop to avoid Rhodobacteraceae bias
+- acc: A0A1H6KA81
+  organism: Paracoccus alkenifer
+  length: 158
+  phmmer_score: 217.6
+  keep: false
+  note: 4th Paracoccus species; 3 Paracoccus already kept (pantotrophus, denitrificans,
+    thiocyanatus). Drop to avoid genus-level oversampling
+- acc: A0A418ZS89
+  organism: Paracoccus aestuarii
+  length: 157
+  phmmer_score: 222.9
+  keep: false
+  note: 5th Paracoccus species; oversampled, drop
+- acc: A0A1Y5RLI7
+  organism: Pacificibacter marinus
+  length: 157
+  phmmer_score: 214.6
+  keep: false
+  note: Roseobacter-clade additional; redundant
+- acc: A0A1N7HJV8
+  organism: Roseovarius nanhaiticus
+  length: 157
+  phmmer_score: 224.2
+  keep: false
+  note: Roseovarius rep; Roseobacter-clade redundant at cdhit 0.85
+- acc: UPI0021B07C05
+  organism: Chlorobaculum sp. MV4-Y
+  length: 118
+  phmmer_score: 220.2
+  keep: false
+  note: UPI* accession filtered per WORK_PLAN convention; 2nd-Chlorobaculum role already
+    covered by non-UPI A0A1D8D023 (C. limnaeum)
+- acc: Q0K5U8
+  organism: Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB
+    10442 / H16 / Stanier 337)
+  length: 220
+  phmmer_score: null
+  keep: true
+  note: 'task #15 broadening: panel positive Cnecator_H16; canonical Betaproteo SoxX
+    (PF00034); 220-aa subclass distinct from current 117-161 aa Alphaproteo'
+- acc: A0A2L0XB92
+  organism: Cupriavidus metallidurans
+  length: 220
+  phmmer_score: null
+  keep: true
+  note: 'task #15: C. metallidurans soxX; intra-Cupriavidus diversity (REE-positive
+    sister)'
+- acc: A0A7X2HQG1
+  organism: Ralstonia pickettii (Burkholderia pickettii)
+  length: 219
+  phmmer_score: null
+  keep: true
+  note: 'task #15: Ralstonia pickettii soxX; broader Betaproteo coverage'
+- acc: A0A454TX52
+  organism: Ralstonia pseudosolanacearum
+  length: 226
+  phmmer_score: null
+  keep: true
+  note: 'task #15: Ralstonia pseudosolanacearum soxX; intra-Ralstonia diversity'
+- acc: Q5SIF3
+  organism: Thermus thermophilus (strain ATCC 27634 / DSM 579 / HB8)
+  length: 186
+  phmmer_score: null
+  keep: true
+  note: 'task #15 broadening: panel positive Tthermophilus_HB8; canonical Deinococcota
+    SoxX (PF00034); 186-aa subclass'
+- acc: A0A7V4E5Z7
+  organism: Thermus tengchongensis
+  length: 187
+  phmmer_score: null
+  keep: true
+  note: 'task #15: T. tengchongensis soxX; intra-Thermus diversity'
+- acc: A0A831UIW6
+  organism: Thermus islandicus
+  length: 190
+  phmmer_score: null
+  keep: true
+  note: 'task #15: T. islandicus soxX; broader Thermus-clade coverage'
+- acc: A0A7C3DDL6
+  organism: Meiothermus ruber
+  length: 191
+  phmmer_score: null
+  keep: true
+  note: 'task #15: Meiothermus ruber soxX; Deinococcota relative (vs Thermus genus)'
+tc_bitscore: 69.8
+tc_rationale: 'clean gap: min_positive=122.2 > max_negative=17.5; TC = midpoint =
+  69.8'
+n_seqs_final: 22
+curator: pedro.leao.ru@gmail.com
+curation_date: '2026-05-22'
+notes: "Priority B #11 \u2014 soxX = ~150 aa periplasmic monoheme c-type cytochrome,\n\
+  small partner of SoxA in the SoxXA dimer that catalyses the initial covalent\nbinding\
+  \ of thiosulfate to the SoxYZ carrier. Custom HMM must replace v1's\nbroad PF00034\
+  \ (cyt c monoheme), which false-positive-called sox_core \"complete\"\nin M. extorquens\
+  \ (any cyt c-containing organism matches PF00034).\n\n==========================================================================\n\
+  Curation (2026-05-20, P. Le\xE3o): 20 keeps total = 5 seeds + 15 additions.\n==========================================================================\n\
+  Lineage breakdown (target diversity across Sox-positive families):\n  - Paracoccus:\
+  \ 3 (P. pantotrophus seed, P. denitrificans seed, P. thiocyanatus)\n  - Allochromatium\
+  \ (purple sulfur): 2 (Q1W3E5 seed + D3RVS6, both 128 aa)\n  - Chlorobaculum/Chlorobiaceae\
+  \ (green sulfur): 3 (C. tepidum seed 144 aa,\n    C. limnaeum 117 aa, Chlorobiaceae\
+  \ Q8RLX3 117 aa)\n  - Ruegeria (Roseobacter-clade marine): 3 (R. pomeroyi seed,\
+  \ R. marisflavi,\n    R. marina)\n  - Other Rhodobacteraceae: 6 (Pseudogemmobacter,\
+  \ Gemmobacter,\n    Cereibacter, Phaeobacter, Leisingera, Celeribacter)\n  - Sulfitobacter:\
+  \ 1 (S. brevis) \u2014 brief explicitly listed\n  - Rhodovulum: 1 (R. strictum)\
+  \ \u2014 brief explicitly listed\n  - Rhodobacter: 1 \u2014 classical purple non-sulfur\
+  \ lineage\n\nLength distribution: 117-161 aa, all within the 120-170 aa canonical\
+  \ SoxX\nwindow (the two 117-aa Chlorobi sequences are at the lower edge but well-\n\
+  characterised in their lineage; the 161-aa R. pomeroyi seed is at the upper edge).\n\
+  \nGaps relative to brief's lineage list:\n  - Aquifex aeolicus / Hydrogenobacter\
+  \ thermophilus: NO Aquificales hits in\n    the phmmer expansion. These deep-branching\
+  \ thermophilic sulfur-oxidisers\n    almost certainly carry a divergent SoxX that\
+  \ doesn't cluster with the\n    Proteo/Chlorobi seed set at the score-200 threshold.\
+  \ If a real metagenome\n    contains Aquificales SoxX missed by the HMM, re-seed\
+  \ with the\n    A. aeolicus SoxX (UniProt O67072 / equivalent) and re-expand.\n\
+  \  - Starkeya novella: not in expansion pool; classical type strain, may need\n\
+  \    re-seeding.\n  - Allochromatium / Chlorobaculum (purple/green-sulfur) representation\
+  \ comes\n    only from the two 128-aa class and three 117-aa class entries respectively.\n\
+  \    This is enough for the HMM consensus but the bitscore distribution for\n  \
+  \  these lineages will be wider than for the 157-aa Roseobacter cluster.\n\nRoseobacter-clade\
+  \ dominance: even after pruning, 10/20 keeps are Roseobacter/\nRhodobacteraceae.\
+  \ This is unavoidable \u2014 the phmmer expansion was 90%\nRhodobacteraceae because\
+  \ R. pomeroyi seed pulled hundreds of Roseobacter\nhomologues. CD-HIT at 0.85 should\
+  \ collapse intra-Ruegeria/Roseobacter\nredundancy. If post-CD-HIT clusters are still\
+  \ Roseobacter-skewed, manually\ndrop one Ruegeria + one Rhodobacteraceae before\
+  \ alignment.\n\n==========================================================================\n\
+  cdhit_threshold: 0.85 \u2014 same as hcnA / mtrC / cyc2-with-Acidihalobacter.\n\
+  ==========================================================================\nCyt\
+  \ c monoheme is moderately conserved within a sub-class (R. pomeroyi 161 aa\nand\
+  \ P. pantotrophus 157 aa Roseobacter/Paracoccus SoxX align at ~50-60%\nidentity),\
+  \ so 0.85 splits species-level identity while collapsing strain\nduplicates. 0.7\
+  \ would likely collapse all 9 Rhodobacteraceae into 2-3\nclusters; 0.95 would inflate\
+  \ Ruegeria genus to 3 redundant clusters. Expect\n12-15 clusters after CD-HIT @0.85.\n\
+  \nmin_seqs_override NOT set: 19 keeps should give >8 clusters at 0.85 without help.\n\
+  If post-CD-HIT count drops below 8 (unlikely), escalate cdhit to 0.9.\n\n==========================================================================\n\
+  hmm_min_qcov: 0.6 \u2014 set PROACTIVELY based on hcnA precedent.\n==========================================================================\n\
+  hcnA (104-aa small protein) required hmm_min_qcov: 0.7 to filter multidomain\nfalse\
+  \ positives \u2014 the small HMM was hitting the equivalent domain of large\n(~950\
+  \ aa) Fe-S-containing oxidoreductases in M. extorquens and C. metallidurans.\nSoxX\
+  \ is at similar risk: ~150-aa LENG profile vs the universe of multidomain\ncyt c\
+  \ proteins (cyt c oxidase subunit II is ~250 aa with a cyt c c-terminal\ndomain;\
+  \ some periplasmic multiheme cyt c's are 400-600 aa with multiple\n~150-aa cyt c\
+  \ repeats). A 0.6 coverage floor requires the hmmsearch hit to\ncover at least 60%\
+  \ of the query protein \u2014 filtering out large multidomain\nproteins where only\
+  \ a sub-region (~100-150 aa) matches the soxX profile.\n0.6 is slightly looser than\
+  \ hcnA's 0.7 because SoxX has natural length\nvariation (117-161 aa across kept\
+  \ seqs) and the green-sulfur 117-aa class\nwould already be a 70-78% coverage relative\
+  \ to a 150-aa-LENG profile; 0.7\nwould risk dropping legitimate green-sulfur SoxX.\
+  \ Document outcome during\ncalibration: if validation shows 0 FP without the filter,\
+  \ can be relaxed;\nif Chlorobaculum SoxX rejected at 0.6, lower to 0.5.\n\n==========================================================================\n\
+  Negatives set (14) \u2014 designed to lock the HMM specifically to SoxX vs the\n\
+  much larger family of monoheme cyt c proteins (cyt c-551, cyt c2, cyt c').\n==========================================================================\n\
+  Test-genome anchors (6) \u2014 the proteins that v1's PF00034 false-positively\n\
+  matched as SoxX:\n  1. C5ASB2 \u2014 M. extorquens AM1 class-I cyt c (195 aa).\n\
+  \     THE single most important negative: this is one of the M. extorquens\n   \
+  \  proteins responsible for v1 reporting sox_core \"complete\" in a methylo-\n \
+  \    troph that has zero sulfur-oxidation biology. Calibration MUST place\n    \
+  \ this below TC; if it scores above, the HMM has learned generic cyt c\n     and\
+  \ the v1 bug is unfixed.\n  2. C5AYX9 \u2014 M. extorquens AM1 class-I cyt c (190\
+  \ aa). Paralogue of C5ASB2;\n     same logic. Reused from cycA negatives where these\
+  \ two locked the cycA\n     HMM against M. extorquens.\n  3-4. Q8E8J8, Q8EA61 \u2014\
+  \ S. oneidensis MR-1 diheme cyt c4. Validated\n     S. oneidensis cyt c anchors\
+  \ (reused from cycA). Diheme not monoheme,\n     but they're the small periplasmic\
+  \ cyt c's of an organism that does NOT\n     do Sox-pathway thiosulfate oxidation\
+  \ \u2014 they MUST score below TC.\n  5-6. Q1LI70, Q1LKS2 \u2014 C. metallidurans\
+  \ CH34 cyt c4 (reused from cycA).\n     C. metallidurans has zero Sox biology; these\
+  \ anchor the HMM against the\n     test genome's small periplasmic cyt c proteome.\n\
+  E. coli K-12: no canonical monoheme cyt c in the SoxX size class \u2014 NapB / NapC\n\
+  are diheme/tetraheme (different fold-count). Test-genome anchor coverage via\nM.\
+  \ extorquens / S. oneidensis / C. metallidurans is sufficient.\nA. ferrooxidans:\
+  \ NO test-genome anchor added. The brief flags that\nA. ferrooxidans is a sulfur-oxidiser\
+  \ but lacks the canonical Paracoccus-style\nSoxXAYZ-CDB system (uses heterodisulfide-reductase-like\
+  \ architectures instead).\nWe deliberately do NOT add A. ferrooxidans negatives\
+  \ because (a) the textbook-\ncorrect call is sox_core ABSENT, and we don't want\
+  \ to over-anchor against a\nlineage that may have a divergent SoxX-related protein\
+  \ that's biologically\nambiguous; (b) if the HMM scores an A. ferrooxidans protein\
+  \ above TC during\nvalidation, that result is interesting and must be biology-reviewed,\
+  \ not\nautomatically suppressed. Pre-emptively negativing A. ferrooxidans risks\n\
+  hiding a real heterodisulfide-related SoxX paralogue.\n\ncyc2-reused monoheme cyt\
+  \ c outgroups (8) \u2014 the 80-130 aa size class is\nexactly the SoxX size class,\
+  \ making these the highest-value discrimination\nanchors. Selected per brief: \"\
+  pick the 80-125 aa monohemes\":\n  7. P00097 \u2014 Pseudomonas aeruginosa cyt c-551\
+  \ (monoheme, ~80 aa).\n  8. P00098 \u2014 Rhodocyclus c2 (monoheme, ~110 aa).\n\
+  \  9. P0C0X8 \u2014 Cereibacter cyt c2 (monoheme, ~125 aa). Particularly important\n\
+  \     because Cereibacter is in the SoxX positive set (A0A2T4JWN2 kept) \u2014 the\n\
+  \     HMM must distinguish the operon-context SoxX from the housekeeping cyt c2\n\
+  \     in the same genus.\n  10. P00120 \u2014 Desulfovibrio cyt c-553 (monoheme).\
+  \ Sulfate-reducer outgroup,\n     functionally opposite biology from Sox sulfur-oxidiser.\n\
+  \  11. P00154 \u2014 Allochromatium cyt c' (~130 aa). CRITICAL anchor: Allochromatium\n\
+  \     vinosum IS in the SoxX positive set (Q1W3E5 seed) \u2014 the HMM must\n  \
+  \   distinguish A. vinosum SoxX (128 aa, periplasmic, Sox-operon context)\n    \
+  \ from A. vinosum cyt c' (~130 aa, completely different function: photo-\n     respiratory\
+  \ NO-binding). Same length, same lineage, different gene \u2014\n     the toughest\
+  \ possible discrimination test.\n  12. P00099 \u2014 Rhodopseudomonas viridis cyt\
+  \ c2 (small monoheme).\n  13. P00102 \u2014 Azotobacter cyt c5 (small monoheme).\n\
+  \  14. P00080 \u2014 Pseudomonas mendocina cyt c-551 (small monoheme).\n\nDeliberately\
+  \ EXCLUDED from cyc2 reuse (per brief: avoid longer diheme/\ntetraheme entries):\n\
+  \  - P0ABL3 NapB (~150 aa diheme) \u2014 multiheme, wrong fold-count class\n  -\
+  \ P0ABL5 NapC (~200 aa tetraheme) \u2014 multiheme\n  - P0ABK9 NrfA (478 aa decaheme)\
+  \ \u2014 multiheme, multidomain\n  - P00125 bovine cyt c1 (~250 aa, multi-domain\
+  \ mitochondrial bc1 subunit) \u2014\n    cleared by hmm_min_qcov filter; not adding\
+  \ to keep negatives lean\n\n==========================================================================\n\
+  A. ferrooxidans biology note (brief nuance)\n==========================================================================\n\
+  A. ferrooxidans is a chemolithoautotrophic sulfur-oxidiser BUT historically\nreported\
+  \ to lack the canonical Paracoccus-style SoxXAYZ-CDB system; it uses\nheterodisulfide-reductase-like\
+  \ architectures (Hdr) instead. Textbook-correct\ncall for sox_core in A. ferrooxidans\
+  \ is therefore ABSENT.\n\nValidation behaviour expected:\n  - Expected 0 TP / 5\
+  \ TN (none of the 5 test genomes are canonical Sox-pathway\n    organisms). M. extorquens\
+  \ MUST go from v1 FP-confirmed to v2 TN.\n  - IF the HMM scores an A. ferrooxidans\
+  \ protein above TC, DO NOT assume\n    TP \u2014 flag for biology review. The hit\
+  \ could be: (a) a real Hdr-component\n    cyt c that's a SoxX paralogue (interesting\
+  \ but a different family), or\n    (b) cross-reactivity to a generic cyt c. If (a),\
+  \ the call is\n    \"biological\" but doesn't mean A. ferrooxidans does Sox-pathway\
+  \ sulfur\n    oxidation \u2014 it means it has a SoxX-related protein in an Hdr-family\n\
+  \    context. Note in validation report.\n\n==========================================================================\n\
+  Predicted calibration outcome\n==========================================================================\n\
+  Hypothesis:\n  - Positives bitscore band: ~200-380 (phmmer scores 213-312 from expansion\n\
+  \    suggest most kept seqs will land in 250-350 range against self-built HMM).\n\
+  \    The 117-aa Chlorobiaceae class may sit at the low end (~200-220) because\n\
+  \    they're shorter than the 157-aa profile consensus.\n  - Negatives bitscore\
+  \ band: P00154 Allochromatium cyt c' is the closest\n    threat (same size, same\
+  \ genus); predicted ~50-100. C5ASB2/C5AYX9\n    M. extorquens cyt c \u2248 30-80.\
+  \ cyc2-reused 80-130 aa monohemes \u2248 20-60.\n  - Predicted clean gap of 100+\
+  \ bits, TC \u2248 150-180.\n\nConfidence: HIGH that a clean gap emerges (the cyc2\
+  \ cytochrome negatives are\ngeneric cyt c's from organisms with no SoxX operon,\
+  \ while the 5 seeds are all\nmanually-verified canonical SoxX from operon-confirmed\
+  \ Sox-pathway organisms).\nMEDIUM-HIGH on the 5-genome test (expected 0 TP / 5 TN).\
+  \ The principal risk\nis the green-sulfur 117-aa Chlorobiaceae class sitting near\
+  \ the bottom of the\npositive distribution \u2014 if calibration TC is set off the\
+  \ Roseobacter mean\nrather than the green-sulfur minimum, Chlorobaculum SoxX may\
+  \ be missed in\nreal metagenomes. Use min_positive (not mean) for TC calculation.\n\
+  \nBelow-floor risk: 20 keeps \u2192 expected 13-16 clusters at CD-HIT 0.85, well\n\
+  above MIN_SEQS=8. No floor concern.\n\n==========================================================================\n\
+  v1 ref bug heritage\n==========================================================================\n\
+  v1 ref bug: Q5LTJ8 was annotated as soxX from Ruegeria pomeroyi DSS-3 but is\nactually\
+  \ a 189 aa TPR-domain protein. The correct R. pomeroyi soxX is Q5LUR0\n(SPO0993,\
+  \ 161 aa) \u2014 adjacent locus to soxD SPO0999. Same off-by-few-locus\naccession-corruption\
+  \ pattern as cyc2/cycA/hcnA. v1 seeds were already corrected\nin the prior session;\
+  \ this curation accepts the corrected 5-seed set as canonical.\n"

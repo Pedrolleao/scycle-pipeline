@@ -1,0 +1,51 @@
+# ncycle-pipeline — accuracy regression gate (CI)
+#
+# Fails the build if panel accuracy drops below the floors in
+# validation/test_regression.py. This is a TEMPLATE: before it can run you must
+#   1. put this repo under git and push to GitHub (it is not a git repo yet), and
+#   2. provision the 33-genome reference panel at ../test_panel — see the
+#      "Provision reference panel" step below (no panel manifest exists in-repo yet;
+#      add one, e.g. an accessions.tsv + `datasets download`, then wire it here).
+# The KOfam download (~1.5 GB) is cached and keyed on the pinned release hash so it
+# is fetched at most once.
+
+name: regression
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  accuracy-gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}        # login shell so the conda env stays active
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up ncycle-pipeline conda env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: envs/ncycle.yaml
+          cache-environment: true
+
+      - name: Cache KOfam profiles (pinned release)
+        uses: actions/cache@v4
+        with:
+          path: resources/.cache
+          # keyed on the pinned sha256 in config.yaml — a release bump busts the cache
+          key: kofam-b03d20b96254d0f04652102ea538087ac36adadf0f807ee7278f8637810ca15a
+
+      - name: Provision reference panel
+        run: |
+          # TODO: fetch the 33-genome panel into ../test_panel. Until a panel
+          # manifest exists, commit the proteomes as a fixture or add a download
+          # script (NCBI `datasets`) and call it here. Example shape:
+          #   mkdir -p ../test_panel && python scripts/fetch_panel.py ../test_panel
+          test -d ../test_panel || { echo "::error::reference panel missing at ../test_panel"; exit 1; }
+
+      - name: Run accuracy regression gate
+        env:
+          NCYCLE_ENV: ncycle-pipeline   # run.py reuses the active CI env
+        run: make regression

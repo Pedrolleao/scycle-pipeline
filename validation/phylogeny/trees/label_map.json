@@ -1,0 +1,1546 @@
+{
+"R000": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "P45575",
+"org": "Nitratidesulfovibrio_vulgaris"
+},
+"R001": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "Q9F4A2",
+"org": "Desulfovibrio_desulfuricans"
+},
+"R002": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "T2G8V8",
+"org": "Megalodesulfovibrio_gigas"
+},
+"R003": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "Q9K5B4",
+"org": "Desulfobacter_vibrioformis"
+},
+"R004": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "Q9K5B8",
+"org": "Desulfobulbus_rhabdoformis"
+},
+"R005": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "A4J9D5",
+"org": "Desulforamulus_reducens"
+},
+"R006": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "Q251E3",
+"org": "Desulfitobacterium_hafniense"
+},
+"R007": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "A0ABT8QNA5",
+"org": "Desulfosporosinus_nitroreducens"
+},
+"R008": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "B5YIF3",
+"org": "Thermodesulfovibrio_yellowstonii"
+},
+"R009": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "E1QFJ3",
+"org": "Desulfarculus_baarsii"
+},
+"R010": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "S0G5M9",
+"org": "Desulfotignum_phosphitoxidans_DSM_13687"
+},
+"R011": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "Q59110",
+"org": "Archaeoglobus_fulgidus"
+},
+"R012": {
+"kind": "ref",
+"type": "reductive",
+"gene": "dsrB",
+"acc": "N0BL33",
+"org": "Archaeoglobus_sulfaticallidus_PM70-1"
+},
+"R013": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "O33999",
+"org": "Allochromatium_vinosum"
+},
+"R014": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "Q8KE39",
+"org": "Chlorobaculum_tepidum"
+},
+"R015": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A0A5C4RYG3",
+"org": "Chlorobaculum_thiosulfatiphilum"
+},
+"R016": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A1BCS2",
+"org": "Chlorobium_phaeobacteroides"
+},
+"R017": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "L0DSF9",
+"org": "Thioalkalivibrio_nitratireducens"
+},
+"R018": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A0A9X0WG77",
+"org": "Thiocapsa_imhoffii"
+},
+"R019": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A0L9L5",
+"org": "Magnetococcus_marinus"
+},
+"R020": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A0ABY9MNZ8",
+"org": "Thiothrix_lacustris"
+},
+"R021": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrB",
+"acc": "A0ABS1E5W7",
+"org": "Halorhodospira_neutriphila"
+},
+"R022": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrA",
+"acc": "A0ABY9MRG6",
+"org": "Thiothrix_lacustris"
+},
+"R023": {
+"kind": "ref",
+"type": "oxidative",
+"gene": "dsrA",
+"acc": "A0ABS1E8E7",
+"org": "Halorhodospira_neutriphila"
+},
+"Q000_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_001725525_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q001_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_001799195_1",
+"clade": "p__Bdellovibrionota_F",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q002_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_001897675_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q003_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_002412965_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q004_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_002877985_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q005_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_003232385_1",
+"clade": "p__SZUA-79",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q006_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_003641645_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q007_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_013151235_1",
+"clade": "p__CG2-30-53-67",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q008_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_013201405_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q009_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_014730175_1",
+"clade": "p__Zixibacteria",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q010_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_014804905_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q011_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_016193065_1",
+"clade": "p__JACPSX01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q012_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_016756835_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q013_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_016931495_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q014_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_017454855_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q015_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_017613715_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q016_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_018263585_1",
+"clade": "p__Electryoneota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q017_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_018902545_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q018_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_020061125_1",
+"clade": "p__UBP15",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q019_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_020217265_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q020_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_020445225_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q021_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_020721255_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q022_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_021163085_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q023_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_021783475_1",
+"clade": "p__Thermodesulfobiota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q024_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_021787655_1",
+"clade": "p__JAMCPX01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q025_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_021806125_1",
+"clade": "p__SZUA-79",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q026_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_022600395_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q027_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_024275315_1",
+"clade": "p__Nitrospinota_A",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q028_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_024699605_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q029_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_024860865_1",
+"clade": "p__JACRDV01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q030_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_025363775_1",
+"clade": "p__Acidobacteriota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q031_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_025774555_1",
+"clade": "p__Electryoneota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q032_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_026991065_1",
+"clade": "p__GCA-2686955",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q033_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_027030425_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q034_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_027344185_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q035_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_028277725_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q036_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_029937335_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q037_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_030145005_1",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q038_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_031406795_1",
+"clade": "p__JAUVQV01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q039_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_036781525_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q040_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_036845625_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q041_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_040755155_1",
+"clade": "p__Hinthialibacterota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q042_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_040755795_1",
+"clade": "p__UBA9089",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q043_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_040757115_1",
+"clade": "p__UBA9089",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q044_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_041622895_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q045_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_041640755_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q046_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_046484865_1",
+"clade": "p__Krumholzibacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q047_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_050253135_1",
+"clade": "p__Campylobacterota_A",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q048_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_903823385_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q049_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_910595855_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q050_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_945786985_1",
+"clade": "p__CG2-30-53-67",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q051_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_945787325_1",
+"clade": "p__Desulfobacterota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q052_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_963663345_2",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q053_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_963818325_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q054_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964420375_1",
+"clade": "p__RBG-13-61-14",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q055_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964448115_1",
+"clade": "p__CAYUVA01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q056_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964448305_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q057_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964453435_1",
+"clade": "p__Abyssobacteria",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q058_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964524645_1",
+"clade": "p__Krumholzibacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q059_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964547905_1",
+"clade": "p__JAMCPX01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q060_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964617105_1",
+"clade": "p__CAZTWC01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q061_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_964654595_1",
+"clade": "p__Halobacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q062_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCA_965613365_1",
+"clade": "p__Hydrothermarchaeota",
+"characterized": false,
+"scycle_dir": "ambiguous"
+},
+"Q063_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000189755_2",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q064_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000212395_1",
+"clade": "p__Thermodesulfobiota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q065_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000215085_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q066_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000233695_2",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q067_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000260135_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q068_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000315365_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q069_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000321415_2",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q070_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000378965_1",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q071_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000428825_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q072_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_000621145_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q073_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_001514535_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q074_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_001655685_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q075_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_002000365_1",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q076_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_002005145_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q077_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_002813775_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q078_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_013389365_1",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q079_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_021650935_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q080_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_024204645_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q081_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_030913135_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q082_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_031280615_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q083_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_032027065_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q084_dsrA": {
+"kind": "query",
+"gene": "dsrA",
+"genome": "GCF_040451425_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q000_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_001725525_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q001_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_001799195_1",
+"clade": "p__Bdellovibrionota_F",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q002_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_001897675_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q003_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_002412965_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q004_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_002877985_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q005_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_003232385_1",
+"clade": "p__SZUA-79",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q006_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_003641645_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q007_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_013151235_1",
+"clade": "p__CG2-30-53-67",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q008_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_013201405_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q009_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_014730175_1",
+"clade": "p__Zixibacteria",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q010_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_014804905_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q011_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_016193065_1",
+"clade": "p__JACPSX01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q012_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_016756835_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q013_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_016931495_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q014_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_017454855_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q015_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_017613715_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q016_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_018263585_1",
+"clade": "p__Electryoneota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q017_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_018902545_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q018_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_020061125_1",
+"clade": "p__UBP15",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q019_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_020217265_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q020_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_020445225_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q021_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_020721255_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q022_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_021163085_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q023_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_021783475_1",
+"clade": "p__Thermodesulfobiota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q024_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_021787655_1",
+"clade": "p__JAMCPX01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q025_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_021806125_1",
+"clade": "p__SZUA-79",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q026_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_022600395_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q027_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_024275315_1",
+"clade": "p__Nitrospinota_A",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q028_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_024699605_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q029_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_024860865_1",
+"clade": "p__JACRDV01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q030_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_025363775_1",
+"clade": "p__Acidobacteriota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q031_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_025774555_1",
+"clade": "p__Electryoneota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q032_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_026991065_1",
+"clade": "p__GCA-2686955",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q033_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_028277725_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q034_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_029937335_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q035_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_030145005_1",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q036_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_031406795_1",
+"clade": "p__JAUVQV01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q037_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_031960865_1",
+"clade": "p__Campylobacterota_A",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q038_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_036781525_1",
+"clade": "Thermodesulfobacterium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q039_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_036845625_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q040_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_040755155_1",
+"clade": "p__Hinthialibacterota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q041_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_040755795_1",
+"clade": "p__UBA9089",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q042_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_040757115_1",
+"clade": "p__UBA9089",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q043_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_041622895_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q044_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_041640755_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q045_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_046484865_1",
+"clade": "p__Krumholzibacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q046_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_050253135_1",
+"clade": "p__Campylobacterota_A",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q047_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_903823385_1",
+"clade": "Chlorobiia_GSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q048_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_910595855_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q049_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_944324555_1",
+"clade": "Desulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q050_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_945786985_1",
+"clade": "p__CG2-30-53-67",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q051_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_945787325_1",
+"clade": "p__Desulfobacterota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q052_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_963663345_2",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q053_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_963818325_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q054_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964420375_1",
+"clade": "p__RBG-13-61-14",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q055_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964448115_1",
+"clade": "p__CAYUVA01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q056_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964448305_1",
+"clade": "Thioglobus_SUP05",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q057_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964453435_1",
+"clade": "p__Abyssobacteria",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q058_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964513745_1",
+"clade": "p__JAUVQV01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q059_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964524645_1",
+"clade": "p__Krumholzibacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q060_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964547905_1",
+"clade": "p__JAMCPX01",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q061_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964617105_1",
+"clade": "p__CAZTWC01",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q062_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_964654595_1",
+"clade": "p__Halobacteriota",
+"characterized": false,
+"scycle_dir": "reductive"
+},
+"Q063_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCA_965613365_1",
+"clade": "p__Hydrothermarchaeota",
+"characterized": false,
+"scycle_dir": "ambiguous"
+},
+"Q064_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000189755_2",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q065_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000212395_1",
+"clade": "p__Thermodesulfobiota",
+"characterized": false,
+"scycle_dir": "oxidative"
+},
+"Q066_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000215085_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q067_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000233695_2",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q068_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000260135_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q069_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000315365_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q070_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000321415_2",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q071_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000378965_1",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q072_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000428825_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q073_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_000621145_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q074_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_001514535_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q075_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_001655685_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q076_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_002000365_1",
+"clade": "Thioalkalivibrio",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q077_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_002005145_1",
+"clade": "Desulfotomaculum",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q078_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_002813775_1",
+"clade": "Chromatiales_PSB",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q079_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_013389365_1",
+"clade": "Desulfobacter",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q080_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_021650935_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q081_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_024204645_1",
+"clade": "Desulfomicrobium",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q082_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_030913135_1",
+"clade": "Beggiatoa_Thiothrix",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q083_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_031280615_1",
+"clade": "Desulfobulbus",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q084_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_032027065_1",
+"clade": "Thiobacillus",
+"characterized": true,
+"scycle_dir": "oxidative"
+},
+"Q085_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_040450955_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+},
+"Q086_dsrB": {
+"kind": "query",
+"gene": "dsrB",
+"genome": "GCF_040451425_1",
+"clade": "Thermodesulfovibrio",
+"characterized": true,
+"scycle_dir": "reductive"
+}
+}

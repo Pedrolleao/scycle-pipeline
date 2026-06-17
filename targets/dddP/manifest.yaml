@@ -1,0 +1,21 @@
+target_id: dddP
+name: DMSP lyase DddP (M24B metallopeptidase-fold)
+curator: pedro.leao.ru@gmail.com
+curation_date: '2026-05-26'
+build: SP6b — dedicated DddP custom HMM for the last orphan target.
+
+# Custom HMM built from 113 characterized/named "DMSP lyase DddP" sequences (UniProt,
+# 430-480 aa, M24B fold), CD-HIT 0.7 -> 21 representatives -> MAFFT --auto -> hmmbuild.
+# DELIBERATELY EXCLUDES Roseobacter denitrificans (the panel's dddP-positive test genome) —
+# its DddP (Q166H0) is at most 86.7% identical to any training ref and 77.3% to the BLAST
+# seeds (verified by blastp), so detection is non-circular (microbiologist caveat closed).
+n_seqs_final: 21
+
+# TC calibration: hmmsearch the HMM against the 113 DddP positives vs 293 generic M24
+# peptidases (creatinase / prolidase / Xaa-Pro aminopeptidase, the moonlighting parent
+# family). Clean separation: min positive 460.4 >> max negative 94.6 (365-bit gap).
+tc_bitscore: 277.5
+tc_rationale: "midpoint(min_positive=460.4, max_negative=94.6)=277.5. The 365-bit gap between
+  genuine DddP and generic M24 peptidases is wide; the HMM alone separates the fold, and the
+  ≥50% DIAMOND gate to characterized DddP enforces DMSP-lyase specificity (e.g. S. meliloti's
+  M24 paralog scores 468 on the HMM but only 40% BLAST identity → correctly disqualified)."

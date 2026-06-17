@@ -1,0 +1,76 @@
+# manifest.template.yaml — schema for a Tier 2 / Tier 3 custom-HMM target.
+#
+# One manifest.yaml per target lives at:  targets/{target_id}/manifest.yaml
+#
+# Workflow:
+#   1. Curator fills `seed_accessions` (3-5 trusted UniProt accessions).
+#   2. `build_custom_hmms.py expand --target X` writes `expanded_candidates`
+#      below with keep: null. Curator reviews and sets keep: true|false.
+#   3. Curator fills `negatives` (~15 close-but-not-this-function UniProt accs).
+#   4. `build_custom_hmms.py build --target X` consumes kept rows → cyc2.hmm.
+#   5. `calibrate_tc.py --target X` writes `tc_bitscore` + `tc_rationale`.
+#
+# Floors: <8 sequences after curation → abort and fall back to BLAST-only.
+
+target_id: TARGET_ID            # must match the entry in config/targets.yaml
+tier: 2                          # 2 = custom HMM, 3 = BLAST-only
+
+# Optional: override the CD-HIT redundancy threshold (default 0.7 per WORK_PLAN
+# §4). Raise to 0.9 / 0.95 for highly-conserved narrow families where 0.7
+# collapses below the MIN_SEQS=8 floor (e.g. rusticyanin: 15 keeps → 4 clusters
+# @0.7 → 13 clusters @0.9). Leave unset to use the 0.7 default.
+# cdhit_threshold: 0.9
+
+# Optional: override the MIN_SEQS=8 floor when the family is biologically
+# narrow and only ~5-7 high-quality positives exist after curation (e.g. coxB
+# with 5 Acidithiobacillus/Acidiferrobacter/Acidihalobacter reps). hmmbuild
+# can build a profile from 5 sequences — the floor is a guardrail, not a
+# requirement. **Document the rationale in notes:** before lowering.
+# min_seqs_override: 5
+
+# ── Curator input ────────────────────────────────────────────────────────────
+seed_accessions:
+  # 3-5 UniProt accessions the curator trusts as functionally-validated
+  # examples of this enzyme. Used as phmmer queries against SwissProt.
+  - ACCESSION1                   # Organism, brief note (optional)
+  - ACCESSION2
+
+negatives:
+  # ~10-15 UniProt accessions of close-but-not-this-function homologues,
+  # used for TC calibration. Pick proteins from organisms KNOWN not to
+  # perform this function.
+  #
+  # ALWAYS verify each accession via UniProt before adding — accession
+  # lookups in textbooks / older papers are routinely wrong. Confirm:
+  # (a) the protein is what its name claims, (b) the source organism is
+  # known not to perform the target function, (c) the length is within
+  # 70-130% of the target enzyme's expected length.
+  #
+  # Reusable cyt-c outgroup set for any cyt-c-family target (cycA, soxX,
+  # soxD, mtrA, mtrC, coxA, coxB, hcnB, ...): see targets/cyc2/manifest.yaml
+  # negatives — vetted 12-member set spanning E. coli Nap/Nrf, Pseudomonas
+  # c-551, photosynthetic-bacterium c2s, Desulfovibrio c-553, Allochromatium
+  # c', and bovine mitochondrial cyt c1 (eukaryotic outgroup).
+  - ACCESSION1
+  - ACCESSION2
+
+# ── Filled by `build_custom_hmms.py expand` ──────────────────────────────────
+expanded_candidates:
+  # Curator sets `keep: true` for rows that should enter the training set.
+  # Aim for the count given in WORK_PLAN section 4 per target type.
+  - acc: ""
+    organism: ""
+    length: 0
+    phmmer_score: 0.0
+    keep: null                   # null → not reviewed; true/false → curator decision
+    note: ""
+
+# ── Filled by `calibrate_tc.py` ──────────────────────────────────────────────
+tc_bitscore: null                # float; trusted-cutoff bitscore for this HMM
+tc_rationale: ""                 # "gap=42.1 between min_pos=85.0 and max_neg=42.9"
+
+# ── Provenance ───────────────────────────────────────────────────────────────
+n_seqs_final: 0                  # number of sequences in refs.fasta after CD-HIT
+curator: ""                      # email of person who curated
+curation_date: ""                # YYYY-MM-DD
+notes: ""                        # free-text rationale, citations, gotchas

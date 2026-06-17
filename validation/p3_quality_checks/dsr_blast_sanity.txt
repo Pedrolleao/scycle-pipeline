@@ -1,0 +1,64 @@
+# Post-download dsrA/dsrB BLAST sanity-check results (2026-05-28)
+# Per audit DOSSIER_P3_AUDIT.md mandatory checks.
+
+## R1_Desulfofervidus_Auka
+  dsrA||Q59109         JAGGRT010000258.1         59.1% L=254 E=5e-86
+  dsrA||P45574         JAGGRT010000258.1         68.9% L=273 E=5e-123
+  dsrA||O33998         JAGGRT010000258.1         43.3% L=254 E=6e-61
+  dsrA||Q9F4A3         JAGGRT010000258.1         67.5% L=277 E=3e-122
+  dsrA||S0FXQ9         JAGGRT010000258.1         63.5% L=277 E=2e-106
+
+## R2_Thermodesulfobacterium_AUK139
+  dsrA||Q59109         JAGGWZ010000080.1         49.0% L=255 E=1e-73
+  dsrA||P45574         JAGGWZ010000080.1         61.7% L=261 E=2e-111
+  dsrA||O33998         JAGGWZ010000080.1         40.7% L=241 E=7e-54
+  dsrA||Q9F4A3         JAGGWZ010000080.1         59.0% L=261 E=2e-107
+  dsrA||S0FXQ9         JAGGWZ010000080.1         57.1% L=266 E=6e-99
+  dsrB||P45575         JAGGWZ010000080.1         63.9% L=374 E=3e-179
+  dsrB||Q59110         JAGGWZ010000080.1         57.2% L=376 E=6e-151
+  dsrB||Q9F4A2         JAGGWZ010000080.1         62.8% L=374 E=2e-177
+  dsrB||S0G5M9         JAGGWZ010000080.1         60.5% L=375 E=1e-167
+  dsrB||D3RSN2         JAGGWZ010000080.1         41.2% L=359 E=4e-96
+
+## R3_Desulfobacteraceae_4572-130_Guaymas
+  dsrA||Q59109         NBLN01000002.1            53.3% L=422 E=3e-133
+  dsrA||P45574         NBLN01000002.1            73.7% L=441 E=0e+00
+  dsrA||O33998         NBLN01000002.1            41.2% L=434 E=4e-99
+  dsrA||Q9F4A3         NBLN01000002.1            69.8% L=441 E=0e+00
+  dsrA||S0FXQ9         NBLN01000002.1            86.2% L=442 E=0e+00
+  dsrB||P45575         NBLN01000002.1            72.8% L=382 E=0e+00
+  dsrB||Q59110         NBLN01000002.1            51.6% L=372 E=3e-128
+  dsrB||Q9F4A2         NBLN01000002.1            69.4% L=382 E=0e+00
+  dsrB||S0G5M9         NBLN01000002.1            85.9% L=382 E=0e+00
+  dsrB||D3RSN2         NBLN01000002.1            39.6% L=369 E=1e-88
+
+## O1_Sulfurovum_Auka
+
+## O2_Thioglobus_Saanich
+  dsrA||Q59109         NZ_CAXBVG010000035.1      37.1% L=423 E=9e-81
+  dsrA||P45574         NZ_CAXBVG010000035.1      36.7% L=436 E=2e-83
+  dsrA||O33998         NZ_CAXBVG010000035.1      60.0% L=435 E=5e-167
+  dsrA||Q9F4A3         NZ_CAXBVG010000035.1      35.8% L=436 E=8e-79
+  dsrA||S0FXQ9         NZ_CAXBVG010000035.1      36.1% L=449 E=2e-76
+  dsrB||P45575         NZ_CAXBVG010000035.1      41.6% L=339 E=3e-91
+  dsrB||Q59110         NZ_CAXBVG010000035.1      43.0% L=335 E=1e-91
+  dsrB||Q9F4A2         NZ_CAXBVG010000035.1      41.9% L=339 E=2e-87
+  dsrB||S0G5M9         NZ_CAXBVG010000035.1      42.2% L=358 E=1e-88
+  dsrB||D3RSN2         NZ_CAXBVG010000035.1      73.1% L=357 E=0e+00
+
+## O3_Parabeggiatoa_Guaymas
+  dsrA||Q59109         QNER01000003.1            47.0% L=198 E=3e-52
+  dsrA||P45574         QNER01000003.1            39.8% L=226 E=6e-48
+  dsrA||O33998         QNER01000003.1            75.3% L=215 E=1e-109
+  dsrA||Q9F4A3         QNER01000003.1            39.3% L=229 E=3e-47
+  dsrA||S0FXQ9         QNER01000003.1            40.2% L=214 E=5e-47
+  dsrB||P45575         QNER01000003.1            44.6% L=354 E=7e-98
+  dsrB||Q59110         QNER01000003.1            45.4% L=350 E=2e-96
+  dsrB||Q9F4A2         QNER01000003.1            43.3% L=372 E=5e-92
+  dsrB||S0G5M9         QNER01000003.1            42.1% L=373 E=1e-92
+  dsrB||D3RSN2         QNER01000003.1            81.8% L=352 E=0e+00
+
+## Bacteroides_fragilis_NCTC9343
+
+## Prochlorococcus_marinus_MED4
+

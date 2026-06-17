@@ -1,0 +1,90 @@
+genome	clade	characterized	scycle_dir	phylo_dir	dsrA_call	dsrA_margin	dsrB_call	dsrB_margin	min_margin	close
+GCA_965613365_1	p__Hydrothermarchaeota		ambiguous	reductive	reductive	0.244	reductive	0.253	0.244	yes
+GCA_001725525_1	Thiobacillus	yes	oxidative	oxidative	oxidative	0.318	oxidative	0.422	0.318	yes
+GCA_001897675_1	Thiobacillus	yes	oxidative	oxidative	oxidative	0.341	oxidative	0.427	0.341	yes
+GCA_016756835_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	0.440	oxidative	0.385	0.385	
+GCA_016931495_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	0.486	oxidative	0.486	0.486	
+GCA_020217265_1	Thiobacillus	yes	oxidative	oxidative	oxidative	0.317	oxidative	0.407	0.317	yes
+GCA_020445225_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	0.501	oxidative	0.524	0.501	
+GCA_020721255_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	0.463	oxidative	0.459	0.459	
+GCA_022600395_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	0.417	oxidative	0.408	0.408	
+GCA_027030425_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	0.409	-	0.000	0.409	
+GCA_027344185_1	Thiobacillus	yes	oxidative	oxidative	oxidative	0.320	-	0.000	0.320	yes
+GCA_028277725_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	0.511	oxidative	0.546	0.511	
+GCA_029937335_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	0.418	oxidative	0.450	0.418	
+GCA_903823385_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	0.480	oxidative	0.480	0.480	
+GCA_910595855_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	0.425	oxidative	0.402	0.402	
+GCA_963818325_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	0.518	oxidative	0.541	0.518	
+GCA_964448305_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	0.413	oxidative	0.431	0.413	
+GCF_000260135_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	0.562	oxidative	0.553	0.553	
+GCF_000321415_2	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	0.424	oxidative	0.411	0.411	
+GCF_000378965_1	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	0.448	oxidative	0.529	0.448	
+GCF_002000365_1	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	0.452	oxidative	0.422	0.422	
+GCF_002813775_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	0.497	oxidative	0.540	0.497	
+GCF_021650935_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	0.561	oxidative	0.541	0.541	
+GCF_030913135_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	0.566	oxidative	0.547	0.547	
+GCF_032027065_1	Thiobacillus	yes	oxidative	oxidative	oxidative	0.307	oxidative	0.418	0.307	yes
+GCA_001799195_1	p__Bdellovibrionota_F		oxidative	reductive	reductive	0.259	reductive	0.226	0.226	yes
+GCA_003232385_1	p__SZUA-79		oxidative	reductive	reductive	0.239	reductive	0.126	0.126	yes
+GCA_013151235_1	p__CG2-30-53-67		oxidative	reductive	reductive	0.233	reductive	0.156	0.156	yes
+GCA_016193065_1	p__JACPSX01		oxidative	reductive	reductive	0.241	reductive	0.226	0.226	yes
+GCA_021783475_1	p__Thermodesulfobiota		oxidative	reductive	reductive	0.345	reductive	0.316	0.316	yes
+GCA_021806125_1	p__SZUA-79		oxidative	reductive	reductive	0.223	reductive	0.117	0.117	yes
+GCA_024860865_1	p__JACRDV01		oxidative	reductive	reductive	0.267	reductive	0.268	0.267	yes
+GCA_025363775_1	p__Acidobacteriota		oxidative	reductive	reductive	0.281	reductive	0.207	0.207	yes
+GCA_031406795_1	p__JAUVQV01		oxidative	reductive	reductive	0.288	reductive	0.188	0.188	yes
+GCA_031960865_1	p__Campylobacterota_A		oxidative	reductive	-	0.000	reductive	0.155	0.155	yes
+GCA_040755795_1	p__UBA9089		oxidative	reductive	reductive	0.270	reductive	0.199	0.199	yes
+GCA_040757115_1	p__UBA9089		oxidative	reductive	reductive	0.267	reductive	0.198	0.198	yes
+GCA_050253135_1	p__Campylobacterota_A		oxidative	reductive	reductive	0.252	reductive	0.143	0.143	yes
+GCA_945786985_1	p__CG2-30-53-67		oxidative	reductive	reductive	0.250	reductive	0.156	0.156	yes
+GCA_964547905_1	p__JAMCPX01		oxidative	reductive	reductive	0.289	reductive	0.246	0.246	yes
+GCF_000212395_1	p__Thermodesulfobiota		oxidative	reductive	reductive	0.353	reductive	0.307	0.307	yes
+GCA_024275315_1	p__Nitrospinota_A		reductive	oxidative	oxidative	0.074	oxidative	0.082	0.074	yes
+GCA_002412965_1	Desulfomicrobium	yes	reductive	reductive	reductive	0.541	reductive	0.498	0.498	
+GCA_002877985_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	0.473	reductive	0.357	0.357	
+GCA_003641645_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	0.504	reductive	0.330	0.330	yes
+GCA_013201405_1	Desulfobulbus	yes	reductive	reductive	reductive	0.537	reductive	0.455	0.455	
+GCA_014730175_1	p__Zixibacteria		reductive	reductive	reductive	0.254	reductive	0.220	0.220	yes
+GCA_014804905_1	Desulfovibrio	yes	reductive	reductive	reductive	0.581	reductive	0.531	0.531	
+GCA_017454855_1	Desulfovibrio	yes	reductive	reductive	reductive	0.593	reductive	0.523	0.523	
+GCA_017613715_1	Desulfovibrio	yes	reductive	reductive	reductive	0.563	reductive	0.506	0.506	
+GCA_018263585_1	p__Electryoneota		reductive	reductive	reductive	0.231	reductive	0.214	0.214	yes
+GCA_018902545_1	Desulfomicrobium	yes	reductive	reductive	reductive	0.536	reductive	0.497	0.497	
+GCA_020061125_1	p__UBP15		reductive	reductive	reductive	0.280	reductive	0.330	0.280	yes
+GCA_021163085_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	0.511	reductive	0.338	0.338	yes
+GCA_021787655_1	p__JAMCPX01		reductive	reductive	reductive	0.299	reductive	0.233	0.233	yes
+GCA_024699605_1	Desulfovibrio	yes	reductive	reductive	reductive	0.562	reductive	0.506	0.506	
+GCA_025774555_1	p__Electryoneota		reductive	reductive	reductive	0.308	reductive	0.206	0.206	yes
+GCA_026991065_1	p__GCA-2686955		reductive	reductive	reductive	0.214	reductive	0.211	0.211	yes
+GCA_030145005_1	Desulfobacter	yes	reductive	reductive	reductive	0.595	reductive	0.566	0.566	
+GCA_036781525_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	0.512	reductive	0.361	0.361	
+GCA_036845625_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	0.599	reductive	0.549	0.549	
+GCA_040755155_1	p__Hinthialibacterota		reductive	reductive	reductive	0.292	reductive	0.198	0.198	yes
+GCA_041622895_1	Desulfobulbus	yes	reductive	reductive	reductive	0.567	reductive	0.483	0.483	
+GCA_041640755_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	0.590	reductive	0.495	0.495	
+GCA_046484865_1	p__Krumholzibacteriota		reductive	reductive	reductive	0.300	reductive	0.238	0.238	yes
+GCA_944324555_1	Desulfovibrio	yes	reductive	reductive	-	0.000	reductive	0.537	0.537	
+GCA_945787325_1	p__Desulfobacterota		reductive	reductive	reductive	0.477	reductive	0.453	0.453	
+GCA_963663345_2	Desulfobacter	yes	reductive	reductive	reductive	0.617	reductive	0.564	0.564	
+GCA_964420375_1	p__RBG-13-61-14		reductive	reductive	reductive	0.325	reductive	0.309	0.309	yes
+GCA_964448115_1	p__CAYUVA01		reductive	reductive	reductive	0.277	reductive	0.238	0.238	yes
+GCA_964453435_1	p__Abyssobacteria		reductive	reductive	reductive	0.289	reductive	0.322	0.289	yes
+GCA_964513745_1	p__JAUVQV01		reductive	reductive	-	0.000	reductive	0.198	0.198	yes
+GCA_964524645_1	p__Krumholzibacteriota		reductive	reductive	reductive	0.298	reductive	0.208	0.208	yes
+GCA_964617105_1	p__CAZTWC01		reductive	reductive	reductive	0.254	reductive	0.192	0.192	yes
+GCA_964654595_1	p__Halobacteriota		reductive	reductive	reductive	0.555	reductive	0.539	0.539	
+GCF_000189755_2	Desulfotomaculum	yes	reductive	reductive	reductive	0.317	reductive	0.465	0.317	yes
+GCF_000215085_1	Desulfotomaculum	yes	reductive	reductive	reductive	0.327	reductive	0.473	0.327	yes
+GCF_000233695_2	Desulfobacter	yes	reductive	reductive	reductive	0.615	reductive	0.563	0.563	
+GCF_000315365_1	Desulfotomaculum	yes	reductive	reductive	reductive	0.312	reductive	0.458	0.312	yes
+GCF_000428825_1	Desulfomicrobium	yes	reductive	reductive	reductive	0.530	reductive	0.497	0.497	
+GCF_000621145_1	Desulfobulbus	yes	reductive	reductive	reductive	0.557	reductive	0.512	0.512	
+GCF_001514535_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	0.593	reductive	0.530	0.530	
+GCF_001655685_1	Desulfotomaculum	yes	reductive	reductive	reductive	0.437	reductive	0.396	0.396	
+GCF_002005145_1	Desulfotomaculum	yes	reductive	reductive	reductive	0.296	reductive	0.469	0.296	yes
+GCF_013389365_1	Desulfobacter	yes	reductive	reductive	reductive	0.614	reductive	0.564	0.564	
+GCF_024204645_1	Desulfomicrobium	yes	reductive	reductive	reductive	0.512	reductive	0.481	0.481	
+GCF_031280615_1	Desulfobulbus	yes	reductive	reductive	reductive	0.560	reductive	0.524	0.524	
+GCF_040450955_1	Thermodesulfovibrio	yes	reductive	reductive	-	0.000	reductive	0.547	0.547	
+GCF_040451425_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	0.546	reductive	0.488	0.488	

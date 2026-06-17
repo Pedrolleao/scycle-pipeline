@@ -1,0 +1,1256 @@
+target_id: doxD
+tier: 2
+cdhit_threshold: 0.85
+seed_accessions:
+- B7J3E5
+- B7J3E9
+- P97207
+- Q97XJ3
+- A0ACC6TN00
+negatives:
+- P0A113
+- A0A0B8N5Y9
+- Q5P1R2
+- Q6MPS7
+expanded_candidates:
+- acc: B7J3E5
+  organism: Acidithiobacillus ferrooxidans (strain ATCC 23270 / DSM 14882 / CIP 104768
+    / NCIMB 8455)
+  length: 356
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: B7J3E9
+  organism: Acidithiobacillus ferrooxidans (strain ATCC 23270 / DSM 14882 / CIP 104768
+    / NCIMB 8455)
+  length: 360
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: P97207
+  organism: Acidianus ambivalens
+  length: 184
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: Q97XJ3
+  organism: Saccharolobus solfataricus (strain ATCC 35092 / DSM 1617 / JCM 11322 /
+    P2)
+  length: 183
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: A0ACC6TN00
+  organism: Candidatus Aramenus sulfurataquae
+  length: 182
+  phmmer_score: null
+  keep: true
+  note: seed
+- acc: A0A060UMW7
+  organism: Acidithiobacillus
+  length: 360
+  phmmer_score: 737.6
+  keep: true
+  note: Acidithiobacillus (360 aa, score 737.6)
+- acc: UPI0025C5EC40
+  organism: Acidithiobacillus sp.
+  length: 360
+  phmmer_score: 653.6
+  keep: false
+  note: UPI*
+- acc: UPI0025BE531B
+  organism: Acidithiobacillus sp.
+  length: 361
+  phmmer_score: 566.3
+  keep: false
+  note: UPI*
+- acc: A0A4S3KR35
+  organism: Metallibacterium scheffleri
+  length: 355
+  phmmer_score: 559.7
+  keep: true
+  note: Metallibacterium scheffleri (355 aa, score 559.7)
+- acc: UPI00242FF410
+  organism: Acidithiobacillus
+  length: 288
+  phmmer_score: 553.3
+  keep: false
+  note: UPI*
+- acc: UPI0026ED6D96
+  organism: Metallibacterium
+  length: 355
+  phmmer_score: 552.1
+  keep: false
+  note: UPI*
+- acc: G0JR01
+  organism: Acidithiobacillus
+  length: 362
+  phmmer_score: 547.4
+  keep: true
+  note: Acidithiobacillus (362 aa, score 547.4)
+- acc: A0A845U8Q0
+  organism: Acidithiobacillus ferrianus
+  length: 362
+  phmmer_score: 544.0
+  keep: true
+  note: Acidithiobacillus ferrianus (362 aa, score 544.0)
+- acc: UPI00261163EF
+  organism: Acidocella sp.
+  length: 368
+  phmmer_score: 516.9
+  keep: false
+  note: UPI*
+- acc: A0ABS2JZY9
+  organism: Dyella flava
+  length: 358
+  phmmer_score: 514.0
+  keep: true
+  note: Dyella flava (358 aa, score 514.0)
+- acc: A0ABS2KF58
+  organism: Dyella mobilis
+  length: 358
+  phmmer_score: 503.6
+  keep: true
+  note: Dyella mobilis (358 aa, score 503.6)
+- acc: UPI003D07CB69
+  organism: Acidithiobacillus sp.
+  length: 340
+  phmmer_score: 503.2
+  keep: false
+  note: UPI*
+- acc: A0A370X739
+  organism: Dyella psychrodurans
+  length: 358
+  phmmer_score: 502.6
+  keep: true
+  note: Dyella psychrodurans (358 aa, score 502.6)
+- acc: A0A840VC17
+  organism: Acidocella aromatica
+  length: 381
+  phmmer_score: 491.4
+  keep: true
+  note: Acidocella aromatica (381 aa, score 491.4)
+- acc: UPI001D095BEF
+  organism: unclassified Acidocella
+  length: 367
+  phmmer_score: 488.4
+  keep: false
+  note: UPI*
+- acc: A0AAE2YSL9
+  organism: Acidithiobacillaceae
+  length: 363
+  phmmer_score: 469.9
+  keep: false
+  note: unclassified taxonomy (Acidithiobacillaceae)
+- acc: UPI0034E41A6B
+  organism: Acidithiobacillus sp. IBUN Pt1247-S3
+  length: 363
+  phmmer_score: 468.8
+  keep: false
+  note: UPI*
+- acc: UPI002615FDEC
+  organism: Acidocella sp.
+  length: 354
+  phmmer_score: 467.8
+  keep: false
+  note: UPI*
+- acc: UPI000E0D0972
+  organism: Acidibrevibacterium
+  length: 366
+  phmmer_score: 466.6
+  keep: false
+  note: UPI*
+- acc: A0A8J4M6W2
+  organism: Acidicaldus sp.
+  length: 366
+  phmmer_score: 465.1
+  keep: true
+  note: Acidicaldus sp. (366 aa, score 465.1)
+- acc: UPI002AB60051
+  organism: Paraburkholderia tropica
+  length: 365
+  phmmer_score: 455.9
+  keep: false
+  note: UPI*
+- acc: A0A5B0HHP2
+  organism: Paraburkholderia
+  length: 364
+  phmmer_score: 455.7
+  keep: true
+  note: Paraburkholderia (364 aa, score 455.7)
+- acc: UPI003465F5C3
+  organism: unclassified Paraburkholderia
+  length: 401
+  phmmer_score: 454.1
+  keep: false
+  note: UPI*
+- acc: UPI002C216E1D
+  organism: Acidisoma sp.
+  length: 370
+  phmmer_score: 445.6
+  keep: false
+  note: UPI*
+- acc: UPI000A491EAD
+  organism: Bradyrhizobium sp. URHD0069
+  length: 367
+  phmmer_score: 442.6
+  keep: false
+  note: UPI*
+- acc: UPI0024354D0A
+  organism: Bradyrhizobium sp. CB1650
+  length: 375
+  phmmer_score: 440.6
+  keep: false
+  note: UPI*
+- acc: A0ACC7NP00
+  organism: Paraburkholderia
+  length: 364
+  phmmer_score: 440.0
+  keep: true
+  note: Paraburkholderia (364 aa, score 440.0)
+- acc: A4ZV24
+  organism: Acidithiobacillus caldus
+  length: 361
+  phmmer_score: 438.5
+  keep: false
+  note: genus cap 3
+- acc: UPI00131D5BDB
+  organism: Acidisoma sp. S159
+  length: 369
+  phmmer_score: 437.2
+  keep: false
+  note: UPI*
+- acc: A0A1M5X2Q5
+  organism: Bradyrhizobium erythrophlei
+  length: 367
+  phmmer_score: 435.1
+  keep: true
+  note: Bradyrhizobium erythrophlei (367 aa, score 435.1)
+- acc: UPI0025A5AE37
+  organism: Bradyrhizobium sp. NP1
+  length: 376
+  phmmer_score: 434.9
+  keep: false
+  note: UPI*
+- acc: A0A1M5H1G6
+  organism: Bradyrhizobium
+  length: 369
+  phmmer_score: 433.7
+  keep: true
+  note: Bradyrhizobium (369 aa, score 433.7)
+- acc: A0A1D8UXM6
+  organism: Acetobacteraceae
+  length: 373
+  phmmer_score: 433.5
+  keep: false
+  note: unclassified taxonomy (Acetobacteraceae)
+- acc: UPI0005CA9A65
+  organism: Bradyrhizobium sp. LTSPM299
+  length: 367
+  phmmer_score: 433.2
+  keep: false
+  note: UPI*
+- acc: A0A1M7D345
+  organism: Bradyrhizobium lablabi
+  length: 365
+  phmmer_score: 431.5
+  keep: true
+  note: Bradyrhizobium lablabi (365 aa, score 431.5)
+- acc: UPI002BA2FE93
+  organism: Bradyrhizobium sp.
+  length: 367
+  phmmer_score: 430.6
+  keep: false
+  note: UPI*
+- acc: A0A5D3K5K7
+  organism: Bradyrhizobium
+  length: 396
+  phmmer_score: 430.1
+  keep: false
+  note: genus cap 3
+- acc: A0A5I2XCP0
+  organism: Salmonella enterica subsp. enterica serovar Ank
+  length: 362
+  phmmer_score: 429.1
+  keep: true
+  note: Salmonella enterica subsp. enterica sero (362 aa, score 429.1)
+- acc: A0A023D2A2
+  organism: Acidomonas methanolica
+  length: 386
+  phmmer_score: 428.9
+  keep: true
+  note: Acidomonas methanolica (386 aa, score 428.9)
+- acc: UPI001CCAB682
+  organism: Klebsiella michiganensis
+  length: 361
+  phmmer_score: 428.8
+  keep: false
+  note: UPI*
+- acc: A0A1M7DQJ3
+  organism: Bradyrhizobium lablabi
+  length: 367
+  phmmer_score: 427.7
+  keep: false
+  note: genus cap 3
+- acc: UPI0003FFF708
+  organism: Bradyrhizobium sp. WSM3983
+  length: 368
+  phmmer_score: 427.6
+  keep: false
+  note: UPI*
+- acc: UPI0023A74D18
+  organism: Bradyrhizobium sp.
+  length: 355
+  phmmer_score: 427.0
+  keep: false
+  note: UPI*
+- acc: UPI002F42D5DB
+  organism: Paraburkholderia sp.
+  length: 363
+  phmmer_score: 426.2
+  keep: false
+  note: UPI*
+- acc: A0A0D6P800
+  organism: Acidisphaera rubrifaciens HS-AP3
+  length: 364
+  phmmer_score: 425.4
+  keep: true
+  note: Acidisphaera rubrifaciens HS-AP3 (364 aa, score 425.4)
+- acc: A0A624W4C4
+  organism: Salmonella enterica
+  length: 361
+  phmmer_score: 424.6
+  keep: true
+  note: Salmonella enterica (361 aa, score 424.6)
+- acc: UPI001A8F7FC5
+  organism: Trinickia mobilis
+  length: 374
+  phmmer_score: 424.5
+  keep: false
+  note: UPI*
+- acc: A0A5W1Z6I1
+  organism: Enterobacterales
+  length: 362
+  phmmer_score: 423.1
+  keep: false
+  note: unclassified taxonomy (Enterobacterales)
+- acc: A0A4P7D2T2
+  organism: Paraburkholderia
+  length: 374
+  phmmer_score: 422.1
+  keep: true
+  note: Paraburkholderia (374 aa, score 422.1)
+- acc: UPI003D2467F9
+  organism: Paraburkholderia sp. EB58
+  length: 369
+  phmmer_score: 421.9
+  keep: false
+  note: UPI*
+- acc: UPI00238F82A7
+  organism: Bradyrhizobium sp.
+  length: 369
+  phmmer_score: 421.7
+  keep: false
+  note: UPI*
+- acc: UPI001C5B24CC
+  organism: Methylovirgula sp. HY1
+  length: 366
+  phmmer_score: 421.6
+  keep: false
+  note: UPI*
+- acc: A0ABU0J7J1
+  organism: Labrys wisconsinensis
+  length: 364
+  phmmer_score: 421.5
+  keep: true
+  note: Labrys wisconsinensis (364 aa, score 421.5)
+- acc: A0A4Q6XM22
+  organism: Sphingomonas populi
+  length: 364
+  phmmer_score: 421.0
+  keep: true
+  note: Sphingomonas populi (364 aa, score 421.0)
+- acc: A0A6S7B1A3
+  organism: Burkholderiaceae
+  length: 369
+  phmmer_score: 420.6
+  keep: true
+  note: Burkholderiaceae (369 aa, score 420.6)
+- acc: UPI0004AC5C80
+  organism: Paraburkholderia nodosa
+  length: 374
+  phmmer_score: 419.2
+  keep: false
+  note: UPI*
+- acc: UPI002ABDABA1
+  organism: Paraburkholderia sp. J63
+  length: 366
+  phmmer_score: 419.1
+  keep: false
+  note: UPI*
+- acc: UPI00398265EC
+  organism: Paraburkholderia
+  length: 386
+  phmmer_score: 418.3
+  keep: false
+  note: UPI*
+- acc: A0ABT3ZPF4
+  organism: Robbsia betulipollinis
+  length: 368
+  phmmer_score: 417.8
+  keep: false
+  note: score 417.8 too low
+- acc: A0A7H0RWS9
+  organism: Enterobacteriaceae
+  length: 355
+  phmmer_score: 417.7
+  keep: false
+  note: score 417.7 too low
+- acc: A0A403F512
+  organism: Salmonella enterica
+  length: 366
+  phmmer_score: 417.4
+  keep: false
+  note: score 417.4 too low
+- acc: UPI002E35B35C
+  organism: Phenylobacterium sp.
+  length: 346
+  phmmer_score: 416.8
+  keep: false
+  note: UPI*
+- acc: A0A2S6NAK4
+  organism: Rhodopila globiformis
+  length: 369
+  phmmer_score: 416.3
+  keep: false
+  note: score 416.3 too low
+- acc: A0A447JCF2
+  organism: Enterobacterales
+  length: 383
+  phmmer_score: 414.4
+  keep: false
+  note: unclassified taxonomy (Enterobacterales)
+- acc: UPI0009EC28DE
+  organism: Bradyrhizobium valentinum
+  length: 381
+  phmmer_score: 413.6
+  keep: false
+  note: UPI*
+- acc: A0A0R3L6Y2
+  organism: Bradyrhizobium
+  length: 350
+  phmmer_score: 413.5
+  keep: false
+  note: score 413.5 too low
+- acc: UPI002ABD7939
+  organism: Paraburkholderia sp. J12
+  length: 377
+  phmmer_score: 413.2
+  keep: false
+  note: UPI*
+- acc: A0A3V2Y5M3
+  organism: Enterobacteriaceae
+  length: 362
+  phmmer_score: 411.2
+  keep: false
+  note: score 411.2 too low
+- acc: UPI0038BD9763
+  organism: unclassified Paraburkholderia
+  length: 369
+  phmmer_score: 411.1
+  keep: false
+  note: UPI*
+- acc: A9MRJ5
+  organism: Salmonella enterica
+  length: 363
+  phmmer_score: 410.5
+  keep: false
+  note: score 410.5 too low
+- acc: UPI0021D07E10
+  organism: Enterobacter quasiroggenkampii
+  length: 363
+  phmmer_score: 409.6
+  keep: false
+  note: UPI*
+- acc: UPI003C4C1A7D
+  organism: Paraburkholderia sp.
+  length: 363
+  phmmer_score: 408.9
+  keep: false
+  note: UPI*
+- acc: UPI00287741DA
+  organism: Paraburkholderia sp. FT54
+  length: 374
+  phmmer_score: 407.9
+  keep: false
+  note: UPI*
+- acc: A0A1V8NU28
+  organism: Enterobacteriaceae
+  length: 342
+  phmmer_score: 406.9
+  keep: false
+  note: score 406.9 too low
+- acc: A0A1S0ZUT6
+  organism: Salmonella
+  length: 354
+  phmmer_score: 406.7
+  keep: false
+  note: score 406.7 too low
+- acc: A0A3J0N3C3
+  organism: Salmonella enterica
+  length: 375
+  phmmer_score: 406.7
+  keep: false
+  note: score 406.7 too low
+- acc: A0A403MPU2
+  organism: Salmonella
+  length: 364
+  phmmer_score: 406.6
+  keep: false
+  note: score 406.6 too low
+- acc: A0AAW3EST4
+  organism: Burkholderia
+  length: 363
+  phmmer_score: 404.3
+  keep: false
+  note: score 404.3 too low
+- acc: UPI003CF06A96
+  organism: Bradyrhizobium genosp. P
+  length: 352
+  phmmer_score: 401.2
+  keep: false
+  note: UPI*
+- acc: UPI00352466D3
+  organism: Kluyvera intermedia
+  length: 357
+  phmmer_score: 395.6
+  keep: false
+  note: UPI*
+- acc: A0A543Q358
+  organism: Acidithiobacillus
+  length: 305
+  phmmer_score: 394.4
+  keep: false
+  note: length 305 outside 340-400 aa band
+- acc: W7KJV8
+  organism: Candidatus Aramenus sulfurataquae
+  length: 182
+  phmmer_score: 392.4
+  keep: false
+  note: length 182 outside 340-400 aa band
+- acc: UPI002ED0C189
+  organism: Enterobacter
+  length: 365
+  phmmer_score: 386.9
+  keep: false
+  note: UPI*
+- acc: UPI003CF20A53
+  organism: Bradyrhizobium genosp. P
+  length: 369
+  phmmer_score: 384.3
+  keep: false
+  note: UPI*
+- acc: A0ABY2SPB7
+  organism: Martelella alba
+  length: 357
+  phmmer_score: 380.9
+  keep: false
+  note: score 380.9 too low
+- acc: A0A330HKJ3
+  organism: Mesorhizobium
+  length: 379
+  phmmer_score: 380.6
+  keep: false
+  note: score 380.6 too low
+- acc: UPI0009DB48CE
+  organism: unclassified Bordetella
+  length: 369
+  phmmer_score: 380.3
+  keep: false
+  note: UPI*
+- acc: UPI003CFDBE25
+  organism: Acidocella sp.
+  length: 367
+  phmmer_score: 375.3
+  keep: false
+  note: UPI*
+- acc: UPI00067CDECC
+  organism: Bradyrhizobium embrapense
+  length: 369
+  phmmer_score: 375.1
+  keep: false
+  note: UPI*
+- acc: A0A2U9IBB0
+  organism: Acidianus brierleyi
+  length: 182
+  phmmer_score: 372.0
+  keep: false
+  note: length 182 outside 340-400 aa band
+- acc: A0A9X2D1W0
+  organism: Legionella maioricensis
+  length: 350
+  phmmer_score: 370.6
+  keep: false
+  note: score 370.6 too low
+- acc: UPI000BB03CBB
+  organism: unclassified Mesorhizobium
+  length: 379
+  phmmer_score: 366.5
+  keep: false
+  note: UPI*
+- acc: UPI0025C63D7E
+  organism: Acidithiobacillus sp.
+  length: 258
+  phmmer_score: 364.3
+  keep: false
+  note: UPI*
+- acc: A0A5E4PG04
+  organism: Aquicella siphonis
+  length: 354
+  phmmer_score: 357.8
+  keep: false
+  note: score 357.8 too low
+- acc: A0A031LM06
+  organism: Candidatus Acidianus copahuensis
+  length: 183
+  phmmer_score: 354.5
+  keep: false
+  note: length 183 outside 340-400 aa band
+- acc: A0A917JPC3
+  organism: Legionella impletisoli
+  length: 355
+  phmmer_score: 353.2
+  keep: false
+  note: score 353.2 too low
+- acc: A0A378JA66
+  organism: Legionella gratiana
+  length: 355
+  phmmer_score: 352.7
+  keep: false
+  note: score 352.7 too low
+- acc: UPI0028A06171
+  organism: Candidatus Igneacidithiobacillus taiwanensis
+  length: 284
+  phmmer_score: 349.9
+  keep: false
+  note: UPI*
+- acc: UPI0003FACB33
+  organism: Thermithiobacillus tepidarius
+  length: 361
+  phmmer_score: 348.1
+  keep: false
+  note: UPI*
+- acc: UPI003D082CE6
+  organism: Acidithiobacillus sp.
+  length: 218
+  phmmer_score: 347.8
+  keep: false
+  note: UPI*
+- acc: A0A650CRZ4
+  organism: Stygiolobus
+  length: 180
+  phmmer_score: 345.2
+  keep: false
+  note: length 180 outside 340-400 aa band
+- acc: UPI002FF43BF6
+  organism: Bradyrhizobium sp. AZCC 2262
+  length: 294
+  phmmer_score: 342.6
+  keep: false
+  note: UPI*
+- acc: A0A0W0WBK2
+  organism: Legionella maceachernii
+  length: 346
+  phmmer_score: 341.4
+  keep: false
+  note: score 341.4 too low
+- acc: A0A378KU03
+  organism: Legionella
+  length: 349
+  phmmer_score: 340.3
+  keep: false
+  note: score 340.3 too low
+- acc: A0A0W0TBA4
+  organism: Legionella
+  length: 350
+  phmmer_score: 340.0
+  keep: false
+  note: score 340.0 too low
+- acc: A0A098GEM8
+  organism: Legionella micdadei
+  length: 350
+  phmmer_score: 338.5
+  keep: false
+  note: score 338.5 too low
+- acc: UPI0018D24D78
+  organism: Bradyrhizobium valentinum
+  length: 290
+  phmmer_score: 337.1
+  keep: false
+  note: UPI*
+- acc: A0A379S220
+  organism: Salmonella enterica subsp. arizonae
+  length: 272
+  phmmer_score: 336.2
+  keep: false
+  note: length 272 outside 340-400 aa band
+- acc: A0A368HF51
+  organism: Acidiferrobacter
+  length: 352
+  phmmer_score: 336.1
+  keep: false
+  note: score 336.1 too low
+- acc: A0A370GL97
+  organism: Aquicella lusitana
+  length: 354
+  phmmer_score: 335.3
+  keep: false
+  note: score 335.3 too low
+- acc: A0A0W0WVH3
+  organism: Legionella nautarum
+  length: 350
+  phmmer_score: 333.3
+  keep: false
+  note: score 333.3 too low
+- acc: UPI00390C42E7
+  organism: Acidithiobacillus ferriphilus
+  length: 172
+  phmmer_score: 332.4
+  keep: false
+  note: UPI*
+- acc: A4YDN8
+  organism: Metallosphaera
+  length: 182
+  phmmer_score: 331.9
+  keep: false
+  note: length 182 outside 340-400 aa band
+- acc: A0A6N0NTZ1
+  organism: Metallosphaera tengchongensis
+  length: 182
+  phmmer_score: 327.5
+  keep: false
+  note: length 182 outside 340-400 aa band
+- acc: Q96ZH9
+  organism: Sulfolobaceae
+  length: 180
+  phmmer_score: 326.3
+  keep: false
+  note: length 180 outside 340-400 aa band
+- acc: F4G0C9
+  organism: Metallosphaera
+  length: 181
+  phmmer_score: 326.1
+  keep: false
+  note: length 181 outside 340-400 aa band
+- acc: A0A633LDU9
+  organism: Salmonella enterica
+  length: 254
+  phmmer_score: 325.7
+  keep: false
+  note: length 254 outside 340-400 aa band
+- acc: UPI00262E8EC3
+  organism: Acidiferrobacter sp.
+  length: 352
+  phmmer_score: 321.2
+  keep: false
+  note: UPI*
+- acc: A0A2U9ISY0
+  organism: Metallosphaera hakonensis JCM 8857 = DSM 7519
+  length: 181
+  phmmer_score: 320.2
+  keep: false
+  note: length 181 outside 340-400 aa band
+- acc: UPI0023AAAF38
+  organism: Acidithiobacillus thiooxidans
+  length: 190
+  phmmer_score: 318.9
+  keep: false
+  note: UPI*
+- acc: UPI000845C689
+  organism: Sulfolobaceae
+  length: 180
+  phmmer_score: 318.1
+  keep: false
+  note: UPI*
+- acc: H2C507
+  organism: Metallosphaera yellowstonensis MK1
+  length: 181
+  phmmer_score: 315.9
+  keep: false
+  note: length 181 outside 340-400 aa band
+- acc: A0A348B254
+  organism: Sulfodiicoccus acidiphilus
+  length: 183
+  phmmer_score: 310.0
+  keep: false
+  note: length 183 outside 340-400 aa band
+- acc: G5QCQ3
+  organism: Salmonella enterica subsp. enterica serovar Rubislaw str. A4-653
+  length: 287
+  phmmer_score: 302.8
+  keep: false
+  note: length 287 outside 340-400 aa band
+- acc: UPI001F40C87C
+  organism: Hafnia paralvei
+  length: 276
+  phmmer_score: 302.0
+  keep: false
+  note: UPI*
+- acc: UPI00262EC656
+  organism: Metallibacterium sp.
+  length: 175
+  phmmer_score: 301.2
+  keep: false
+  note: UPI*
+- acc: UPI000367F27E
+  organism: Komagataeibacter europaeus
+  length: 234
+  phmmer_score: 300.4
+  keep: false
+  note: UPI*
+- acc: UPI002AD30B97
+  organism: Halothiobacillus sp.
+  length: 364
+  phmmer_score: 294.8
+  keep: false
+  note: UPI*
+- acc: A0A2I1DKL7
+  organism: Acidithiobacillus marinus
+  length: 278
+  phmmer_score: 292.8
+  keep: false
+  note: length 278 outside 340-400 aa band
+- acc: A0A401JD69
+  organism: Sulfuriferula multivorans
+  length: 363
+  phmmer_score: 282.6
+  keep: false
+  note: score 282.6 too low
+- acc: UPI0039AF56FA
+  organism: Sulfuriferula sp. GW1
+  length: 363
+  phmmer_score: 273.9
+  keep: false
+  note: UPI*
+- acc: A0A1D8IPF5
+  organism: Acidihalobacter yilgarnensis
+  length: 346
+  phmmer_score: 268.8
+  keep: false
+  note: score 268.8 too low
+- acc: A0A1J5PLU9
+  organism: mine drainage metagenome
+  length: 231
+  phmmer_score: 258.9
+  keep: false
+  note: length 231 outside 340-400 aa band
+- acc: UPI00335B7205
+  organism: Enterobacter hormaechei
+  length: 241
+  phmmer_score: 254.6
+  keep: false
+  note: UPI*
+- acc: UPI0028159095
+  organism: Acidithiobacillus caldus
+  length: 231
+  phmmer_score: 253.8
+  keep: false
+  note: UPI*
+- acc: A0AAQ4CTG3
+  organism: Saccharolobus
+  length: 180
+  phmmer_score: 246.3
+  keep: false
+  note: length 180 outside 340-400 aa band
+- acc: T0YTW3
+  organism: mine drainage metagenome
+  length: 146
+  phmmer_score: 245.1
+  keep: false
+  note: length 146 outside 340-400 aa band
+- acc: A0A1P8UGF7
+  organism: Acidihalobacter ferrooxydans
+  length: 361
+  phmmer_score: 242.6
+  keep: false
+  note: score 242.6 too low
+- acc: A0A0Q0WL45
+  organism: Ferroplasmaceae
+  length: 191
+  phmmer_score: 232.0
+  keep: false
+  note: length 191 outside 340-400 aa band
+- acc: UPI0038B9325E
+  organism: Paraburkholderia sp. RL17-337-BIB-A
+  length: 211
+  phmmer_score: 231.8
+  keep: false
+  note: UPI*
+- acc: A0AAW9RV75
+  organism: Microbaculum marinum
+  length: 366
+  phmmer_score: 229.3
+  keep: false
+  note: score 229.3 too low
+- acc: Q6L1R8
+  organism: Picrophilus torridus (strain ATCC 700027 / DSM 9790 / JCM 10055 / NBRC
+    100828 / KAW 2/3)
+  length: 190
+  phmmer_score: 228.7
+  keep: false
+  note: length 190 outside 340-400 aa band
+- acc: UPI00307F26A2
+  organism: Ferroplasma sp.
+  length: 190
+  phmmer_score: 227.4
+  keep: false
+  note: UPI*
+- acc: A0A510DYY9
+  organism: Sulfuracidifex
+  length: 182
+  phmmer_score: 226.5
+  keep: false
+  note: length 182 outside 340-400 aa band
+- acc: UPI00307EE251
+  organism: Acidihalobacter sp.
+  length: 362
+  phmmer_score: 223.8
+  keep: false
+  note: UPI*
+- acc: A0A1E3VIT5
+  organism: Methyloceanibacter superfactus
+  length: 357
+  phmmer_score: 223.0
+  keep: false
+  note: score 223.0 too low
+- acc: A0A1E3W986
+  organism: Methyloceanibacter marginalis
+  length: 364
+  phmmer_score: 220.8
+  keep: false
+  note: score 220.8 too low
+- acc: T1BZS4
+  organism: mine drainage metagenome
+  length: 213
+  phmmer_score: 218.5
+  keep: false
+  note: length 213 outside 340-400 aa band
+- acc: A0A2R6AGI9
+  organism: Candidatus Marsarchaeota group 1
+  length: 180
+  phmmer_score: 218.3
+  keep: false
+  note: length 180 outside 340-400 aa band
+- acc: A0A2R6BB34
+  organism: Candidatus Marsarchaeota group 2
+  length: 183
+  phmmer_score: 215.1
+  keep: false
+  note: length 183 outside 340-400 aa band
+- acc: UPI0024C17A06
+  organism: Salmonella enterica
+  length: 160
+  phmmer_score: 214.8
+  keep: false
+  note: UPI*
+- acc: UPI003EE1C6C4
+  organism: Methyloceanibacter sp.
+  length: 365
+  phmmer_score: 210.9
+  keep: false
+  note: UPI*
+- acc: A0A6I3KQ59
+  organism: Hyphomicrobium album
+  length: 369
+  phmmer_score: 206.5
+  keep: false
+  note: score 206.5 too low
+- acc: UPI001490BB19
+  organism: Acidianus sp. RZ1
+  length: 108
+  phmmer_score: 204.9
+  keep: false
+  note: UPI*
+- acc: UPI0026DD0B6A
+  organism: Salmonella enterica
+  length: 161
+  phmmer_score: 204.9
+  keep: false
+  note: UPI*
+- acc: A0A2I1DKJ3
+  organism: Acidithiobacillus marinus
+  length: 362
+  phmmer_score: 203.4
+  keep: false
+  note: score 203.4 too low
+- acc: UPI0018F15E78
+  organism: Marinomonas spartinae
+  length: 353
+  phmmer_score: 202.0
+  keep: false
+  note: UPI*
+- acc: UPI00132B03C3
+  organism: Hyphomicrobium sp.
+  length: 363
+  phmmer_score: 201.9
+  keep: false
+  note: UPI*
+- acc: UPI00311E7F1E
+  organism: Marinomonas
+  length: 369
+  phmmer_score: 200.9
+  keep: false
+  note: UPI*
+- acc: UPI0019125059
+  organism: Thiorhodovibrio
+  length: 362
+  phmmer_score: 200.6
+  keep: false
+  note: UPI*
+- acc: A0A4R3NIC7
+  organism: Martelella
+  length: 357
+  phmmer_score: 199.1
+  keep: false
+  note: score 199.1 too low
+- acc: UPI003C79A603
+  organism: unclassified Hyphomicrobium
+  length: 366
+  phmmer_score: 195.5
+  keep: false
+  note: UPI*
+- acc: UPI0015915FC0
+  organism: Martelella sp. HB161492
+  length: 357
+  phmmer_score: 194.1
+  keep: false
+  note: UPI*
+- acc: A0A1A8TFE2
+  organism: Marinomonas spartinae
+  length: 353
+  phmmer_score: 192.9
+  keep: false
+  note: score 192.9 too low
+- acc: A0A506U2E4
+  organism: Martelella
+  length: 357
+  phmmer_score: 191.5
+  keep: false
+  note: score 191.5 too low
+- acc: A0A379T5L8
+  organism: Salmonella enterica subsp. arizonae
+  length: 153
+  phmmer_score: 191.0
+  keep: false
+  note: length 153 outside 340-400 aa band
+- acc: UPI0020331DAC
+  organism: Allorhizobium sonneratiae
+  length: 368
+  phmmer_score: 191.0
+  keep: false
+  note: UPI*
+- acc: A0A658IDC8
+  organism: Salmonella enterica subsp. enterica serovar Newport str. CFSAN000835
+  length: 218
+  phmmer_score: 190.8
+  keep: false
+  note: length 218 outside 340-400 aa band
+- acc: UPI0009760D2E
+  organism: Mangrovimonas
+  length: 339
+  phmmer_score: 189.4
+  keep: false
+  note: UPI*
+- acc: A0ABW9B203
+  organism: Paraburkholderia dipogonis
+  length: 151
+  phmmer_score: 186.4
+  keep: false
+  note: length 151 outside 340-400 aa band
+- acc: A0A4V2PPR9
+  organism: Celerinatantimonas diazotrophica
+  length: 353
+  phmmer_score: 185.7
+  keep: false
+  note: score 185.7 too low
+- acc: H2C547
+  organism: Metallosphaera yellowstonensis MK1
+  length: 105
+  phmmer_score: 184.1
+  keep: false
+  note: length 105 outside 340-400 aa band
+- acc: UPI0028FC0CC1
+  organism: Salmonella enterica
+  length: 135
+  phmmer_score: 183.6
+  keep: false
+  note: UPI*
+- acc: A0ABW9G6Q5
+  organism: Celerinatantimonas yamalensis
+  length: 356
+  phmmer_score: 183.4
+  keep: false
+  note: score 183.4 too low
+- acc: A0A2I5TK37
+  organism: Pectobacteriaceae
+  length: 359
+  phmmer_score: 177.5
+  keep: false
+  note: score 177.5 too low
+- acc: UPI0023F508E2
+  organism: Caballeronia mineralivorans
+  length: 177
+  phmmer_score: 175.7
+  keep: false
+  note: UPI*
+- acc: A0A2N8HCJ0
+  organism: Akkermansia
+  length: 350
+  phmmer_score: 172.9
+  keep: false
+  note: score 172.9 too low
+- acc: A0ABM7ZCX8
+  organism: Pseudomonadati
+  length: 350
+  phmmer_score: 171.3
+  keep: false
+  note: score 171.3 too low
+- acc: UPI0015CBBF57
+  organism: Winogradskyella ludwigii
+  length: 337
+  phmmer_score: 170.8
+  keep: false
+  note: UPI*
+- acc: A0A1G8ISC7
+  organism: Winogradskyella
+  length: 337
+  phmmer_score: 170.7
+  keep: false
+  note: length 337 outside 340-400 aa band
+- acc: A0A1M5UDX4
+  organism: Wenyingzhuangia marina
+  length: 341
+  phmmer_score: 168.7
+  keep: false
+  note: score 168.7 too low
+- acc: UPI003F6E0C93
+  organism: Carboxylicivirga taeanensis
+  length: 338
+  phmmer_score: 167.3
+  keep: false
+  note: UPI*
+- acc: UPI00386E8B77
+  organism: Algibacter sp. Ld11
+  length: 338
+  phmmer_score: 167.0
+  keep: false
+  note: UPI*
+- acc: UPI0015C9E6B2
+  organism: Winogradskyella vidalii
+  length: 337
+  phmmer_score: 166.9
+  keep: false
+  note: UPI*
+- acc: T2KMW6
+  organism: Flavobacteriaceae
+  length: 338
+  phmmer_score: 166.8
+  keep: false
+  note: length 338 outside 340-400 aa band
+- acc: UPI0013C2638C
+  organism: Allomuricauda sp. TY007
+  length: 338
+  phmmer_score: 166.2
+  keep: false
+  note: UPI*
+- acc: UPI000C312EAE
+  organism: unclassified Polaribacter
+  length: 340
+  phmmer_score: 164.3
+  keep: false
+  note: UPI*
+- acc: A0A2T0WYX0
+  organism: Marinilabilia salmonicolor
+  length: 339
+  phmmer_score: 164.2
+  keep: false
+  note: length 339 outside 340-400 aa band
+- acc: UPI000A627DF1
+  organism: Acidithiobacillus
+  length: 179
+  phmmer_score: 164.1
+  keep: false
+  note: UPI*
+- acc: UPI0001C5107D
+  organism: unclassified Hydrogenobaculum
+  length: 353
+  phmmer_score: 164.0
+  keep: false
+  note: UPI*
+- acc: UPI0019108F1F
+  organism: Echinicola sp. 20G
+  length: 338
+  phmmer_score: 162.7
+  keep: false
+  note: UPI*
+- acc: A0ABP8CN06
+  organism: Winogradskyella
+  length: 337
+  phmmer_score: 162.6
+  keep: false
+  note: length 337 outside 340-400 aa band
+- acc: UPI00111E9612
+  organism: Flavicella sediminum
+  length: 343
+  phmmer_score: 162.6
+  keep: false
+  note: UPI*
+- acc: A0A2W1N2J6
+  organism: Putridiphycobacter roseus
+  length: 338
+  phmmer_score: 162.1
+  keep: false
+  note: length 338 outside 340-400 aa band
+- acc: UPI0025B8E2C0
+  organism: Akkermansia
+  length: 350
+  phmmer_score: 162.0
+  keep: false
+  note: UPI*
+- acc: A0A2T0TXC8
+  organism: Arcticibacter pallidicorallinus
+  length: 339
+  phmmer_score: 161.8
+  keep: false
+  note: length 339 outside 340-400 aa band
+- acc: M7N719
+  organism: Xanthomarina
+  length: 339
+  phmmer_score: 161.6
+  keep: false
+  note: length 339 outside 340-400 aa band
+- acc: UPI0010A7CA87
+  organism: Psychroserpens sp. NJDZ02
+  length: 341
+  phmmer_score: 161.5
+  keep: false
+  note: UPI*
+- acc: UPI000590D1BD
+  organism: Psychroserpens damuponensis
+  length: 338
+  phmmer_score: 161.4
+  keep: false
+  note: UPI*
+- acc: UPI004038481E
+  organism: Thermophagus sp. OGC60D27
+  length: 341
+  phmmer_score: 161.3
+  keep: false
+  note: UPI*
+tc_bitscore: 116.2
+tc_rationale: 'clean gap: min_positive=206.9 > max_negative=25.5; TC = midpoint =
+  116.2'
+n_seqs_final: 23
+curator: pedro.leao.ru@gmail.com
+curation_date: '2026-05-21'
+notes: doxD TQO. Bacterial ~360 aa + archaeal ~180 aa architectures. Curated programmatically.

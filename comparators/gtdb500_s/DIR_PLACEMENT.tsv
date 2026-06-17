@@ -1,0 +1,90 @@
+genome	clade	characterized	scycle_dir	besthit_dir	dsrA_place	dsrA_support	dsrB_place	dsrB_concord	placement_dir	place_conf
+GCF_000260135_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCF_021650935_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	55	oxidative	agree	oxidative	low_support
+GCF_030913135_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	55	oxidative	agree	oxidative	low_support
+GCA_963818325_1	Beggiatoa_Thiothrix	yes	oxidative	oxidative	oxidative	56	oxidative	agree	oxidative	low_support
+GCA_903823385_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_020721255_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_016931495_1	Chlorobiia_GSB	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_027030425_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	99			oxidative	confident
+GCA_016756835_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	97	oxidative	agree	oxidative	confident
+GCA_020445225_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	98	oxidative	agree	oxidative	confident
+GCF_002813775_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	74	oxidative	agree	oxidative	low_support
+GCA_028277725_1	Chromatiales_PSB	yes	oxidative	oxidative	oxidative	74	oxidative	agree	oxidative	low_support
+GCF_013389365_1	Desulfobacter	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCF_000233695_2	Desulfobacter	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_963663345_2	Desulfobacter	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_030145005_1	Desulfobacter	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_013201405_1	Desulfobulbus	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCF_031280615_1	Desulfobulbus	yes	reductive	reductive	reductive	98	reductive	agree	reductive	confident
+GCF_000621145_1	Desulfobulbus	yes	reductive	reductive	reductive	98	reductive	agree	reductive	confident
+GCA_041622895_1	Desulfobulbus	yes	reductive	reductive	reductive	97	reductive	agree	reductive	confident
+GCF_024204645_1	Desulfomicrobium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_002412965_1	Desulfomicrobium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCF_000428825_1	Desulfomicrobium	yes	reductive	reductive	reductive	96	reductive	agree	reductive	confident
+GCA_018902545_1	Desulfomicrobium	yes	reductive	reductive	reductive	99	reductive	agree	reductive	confident
+GCF_000315365_1	Desulfotomaculum	yes	reductive	reductive	reductive	92	reductive	agree	reductive	low_support
+GCF_002005145_1	Desulfotomaculum	yes	reductive	reductive	reductive	92	reductive	agree	reductive	low_support
+GCF_000215085_1	Desulfotomaculum	yes	reductive	reductive	reductive	92	reductive	agree	reductive	low_support
+GCF_000189755_2	Desulfotomaculum	yes	reductive	reductive	reductive	92	reductive	agree	reductive	low_support
+GCF_001655685_1	Desulfotomaculum	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_017454855_1	Desulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_024699605_1	Desulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_017613715_1	Desulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_014804905_1	Desulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_944324555_1	Desulfovibrio	yes	reductive	reductive			reductive	disagree	unresolved	no_dsrA
+GCA_036781525_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_021163085_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_003641645_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_002877985_1	Thermodesulfobacterium	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCF_040451425_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_041640755_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_036845625_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCF_001514535_1	Thermodesulfovibrio	yes	reductive	reductive	reductive	97	reductive	agree	reductive	confident
+GCF_040450955_1	Thermodesulfovibrio	yes	reductive	reductive			reductive	disagree	unresolved	no_dsrA
+GCF_002000365_1	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	98	oxidative	agree	oxidative	confident
+GCF_000378965_1	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	98	oxidative	agree	oxidative	confident
+GCF_000321415_2	Thioalkalivibrio	yes	oxidative	oxidative	oxidative	98	oxidative	agree	oxidative	confident
+GCF_032027065_1	Thiobacillus	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_027344185_1	Thiobacillus	yes	oxidative	oxidative	oxidative	100			oxidative	confident
+GCA_001897675_1	Thiobacillus	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_020217265_1	Thiobacillus	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_001725525_1	Thiobacillus	yes	oxidative	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_964448305_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	44	oxidative	agree	oxidative	low_support
+GCA_029937335_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	44	oxidative	agree	oxidative	low_support
+GCA_910595855_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	44	oxidative	agree	oxidative	low_support
+GCA_022600395_1	Thioglobus_SUP05	yes	oxidative	oxidative	oxidative	44	oxidative	agree	oxidative	low_support
+GCA_964453435_1	p__Abyssobacteria		reductive	reductive	oxidative	66	reductive	disagree	oxidative	low_support
+GCA_025363775_1	p__Acidobacteriota		oxidative	reductive	intermediate	43	oxidative	disagree	unresolved	intermediate
+GCA_001799195_1	p__Bdellovibrionota_F		oxidative	reductive	intermediate	37	oxidative	disagree	unresolved	intermediate
+GCA_964448115_1	p__CAYUVA01		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_964617105_1	p__CAZTWC01		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_945786985_1	p__CG2-30-53-67		oxidative	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_013151235_1	p__CG2-30-53-67		oxidative	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_050253135_1	p__Campylobacterota_A		oxidative	reductive	intermediate	85	oxidative	disagree	unresolved	intermediate
+GCA_031960865_1	p__Campylobacterota_A		oxidative	reductive			oxidative	disagree	unresolved	no_dsrA
+GCA_945787325_1	p__Desulfobacterota		reductive	reductive	reductive	100	reductive	agree	reductive	confident
+GCA_025774555_1	p__Electryoneota		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_018263585_1	p__Electryoneota		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_026991065_1	p__GCA-2686955		reductive	reductive	intermediate	37	oxidative	disagree	unresolved	intermediate
+GCA_964654595_1	p__Halobacteriota		reductive	reductive	oxidative	100	reductive	disagree	oxidative	confident
+GCA_040755155_1	p__Hinthialibacterota		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_965613365_1	p__Hydrothermarchaeota		ambiguous	reductive	reductive	69	reductive	agree	reductive	low_support
+GCA_016193065_1	p__JACPSX01		oxidative	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_024860865_1	p__JACRDV01		oxidative	reductive	reductive	69	reductive	agree	reductive	low_support
+GCA_964547905_1	p__JAMCPX01		oxidative	reductive	intermediate	95	reductive	disagree	unresolved	intermediate
+GCA_021787655_1	p__JAMCPX01		reductive	reductive	intermediate	95	reductive	disagree	unresolved	intermediate
+GCA_031406795_1	p__JAUVQV01		oxidative	reductive	intermediate	95	oxidative	disagree	unresolved	intermediate
+GCA_964513745_1	p__JAUVQV01		reductive	reductive			oxidative	disagree	unresolved	no_dsrA
+GCA_964524645_1	p__Krumholzibacteriota		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_046484865_1	p__Krumholzibacteriota		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate
+GCA_024275315_1	p__Nitrospinota_A		reductive	oxidative	oxidative	100	oxidative	agree	oxidative	confident
+GCA_964420375_1	p__RBG-13-61-14		reductive	reductive	oxidative	66	reductive	disagree	oxidative	low_support
+GCA_021806125_1	p__SZUA-79		oxidative	reductive	intermediate	85	oxidative	disagree	unresolved	intermediate
+GCA_003232385_1	p__SZUA-79		oxidative	reductive	intermediate	85	oxidative	disagree	unresolved	intermediate
+GCF_000212395_1	p__Thermodesulfobiota		oxidative	reductive	reductive	71	reductive	agree	reductive	low_support
+GCA_021783475_1	p__Thermodesulfobiota		oxidative	reductive	reductive	71	reductive	agree	reductive	low_support
+GCA_040757115_1	p__UBA9089		oxidative	reductive	intermediate	95	oxidative	disagree	unresolved	intermediate
+GCA_040755795_1	p__UBA9089		oxidative	reductive	intermediate	95	oxidative	disagree	unresolved	intermediate
+GCA_020061125_1	p__UBP15		reductive	reductive	oxidative	66	reductive	disagree	oxidative	low_support
+GCA_014730175_1	p__Zixibacteria		reductive	reductive	intermediate	61	oxidative	disagree	unresolved	intermediate

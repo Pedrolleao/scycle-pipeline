@@ -1,0 +1,74 @@
+OK Desulfovibrio vulgaris dsrA -> P45574 L=437
+OK Desulfovibrio vulgaris dsrB -> P45575 L=381
+OK Desulfovibrio desulfuricans dsrA -> Q9F4A3 L=437
+OK Desulfovibrio desulfuricans dsrB -> Q9F4A2 L=381
+NONE Desulfovibrio alaskensis dsrA
+NONE Desulfovibrio alaskensis dsrB
+OK Desulfovibrio gigas dsrA -> T2G7Q3 L=437
+OK Desulfovibrio gigas dsrB -> T2G8V8 L=386
+OK Desulfomicrobium baculatum dsrA -> Q5ZQS3 L=368
+NONE Desulfomicrobium baculatum dsrB
+OK Desulfobacter dsrA -> Q9K5B5 L=441
+OK Desulfobacter dsrB -> Q9K5B4 L=382
+NONE Desulfobacterium autotrophicum dsrA
+NONE Desulfobacterium autotrophicum dsrB
+OK Desulfobulbus dsrA -> Q9K5B9 L=428
+OK Desulfobulbus dsrB -> Q9K5B8 L=380
+OK Desulfococcus oleovorans dsrA -> Q5ZQR5 L=369
+NONE Desulfococcus oleovorans dsrB
+NONE Desulfotomaculum dsrA
+OK Desulfotomaculum dsrB -> A4J9D5 L=354
+OK Desulfitobacterium hafniense dsrA -> Q251E4 L=397
+OK Desulfitobacterium hafniense dsrB -> Q251E3 L=352
+OK Desulfosporosinus dsrA -> A0ABT8QKK2 L=407
+OK Desulfosporosinus dsrB -> A0ABT8QNA5 L=352
+OK Thermodesulfovibrio yellowstonii dsrA -> B5YIF2 L=402
+OK Thermodesulfovibrio yellowstonii dsrB -> B5YIF3 L=366
+OK Thermodesulfobacterium dsrA -> Q93EV7 L=382
+NONE Thermodesulfobacterium dsrB
+OK Desulfarculus baarsii dsrA -> Q93EU9 L=366
+OK Desulfarculus baarsii dsrB -> E1QFJ3 L=361
+NONE Desulfurivibrio alkaliphilus dsrA
+NONE Desulfurivibrio alkaliphilus dsrB
+NONE Desulfobacca acetoxidans dsrA
+NONE Desulfobacca acetoxidans dsrB
+OK Desulfotignum phosphitoxidans dsrA -> S0FXQ9 L=442
+OK Desulfotignum phosphitoxidans dsrB -> S0G5M9 L=382
+NONE Candidatus Desulforudis audaxviator dsrA
+NONE Candidatus Desulforudis audaxviator dsrB
+OK Archaeoglobus fulgidus dsrA -> Q59109 L=418
+OK Archaeoglobus fulgidus dsrB -> Q59110 L=366
+NONE Archaeoglobus profundus dsrA
+NONE Archaeoglobus profundus dsrB
+OK Archaeoglobus veneficus dsrA -> Q5ZQT9 L=363
+NONE Archaeoglobus veneficus dsrB
+OK Archaeoglobus sulfaticallidus dsrA -> N0BK96 L=409
+OK Archaeoglobus sulfaticallidus dsrB -> N0BL33 L=365
+OK Allochromatium vinosum dsrA -> O33998 L=417
+OK Allochromatium vinosum dsrB -> O33999 L=356
+OK Chlorobaculum tepidum dsrA -> Q8K5E9 L=416
+OK Chlorobaculum tepidum dsrB -> Q8KE39 L=359
+OK Chlorobium limicola dsrA -> A0A5C4RXN4 L=417
+OK Chlorobium limicola dsrB -> A0A5C4RYG3 L=359
+OK Chlorobium phaeobacteroides dsrA -> A1BCS1 L=417
+OK Chlorobium phaeobacteroides dsrB -> A1BCS2 L=359
+NONE Thiobacillus denitrificans dsrA
+NONE Thiobacillus denitrificans dsrB
+NONE Thioalkalivibrio dsrA
+OK Thioalkalivibrio dsrB -> L0DSF9 L=358
+NONE Thioflavicoccus mobilis dsrA
+NONE Thioflavicoccus mobilis dsrB
+OK Thiocapsa dsrA -> E0D1Z2 L=402
+OK Thiocapsa dsrB -> A0A9X0WG77 L=356
+NONE Sideroxydans lithotrophicus dsrA
+NONE Sideroxydans lithotrophicus dsrB
+OK Magnetococcus marinus dsrA -> A0L9L4 L=402
+OK Magnetococcus marinus dsrB -> A0L9L5 L=357
+NONE Beggiatoa dsrA
+NONE Beggiatoa dsrB
+OK Thiothrix dsrA -> A0ABY9MRG6 L=433
+OK Thiothrix dsrB -> A0ABY9MNZ8 L=358
+NONE Rhodovulum sulfidophilum dsrA
+NONE Rhodovulum sulfidophilum dsrB
+OK Halorhodospira dsrA -> A0ABS1E8E7 L=419
+OK Halorhodospira dsrB -> A0ABS1E5W7 L=362

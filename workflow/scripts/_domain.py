@@ -15,6 +15,8 @@ CYCLE_LETTER = "S"
 CYCLE_NAME = "sulfur"
 CALLS_TSV = "scycle_calls.tsv"
 LOCI_TSV = "scycle_loci.tsv"
+TOOL = "scycle"
+REPORT_HTML = "scycle_report.html"
 
 CAT_ORDER = [
     "dissimilatory_sulfate_reduction", "sulfur_oxidation",

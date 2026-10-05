@@ -12,8 +12,11 @@ Inputs are assembled FASTA — .faa proteomes, or .fna assemblies which are
 auto-translated with Prodigal. (Raw-FASTQ "Mode B" was removed 2026-06-12 — it
 was dead code with no Snakemake rules to run it.)
 
+Results go to scycle_results/ in this directory (`paths.results_dir` of the config),
+or to the directory given with --output.
+
 Usage:
-    python run.py [--input PATH] [--mode protein]
+    python scycle.py [--input PATH] [--output DIR] [--mode protein]
                   [--cores N] [--dry-run] [--skip-db-setup]
                   [--prodigal-mode single|meta]
 """
@@ -23,6 +26,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -69,7 +73,7 @@ def bootstrap_env_and_reexec(argv: list[str]) -> None:
                          capture_output=True, text=True, check=True).stdout
     envs = {Path(p).name for p in json.loads(out).get("envs", [])}
     if ENV_NAME not in envs:
-        print(f"[run.py] creating conda env '{ENV_NAME}' from {ENV_FILE} "
+        print(f"[scycle] creating conda env '{ENV_NAME}' from {ENV_FILE} "
               "(first run, ~5 min, ~600 MB)…", flush=True)
         subprocess.run([conda, "env", "create", "-f", str(ENV_FILE)], check=True)
 
@@ -214,14 +218,14 @@ def build_databases(skip: bool, modes_present: set[str]) -> None:
     presence = db_paths_present()
     if not presence["hmm"] or _stale(_HMM_DB):
         why = "missing" if not presence["hmm"] else "stale (targets.yaml newer)"
-        print(f"[run.py] building HMM database… ({why})", flush=True)
+        print(f"[scycle] building HMM database… ({why})", flush=True)
         subprocess.run([sys.executable, str(ROOT / "workflow" / "scripts" / "build_hmm_db.py"),
                         "--force"], check=True, cwd=ROOT)
     if (not presence["blast_u"] or not presence["blast_g"]
             or _stale(_BLAST_U) or _stale(_BLAST_G)):
         why = ("missing" if not (presence["blast_u"] and presence["blast_g"])
                else "stale (targets.yaml newer)")
-        print(f"[run.py] building BLAST databases… ({why})", flush=True)
+        print(f"[scycle] building BLAST databases… ({why})", flush=True)
         subprocess.run([sys.executable, str(ROOT / "workflow" / "scripts" / "build_blast_db.py"),
                         "--force"], check=True, cwd=ROOT)
 
@@ -248,12 +252,21 @@ def write_samples_block(samples: list[dict]) -> None:
 
 # ───────────────────────────── main ──────────────────────────────────────────
 
+def configured_results_dir() -> Path:
+    """`paths.results_dir` of the config file, as an absolute path."""
+    m = re.search(r"^\s*results_dir:\s*(\S+)", CONFIG_PATH.read_text(), re.M)
+    return (ROOT / (m.group(1).strip("'\"") if m else "scycle_results")).resolve()
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="run.py",
+        prog="scycle.py",
         description="scycle-pipeline: map MAGs / proteomes to sulfur-cycle gene participation")
     p.add_argument("--input", type=Path,
                    help="FASTA / FASTQ file or directory")
+    p.add_argument("--output", type=Path, default=None, metavar="DIR",
+                   help="Directory for the results (default: scycle_results/ next to "
+                        "this script, as set by paths.results_dir in the config)")
     p.add_argument("--mode", choices=["auto", "protein"], default="protein",
                    help="Pipeline mode (protein/assembly). Raw-FASTQ 'read' mode was "
                         "removed 2026-06-12; supply .faa proteomes or .fna assemblies.")
@@ -274,6 +287,10 @@ def main() -> None:
         bootstrap_env_and_reexec(sys.argv[1:])  # never returns
     if missing and in_env():
         sys.exit(f"error: missing tools even in env: {missing}")
+
+    # --output is relative to where the user is; Snakemake runs from ROOT.
+    results_dir = (args.output.expanduser().resolve() if args.output is not None
+                   else configured_results_dir())
 
     # Step 2 — input.
     if args.input is None:
@@ -300,16 +317,21 @@ def main() -> None:
 
     # Step 5 — config.
     write_samples_block(samples)
-    print(f"[run.py] {len(samples)} sample(s) written to config/config.yaml", flush=True)
+    print(f"[scycle] {len(samples)} sample(s) written to config/config.yaml", flush=True)
 
     # Step 6 — snakemake.
     cmd = ["snakemake", "--cores", str(args.cores),
            "--configfile", str(CONFIG_PATH),
            "--snakefile", str(ROOT / "workflow" / "Snakefile")]
+    if args.output is not None:
+        cmd += ["--config", f"results_dir={results_dir}"]
     if args.dry_run:
         cmd.append("--dry-run")
-    print(f"[run.py] $ {' '.join(cmd)}", flush=True)
+    print(f"[scycle] $ {' '.join(cmd)}", flush=True)
     subprocess.run(cmd, check=True, cwd=ROOT)
+    if not args.dry_run:
+        print(f"[scycle] done — results in {results_dir}", flush=True)
+        print(f"[scycle] open {results_dir / 'scycle_report.html'}", flush=True)
 
 
 if __name__ == "__main__":

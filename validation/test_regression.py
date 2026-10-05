@@ -3,7 +3,7 @@
 test_regression.py — accuracy regression gate for scycle-pipeline.
 
 Fails (exit 1) if panel accuracy drops below locked-in floors. Run AFTER the pipeline
-has scored the SP1 43-genome panel into `results/multisample_matrix.tsv`
+has scored the SP1 43-genome panel into `scycle_results/scycle_matrix.tsv`
 (`make regression` runs pipeline → score → gate).
 
 Scores against the curated-FUNCTION GT by default (the SP4 authoritative reference); set env
@@ -117,7 +117,7 @@ def test_regression():
 def main() -> int:
     results = _checks(compute_metrics())
     width = max(len(name) for name, _, _ in results)
-    print("scycle-pipeline accuracy regression gate (panel = results/multisample_matrix.tsv)\n")
+    print("scycle-pipeline accuracy regression gate (panel = scycle_results/scycle_matrix.tsv)\n")
     n_fail = 0
     for name, value, ok in results:
         flag = "PASS" if ok else "FAIL"

@@ -97,7 +97,7 @@ def main() -> int:
         return bool(clade) and not clade.get(g, "p__").startswith("p__")
 
     A.RESULTS = args.results
-    A.MATRIX = args.results / "multisample_matrix.tsv"
+    A.MATRIX = args.results / "scycle_matrix.tsv"
     genomes = [r["sample"] for r in csv.DictReader(open(A.MATRIX), delimiter="\t")]
     preds = A.load_scycle(set(genomes))
 

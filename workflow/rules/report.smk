@@ -1,7 +1,7 @@
 # report.smk — bridges per-sample calls to:
 #   1. per-sample complex/synergy completeness + gap_analysis.txt
 #      + S-cycle map + (nucleotide input) gene-neighbourhood maps
-#   2. cross-sample matrix.tsv + heatmap + focused figures + report.html
+#   2. cross-sample matrix.tsv + heatmap + focused figures + scycle_report.html
 
 
 rule complex_completeness:
@@ -50,9 +50,9 @@ rule cross_sample_report:
         synergies=[str(RESULTS / s / "calls" / "synergy_completeness.tsv") for s in SAMPLES],
         targets=config["paths"]["targets_yaml"],
     output:
-        matrix=RESULTS / "multisample_matrix.tsv",
-        heatmap_svg=RESULTS / "multisample_heatmap.svg",
-        heatmap_png=RESULTS / "multisample_heatmap.png",
+        matrix=RESULTS / "scycle_matrix.tsv",
+        heatmap_svg=RESULTS / "scycle_heatmap.svg",
+        heatmap_png=RESULTS / "scycle_heatmap.png",
     params:
         samples=",".join(SAMPLES.keys()),
         results_dir=str(RESULTS),
@@ -75,7 +75,7 @@ rule cross_sample_report:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Focused per-pathway / complex / synergy / S-cycle-map figures.
-# Replace the legacy dense `multisample_heatmap.svg` for daily reading — the
+# Replace the legacy dense `scycle_heatmap.svg` for daily reading — the
 # legacy heatmap is still produced above as a quick-glance overview.
 #
 # PATHWAY_CATEGORIES is defined in the top-level Snakefile.
@@ -88,7 +88,7 @@ rule pathway_heatmap:
     """One categorical heatmap per pathway category. Co-renders SVG (vector,
     paper-grade) and PNG (300 DPI, quick preview)."""
     input:
-        matrix=RESULTS / "multisample_matrix.tsv",
+        matrix=RESULTS / "scycle_matrix.tsv",
         targets=config["paths"]["targets_yaml"],
     output:
         svg=FIGURES_DIR / "pathway_{pathway}.svg",
@@ -109,7 +109,7 @@ rule pathway_heatmap:
 rule complex_heatmap_figure:
     """Per-sample obligatory-complex completeness panel. SVG + 300 DPI PNG."""
     input:
-        matrix=RESULTS / "multisample_matrix.tsv",        # ensures samples present
+        matrix=RESULTS / "scycle_matrix.tsv",        # ensures samples present
         complexes=[str(RESULTS / s / "calls" / "complex_completeness.tsv") for s in SAMPLES],
         targets=config["paths"]["targets_yaml"],
     output:
@@ -132,7 +132,7 @@ rule complex_heatmap_figure:
 rule synergy_heatmap_figure:
     """Per-sample predicted-synergy completeness panel. SVG + 300 DPI PNG."""
     input:
-        matrix=RESULTS / "multisample_matrix.tsv",
+        matrix=RESULTS / "scycle_matrix.tsv",
         synergies=[str(RESULTS / s / "calls" / "synergy_completeness.tsv") for s in SAMPLES],
         targets=config["paths"]["targets_yaml"],
     output:
@@ -233,7 +233,7 @@ rule html_report:
         targets=config["paths"]["targets_yaml"],
         template="workflow/scripts/report_template.html",
     output:
-        html=RESULTS / "report.html",
+        html=RESULTS / "scycle_report.html",
     params:
         samples=",".join(SAMPLES.keys()),
         results_dir=str(RESULTS),

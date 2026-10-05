@@ -13,7 +13,7 @@ Two uses:
   one genome  → --sample NAME   --out results/NAME/report/<x>cycle_map.svg [.png]
   all genomes → --samples A,B,… --out results/figures/<x>cycle_maps.svg [.png]
                 (small multiples; above --max-panels genomes the grid is
-                 replaced by a pointer to the per-genome maps and report.html)
+                 replaced by a pointer to the per-genome maps and the HTML report)
 
 --out takes one or more paths; the format follows each extension.
 """
@@ -32,6 +32,7 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path as MPath
 
 import _cycle_model as model
+from _domain import REPORT_HTML
 from _completeness import pretty
 from _viz import (AXIS, CALLS_TSV, CAT_ORDER, CYCLE_LETTER, CYCLE_NAME, INK,
                   INK2, MUTED, PATHWAY_COLOR, PATHWAY_LABEL, call_codes,
@@ -201,7 +202,7 @@ def render(samples: list[str], results_dir: Path, outs: list[Path],
         fig.text(0.5, 0.5,
                  f"{n} genomes — too many for one page of {CYCLE_LETTER}-cycle maps "
                  f"(limit {max_panels}).\nSee the per-sample report/ folders "
-                 "for each genome, or open report.html.",
+                 f"for each genome, or open {REPORT_HTML}.",
                  ha="center", va="center", fontsize=10, color=INK2)
         _save(fig, outs)
         return

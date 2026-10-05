@@ -58,13 +58,13 @@ $(TEST_DATA)/Cmetallidurans_CH34.fna:
 # non-empty results matrix (i.e. the pipeline runs start-to-finish). Accuracy is
 # checked separately by `make regression`.
 test_protein: test_data
-	python run.py --input $(TEST_DATA) --mode protein --prodigal-mode single
+	python scycle.py --input $(TEST_DATA) --mode protein --prodigal-mode single
 	@python -c "import csv, sys, pathlib; \
-m = pathlib.Path('results/multisample_matrix.tsv'); \
-sys.exit('FAIL: results/multisample_matrix.tsv missing — pipeline did not finish') if not m.exists() else None; \
+m = pathlib.Path('scycle_results/scycle_matrix.tsv'); \
+sys.exit('FAIL: scycle_results/scycle_matrix.tsv missing — pipeline did not finish') if not m.exists() else None; \
 rows = list(csv.reader(m.open(), delimiter='\t')); \
 sys.exit('FAIL: results matrix is empty') if len(rows) < 2 else None; \
-print(f'OK: pipeline ran end-to-end — {len(rows)-1} data rows x {len(rows[0])-1} columns in results/multisample_matrix.tsv'); \
+print(f'OK: pipeline ran end-to-end — {len(rows)-1} data rows x {len(rows[0])-1} columns in scycle_results/scycle_matrix.tsv'); \
 print('    (call accuracy is checked by: make regression)')"
 
 # (Re)build the HMM and BLAST databases from config/targets.yaml and the pinned
@@ -78,11 +78,11 @@ dbs:
 # ground truths, and FAIL (non-zero exit) if accuracy dropped below the floors in
 # validation/test_regression.py. Needs the databases (`make dbs`, or any run).
 regression:
-	python run.py --input $(PANEL) --skip-db-setup --prodigal-mode single --cores 8
+	python scycle.py --input $(PANEL) --skip-db-setup --prodigal-mode single --cores 8
 	python validation/score_scycle.py
 	python validation/test_regression.py
 
-# Fast gate: re-score the EXISTING results/ matrix and check the floors (no
+# Fast gate: re-score the EXISTING scycle_results/ matrix and check the floors (no
 # pipeline run). Use after a scoring/ground-truth change when calls are current.
 # Scores against the curated-FUNCTION GT (the default); GT_FILE=ground_truth.tsv for KEGG-KO
 # (written to scycle_{metrics,confusion}.ground_truth.tsv, next to the default tables).
@@ -101,7 +101,7 @@ ground-truth:
 
 # ── Head-to-head benchmark vs raw KofamScan (curated-FUNCTION GT) ─────────────
 # Builds the curated-function GT, then runs the genome-cluster-bootstrap benchmark
-# (scycle vs raw KofamScan) on it. Needs the panel scored into results/ first
+# (scycle vs raw KofamScan) on it. Needs the panel scored into scycle_results/ first
 # (run `make regression` or the pipeline once). The KEGG-KO GT contrast is the
 # GT_FILE=ground_truth.tsv variant documented in validation/benchmark/README.md.
 benchmark:
@@ -120,7 +120,7 @@ scycdb:
 	python comparators/build_scycdb_tsv.py
 
 clean:
-	rm -rf results/*
+	rm -rf scycle_results/*
 
 clean_all: clean
 	rm -rf resources/hmm/* resources/blast_db/* resources/nt_refs/*

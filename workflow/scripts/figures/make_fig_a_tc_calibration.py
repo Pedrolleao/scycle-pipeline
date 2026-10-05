@@ -12,7 +12,7 @@ Usage:
   python workflow/scripts/figures/make_fig_a_tc_calibration.py \
       --targets-dir targets \
       --config config/targets.yaml \
-      --out results/figures/fig_a_tc_calibration
+      --out scycle_results/figures/fig_a_tc_calibration
 """
 
 from __future__ import annotations
@@ -92,7 +92,7 @@ def main() -> None:
     ap.add_argument("--targets-dir", default="targets",
                     help="dir containing per-target manifest.yaml + tc_calibration.tsv")
     ap.add_argument("--config", default="config/targets.yaml")
-    ap.add_argument("--out", default="results/figures/fig_a_tc_calibration",
+    ap.add_argument("--out", default="scycle_results/figures/fig_a_tc_calibration",
                     help="output prefix (writes .svg + .png)")
     args = ap.parse_args()
 

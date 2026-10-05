@@ -13,7 +13,7 @@ Usage:
       --ncbifam validation/comparator_compare_corrected.tsv \
       --kofam   validation/kofam/kofam_compare_corrected.tsv \
       --targets-yaml config/targets.yaml \
-      --out results/figures/fig_b_comparator_f1
+      --out scycle_results/figures/fig_b_comparator_f1
 """
 
 from __future__ import annotations
@@ -162,7 +162,7 @@ def main() -> None:
     ap.add_argument("--ncbifam", default="validation/comparator_compare_corrected.tsv")
     ap.add_argument("--kofam",   default="validation/kofam/kofam_compare_corrected.tsv")
     ap.add_argument("--targets-yaml", default="config/targets.yaml")
-    ap.add_argument("--out", default="results/figures/fig_b_comparator_f1")
+    ap.add_argument("--out", default="scycle_results/figures/fig_b_comparator_f1")
     args = ap.parse_args()
 
     out_prefix = Path(args.out)

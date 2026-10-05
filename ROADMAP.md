@@ -138,14 +138,14 @@ to `Nitrogen_Cycle/ncycle-pipeline/resources/.cache/` (don't delete that).
 source $(conda info --base)/etc/profile.d/conda.sh && conda activate ewaste-pipeline
 cd /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline
 ```
-(A first `python run.py` *without* `SCYCLE_ENV=ewaste-pipeline` would build a fresh
+(A first `python scycle.py` *without* `SCYCLE_ENV=ewaste-pipeline` would build a fresh
 `scycle-pipeline` env from `envs/scycle.yaml` — ~5 min; avoid by passing the override.)
 
 **The scored validation loop** (after editing seeds/targets/GT, run these):
 ```bash
 python workflow/scripts/build_blast_db.py --force          # only if you changed blast_refs_uniprot
-SCYCLE_ENV=ewaste-pipeline python run.py --input ../sp1_panel \
-    --prodigal-mode single --skip-db-setup --cores 8        # regenerates results/multisample_matrix.tsv
+SCYCLE_ENV=ewaste-pipeline python scycle.py --input ../sp1_panel \
+    --prodigal-mode single --skip-db-setup --cores 8        # regenerates scycle_results/scycle_matrix.tsv
 python validation/build_ground_truth.py && python validation/score_scycle.py
 # build_ground_truth.py re-uses the cached KEGG KO sets in validation/.kegg_cache/ (fast).
 # To ONLY re-score after a targets/seeds edit + pipeline rerun: run just score_scycle.py.

@@ -83,7 +83,7 @@ def main() -> int:
 
     # point the validated loaders at the GTDB results dir
     A.RESULTS = args.results
-    A.MATRIX = args.results / "multisample_matrix.tsv"
+    A.MATRIX = args.results / "scycle_matrix.tsv"
 
     genomes = set()
     with open(A.MATRIX) as fh:

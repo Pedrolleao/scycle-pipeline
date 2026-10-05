@@ -9,7 +9,8 @@ from pathlib import Path
 configfile: os.environ.get("SCYCLE_CONFIG", "config/config.yaml")
 
 SAMPLES = config.get("samples") or {}
-RESULTS = Path(config["paths"]["results_dir"])
+# `scycle.py --output DIR` passes results_dir on the command line; otherwise the config decides.
+RESULTS = Path(config.get("results_dir") or config["paths"]["results_dir"])
 
 # Per-mode sample name sets — used as wildcard constraints so that
 # Mode-A rules only fire on protein/nucleotide samples and Mode-B rules
@@ -70,10 +71,10 @@ rule all:
         # Per-sample reports.
         [per_sample_target(n, m) for n, m in SAMPLES.items()],
         # Cross-sample products (only meaningful with >=1 sample).
-        (str(RESULTS / "multisample_matrix.tsv") if SAMPLES else []),
-        (str(RESULTS / "multisample_heatmap.svg") if SAMPLES else []),
-        (str(RESULTS / "multisample_heatmap.png") if SAMPLES else []),
+        (str(RESULTS / "scycle_matrix.tsv") if SAMPLES else []),
+        (str(RESULTS / "scycle_heatmap.svg") if SAMPLES else []),
+        (str(RESULTS / "scycle_heatmap.png") if SAMPLES else []),
         # Focused figures (9 SVGs + 9 PNGs in results/figures/).
         cross_sample_figures(),
         # Interactive, self-contained report.
-        (str(RESULTS / "report.html") if SAMPLES else []),
+        (str(RESULTS / "scycle_report.html") if SAMPLES else []),

@@ -133,7 +133,7 @@ phsA/psrA on the shared K08352 (a scycle phsA may classify as the unmapped psrA 
 # selection → selection.tsv / enriched_accs.txt (380 backbone reused from nitrogen gtdb500)
 python3 comparators/gtdb500_s/select_gtdb_scyc.py
 # datasets download → gtdb_dl/ ; prodigal → proteomes/
-#   scycle + kofam: run.py / snakemake over the 499 proteomes (--keep-going) → results/
+#   scycle + kofam: scycle.py / snakemake over the 499 proteomes (--keep-going) → scycle_results/
 python3 comparators/build_scycdb_tsv.py --proteome-dir comparators/gtdb500_s/proteomes \
         --out comparators/gtdb500_s/scycdb.tsv --outdir comparators/gtdb500_s/scycdb_out
 # METABOLIC: 119 S-enriched genomes in 10 sequential ≤12-genome batches (exit-144 above ~40 in one

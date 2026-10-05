@@ -23,10 +23,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 GT = ROOT / "validation" / os.environ.get("GT_FILE", "curated_function_gt.tsv")
-MATRIX = ROOT / "results" / "multisample_matrix.tsv"
+MATRIX = ROOT / "scycle_results" / "scycle_matrix.tsv"
 TARGETS = ROOT / "config" / "targets.yaml"
 KO_LIST = ROOT / "resources" / ".cache" / "ko_list"
-RESULTS = ROOT / "results"
+RESULTS = ROOT / "scycle_results"
 
 HOLDOUT_TAG = "holdout_v3"   # none in the SP1 panel yet; reserved
 

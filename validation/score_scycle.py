@@ -7,7 +7,7 @@ Adapted from ncycle-pipeline/validation/score_ncycle.py. Scores ONLY the
 per-target precision/recall/F1 table, a per-pathway breakdown, and a homology-trap
 subset (the BLAST-gated / shared-signature sulfur targets).
 
-Matrix status codes (results/multisample_matrix.tsv): 2 confirmed, 1 domain-only or
+Matrix status codes (scycle_results/scycle_matrix.tsv): 2 confirmed, 1 domain-only or
 narrow-no-IPR (→ predicted present), 0 absent, -1 disqualified (→ absent).
 """
 from __future__ import annotations
@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # homology-trap cells; built by build_curated_function_gt.py). Set env GT_FILE=ground_truth.tsv to
 # score against the fully-automated KEGG-KO GT (the conservative contrast; see REPORT.md SP4).
 GT = ROOT / "validation" / os.environ.get("GT_FILE", "curated_function_gt.tsv")
-MATRIX = ROOT / "results" / "multisample_matrix.tsv"
+MATRIX = ROOT / "scycle_results" / "scycle_matrix.tsv"
 TARGETS = ROOT / "config" / "targets.yaml"
 # one pair of output tables per ground truth, so that scoring the KEGG contrast does
 # not overwrite the tables of the default (curated-function) ground truth

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-make_html_report.py — one self-contained, interactive report.html for a run.
+make_html_report.py — one self-contained, interactive HTML report for a run.
 
 Collects, for every sample, the calls (with their evidence), the complex and
 process-module completeness, the cycle-map step states and — for nucleotide /
@@ -15,7 +15,7 @@ Identical in the nitrogen, sulfur and methane sister pipelines.
 Usage:
   python workflow/scripts/make_html_report.py \
       --samples A,B,... --results-dir results \
-      --targets config/targets.yaml --out results/report.html
+      --targets config/targets.yaml --out <results>/<tool>_report.html
 """
 
 from __future__ import annotations
@@ -178,6 +178,7 @@ def main() -> None:
                      ("/*__PATHWAY_CSS_LIGHT__*/", css_light),
                      ("/*__PATHWAY_CSS_DARK__*/", css_dark),
                      ("__TITLE__", args.title),
+                     ("__FILE__", args.out.name),
                      ("__DATA_JSON__", blob)):
         if key not in html:
             raise SystemExit(f"report template is missing the {key} placeholder")

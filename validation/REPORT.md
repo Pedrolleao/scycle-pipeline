@@ -2,7 +2,7 @@
 
 Accuracy validation of the sulfur-cycle MAG/proteome detection tool. Reproduce with:
 ```bash
-SCYCLE_ENV=ewaste-pipeline python run.py --input ../sp1_panel --prodigal-mode single --skip-db-setup --cores 8
+SCYCLE_ENV=ewaste-pipeline python scycle.py --input ../sp1_panel --prodigal-mode single --skip-db-setup --cores 8
 python validation/build_ground_truth.py && python validation/score_scycle.py   # + test_regression.py
 ```
 
@@ -546,7 +546,7 @@ above (synteny path validated on real MAGs, 5/5 directional calls) stands on its
 - `validation/p3_quality_checks/checkm_summary.tsv` — CheckM v1.2.2 lineage_wf completeness/contam
 - `validation/p3_quality_checks/dsr_blast_sanity.txt` — pre-pipeline dsrA/B BLAST sanity-check log
 - `results_p3_mags/` — full scycle output (per-MAG `scycle_calls.tsv`, `apply_rules.log`,
-  `multisample_matrix.tsv`, figures); preserved alongside the 37-isolate `results/`
+  `scycle_matrix.tsv`, figures); preserved alongside the 37-isolate `scycle_results/`
 - `comparators/vetting_dossier/DOSSIER_P3.md` — staged candidate dossier (with O2 + R3 swap history)
 - `comparators/vetting_dossier/DOSSIER_P3_AUDIT.md` — environmental-microbiology specialist's
   per-MAG GO/NO-GO audit (independent of scycle internals)

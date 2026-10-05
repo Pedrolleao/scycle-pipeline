@@ -51,7 +51,7 @@
 #      oxidizers→`SOX_REVERSE_DSR` (else dsrD UNSCORED); add fully-independent ones to `INDEPENDENT`.
 #   3. RE-RUN (env: `conda activate ewaste-pipeline`, from scycle-pipeline/):
 #        python validation/build_ground_truth.py && python validation/build_curated_function_gt.py
-#        SCYCLE_ENV=ewaste-pipeline python run.py --input ../sp1_panel --prodigal-mode single --skip-db-setup --cores 8
+#        SCYCLE_ENV=ewaste-pipeline python scycle.py --input ../sp1_panel --prodigal-mode single --skip-db-setup --cores 8
 #        python validation/score_scycle.py && python validation/test_regression.py   # re-lock MAX_ALL_FP if it trips (panel-size scaling; precision is the real guard)
 #        GT_FILE=curated_function_gt.tsv python validation/trap_independence.py       # independent trap cells should rise
 #   4. BENCHMARK (extend to new panel): run METABOLIC (`-in <dir of new .faa>`, env METABOLIC_v4.0) + DRAM

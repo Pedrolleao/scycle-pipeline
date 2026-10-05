@@ -1,5 +1,5 @@
 # config.yaml — scycle-pipeline thresholds and paths.
-# The `samples:` block at the bottom is rewritten by run.py at each invocation.
+# The `samples:` block at the bottom is rewritten by scycle.py at each invocation.
 
 paths:
   hmm_db:        resources/hmm/scycle_targets.hmm
@@ -7,7 +7,7 @@ paths:
   blast_unstable: resources/blast_db/unstable_refs
   blast_gated:   resources/blast_db/blast_gated_refs
   targets_yaml:  config/targets.yaml
-  results_dir:   results
+  results_dir:   scycle_results
 
 thresholds:
   hmmer:

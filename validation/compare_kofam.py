@@ -12,7 +12,7 @@ GT_FILE=ground_truth.tsv for the KEGG-KO GT).
 their targets (so K00370 calls BOTH nxrA and narG; comammox amoA below the KO
 threshold is missed). This is exactly what mapping KofamScan output to pathways does.
 
-The pipeline's calls come from results/multisample_matrix.tsv (codes 1/2 = present).
+The pipeline's calls come from scycle_results/scycle_matrix.tsv (codes 1/2 = present).
 Both are scored against validation/ground_truth.tsv (curated cells only).
 
 Output: stdout comparison (overall + homology-trap subset + per-target deltas).
@@ -23,10 +23,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GT = ROOT / "validation" / os.environ.get("GT_FILE", "curated_function_gt.tsv")
-MATRIX = ROOT / "results" / "multisample_matrix.tsv"
+MATRIX = ROOT / "scycle_results" / "scycle_matrix.tsv"
 TARGETS = ROOT / "config" / "targets.yaml"
 KO_LIST = ROOT / "resources" / ".cache" / "ko_list"
-RESULTS = ROOT / "results"
+RESULTS = ROOT / "scycle_results"
 
 # Homology-trap targets (must match validation/benchmark/adapters.py TRAP).
 TRAP = {"dsrA","dsrB","dsrC","dsrD","soxD","fccA","sdo",

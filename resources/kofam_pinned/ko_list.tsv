@@ -1,0 +1,59 @@
+knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
+K00958	273.63	domain	all	0.953789	2196	1999	2813	693	6.19	0.590	sulfate adenylyltransferase [EC:2.7.7.4]
+K00394	301.97	domain	all	0.998478	344	329	949	578	1.36	0.590	adenylylsulfate reductase, subunit A [EC:1.8.99.2]
+K00395	79.53	domain	all	0.998374	343	310	230	146	1.68	0.589	adenylylsulfate reductase, subunit B [EC:1.8.99.2]
+K11180	325.17	full	all	1.000000	268	250	628	414	1.24	0.589	dissimilatory sulfite reductase alpha subunit [EC:1.8.1.22]
+K11181	353.97	full	all	1.000000	261	245	582	365	1.10	0.591	dissimilatory sulfite reductase beta subunit [EC:1.8.1.22]
+K27187	136.40	full	all	0.997904	250	238	640	301	2.47	0.590	[DsrC]-trisulfide reductase subunit M [EC:1.8.5.10]
+K27188	474.70	full	all	1.000000	243	234	816	491	1.16	0.591	[DsrC]-trisulfide reductase subunit K [EC:1.8.5.10]
+K16885	610.70	full	trim	0.989761	150	145	472	416	0.83	0.590	quinone-modifying oxidoreductase, subunit QmoA
+K16886	818.20	domain	all	0.993399	155	153	1439	711	1.42	0.591	quinone-modifying oxidoreductase, subunit QmoB
+K16887	273.80	full	all	1.000000	117	113	654	388	1.66	0.589	quinone-modifying oxidoreductase, subunit QmoC
+K17222	161.70	full	all	0.998073	814	777	726	272	3.31	0.590	L-cysteine S-thiosulfotransferase [EC:2.8.5.2]
+K17224	383.37	domain	all	0.990545	772	742	1475	848	3.00	0.590	S-sulfosulfanyl-L-cysteine sulfohydrolase [EC:3.1.6.20]
+K17225	422.57	domain	all	0.999274	721	691	826	420	1.32	0.590	sulfane dehydrogenase subunit SoxC
+K17223	79.33	domain	all	0.980834	800	761	776	216	5.83	0.590	L-cysteine S-thiosulfotransferase [EC:2.8.5.2]
+K17226	95.97	full	trim	0.997103	1670	1550	794	317	6.95	0.590	sulfur-oxidizing protein SoxY
+K17227	75.97	domain	trim	0.968869	1017	913	217	108	3.10	0.590	sulfur-oxidizing protein SoxZ
+K17218	243.37	domain	trim	0.650307	3580	3225	1968	590	8.45	0.590	sulfide:quinone oxidoreductase [EC:1.8.5.4]
+K17229	359.90	full	all	1.000000	748	728	828	421	1.64	0.590	sulfide dehydrogenase [flavocytochrome c] flavoprotein chain [EC:1.8.2.3]
+K17230	79.60	domain	all	0.976933	491	465	546	229	5.42	0.590	cytochrome subunit of sulfide dehydrogenase
+K17725	172.23	full	all	0.995678	1099	1040	1372	349	1.85	0.590	sulfur dioxygenase [EC:1.13.11.18]
+K21307	395.93	domain	trim	0.997484	426	394	2002	955	1.74	0.590	sulfite dehydrogenase (quinone) subunit SoeA [EC:1.8.5.6]
+K21308	314.17	full	all	0.987276	438	400	600	321	1.67	0.590	sulfite dehydrogenase (quinone) subunit SoeB
+K21309	164.47	full	all	0.996109	419	389	602	308	3.14	0.590	sulfite dehydrogenase (quinone) subunit SoeC
+K05301	441.43	domain	all	0.933727	254	235	717	404	2.00	0.590	sulfite dehydrogenase (cytochrome) subunit A [EC:1.8.2.1]
+K19713	145.70	full	all	0.996700	1188	1064	1613	467	4.50	0.590	thiosulfate dehydrogenase [EC:1.8.2.2]
+K16952	364.60	full	all	1.000000	41	38	370	310	0.99	0.590	sulfur oxygenase/reductase [EC:1.13.11.55]
+K00956	511.50	domain	all	0.587791	4052	3584	2672	562	1.94	0.590	sulfate adenylyltransferase subunit 1 [EC:2.7.7.4]
+K00955	762.37	domain	all	0.923461	2072	1866	1971	771	2.83	0.590	bifunctional enzyme CysN/CysC [EC:2.7.7.4 2.7.1.25]
+K00957	162.67	domain	all	0.999607	6276	5091	2615	711	3.69	0.590	sulfate adenylyltransferase subunit 2 [EC:2.7.7.4]
+K00860	331.90	domain	all	0.555702	4546	3867	2742	342	5.88	0.590	adenylylsulfate kinase [EC:2.7.1.25]
+K00390	158.43	full	all	0.866105	7068	6132	3658	490	11.49	0.590	phosphoadenosine phosphosulfate reductase [EC:1.8.4.8 1.8.4.10]
+K00380	533.33	domain	all	0.799507	4987	4367	6643	896	7.15	0.590	sulfite reductase (NADPH) flavoprotein alpha-component [EC:1.8.1.2]
+K00381	593.20	domain	trim	0.883876	4401	3797	4465	1175	5.04	0.590	sulfite reductase (NADPH) hemoprotein beta-component [EC:1.8.1.2]
+K00392	594.63	full	trim	0.850059	2275	2118	3295	911	5.32	0.590	sulfite reductase (ferredoxin) [EC:1.8.7.1]
+K01738	415.27	domain	all	0.683916	14937	12855	5832	454	6.43	0.590	cysteine synthase [EC:2.5.1.47]
+K12339	400.57	domain	all	0.945242	2653	2192	945	364	2.40	0.590	S-sulfo-L-cysteine synthase (O-acetyl-L-serine-dependent) [EC:2.5.1.144]
+K08352	568.83	domain	all	0.957351	560	512	2064	796	4.90	0.590	thiosulfate reductase / polysulfide reductase chain A [EC:1.8.5.5]
+K08353	306.13	full	all	0.826331	109	56	237	188	0.90	0.590	thiosulfate reductase electron transport protein
+K08354	232.20	full	all	1.000000	230	120	388	251	0.89	0.589	thiosulfate reductase cytochrome b subunit
+K08357	779.70	domain	all	0.992982	474	425	1615	1032	1.66	0.590	tetrathionate reductase subunit A
+K08358	256.27	full	all	0.943589	513	409	694	290	2.42	0.590	tetrathionate reductase subunit B
+K08359	166.03	full	all	0.995696	412	348	657	364	2.94	0.590	tetrathionate reductase subunit C
+K16936	155.33	full	all	0.990476	69	55	233	171	1.76	0.589	thiosulfate dehydrogenase (quinone) small subunit [EC:1.8.5.2]
+K16937	70.07	domain	trim	0.918140	2232	1961	1229	285	11.54	0.590	thiosulfate dehydrogenase (quinone) large subunit [EC:1.8.5.2]
+K27925	616.70	full	trim	0.939153	41	38	589	538	0.89	0.588	tetrathionate hydrolase [EC:3.12.1.-]
+K01011	190.20	domain	all	0.964198	11563	10345	7306	375	10.13	0.590	thiosulfate/3-mercaptopyruvate sulfurtransferase [EC:2.8.1.1 2.8.1.2]
+K17219	1684.23	full	all	1.000000	23	21	1099	1041	0.55	0.590	sulfur reductase molybdopterin subunit
+K17486	471.83	full	all	1.000000	88	88	418	367	0.84	0.590	dimethylsulfoniopropionate demethylase [EC:2.1.1.269]
+K28072	1452.83	full	all	1.000000	3	3	709	709	0.44	0.591	DMSP lyase
+K28073	959.97	full	all	1.000000	59	58	933	836	0.83	0.590	DMSP lyase
+K21310	89.33	full	all	0.996923	552	490	1003	316	5.89	0.590	methanethiol S-methyltransferase [EC:2.1.1.334]
+K17285	178.43	full	all	0.999222	2042	1927	3062	578	2.50	0.590	methanethiol oxidase [EC:1.8.3.4]
+K03119	328.00	full	all	0.985321	1060	822	658	299	1.41	0.590	taurine dioxygenase [EC:1.14.11.17]
+K15551	230.83	full	all	0.991116	1787	1477	860	378	6.39	0.590	taurine transport system substrate-binding protein
+K10831	349.30	domain	all	0.873736	1543	1231	726	290	1.95	0.589	taurine transport system ATP-binding protein [EC:7.6.2.7]
+K15552	278.43	domain	trim	0.978694	1734	1404	862	298	2.49	0.590	taurine transport system permease protein
+K04091	332.13	full	all	0.943145	4741	4064	2190	518	5.25	0.590	alkanesulfonate monooxygenase [EC:1.14.14.5 1.14.14.34]
+K00299	86.73	domain	all	0.963512	4521	3857	1950	371	9.97	0.590	FMN reductase [EC:1.5.1.38]

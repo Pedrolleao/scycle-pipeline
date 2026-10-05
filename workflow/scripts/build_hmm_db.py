@@ -3,8 +3,12 @@
 build_hmm_db.py — build the concatenated HMM database for the scycle-pipeline.
 
 Primary backbone: **KOfam**. For every KEGG Orthology (KO) listed in
-`targets[].ko` of config/targets.yaml, extract that KO's profile HMM from the
-KOfam `profiles.tar.gz` and use its adaptive score threshold from `ko_list`.
+`targets[].ko` of config/targets.yaml, take that KO's profile HMM and its adaptive
+score threshold from the pinned KOfam snapshot shipped in resources/kofam_pinned/
+(the release the tool was validated on). If a KO is not in the snapshot, or with
+`--upstream`, every KO is taken from the KOfam `profiles.tar.gz` / `ko_list`
+downloaded from genome.jp instead — a rolling release, so thresholds may differ.
+Pfam fallback profiles likewise come from resources/pfam_pinned/ when present.
 This is the KO-primary detection tier the sulfur-cycle tool is built around.
 
 Then:
@@ -19,7 +23,7 @@ Outputs:
   resources/hmm/tc_cutoffs.tsv       (profile_id -> threshold; KO numbers,
                                        custom target ids, and Pfam ids)
 
-Usage:  python workflow/scripts/build_hmm_db.py [--force]
+Usage:  python workflow/scripts/build_hmm_db.py [--force] [--upstream]
 """
 
 from __future__ import annotations
@@ -38,6 +42,8 @@ from _common import ROOT, load_targets
 
 HMM_DIR = ROOT / "resources" / "hmm"
 CACHE = ROOT / "resources" / ".cache"
+PINNED = ROOT / "resources" / "kofam_pinned"   # profiles/{KO}.hmm + ko_list.tsv
+PFAM_PINNED = ROOT / "resources" / "pfam_pinned"   # {PFxxxxx}.hmm
 CONCAT = HMM_DIR / "scycle_targets.hmm"
 TC_TSV = HMM_DIR / "tc_cutoffs.tsv"
 TARGETS_DIR = ROOT / "targets"
@@ -79,6 +85,15 @@ def pfam_only_ids(targets: list[dict]) -> list[str]:
                 seen.add(pf)
                 out.append(pf)
     return out
+
+
+# ───────────────────────────── KOfam snapshot ────────────────────────────────
+
+def pinned_covers(kos: list[str]) -> bool:
+    """True if resources/kofam_pinned/ holds a profile for every KO of targets.yaml.
+    All or nothing: profiles of two KOfam releases are never mixed in one database."""
+    return (PINNED / "ko_list.tsv").exists() and all(
+        (PINNED / "profiles" / f"{ko}.hmm").exists() for ko in kos)
 
 
 # ───────────────────────────── KOfam cache ───────────────────────────────────
@@ -215,6 +230,10 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true",
                     help="Rebuild even if the concatenated DB exists")
+    ap.add_argument("--upstream", action="store_true",
+                    help="Ignore resources/kofam_pinned/ and pfam_pinned/ and download "
+                         "the current KOfam release from genome.jp (~1.5 GB) and the "
+                         "current Pfam profiles from InterPro")
     args = ap.parse_args()
 
     targets = load_targets()["targets"]
@@ -232,13 +251,23 @@ def main() -> None:
         print(f"[build_hmm_db] {CONCAT} exists; pass --force to rebuild")
         return
 
-    ko_list, profiles_tar = ensure_kofam_cache()
-    ko_thr = load_ko_thresholds(ko_list)
-
-    ko_hmm_dir = CACHE / "ko_hmms"
-    print(f"[build_hmm_db] extracting {len(kos)} KO profiles from {profiles_tar.name}…",
-          flush=True)
-    found = extract_ko_hmms(set(kos), profiles_tar, ko_hmm_dir)
+    if pinned_covers(kos) and not args.upstream:
+        print(f"[build_hmm_db] using the pinned KOfam snapshot in {PINNED.relative_to(ROOT)}/ "
+              f"({KOFAM_RELEASE})")
+        ko_thr = load_ko_thresholds(PINNED / "ko_list.tsv")
+        ko_hmm_dir = PINNED / "profiles"
+        found = set(kos)
+    else:
+        if not args.upstream:
+            print("[build_hmm_db] ! resources/kofam_pinned/ does not cover every KO of "
+                  "targets.yaml — taking all of them from the KOfam download instead",
+                  file=sys.stderr)
+        ko_list, profiles_tar = ensure_kofam_cache()
+        ko_thr = load_ko_thresholds(ko_list)
+        ko_hmm_dir = CACHE / "ko_hmms"
+        print(f"[build_hmm_db] extracting {len(kos)} KO profiles from {profiles_tar.name}…",
+              flush=True)
+        found = extract_ko_hmms(set(kos), profiles_tar, ko_hmm_dir)
     missing_ko = sorted(set(kos) - found)
     if missing_ko:
         print(f"[build_hmm_db] ! KO profiles not in tarball: {missing_ko}", file=sys.stderr)
@@ -281,11 +310,17 @@ def main() -> None:
 
         # 3. Pfam fallback for ko-less targets (e.g. archaeal amoA / PF12942).
         for pf in pfams:
-            tmp = ko_hmm_dir / f"{pf}.hmm"
-            if fetch_hmm_interpro(pf, tmp):
-                out.write(tmp.read_text().rstrip("\n") + "\n")
-                tc_rows.append(f"{pf}\t\t{extract_tc(tmp) or ''}")
+            tmp = PFAM_PINNED / f"{pf}.hmm"
+            if tmp.exists() and not args.upstream:
+                print(f"  + pinned Pfam fallback: {pf}")
+            else:
+                (CACHE / "ko_hmms").mkdir(parents=True, exist_ok=True)
+                tmp = CACHE / "ko_hmms" / f"{pf}.hmm"
+                if not fetch_hmm_interpro(pf, tmp):
+                    continue
                 print(f"  + fetched Pfam fallback: {pf}")
+            out.write(tmp.read_text().rstrip("\n") + "\n")
+            tc_rows.append(f"{pf}\t\t{extract_tc(tmp) or ''}")
 
     TC_TSV.write_text("\n".join(tc_rows) + "\n")
     import subprocess

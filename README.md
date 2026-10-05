@@ -9,28 +9,52 @@ and **9 process-completeness synergies**.
 
 **Status: reference layer built, runs end-to-end.** Engine cloned + generalized from
 the validated ncycle-pipeline; sulfur biology authored fresh (`config/targets.yaml`,
-[`../Info-sulfur.md`](../Info-sulfur.md)); curated BLAST seeds + trained custom HMMs
+[`Info-sulfur.md`](Info-sulfur.md)); curated BLAST seeds + trained custom HMMs
 for `soxB/C/D/X`, `sqr`, `sdo`, `tth`, `doxD`, `dsrA`, `dsrB` **lifted from the
 validated ewaste-pipeline**. Smoke-validated on a 5-genome panel: *D. vulgaris* →
 complete sulfate reduction (1.0, dsrAB **reductive**), *P. denitrificans* → complete
 Sox oxidation (1.0), *A. ferrooxidans* → sqr/sdo/doxD/tth sulfur oxidation,
 *E. coli* → complete assimilatory reduction, *S. pneumoniae* → negative. The accuracy
 validation campaign (reference panel + ground truth + regression gate) is the deferred
-follow-on phase — see [`../Info-sulfur.md`](../Info-sulfur.md) "Hardening backlog".
+follow-on phase — see [`Info-sulfur.md`](Info-sulfur.md) "Hardening backlog".
+
+## Install
+
+Developed and validated on Linux (x86-64). Needs `git`, conda or mamba and `curl`;
+about 3 GB of disk for the environment. Network access is needed for the install and
+for the five genomes of the smoke test (NCBI); the databases are built from files in
+the repository and the pipeline itself runs offline.
+
+```bash
+git clone https://github.com/Pedrolleao/scycle-pipeline.git
+cd scycle-pipeline
+conda env create -f envs/scycle.yaml       # env `cycle-pipeline`; or: mamba env create …
+conda activate cycle-pipeline
+make test_protein     # fetch 5 genomes, build the databases, run end to end
+make regression       # run the 43-genome reference panel (sp1_panel/) and check the accuracy floors
+```
+
+`make regression` ending in `OK: all … checks passed` means the install reproduces the
+validated calls. The exact environment of the validation (linux-64) is `envs/ncycle.lock.yml` of the
+nitrogen sister repository, for when the open version ranges of `envs/scycle.yaml`
+resolve to something that behaves differently.
 
 ## Run
 
 ```bash
-cd scycle-pipeline
 python run.py --input <dir-of-.faa-or-.fna> --cores 8
-# First run creates the `cycle-pipeline` conda env from envs/scycle.yaml if it does
-# not exist yet. The env is shared with the nitrogen sister tool (ncycle-pipeline).
-# To use a different env with the same dependencies:
-#   SCYCLE_ENV=<env-name> python run.py --input <dir> --skip-db-setup
+# Outside the conda env, run.py re-runs itself inside `cycle-pipeline` (and creates it
+# from envs/scycle.yaml if it does not exist). To use another env with the same
+# dependencies:
+#   SCYCLE_ENV=<env-name> python run.py --input <dir>
 ```
 
 `run.py` auto-detects protein (`.faa`) vs nucleotide (`.fna`, → Prodigal) input,
-builds the databases on first run, then dispatches Snakemake.
+builds the databases on first run, then dispatches Snakemake. It asks whether
+nucleotide input is isolate genomes or metagenome assemblies unless
+`--prodigal-mode single|meta` is given, and writes the samples it found into the
+`samples:` block of `config/config.yaml` — so `git status` shows that file as modified
+after a run.
 
 ## How it works
 
@@ -103,7 +127,7 @@ pipeline; only `workflow/scripts/_domain.py` (palette, labels, file names) and
 
 ## Pathways & targets
 
-Six process modules / 61 markers (see [`../Info-sulfur.md`](../Info-sulfur.md) for the
+Six process modules / 61 markers (see [`Info-sulfur.md`](Info-sulfur.md) for the
 full per-gene atlas, KO/Pfam anchors, and trap rationale):
 
 1. **Dissimilatory sulfate reduction** (SO₄²⁻→H₂S) — sat, aprAB, dsrAB(CD), dsrMK, qmoABC
@@ -120,5 +144,18 @@ python workflow/scripts/build_hmm_db.py     # KOfam KO profiles + custom HMMs + 
 python workflow/scripts/build_blast_db.py    # curated UniProt seeds → DIAMOND DBs
 ```
 
-The KOfam cache (`resources/.cache/`) is symlinked to the ncycle-pipeline download
-(~1.5 GB profiles.tar.gz, pinned release 2026-05-24) to avoid a re-fetch.
+**The database inputs are pinned in the repository.** The 58 KOfam profiles and
+their thresholds are built from `resources/kofam_pinned/` (release of 2026-05-24, the
+one the tool was validated on), the Pfam fallback profiles from `resources/pfam_pinned/`
+and the BLAST seeds from `resources/seeds_pinned/`. genome.jp serves KOfam from a
+rolling URL and keeps no old releases — the release of 2026-09-29 has a different
+threshold for 49 of the 58 KOs — and UniProt entries are revised and deleted, so
+databases built from fresh downloads are not the validated ones. `build_hmm_db.py
+--upstream` and `build_blast_db.py --upstream` download the current data anyway;
+re-validate (`make regression`) before trusting the result.
+
+**What a clone does not contain.** Pipeline results and the third-party tools and
+databases of the comparator benchmark (METABOLIC, DRAM, SCycDB, GTDB proteomes). The scripts under `comparators/` and
+the study configs `config/config_*.yaml` are the record of how the validation was run:
+they carry paths of the machine it ran on and need editing to be re-run elsewhere.
+Their outputs — the tables under `validation/` and `comparators/` — are committed.

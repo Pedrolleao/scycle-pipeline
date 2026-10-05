@@ -2,9 +2,8 @@
 # scycle-pipeline .gitignore
 # Goal: commit the tool + config + small normalized validation artifacts.
 # Exclude large/regenerable data (DBs, downloads, per-genome pipeline outputs).
-# NOTE: resources/blast_db/ holds cached BLAST reference seqs (incl. 4 S proteins
-# whose UniProt accessions were since deleted) — archive it SEPARATELY (e.g.
-# Zenodo) and footnote in methods; it is intentionally NOT committed here.
+# NOTE: the built databases (resources/hmm/, resources/blast_db/) are not committed;
+# their inputs are — resources/kofam_pinned/, pfam_pinned/ and seeds_pinned/.
 # ============================================================================
 
 # ---- Python / Snakemake / OS cruft ----
@@ -60,3 +59,6 @@ comparators/metabolic_gtdb500/*_rows*.tsv
 
 # Disabled/swapped-out validation inputs (scratch)
 *.swapped_out
+
+# ---- Smoke-test genomes downloaded by `make test_data` ----
+test_data/

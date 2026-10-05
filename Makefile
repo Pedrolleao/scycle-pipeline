@@ -9,7 +9,7 @@
 # results matrix — i.e. the pipeline runs start-to-finish. It does NOT check call
 # accuracy; that is `make regression`.
 
-TEST_DATA := ../test_data
+TEST_DATA := test_data
 REF_GENOMES := \
     $(TEST_DATA)/Aferrooxidans_ATCC23270.fna \
     $(TEST_DATA)/Mextorquens_AM1.fna \
@@ -25,9 +25,9 @@ URL_ECOLI  := $(NCBI_BASE)/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_00000584
 URL_SHEW   := $(NCBI_BASE)/GCF/000/146/165/GCF_000146165.2_ASM14616v2/GCF_000146165.2_ASM14616v2_genomic.fna.gz
 URL_CUPR   := $(NCBI_BASE)/GCF/000/196/015/GCF_000196015.1_ASM19601v1/GCF_000196015.1_ASM19601v1_genomic.fna.gz
 
-PANEL := ../sp1_panel   # SP1 43-genome validation panel (proteomes/.fna) + KEGG ground truth
+PANEL := sp1_panel   # 43-genome validation panel (proteomes + 1 .fna, in the repository)
 
-.PHONY: env test_data test_protein test regression regression-score benchmark scycdb clean clean_all
+.PHONY: env dbs test_data test_protein test ground-truth regression regression-score benchmark scycdb clean clean_all
 
 env:
 	@mamba env create -f envs/scycle.yaml 2>/dev/null || conda env create -f envs/scycle.yaml
@@ -67,13 +67,17 @@ sys.exit('FAIL: results matrix is empty') if len(rows) < 2 else None; \
 print(f'OK: pipeline ran end-to-end — {len(rows)-1} data rows x {len(rows[0])-1} columns in results/multisample_matrix.tsv'); \
 print('    (call accuracy is checked by: make regression)')"
 
+# (Re)build the HMM and BLAST databases from config/targets.yaml and the pinned
+# snapshots under resources/ (KOfam, Pfam, BLAST seeds) — no download.
+dbs:
+	python workflow/scripts/build_hmm_db.py --force
+	python workflow/scripts/build_blast_db.py --force
+
 # ── Accuracy regression gate (the real test for this pipeline) ────────────────
-# Full gate: regenerate ground truth, run the pipeline on the reference panel,
-# score, and FAIL (non-zero exit) if accuracy dropped below the floors in
-# validation/test_regression.py. Needs the panel at $(PANEL) + the KOfam cache.
+# Full gate: run the pipeline on the reference panel, score against the committed
+# ground truths, and FAIL (non-zero exit) if accuracy dropped below the floors in
+# validation/test_regression.py. Needs the databases (`make dbs`, or any run).
 regression:
-	python validation/build_ground_truth.py
-	python validation/build_curated_function_gt.py
 	python run.py --input $(PANEL) --skip-db-setup --prodigal-mode single --cores 8
 	python validation/score_scycle.py
 	python validation/test_regression.py
@@ -82,12 +86,17 @@ regression:
 # pipeline run). Use after a scoring/ground-truth change when calls are current.
 # Scores against the curated-FUNCTION GT (the default); GT_FILE=ground_truth.tsv for KEGG-KO.
 regression-score:
-	python validation/build_ground_truth.py
-	python validation/build_curated_function_gt.py
 	python validation/score_scycle.py
 	python validation/test_regression.py
 
 test: regression
+
+# Rebuild both ground truths: KEGG-derived (queries the KEGG REST API for the 43
+# organisms unless validation/.kegg_cache/ holds them — KEGG's annotation moves, so
+# the result can differ from the committed table), then curated-function.
+ground-truth:
+	python validation/build_ground_truth.py
+	python validation/build_curated_function_gt.py
 
 # ── Head-to-head benchmark vs raw KofamScan (curated-FUNCTION GT) ─────────────
 # Builds the curated-function GT, then runs the genome-cluster-bootstrap benchmark

@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+/* Page style: the "Simple Terminal" design system — monospace ink on a flat canvas,
+   hairline frames with [ bracketed ] labels, no rounded corners, shadows or gradients;
+   colour only as a category tag. Light tokens are its Light variant. The second block
+   of each theme maps those tokens onto the roles the figures draw with. */
+/*__FONT_FACES__*/
+:root {
+  color-scheme: light;
+  --bg: #F7F7F5; --bg-2: #EEEEEC; --highlight: #E4E4E2; --fg: #1A1A1A; --fg-mute: #5A5A5A;
+  --fg-dim: #8A8A8A; --border: #C8C8C6; --border-strong: #ABABAB;
+  --c-teal: #1E8C8E; --c-green: #1E8A2E; --c-coral: #B53A38; --c-purple: #7B33AD; --c-mustard: #8A7B1A;
+  --surface: var(--bg); --ink: var(--fg); --ink2: var(--fg-mute); --muted: #7A7A7A;
+  --grid: var(--highlight); --axis: var(--border-strong); --faint: var(--border);
+  --unann: var(--highlight); --accent: var(--c-teal); --absent-edge: var(--border);
+  --absent-text: var(--fg-dim); --hover: rgba(26,26,26,0.05); --ring: var(--border);
+  /*__PATHWAY_CSS_LIGHT__*/
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0E0E0E; --bg-2: #161616; --highlight: #1F1F1F; --fg: #E5E5E5; --fg-mute: #888888;
+    --fg-dim: #555555; --border: #2A2A2A; --border-strong: #3A3A3A;
+    --c-teal: #6DC7C8; --c-green: #61CA6E; --c-coral: #CE6A68; --c-purple: #B579CF; --c-mustard: #CDC37C;
+    --muted: #6E6E6E; --faint: var(--border-strong); --unann: var(--border);
+    --absent-edge: var(--border-strong); --hover: rgba(229,229,229,0.07);
+    /*__PATHWAY_CSS_DARK__*/
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0E0E0E; --bg-2: #161616; --highlight: #1F1F1F; --fg: #E5E5E5; --fg-mute: #888888;
+  --fg-dim: #555555; --border: #2A2A2A; --border-strong: #3A3A3A;
+  --c-teal: #6DC7C8; --c-green: #61CA6E; --c-coral: #CE6A68; --c-purple: #B579CF; --c-mustard: #CDC37C;
+  --muted: #6E6E6E; --faint: var(--border-strong); --unann: var(--border);
+  --absent-edge: var(--border-strong); --hover: rgba(229,229,229,0.07);
+  /*__PATHWAY_CSS_DARK__*/
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); }
+body { margin: 0; font: 400 12px/1.55 "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.01em; -webkit-font-smoothing: antialiased; }
+main { max-width: 1440px; margin: 0 auto; padding: 32px 40px 64px; }
+@media (max-width: 760px) { main { padding: 20px 14px 48px; } }
+h1, h2, h3 { font-weight: 500; margin: 0; }
+p { margin: 0; }
+
+/* terminal line + top bar */
+.toprow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px 24px; margin-bottom: 18px; }
+.term-line { color: var(--fg-mute); font-size: 11px; }
+.theme-switch { display: inline-flex; align-items: center; font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--fg-mute); }
+.theme-switch span { margin-right: 10px; }
+.theme-switch button { font-size: 10px; letter-spacing: 0.12em; padding: 5px 14px; }
+.theme-switch button + button { margin-left: -1px; }
+.theme-switch button[aria-pressed="true"], .theme-switch button[aria-pressed="true"]:hover {
+  background: var(--fg); color: var(--bg); border-color: var(--fg); position: relative; }
+.term-line .prompt { color: var(--c-green); }
+.term-line .cursor { display: inline-block; width: 8px; height: 14px; background: var(--fg);
+  vertical-align: -2px; margin-left: 4px; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .term-line .cursor { animation: none; } }
+.topbar { display: grid; grid-template-columns: 1fr auto; gap: 24px; margin-bottom: 28px; }
+@media (max-width: 860px) { .topbar { grid-template-columns: 1fr; gap: 12px; } }
+.topbar__id, .topbar__meta { border: 1px solid var(--border); padding: 16px 18px; }
+.id__head { font-size: 10px; text-transform: uppercase; color: var(--fg-mute); letter-spacing: 0.12em; margin-bottom: 6px; }
+.id__name { font-size: 28px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
+.id__sub { color: var(--fg-mute); font-size: 11px; margin-top: 6px; }
+.topbar__meta { min-width: 300px; }
+.meta__row { display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-size: 11px; color: var(--fg-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.meta__row + .meta__row { margin-top: 4px; }
+.meta__row > :last-child { color: var(--fg); }
+
+/* bracketed section frames */
+.frame { border: 1px solid var(--border); background: var(--bg); margin-bottom: 24px; position: relative; }
+.frame__label { position: absolute; top: -1px; left: 12px; transform: translateY(-50%);
+  background: var(--bg); padding: 0 8px; font-size: 10px; font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--fg); }
+.frame__label::before { content: "["; color: var(--fg-mute); margin-right: 4px; }
+.frame__label::after { content: "]"; color: var(--fg-mute); margin-left: 4px; }
+.frame__body { padding: 22px 22px 18px; }
+h3 { font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--fg); margin: 26px 0 10px; }
+h3::before { content: "[ "; color: var(--fg-mute); }
+h3::after { content: " ]"; color: var(--fg-mute); }
+.sub, .note { color: var(--fg-mute); font-size: 11px; }
+.fig-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 0 10px; }
+.fig-head .sub, .fig-head h3 { margin: 0; flex: 1 1 320px; }
+.fig-head.h3 { margin: 26px 0 10px; }
+
+/* controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.controls label { display: inline-flex; align-items: center; gap: 8px; color: var(--fg-mute);
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
+input[type=search], select, button { font: inherit; font-size: 11px; color: var(--fg);
+  background: transparent; border: 1px solid var(--border-strong); border-radius: 0; padding: 6px 10px; }
+input[type=search], select { letter-spacing: 0.01em; text-transform: none; }
+input[type=search]::placeholder { color: var(--fg-dim); }
+select option { background: var(--bg); color: var(--fg); }
+button { letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background .12s linear; }
+button:hover, select:hover { background: var(--highlight); }
+button:disabled { color: var(--fg-dim); cursor: default; }
+:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+input[type=checkbox] { accent-color: var(--fg); vertical-align: -2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; font-size: 10px; letter-spacing: 0.12em; }
+.chip i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.chip[aria-pressed="false"] { color: var(--fg-dim); border-color: var(--border); }
+.chip[aria-pressed="false"] i { background: transparent !important; outline: 1px solid var(--fg-dim); }
+button.png { font-size: 10px; padding: 4px 10px; letter-spacing: 0.12em; }
+.locus-cap button.png { margin-left: 12px; }
+.png-msg { font-size: 10px; color: var(--fg-mute); }
+.png-msg:empty { display: none; }
+
+/* figures */
+.scroll { overflow-x: auto; }
+svg { display: block; }
+svg text { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--fg-mute);
+  font-size: 11px; margin: 8px 0 4px; align-items: center; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.detail { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; }
+@media (max-width: 900px) { .detail { grid-template-columns: 1fr; } }
+.locus-cap { color: var(--fg-mute); font-size: 11px; margin: 14px 0 0; }
+.pw-head { display: flex; align-items: center; gap: 8px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.12em; margin: 20px 0 0; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.pw-head i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.rowlab { cursor: pointer; }
+.g2 { font-weight: 700; fill: var(--ink); }
+.g1 { font-weight: 700; fill: var(--ink); }
+.gx { fill: var(--muted); }
+.g0 { fill: var(--absent-text); }
+
+/* tables: dashed rules, dim uppercase headers, the key column in full ink */
+table { border-collapse: collapse; width: 100%; font-size: 11px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px dashed var(--border);
+  vertical-align: top; color: var(--fg-mute); }
+th { font-weight: 400; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: 10px; white-space: nowrap; }
+#summary th { color: var(--fg-mute); padding-top: 14px; }
+#summary td:nth-child(2), #calls td:nth-child(2) { color: var(--fg); }
+td.num { white-space: nowrap; }
+td.mono { word-break: break-all; }
+tr.absent td, #summary tr.absent td:nth-child(2), #calls tr.absent td:nth-child(2) { color: var(--fg-dim); }
+tbody tr:hover td { background: var(--highlight); }
+.pw { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.pw i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 10; pointer-events: none; display: none; max-width: 360px;
+  background: var(--bg-2); color: var(--fg); border: 1px solid var(--border-strong);
+  padding: 10px 12px; font-size: 11px; line-height: 1.5; }
+#tip b { font-weight: 500; }
+#tip .k { color: var(--fg-mute); }
+#tip .row { display: flex; gap: 12px; justify-content: space-between; }
+
+.foot { margin-top: 26px; border-top: 1px solid var(--border); padding-top: 14px; display: flex;
+  justify-content: space-between; gap: 16px; color: var(--fg-dim); font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.12em; }
+</style>
+</head>
+<body>
+<main>
+  <div class="toprow">
+    <p class="term-line"><span class="prompt">$</span> cat ./report.html <span id="loaded"></span><span class="cursor"></span></p>
+    <div class="theme-switch" role="group" aria-label="Colour theme">
+      <span>Theme</span>
+      <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+  <header class="topbar">
+    <div class="topbar__id">
+      <div class="id__head" id="id-head">[ report ]</div>
+      <h1 class="id__name">__TITLE__</h1>
+      <p class="id__sub" id="meta"></p>
+    </div>
+    <div class="topbar__meta" id="meta-rows"></div>
+  </header>
+
+  <section class="frame">
+    <h2 class="frame__label">Filter</h2>
+    <div class="frame__body controls">
+      <label>Find genome <input type="search" id="q" placeholder="type part of a name"></label>
+      <label>Order rows by
+        <select id="sort">
+          <option value="sim">similar gene content</option>
+          <option value="name">name</option>
+          <option value="input">input order</option>
+        </select>
+      </label>
+      <div class="chips" id="chips" aria-label="Pathways shown"></div>
+    </div>
+  </section>
+
+  <section class="frame">
+    <h2 class="frame__label">Genes</h2>
+    <div class="frame__body">
+      <div class="fig-head" id="head-grid"><p class="sub">One row per genome, one column per marker gene. Hover a cell for the evidence; click a row to open that genome below.</p></div>
+      <div class="legend" id="leg-status"></div>
+      <div class="scroll"><svg id="grid" role="img" aria-label="Gene presence grid"></svg></div>
+    </div>
+  </section>
+
+  <section class="frame">
+    <h2 class="frame__label">Complexes · process modules</h2>
+    <div class="frame__body">
+      <div class="fig-head" id="head-proc"><p class="sub">Is every subunit of a complex, or every step of a process, present in one genome?</p></div>
+      <div class="legend" id="leg-comp"></div>
+      <div class="scroll"><svg id="proc" role="img" aria-label="Complex and process completeness grid"></svg></div>
+    </div>
+  </section>
+
+  <section class="frame" id="detail">
+    <h2 class="frame__label">Genome</h2>
+    <div class="frame__body">
+      <div class="controls">
+        <label>Genome shown <select id="genome" aria-label="Genome shown below"></select></label>
+      </div>
+      <div class="detail">
+        <div>
+          <div class="fig-head h3" id="head-cycle"><h3 id="cycle-h">Position in the cycle</h3></div>
+          <p class="note" id="cycle-note" style="margin:0 0 6px"></p>
+          <div class="legend" id="leg-cycle"></div>
+          <svg id="cycle" role="img" aria-label="Cycle map for the selected genome"></svg>
+        </div>
+        <div>
+          <h3>Complexes and process modules</h3>
+          <table id="summary"></table>
+        </div>
+      </div>
+      <h3>Gene neighbourhoods</h3>
+      <div id="loci"></div>
+      <h3>All calls</h3>
+      <label class="note"><input type="checkbox" id="showabsent"> include genes that were not found</label>
+      <div class="scroll"><table id="calls"></table></div>
+    </div>
+  </section>
+
+  <footer class="foot"><span>./report.html</span><span id="foot"></span></footer>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script type="application/json" id="data">__DATA_JSON__</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById("data").textContent);
+const NS = "http://www.w3.org/2000/svg";
+const PW = {}; D.pathways.forEach((p, i) => { PW[p.id] = Object.assign({i}, p); });
+const TG = {}; D.targets.forEach(t => { TG[t.id] = t; });
+const STATUS = {"2": "confirmed", "1": "domain-only", "-1": "disqualified", "0": "absent"};
+const STATUS_LONG = {"2": "confirmed", "1": "domain-only (HMM signature, no BLAST support)",
+  "-1": "disqualified (failed the homology-trap gate)", "0": "absent"};
+const COMP_LONG = {complete: "complete", partial: "partial", ruled_out: D.labels.ruled_out, absent: "absent"};
+const state = {q: "", sort: "sim", hidden: new Set(), sel: D.samples.length ? D.samples[0].name : null, showAbsent: false};
+
+function s(tag, attrs, parent, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function h(tag, attrs, parent, text) {
+  const e = document.createElement(tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const pcol = id => PW[id] ? `var(--p${PW[id].i})` : "var(--muted)";
+const fmt = n => Number(n).toLocaleString("en-US");
+
+// ── glyphs ────────────────────────────────────────────────────────────────
+function statusGlyph(g, cx, cy, r, code, colour) {
+  if (code === 2) s("circle", {cx, cy, r, fill: colour}, g);
+  else if (code === 1) {
+    s("circle", {cx, cy, r: r - 0.6, fill: "var(--surface)", stroke: colour, "stroke-width": 1.4}, g);
+    s("path", {d: `M${cx},${cy - r} A${r},${r} 0 0 0 ${cx},${cy + r} Z`, fill: colour}, g);
+  } else if (code === -1) {
+    s("circle", {cx, cy, r: r - 0.5, fill: "var(--surface)", stroke: "var(--muted)", "stroke-width": 1.1}, g);
+    const d = r * 0.42;
+    s("path", {d: `M${cx - d},${cy - d}L${cx + d},${cy + d}M${cx - d},${cy + d}L${cx + d},${cy - d}`,
+      stroke: "var(--muted)", "stroke-width": 1.1, "stroke-linecap": "round"}, g);
+  } else s("circle", {cx, cy, r: r - 0.5, fill: "none", stroke: "var(--faint)", "stroke-width": 0.8}, g);
+}
+function compGlyph(g, cx, cy, r, st, text) {
+  if (st === "complete") s("circle", {cx, cy, r, fill: "var(--accent)"}, g);
+  else if (st === "partial") {
+    s("circle", {cx, cy, r: r - 0.7, fill: "var(--surface)", stroke: "var(--accent)", "stroke-width": 1.5}, g);
+    if (text) {
+      // n/N inside the ring; a long one ("10/12") is squeezed to the ring's inner width.
+      const a = {x: cx, y: cy + 2.8, "text-anchor": "middle", "font-size": 7.5, "letter-spacing": 0, fill: "var(--ink2)"};
+      if (text.length > 3) { a.textLength = 2 * r - 4.5; a.lengthAdjust = "spacingAndGlyphs"; }
+      s("text", a, g, text);
+    }
+  } else {
+    s("circle", {cx, cy, r: r - 0.5, fill: "none", stroke: "var(--faint)", "stroke-width": 0.8}, g);
+    if (st === "ruled_out") {
+      const d = r * 0.38;
+      s("path", {d: `M${cx - d},${cy - d}L${cx + d},${cy + d}M${cx - d},${cy + d}L${cx + d},${cy - d}`,
+        stroke: "var(--muted)", "stroke-width": 1.1, "stroke-linecap": "round"}, g);
+    }
+  }
+}
+function legendItem(parent, draw, label) {
+  const sp = h("span", {}, parent);
+  const v = s("svg", {width: 18, height: 18, viewBox: "0 0 18 18"}, sp);
+  draw(v);
+  sp.appendChild(document.createTextNode(label));
+}
+
+// ── tooltip ───────────────────────────────────────────────────────────────
+const tip = document.getElementById("tip");
+function showTip(evt, build) {
+  tip.replaceChildren();
+  build(tip);
+  tip.style.display = "block";
+  const pad = 14, w = tip.offsetWidth, hh = tip.offsetHeight;
+  let x = evt.clientX + pad, y = evt.clientY + pad;
+  if (x + w > window.innerWidth - 8) x = evt.clientX - w - pad;
+  if (y + hh > window.innerHeight - 8) y = evt.clientY - hh - pad;
+  tip.style.left = Math.max(4, x) + "px";
+  tip.style.top = Math.max(4, y) + "px";
+}
+function hideTip() { tip.style.display = "none"; }
+function tipHead(t, strong, rest) {
+  const d = h("div", {}, t); h("b", {}, d, strong);
+  if (rest) d.appendChild(document.createTextNode(" " + rest));
+}
+function tipRow(t, k, v) {
+  if (v === "" || v == null) return;
+  const d = h("div", {class: "row"}, t);
+  h("span", {class: "k"}, d, k); h("span", {}, d, String(v));
+}
+function callTip(t, sample, tid) {
+  const tg = TG[tid], c = sample.calls[tid];
+  tipHead(t, tg.label, "· " + sample.name);
+  h("div", {class: "k"}, t, tg.name);
+  tipRow(t, "status", STATUS_LONG[c ? c[0] : 0]);
+  if (!c) return;
+  tipRow(t, "evidence", c[1]);
+  tipRow(t, "protein", c[2]);
+  tipRow(t, "HMM hit", c[3]);
+  tipRow(t, "E-value", c[4]);
+  tipRow(t, "BLAST reference", c[5]);
+  tipRow(t, "identity", c[6] !== "" ? c[6] + " %" : "");
+  if (c[7]) tipRow(t, "location", `${c[7]}:${fmt(c[8])}–${fmt(c[9])} (${c[10]})`);
+  if (c[11]) tipRow(t, "other copies", c[11]);
+}
+
+// ── PNG export ────────────────────────────────────────────────────────────
+// Every figure is an inline SVG styled through the page's CSS variables. To save
+// one, a standalone copy is built (variables and text rules written into it, a
+// title and the legend added, hover / selection marks dropped), drawn on a canvas
+// at 300/96 of its on-screen size, and the PNG is stamped with a pHYs chunk so
+// that it opens at 300 dpi with the physical size it has on screen.
+const DPI = 300;
+const FONT = '"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace';
+function isDark() {
+  const root = document.documentElement;
+  return root.dataset.theme ? root.dataset.theme === "dark"
+    : window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+function exportCss(background) {
+  // Resolve every custom property of the page and carry over the SVG text rules.
+  const cs = getComputedStyle(document.documentElement), names = new Set(), rules = [];
+  for (const sheet of document.styleSheets) for (const r of sheet.cssRules) {
+    const sel = r.selectorText || "";
+    if (sel === ":root") { for (let i = 0; i < r.style.length; i++) if (r.style[i].startsWith("--")) names.add(r.style[i]); }
+    else if (sel === "svg text" || /^\.g[012x]$/.test(sel)) rules.push(r.cssText);
+    else if (r.type === CSSRule.FONT_FACE_RULE) rules.unshift(r.cssText);   // the inlined report font
+  }
+  const vars = [...names].map(n => `${n}:${n === "--surface" ? background : cs.getPropertyValue(n).trim()}`);
+  return `:root{${vars.join(";")}}\n${rules.join("\n")}`;
+}
+function pathwayKey(ids) {
+  // A detached legend row naming the pathway colours (the page shows them as chips).
+  const key = h("div", {});
+  D.pathways.filter(p => !ids || ids.has(p.id)).forEach(p => legendItem(key,
+    v => s("line", {x1: 1, x2: 17, y1: 9, y2: 9, stroke: pcol(p.id), "stroke-width": 3.2}, v), p.label));
+  return key;
+}
+function standaloneSvg(spec) {
+  const src = spec.svg, vb = src.viewBox.baseVal, box = src.getBoundingClientRect();
+  const w = vb && vb.width ? vb.width : box.width, hgt = vb && vb.height ? vb.height : box.height;
+  const P = 16, innerW = Math.max(w, 460);
+  const bg = isDark() ? getComputedStyle(document.documentElement).getPropertyValue("--surface").trim() : "#ffffff";
+  const out = s("svg", {});
+  s("style", {}, out, exportCss(bg));
+  const back = s("rect", {x: 0, y: 0, fill: bg}, out);
+  let y = P;
+  if (spec.title) { s("text", {x: P, y: y + 13, "font-size": 14, "font-weight": 500, fill: "var(--ink)"}, out, spec.title); y += 24; }
+  if (spec.subtitle) { s("text", {x: P, y: y + 10, "font-size": 11, fill: "var(--ink2)"}, out, spec.subtitle); y += 20; }
+  const fig = src.cloneNode(true);
+  fig.removeAttribute("id"); fig.removeAttribute("style");
+  fig.querySelectorAll(".ui-only").forEach(e => e.remove());
+  fig.querySelectorAll(".rowlab").forEach(e => e.setAttribute("font-weight", 400));
+  for (const [k, v] of [["x", P], ["y", y], ["width", w], ["height", hgt]]) fig.setAttribute(k, v);
+  out.appendChild(fig);
+  y += hgt + 10;
+  // Legends: the page's HTML legend rows (a small SVG + a label per item), re-flowed.
+  const ctx = document.createElement("canvas").getContext("2d");
+  ctx.font = "11px " + FONT;
+  (spec.legends || []).forEach(lg => {
+    let x = P, any = false;
+    lg.querySelectorAll(":scope > span").forEach(sp => {
+      const g = sp.querySelector("svg");           // the label is the span's own text, not the glyph's
+      const label = [...sp.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join("").trim();
+      const gw = g ? Number(g.getAttribute("width")) : 0, lead = g ? gw + 6 : 0;
+      const iw = lead + ctx.measureText(label).width;
+      if (x > P && x + iw > P + innerW) { x = P; y += 22; }
+      if (g) { const c = g.cloneNode(true); c.setAttribute("x", x); c.setAttribute("y", y); out.appendChild(c); }
+      s("text", {x: x + lead, y: y + 13, "font-size": 11, fill: "var(--ink2)"}, out, label);
+      x += iw + 18; any = true;
+    });
+    if (any) y += 24;
+  });
+  const W = innerW + 2 * P, H = y + P - 8;
+  for (const [k, v] of [["width", W], ["height", H], ["viewBox", `0 0 ${W} ${H}`]]) out.setAttribute(k, v);
+  back.setAttribute("width", W); back.setAttribute("height", H);
+  return {svg: out, w: W, h: H};
+}
+const CRC = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+  return t;
+})();
+function crc32(bytes) {
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) c = CRC[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+async function stampDpi(blob, dpi) {
+  // Write the resolution into the PNG: a pHYs chunk (pixels per metre) right after IHDR.
+  const src = new Uint8Array(await blob.arrayBuffer()), view = new DataView(src.buffer);
+  const phys = new Uint8Array(21), pv = new DataView(phys.buffer), ppm = Math.round(dpi / 0.0254);
+  pv.setUint32(0, 9); phys.set([0x70, 0x48, 0x59, 0x73], 4);            // length, "pHYs"
+  pv.setUint32(8, ppm); pv.setUint32(12, ppm); phys[16] = 1;             // x, y, unit = metre
+  pv.setUint32(17, crc32(phys.subarray(4, 17)));
+  const parts = [src.subarray(0, 8)];
+  for (let off = 8; off + 12 <= src.length;) {
+    const end = off + 12 + view.getUint32(off);
+    const type = String.fromCharCode(src[off + 4], src[off + 5], src[off + 6], src[off + 7]);
+    if (type !== "pHYs") parts.push(src.subarray(off, end));
+    if (type === "IHDR") parts.push(phys);
+    off = end;
+  }
+  return new Blob(parts, {type: "image/png"});
+}
+async function savePng(spec) {
+  await document.fonts.ready;
+  const {svg, w, h: hgt} = standaloneSvg(spec);
+  const xml = new XMLSerializer().serializeToString(svg);
+  const url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml;charset=utf-8"}));
+  try {
+    const img = new Image();
+    await new Promise((ok, bad) => {
+      img.onload = ok; img.onerror = () => bad(new Error("the figure could not be rendered"));
+      img.src = url;
+    });
+    // The font inlined in the SVG is decoded on first paint: paint once and let it settle,
+    // so that the real drawing below does not fall back to a system face.
+    document.createElement("canvas").getContext("2d").drawImage(img, 0, 0, 8, 8);
+    await new Promise(done => setTimeout(done, 120));
+    // 300 dpi unless the bitmap would exceed what a browser canvas can hold
+    // (a grid of hundreds of genomes); then the largest size that works.
+    const scale = Math.min(DPI / 96, 32767 / w, 32767 / hgt, Math.sqrt(2.6e8 / (w * hgt)));
+    let blob = null, used = scale;
+    for (let k = 0; k < 6 && !blob; k++) {
+      used = scale * Math.pow(0.7, k);
+      const c = document.createElement("canvas");
+      c.width = Math.round(w * used); c.height = Math.round(hgt * used);
+      const ctx = c.getContext("2d");
+      if (!ctx) continue;
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      blob = await new Promise(done => c.toBlob(done, "image/png"));
+    }
+    if (!blob) throw new Error("the browser could not allocate the image");
+    const dpi = Math.round(used * 96);
+    const name = `${D.labels.cycle}-cycle_${spec.name}_${dpi}dpi.png`.replace(/[^A-Za-z0-9._-]+/g, "_");
+    const a = h("a", {href: URL.createObjectURL(await stampDpi(blob, dpi)), download: name}, document.body);
+    a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    return {name, dpi};
+  } finally { URL.revokeObjectURL(url); }
+}
+function pngButton(parent, getSpec) {
+  const b = h("button", {class: "png", type: "button",
+    title: `Download this figure, as shown, as a ${DPI} dpi PNG`}, parent, `Save PNG (${DPI} dpi)`);
+  const msg = h("span", {class: "png-msg", role: "status"}, parent);
+  b.addEventListener("click", async () => {
+    b.disabled = true; msg.textContent = "rendering…";
+    try {
+      const r = await savePng(getSpec());
+      msg.textContent = r.dpi === DPI ? `saved ${r.name}`
+        : `figure too large for ${DPI} dpi — saved at ${r.dpi} dpi as ${r.name}`;
+    } catch (e) { msg.textContent = "export failed: " + e.message; }
+    b.disabled = false;
+  });
+  return b;
+}
+
+// ── rows ──────────────────────────────────────────────────────────────────
+function rows() {
+  const q = state.q.trim().toLowerCase();
+  const r = D.samples.filter(x => !q || x.name.toLowerCase().includes(q));
+  if (state.sort === "name") r.sort((a, b) => a.name.localeCompare(b.name));
+  else if (state.sort === "sim") r.sort((a, b) => a.rank - b.rank);
+  else r.sort((a, b) => a.idx - b.idx);
+  return r;
+}
+const CELL = 22, CW = 18, R = 7;
+// Label extents are computed, not measured: JetBrains Mono advances 0.6 em per character.
+const CHW = 0.6, RAD = Math.PI / 180;
+const maxLen = list => Math.max(1, ...list.map(x => x.length));
+function labelWidth(list) { return 18 + Math.max(40, ...list.map(x => x.name.length * 12 * CHW + 1)); }
+function drawRowLabels(svg, list, left, top) {
+  list.forEach((x, i) => {
+    const y = top + i * CELL + CELL / 2;
+    const t = s("text", {x: left - 10, y: y + 4, "text-anchor": "end", "font-size": 12,
+      fill: "var(--ink)", class: "rowlab", "font-weight": x.name === state.sel ? 700 : 400}, svg, x.name);
+    t.addEventListener("click", () => select(x.name, true));
+    if (x.name === state.sel)
+      s("rect", {x: 2, y: y - 7, width: 3, height: 14, fill: "var(--accent)", class: "ui-only"}, svg);
+  });
+}
+function hoverBand(svg, left, width) {
+  return s("rect", {x: left - 4, y: -100, width: width + 8, height: CELL, fill: "var(--hover)", "pointer-events": "none", class: "ui-only"}, svg);
+}
+function emptyNote(svg, msg) {
+  svg.replaceChildren();
+  svg.setAttribute("width", 400); svg.setAttribute("height", 40);
+  s("text", {x: 0, y: 24, "font-size": 13, fill: "var(--ink2)"}, svg, msg);
+}
+
+// ── gene grid ─────────────────────────────────────────────────────────────
+function renderGrid() {
+  const svg = document.getElementById("grid");
+  const list = rows();
+  const blocks = D.pathways.filter(p => !state.hidden.has(p.id))
+    .map(p => ({p, genes: D.targets.filter(t => t.cat === p.id)})).filter(b => b.genes.length);
+  if (!list.length || !blocks.length) return emptyNote(svg, list.length ? "All pathways are hidden." : "No genome matches.");
+  svg.replaceChildren();
+  const left = labelWidth(list), gut = 10;
+  const cols = []; let x = left;
+  blocks.forEach((b, bi) => {
+    if (bi) x += gut;
+    b.x0 = x;
+    b.genes.forEach(t => { cols.push({t, x: x + CW / 2, p: b.p}); x += CW; });
+    b.x1 = x;
+  });
+  // Header heights follow the longest pathway name (at -35°) and gene name (at -60°).
+  const pw = b => b.p.short.length * 11 * CHW;
+  const barY = Math.ceil(Math.max(...blocks.map(pw)) * Math.sin(35 * RAD)) + 22;
+  const geneLen = maxLen(cols.map(c => c.t.label)) * 11 * CHW;
+  const top = barY + 14 + Math.ceil(geneLen * Math.sin(60 * RAD)) + 10;
+  const W = Math.ceil(Math.max(x + geneLen * Math.cos(60 * RAD) + 16,
+    ...blocks.map(b => b.x0 + 6 + pw(b) * Math.cos(35 * RAD) + 14)));
+  const H = top + list.length * CELL + 8;
+  svg.setAttribute("width", W); svg.setAttribute("height", H);
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const band = hoverBand(svg, left, x - left);
+  blocks.forEach(b => {
+    s("rect", {x: b.x0 + 2, y: barY, width: b.x1 - b.x0 - 4, height: 3, fill: pcol(b.p.id)}, svg);
+    s("text", {x: b.x0 + 6, y: barY - 7, "font-size": 11, "font-weight": 500, fill: "var(--ink)",
+      "letter-spacing": 0, transform: `rotate(-35 ${b.x0 + 6} ${barY - 7})`}, svg, b.p.short.toUpperCase());
+  });
+  cols.forEach(c => s("text", {x: c.x + 4, y: top - 8, "font-size": 11, fill: "var(--ink2)",
+    transform: `rotate(-60 ${c.x + 4} ${top - 8})`}, svg, c.t.label));
+  list.forEach((sm, i) => {
+    const y = top + i * CELL + CELL / 2;
+    s("line", {x1: left, x2: x, y1: y, y2: y, stroke: "var(--grid)", "stroke-width": 1}, svg);
+    let d = "";
+    cols.forEach(c => {
+      const call = sm.calls[c.t.id];
+      if (!call) { const r = R - 0.5; d += `M${c.x - r},${y}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`; }
+    });
+    if (d) s("path", {d, fill: "var(--surface)", stroke: "var(--faint)", "stroke-width": 0.8}, svg);
+    cols.forEach(c => { const call = sm.calls[c.t.id]; if (call) statusGlyph(svg, c.x, y, R, call[0], pcol(c.p.id)); });
+  });
+  drawRowLabels(svg, list, left, top);
+  const at = evt => {
+    const b = svg.getBoundingClientRect();
+    const px = evt.clientX - b.left, py = evt.clientY - b.top;
+    const ri = Math.floor((py - top) / CELL);
+    if (ri < 0 || ri >= list.length) return null;
+    const c = cols.find(c => Math.abs(c.x - px) <= CW / 2);
+    return {ri, c};
+  };
+  svg.onpointermove = evt => {
+    const hit = at(evt);
+    if (!hit) { band.setAttribute("y", -100); return hideTip(); }
+    band.setAttribute("y", top + hit.ri * CELL);
+    if (!hit.c) return hideTip();
+    showTip(evt, t => callTip(t, list[hit.ri], hit.c.t.id));
+  };
+  svg.onpointerleave = () => { band.setAttribute("y", -100); hideTip(); };
+  svg.onclick = evt => { const hit = at(evt); if (hit) select(list[hit.ri].name, true); };
+}
+
+// ── complex / process grid ────────────────────────────────────────────────
+function procTip(t, sample, kind, def) {
+  const v = (kind === "cx" ? sample.cx : sample.syn)[def.id] || ["absent", "", "", "", ""];
+  tipHead(t, def.label, "· " + sample.name);
+  h("div", {class: "k"}, t, def.desc);
+  tipRow(t, "state", COMP_LONG[v[0]] + (v[1] ? ` (${v[1]})` : ""));
+  tipRow(t, "found", v[2]);
+  tipRow(t, "missing", v[3]);
+  tipRow(t, "ruled out by", v[4]);
+}
+function renderProc() {
+  const svg = document.getElementById("proc");
+  const list = rows();
+  if (!list.length) return emptyNote(svg, "No genome matches.");
+  svg.replaceChildren();
+  const groups = [
+    {label: "complexes", kind: "cx", defs: D.complexes},
+    {label: "process modules", kind: "syn", defs: D.synergies.filter(x => x.group === "process")},
+    {label: "phenotype flags", kind: "syn", defs: D.synergies.filter(x => x.group === "flag")},
+  ].filter(g => g.defs.length);
+  const cw = 26, left = labelWidth(list), gut = 18;
+  const cols = []; let x = left;
+  groups.forEach((g, gi) => {
+    if (gi) x += gut;
+    g.x0 = x;
+    g.defs.forEach(def => { cols.push({def, kind: g.kind, x: x + cw / 2}); x += cw; });
+    g.x1 = x;
+  });
+  // Header height follows the longest column label (at -60°).
+  const labLen = maxLen(cols.map(c => c.def.label)) * 11 * CHW;
+  const top = 26 + Math.ceil(labLen * Math.sin(60 * RAD)) + 16;
+  const W = Math.ceil(x + labLen * Math.cos(60 * RAD) + 16), H = top + list.length * CELL + 8;
+  svg.setAttribute("width", W); svg.setAttribute("height", H);
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const band = hoverBand(svg, left, x - left);
+  groups.forEach(g => {
+    s("line", {x1: g.x0 + 2, x2: g.x1 - 2, y1: 16, y2: 16, stroke: "var(--ink2)", "stroke-width": 1}, svg);
+    s("text", {x: g.x0 + 2, y: 10, "font-size": 10, "font-weight": 500, fill: "var(--ink)"}, svg, g.label.toUpperCase());
+  });
+  cols.forEach(c => s("text", {x: c.x + 4, y: top - 8, "font-size": 11, fill: "var(--ink2)",
+    transform: `rotate(-60 ${c.x + 4} ${top - 8})`}, svg, c.def.label));
+  list.forEach((sm, i) => {
+    const y = top + i * CELL + CELL / 2;
+    s("line", {x1: left, x2: x, y1: y, y2: y, stroke: "var(--grid)", "stroke-width": 1}, svg);
+    cols.forEach(c => {
+      const v = (c.kind === "cx" ? sm.cx : sm.syn)[c.def.id] || ["absent", ""];
+      s("circle", {cx: c.x, cy: y, r: R + 1, fill: "var(--surface)"}, svg);
+      compGlyph(svg, c.x, y, R + 1, v[0], v[1]);
+    });
+  });
+  drawRowLabels(svg, list, left, top);
+  const at = evt => {
+    const b = svg.getBoundingClientRect();
+    const px = evt.clientX - b.left, py = evt.clientY - b.top;
+    const ri = Math.floor((py - top) / CELL);
+    if (ri < 0 || ri >= list.length) return null;
+    return {ri, c: cols.find(c => Math.abs(c.x - px) <= cw / 2)};
+  };
+  svg.onpointermove = evt => {
+    const hit = at(evt);
+    if (!hit) { band.setAttribute("y", -100); return hideTip(); }
+    band.setAttribute("y", top + hit.ri * CELL);
+    if (!hit.c) return hideTip();
+    showTip(evt, t => procTip(t, list[hit.ri], hit.c.kind, hit.c.def));
+  };
+  svg.onpointerleave = () => { band.setAttribute("y", -100); hideTip(); };
+  svg.onclick = evt => { const hit = at(evt); if (hit) select(list[hit.ri].name, true); };
+}
+
+// ── genome detail: cycle map ──────────────────────────────────────────────
+function tokenClass(code) { return code === 2 ? "g2" : code === 1 ? "g1" : code === -1 ? "gx" : "g0"; }
+function tokenText(tok) { return tok[0] + (tok[1] === 1 ? "°" : tok[1] === -1 ? "×" : ""); }
+function renderCycle(sm) {
+  const svg = document.getElementById("cycle");
+  svg.replaceChildren();
+  const C = D.cycle, k = 6;
+  const W = (C.xlim[1] - C.xlim[0]) * k, H = (C.ylim[1] - C.ylim[0]) * k;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("width", "100%");
+  svg.style.maxWidth = W + "px";
+  const X = x => (x - C.xlim[0]) * k, Y = y => (C.ylim[1] - y) * k;
+  const order = {absent: 0, partial: 1, complete: 2};
+  const steps = C.steps.slice().sort((a, b) => order[sm.steps[a.id][0]] - order[sm.steps[b.id][0]]);
+  const stepTip = st => t => {
+    const v = sm.steps[st.id];
+    tipHead(t, st.name);
+    const d = h("div", {class: "pw"}, t); h("i", {style: `background:${pcol(st.pathway)}`}, d);
+    d.appendChild(document.createTextNode(PW[st.pathway].label));
+    tipRow(t, "step", v[0] + (v[2] ? " — runs in reverse here" : ""));
+    v[1].forEach(line => line.forEach(tok => tipRow(t, tok[0], STATUS[tok[1]])));
+  };
+  steps.forEach(st => {
+    const stt = sm.steps[st.id][0];
+    const colour = stt === "absent" ? "var(--absent-edge)" : pcol(st.pathway);
+    const g = s("g", {}, svg);
+    (sm.steps[st.id][2] ? st.arrows_rev : st.arrows).forEach(a => {
+      if (!a.line.length) return;
+      const d = a.line.map((p, i) => (i ? "L" : "M") + X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("");
+      const attrs = {d, fill: "none", stroke: colour, "stroke-linejoin": "round",
+        "stroke-width": stt === "complete" ? 3.4 : stt === "partial" ? 2 : 1.2};
+      if (stt === "partial") attrs["stroke-dasharray"] = "5 4";
+      s("path", attrs, g);
+      s("polygon", {points: a.head.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join(" "), fill: colour}, g);
+      s("path", {d, fill: "none", stroke: "transparent", "stroke-width": 16}, g);
+    });
+    g.addEventListener("pointermove", e => showTip(e, stepTip(st)));
+    g.addEventListener("pointerleave", hideTip);
+  });
+  C.nodes.forEach(n => {
+    s("rect", {x: X(n.x - n.w / 2), y: Y(n.y + n.h / 2), width: n.w * k, height: n.h * k,
+      fill: "var(--surface)", stroke: "var(--axis)", "stroke-width": 1}, svg);
+    s("text", {x: X(n.x), y: Y(n.y) + 4.5, "text-anchor": "middle", "font-size": 13, fill: "var(--ink)"}, svg, n.label);
+  });
+  C.steps.forEach(st => {
+    const [lx, ly, ha] = st.label;
+    const anchor = ha === "right" ? "end" : ha === "center" ? "middle" : "start";
+    const g = s("g", {}, svg);
+    sm.steps[st.id][1].forEach((line, li) => {
+      const t = s("text", {x: X(lx), y: Y(ly - li * C.line_step) + 4, "text-anchor": anchor, "font-size": 11}, g);
+      line.forEach((tok, ti) => {
+        const ts = s("tspan", {class: tokenClass(tok[1])}, t, tokenText(tok));
+        if (ti) ts.setAttribute("dx", 6);
+      });
+    });
+    g.addEventListener("pointermove", e => showTip(e, stepTip(st)));
+    g.addEventListener("pointerleave", hideTip);
+  });
+}
+
+// ── genome detail: summary, loci, calls ───────────────────────────────────
+function renderSummary(sm) {
+  const tb = document.getElementById("summary");
+  tb.replaceChildren();
+  const add = (title, defs, src) => {
+    if (!defs.length) return;
+    const hr = h("tr", {}, tb); h("th", {colspan: 3}, hr, title);
+    defs.forEach(def => {
+      const v = src[def.id] || ["absent", "", "", "", ""];
+      const tr = h("tr", {class: v[0] === "absent" ? "absent" : ""}, tb);
+      const td = h("td", {style: "width:28px"}, tr);
+      const g = s("svg", {width: 20, height: 20, viewBox: "0 0 20 20"}, td);
+      compGlyph(g, 10, 10, 8.5, v[0], v[1]);
+      h("td", {}, tr, def.label);
+      let txt = COMP_LONG[v[0]];
+      if (v[0] === "partial") txt = `${v[1]} — missing ${v[3]}`;
+      else if (v[0] === "ruled_out") txt = `ruled out by ${v[4]}`;
+      else if (v[0] === "complete" && v[2]) txt = v[2];
+      h("td", {}, tr, txt);
+    });
+  };
+  add("Complexes", D.complexes, sm.cx);
+  add("Process modules", D.synergies.filter(x => x.group === "process"), sm.syn);
+  add("Phenotype flags", D.synergies.filter(x => x.group === "flag"), sm.syn);
+}
+function geneArrow(x0, x1, y, hgt, strand) {
+  const hd = Math.min(8, (x1 - x0) * 0.6), t = y - hgt / 2, b = y + hgt / 2;
+  return strand === "+"
+    ? `${x0},${t} ${x1 - hd},${t} ${x1},${y} ${x1 - hd},${b} ${x0},${b}`
+    : `${x1},${t} ${x0 + hd},${t} ${x0},${y} ${x0 + hd},${b} ${x1},${b}`;
+}
+function renderLoci(sm) {
+  const box = document.getElementById("loci");
+  box.replaceChildren();
+  if (sm.kind !== "nucleotide") {
+    h("p", {class: "note"}, box, "No gene coordinates for this sample: neighbourhood maps need nucleotide / MAG input (this one was a pre-called proteome).");
+    return;
+  }
+  const loci = sm.loci.filter(l => l.np > 0);
+  if (!loci.length) { h("p", {class: "note"}, box, `No ${D.labels.letter}-cycle genes were called in this genome.`); return; }
+  const lg = h("div", {class: "legend"}, box);
+  const demo = (code) => v => {
+    const p = s("polygon", {points: geneArrow(1, 17, 9, 9, "+")}, v);
+    if (code === 2) p.setAttribute("fill", "var(--ink2)");
+    else if (code === 1) { p.setAttribute("fill", "var(--ink2)"); p.setAttribute("fill-opacity", 0.3); p.setAttribute("stroke", "var(--ink2)"); }
+    else if (code === -1) { p.setAttribute("fill", "var(--surface)"); p.setAttribute("stroke", "var(--muted)"); }
+    else p.setAttribute("fill", "var(--unann)");
+  };
+  legendItem(lg, demo(2), "confirmed");
+  legendItem(lg, demo(1), "domain-only°");
+  legendItem(lg, demo(-1), "disqualified×");
+  legendItem(lg, demo(0), "not annotated (outside the target set)");
+  legendItem(lg, v => s("line", {x1: 9, x2: 9, y1: 2, y2: 16, stroke: "var(--ink2)", "stroke-width": 2.5}, v), "contig end");
+  const maxSpan = Math.max(...loci.map(l => l.end - l.start));
+  const avail = Math.max(420, Math.min(1180, box.clientWidth || 1000) - 70);
+  const ppb = Math.min(0.045, avail / maxSpan);            // px per bp, shared by every locus
+  const kb = 1000 * ppb >= 28 ? 1000 : 5000;
+  const sc = h("span", {}, lg);
+  const sv = s("svg", {width: kb * ppb + 2, height: 18}, sc);
+  s("line", {x1: 1, x2: kb * ppb + 1, y1: 9, y2: 9, stroke: "var(--ink2)", "stroke-width": 1.5}, sv);
+  sc.appendChild(document.createTextNode(`${kb / 1000} kb`));
+  D.pathways.forEach(p => {
+    const ls = loci.filter(l => l.pathway === p.id);
+    if (!ls.length) return;
+    const hd = h("div", {class: "pw-head"}, box); h("i", {style: `background:${pcol(p.id)}`}, hd);
+    hd.appendChild(document.createTextNode(p.label));
+    ls.forEach(l => {
+      const cap = h("p", {class: "locus-cap"}, box, `${l.id} · ${l.contig} · ${fmt(l.start)}–${fmt(l.end)} bp`);
+      const L = 34, labH = 58, ah = 15, yc = labH + ah / 2 + 2;
+      const X = pos => L + (pos - l.start) * ppb;
+      const W = X(l.end) + 90, H = labH + ah + 12;
+      const svg = s("svg", {width: W, height: H, viewBox: `0 0 ${W} ${H}`}, h("div", {class: "scroll"}, box));
+      pngButton(cap, () => ({svg, title: `${sm.name} · ${l.id}`,
+        subtitle: `${l.contig} · ${fmt(l.start)}–${fmt(l.end)} bp`,
+        legends: [lg, pathwayKey(new Set(l.genes.map(gn => gn[4][0] && gn[4][0][2])))],
+        name: `locus_${sm.name}_${l.id}`}));
+      let xl = X(l.start) - 12, xr = X(l.end) + 12;
+      if (l.el) xl = l.clen ? Math.max(X(l.start) - 26, X(1)) : X(l.start) - 8;
+      if (l.er) xr = l.clen ? Math.min(X(l.end) + 26, X(l.clen)) : X(l.end) + 8;
+      s("line", {x1: xl, x2: xr, y1: yc, y2: yc, stroke: "var(--axis)", "stroke-width": 1.2}, svg);
+      if (l.el) s("line", {x1: xl, x2: xl, y1: yc - 12, y2: yc + 12, stroke: "var(--ink2)", "stroke-width": 2.5}, svg);
+      if (l.er) s("line", {x1: xr, x2: xr, y1: yc - 12, y2: yc + 12, stroke: "var(--ink2)", "stroke-width": 2.5}, svg);
+      l.genes.forEach(gn => {
+        const [gid, gs, ge, strand, calls, partial] = gn;
+        const x0 = X(gs), x1 = Math.max(X(ge), x0 + 2);
+        const p = s("polygon", {points: geneArrow(x0, x1, yc, ah, strand)}, svg);
+        const best = calls[0];
+        if (!best) p.setAttribute("fill", "var(--unann)");
+        else {
+          const col = pcol(best[2]);
+          if (best[1] === 2) p.setAttribute("fill", col);
+          else if (best[1] === 1) { p.setAttribute("fill", col); p.setAttribute("fill-opacity", 0.3); p.setAttribute("stroke", col); p.setAttribute("stroke-width", 1.3); }
+          else { p.setAttribute("fill", "var(--surface)"); p.setAttribute("stroke", "var(--muted)"); p.setAttribute("stroke-width", 1.1); }
+          const xm = (x0 + x1) / 2, ym = yc - ah / 2 - 5;
+          const name = TG[best[0]].label + (best[1] === 1 ? "°" : best[1] === -1 ? "×" : "");
+          s("text", {x: xm, y: ym, "font-size": 11, transform: `rotate(-40 ${xm} ${ym})`,
+            class: best[1] > 0 ? "g2" : "gx"}, svg, name);
+        }
+        const hit = s("rect", {x: x0 - 1, y: yc - 14, width: Math.max(x1 - x0 + 2, 10), height: 28, fill: "transparent"}, svg);
+        hit.addEventListener("pointermove", e => showTip(e, t => {
+          tipHead(t, best ? TG[best[0]].label : "not annotated", best ? "· " + TG[best[0]].name : "");
+          tipRow(t, "protein", gid);
+          tipRow(t, "location", `${fmt(gs)}–${fmt(ge)} (${strand})`);
+          tipRow(t, "length", fmt(ge - gs + 1) + " bp");
+          calls.forEach(c => tipRow(t, TG[c[0]].label, STATUS[c[1]] + (c[3] ? " — additional copy" : "")));
+          if (partial !== "00") tipRow(t, "note", "gene runs off the contig end");
+        }));
+        hit.addEventListener("pointerleave", hideTip);
+      });
+    });
+  });
+  const hidden = sm.loci.length - loci.length;
+  if (hidden) h("p", {class: "note"}, box, `${hidden} more loci hold only disqualified hits and are not drawn (listed in ${D.labels.loci_tsv}).`);
+}
+function renderCalls(sm) {
+  const tb = document.getElementById("calls");
+  tb.replaceChildren();
+  const hr = h("tr", {}, h("thead", {}, tb));
+  ["Pathway", "Gene", "Status", "Evidence", "Protein", "HMM hit", "E-value", "BLAST ref", "Identity %", "Location", "Other copies"]
+    .forEach(c => h("th", {}, hr, c));
+  const body = h("tbody", {}, tb);
+  D.targets.forEach(t => {
+    const c = sm.calls[t.id];
+    if (!c && !state.showAbsent) return;
+    const tr = h("tr", {class: c ? "" : "absent", title: t.name}, body);
+    const td = h("td", {}, tr), sp = h("span", {class: "pw"}, td);
+    h("i", {style: `background:${pcol(t.cat)}`}, sp); sp.appendChild(document.createTextNode(PW[t.cat].short));
+    h("td", {}, tr, t.id);
+    h("td", {}, tr, STATUS[c ? c[0] : 0]);
+    h("td", {}, tr, c ? c[1] : "");
+    h("td", {class: "mono"}, tr, c ? c[2] : "");
+    h("td", {}, tr, c ? c[3] : "");
+    h("td", {class: "num"}, tr, c ? c[4] : "");
+    h("td", {}, tr, c ? c[5] : "");
+    h("td", {class: "num"}, tr, c ? c[6] : "");
+    h("td", {class: "num"}, tr, c && c[7] ? `${c[7]}:${fmt(c[8])}–${fmt(c[9])} (${c[10]})` : "");
+    h("td", {class: "num"}, tr, c && c[11] ? c[11] : "");
+  });
+}
+function renderDetail() {
+  const sm = D.samples.find(x => x.name === state.sel);
+  if (!sm) return;
+  document.getElementById("genome").value = sm.name;
+  document.getElementById("cycle-note").textContent = sm.note || "";
+  renderCycle(sm); renderSummary(sm); renderLoci(sm); renderCalls(sm);
+}
+function select(name, scroll) {
+  state.sel = name;
+  renderGrid(); renderProc(); renderDetail();
+  if (scroll) document.getElementById("detail").scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+// ── static chrome ─────────────────────────────────────────────────────────
+function init() {
+  const nNuc = D.samples.filter(x => x.kind === "nucleotide").length;
+  document.getElementById("id-head").textContent = `[ report ~ ${D.labels.cycle}_cycle ]`;
+  document.getElementById("meta").textContent =
+    "Marker-gene calls, obligatory complexes and process modules, genome by genome.";
+  document.getElementById("loaded").textContent = ` // generated ${D.generated}`;
+  document.getElementById("foot").textContent = `${D.labels.cycle}-cycle report · ${D.generated}`;
+  const metaRows = document.getElementById("meta-rows");
+  [["Genomes", D.samples.length], ["Marker genes", D.targets.length], ["Pathways", D.pathways.length],
+   ["With gene coordinates", nNuc], ["Generated", D.generated]].forEach(([k, v]) => {
+    const row = h("div", {class: "meta__row"}, metaRows); h("span", {}, row, k); h("span", {}, row, String(v));
+  });
+  document.getElementById("cycle-h").textContent = `Position in the ${D.labels.cycle} cycle`;
+  if (D.cycle.wide) document.querySelector(".detail").style.gridTemplateColumns = "1fr";
+  const chips = document.getElementById("chips");
+  D.pathways.forEach(p => {
+    const b = h("button", {class: "chip", type: "button", "aria-pressed": "true"}, chips);
+    h("i", {style: `background:${pcol(p.id)}`}, b);
+    b.appendChild(document.createTextNode(p.short));
+    b.addEventListener("click", () => {
+      if (state.hidden.has(p.id)) state.hidden.delete(p.id); else state.hidden.add(p.id);
+      b.setAttribute("aria-pressed", String(!state.hidden.has(p.id)));
+      renderGrid();
+    });
+  });
+  const ls = document.getElementById("leg-status");
+  [2, 1, -1, 0].forEach(code => legendItem(ls, v => statusGlyph(v, 9, 9, 7.5, code, "var(--ink2)"), STATUS_LONG[code]));
+  const lc = document.getElementById("leg-comp");
+  [["complete", "", "complete"], ["partial", "2/3", "partial — n of N found"],
+   ["ruled_out", "", D.labels.ruled_out], ["absent", "", "absent"]]
+    .forEach(it => legendItem(lc, v => compGlyph(v, 9, 9, 8.5, it[0], it[1]), it[2]));
+  const ly = document.getElementById("leg-cycle");
+  const arrow = (w, dash, col) => v => {
+    const a = {x1: 0, x2: 13, y1: 9, y2: 9, stroke: col, "stroke-width": w};
+    if (dash) a["stroke-dasharray"] = "4 3";
+    s("line", a, v); s("polygon", {points: "18,9 12,5.5 12,12.5", fill: col}, v);
+  };
+  legendItem(ly, arrow(3.2, false, "var(--ink2)"), "complete step");
+  legendItem(ly, arrow(1.8, true, "var(--ink2)"), "partial");
+  legendItem(ly, arrow(1.1, false, "var(--absent-edge)"), "absent");
+  h("span", {}, ly).append("bold gene = found · ° domain-only · × disqualified · grey = absent");
+  const sel = document.getElementById("genome");
+  D.samples.slice().sort((a, b) => a.name.localeCompare(b.name))
+    .forEach(x => h("option", {value: x.name}, sel, x.name));
+  sel.addEventListener("change", () => select(sel.value, false));
+  document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; renderGrid(); renderProc(); });
+  document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; renderGrid(); renderProc(); });
+  document.getElementById("showabsent").addEventListener("change", e => { state.showAbsent = e.target.checked; renderDetail(); });
+  // Theme selector: starts on the system theme; a click pins light or dark.
+  const themeBtns = [...document.querySelectorAll("[data-theme-set]")];
+  const showTheme = () => themeBtns.forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.themeSet === (isDark() ? "dark" : "light"))));
+  themeBtns.forEach(b => b.addEventListener("click", () => {
+    document.documentElement.dataset.theme = b.dataset.themeSet; showTheme();
+  }));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", showTheme);
+  showTheme();
+  const cap = D.labels.cycle.charAt(0).toUpperCase() + D.labels.cycle.slice(1);
+  const grid = id => document.getElementById(id);
+  pngButton(grid("head-grid"), () => ({svg: grid("grid"), name: "genes",
+    title: `${cap}-cycle marker genes · ${rows().length} genomes`, legends: [grid("leg-status")]}));
+  pngButton(grid("head-proc"), () => ({svg: grid("proc"), name: "complexes_modules",
+    title: `${cap}-cycle complexes and process modules · ${rows().length} genomes`, legends: [grid("leg-comp")]}));
+  pngButton(grid("head-cycle"), () => {
+    const sm = D.samples.find(x => x.name === state.sel);
+    return {svg: grid("cycle"), name: `cycle-map_${sm.name}`, title: sm.name, subtitle: sm.note || "",
+      legends: [grid("leg-cycle"), pathwayKey()]};
+  });
+  if (!D.samples.length) { document.getElementById("meta").textContent = "No samples."; return; }
+  renderGrid(); renderProc(); renderDetail();
+}
+init();
+</script>
+</body>
+</html>

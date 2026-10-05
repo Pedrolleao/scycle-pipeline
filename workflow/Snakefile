@@ -20,6 +20,9 @@ PROTEIN_SAMPLES = [
     n for n, m in SAMPLES.items() if m.get("kind") in ("protein", "nucleotide")
 ]
 READ_SAMPLES = [n for n, m in SAMPLES.items() if m.get("kind") == "fastq"]
+# Samples with gene coordinates (Prodigal ran) — the only ones that get locus maps.
+NUCLEOTIDE_SAMPLES = [n for n, m in SAMPLES.items() if m.get("kind") == "nucleotide"]
+NUCLEOTIDE_SAMPLES_RE = "|".join(re.escape(s) for s in NUCLEOTIDE_SAMPLES) or "__NONE__"
 PROTEIN_SAMPLES_RE = "|".join(re.escape(s) for s in PROTEIN_SAMPLES) or "__NONE__"
 READ_SAMPLES_RE = "|".join(re.escape(s) for s in READ_SAMPLES) or "__NONE__"
 
@@ -38,19 +41,26 @@ include: "rules/report.smk"
 
 
 def per_sample_target(name, meta):
-    """Final artefact for one sample = its gap_analysis.txt."""
-    return str(RESULTS / name / "report" / "gap_analysis.txt")
+    """Final artefacts for one sample: gap_analysis.txt + its S-cycle map, plus
+    the locus table / maps when the sample has gene coordinates."""
+    rep = RESULTS / name / "report"
+    out = [str(rep / "gap_analysis.txt"),
+           str(rep / "scycle_map.svg"), str(rep / "scycle_map.png")]
+    if meta.get("kind") == "nucleotide":
+        out += [str(RESULTS / name / "calls" / "scycle_loci.tsv"),
+                str(rep / "loci.svg"), str(rep / "loci.png")]
+    return out
 
 
 def cross_sample_figures():
-    """Per-pathway + complex + synergy + applications figures in results/figures/.
+    """Per-pathway + complex + synergy + S-cycle-map figures in results/figures/.
     Each figure co-renders as SVG (vector) + PNG (300 DPI raster preview)."""
     if not SAMPLES:
         return []
     figdir = RESULTS / "figures"
     bases = (
         [f"pathway_{p}" for p in PATHWAY_CATEGORIES]
-        + ["complexes", "synergies", "applications"]
+        + ["complexes", "synergies", "scycle_maps"]
     )
     return [str(figdir / f"{b}.{ext}") for b in bases for ext in ("svg", "png")]
 
@@ -63,5 +73,7 @@ rule all:
         (str(RESULTS / "multisample_matrix.tsv") if SAMPLES else []),
         (str(RESULTS / "multisample_heatmap.svg") if SAMPLES else []),
         (str(RESULTS / "multisample_heatmap.png") if SAMPLES else []),
-        # Focused figures (10 SVGs + 10 PNGs in results/figures/).
+        # Focused figures (9 SVGs + 9 PNGs in results/figures/).
         cross_sample_figures(),
+        # Interactive, self-contained report.
+        (str(RESULTS / "report.html") if SAMPLES else []),

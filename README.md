@@ -23,9 +23,10 @@ follow-on phase — see [`../Info-sulfur.md`](../Info-sulfur.md) "Hardening back
 ```bash
 cd scycle-pipeline
 python run.py --input <dir-of-.faa-or-.fna> --cores 8
-# First run creates the standalone `scycle-pipeline` conda env from envs/scycle.yaml.
-# To reuse an existing compatible env instead (e.g. the ewaste one):
-#   SCYCLE_ENV=ewaste-pipeline python run.py --input <dir> --skip-db-setup
+# First run creates the `cycle-pipeline` conda env from envs/scycle.yaml if it does
+# not exist yet. The env is shared with the nitrogen sister tool (ncycle-pipeline).
+# To use a different env with the same dependencies:
+#   SCYCLE_ENV=<env-name> python run.py --input <dir> --skip-db-setup
 ```
 
 `run.py` auto-detects protein (`.faa`) vs nucleotide (`.fna`, → Prodigal) input,
@@ -50,8 +51,55 @@ builds the databases on first run, then dispatches Snakemake.
    reverse/oxidative rDSR) is resolved by `resolve_dsr_direction` (dsrD/qmo presence,
    refined by dsrD↔dsrAB operon synteny on nucleotide/MAG input).
 5. **Reports** — per-sample `calls/scycle_calls.tsv`, `complex_completeness.tsv`,
-   `synergy_completeness.tsv`, `report/gap_analysis.txt`; cross-sample
-   `multisample_matrix.tsv` + heatmap + per-pathway/complex/synergy/process figures.
+   `synergy_completeness.tsv`, `report/gap_analysis.txt`, `report/scycle_map.*`;
+   cross-sample `multisample_matrix.tsv`, figures, and an interactive `report.html`
+   (see **Outputs** below).
+
+## Outputs
+
+All paths are under `paths.results_dir` (`results/` by default). Figures are written
+as SVG (vector) and PNG (300 DPI).
+
+**Per sample — `<sample>/`**
+
+| file | what it is |
+|---|---|
+| `calls/scycle_calls.tsv` | one row per target: status, evidence source, protein, HMM hit + E-value, BLAST reference + identity. For nucleotide input the columns `contig`, `start`, `end`, `strand` locate the called gene (empty for a pre-called proteome). One protein is reported per target; `other_copies` lists any further proteins that reach the same status (paralog copies) |
+| `calls/complex_completeness.tsv`, `calls/synergy_completeness.tsv` | completeness of the 11 complexes and 9 process modules |
+| `calls/scycle_loci.tsv` | *(nucleotide input only)* called genes grouped into loci: genes on one contig with at most 5 other genes between them. `copy` says whether a gene is the one reported in `scycle_calls.tsv` or an additional copy |
+| `report/gap_analysis.txt` | plain-text summary |
+| `report/scycle_map.svg/.png` | the genome's calls drawn on the sulfur cycle: each reaction arrow is solid (a complete route found), dashed (partial) or grey (absent), with the genes behind it. The sat / aprAB / dsrAB arrows point SO₄²⁻ → H₂S unless the dsrAB direction call is `oxidative` (reverse Dsr), in which case they are drawn the other way |
+| `report/loci.svg/.png` | *(nucleotide input only)* gene-arrow maps of every locus, grouped by pathway, to a common bp scale. Genes outside the target set are blank; a bar marks a contig end (where an operon may run off the assembly) |
+
+**Across samples**
+
+| file | what it is |
+|---|---|
+| `multisample_matrix.tsv` | genomes × (targets, complexes, modules) |
+| `multisample_heatmap.svg/.png` | overview dot grid; genomes ordered by gene-content similarity |
+| `figures/pathway_<pathway>.svg/.png` | one dot grid per pathway |
+| `figures/complexes.svg/.png`, `figures/synergies.svg/.png` | complex / process-module completeness |
+| `figures/scycle_maps.svg/.png` | every genome's S-cycle map side by side (up to 48 genomes) |
+| `report.html` | self-contained interactive report (no network needed): the gene grid and the complex / module grid with hover evidence, row search / ordering, and a per-genome panel with the S-cycle map, locus maps and the full calls table. Light and dark themes. Every figure in it (gene grid, complex / module grid, cycle map, each locus map) has a **Save PNG (300 dpi)** button: it downloads that figure as currently shown — row filter and order, hidden pathways, selected genome, light or dark theme — with its title and legend, rendered at 300 dpi (a grid too large for a browser canvas is saved at the highest resolution that fits, and says so). The page follows the group's *Simple Terminal* design system (`design/Simple`): JetBrains Mono, hairline `[ bracketed ]` frames, its dark palette or its Light variant according to the system theme, with a LIGHT / DARK selector in the top-right corner to pin either. The font is inlined from `workflow/scripts/fonts/` (SIL OFL 1.1, licence alongside), so the report looks the same offline and the PNG export uses it too; pathway colours stay the validated palette of the static figures. |
+
+**Reading the glyphs** (same in every figure and in `report.html`): solid disc =
+confirmed; half-filled = domain-only (HMM signature, no BLAST support); ring with a
+cross = disqualified (failed the homology-trap gate); faint ring = absent. In the
+complex / module grids: solid = complete, ring with `n/N` = partial, faint ring with
+a cross = ruled out. Colour always means pathway; the palette lives in
+`workflow/scripts/_domain.py`.
+
+**dsrAB direction and the two dsr modules.** `complete_sulfate_reduction` and
+`reverse_dsr_sulfur_oxidation` need the same genes, so they are told apart by the
+dsrAB direction call (`reductive` / `oxidative`, tagged on the dsrA / dsrB
+`evidence_source`). When a direction is called, the module that needs the opposite
+direction is scored `absent` and listed under `forbids_violated` in
+`synergy_completeness.tsv` (shown as "ruled out" in the figures); with no call, or an
+ambiguous one, both modules are scored on gene presence alone.
+
+The figure and report scripts are shared, byte-identical, with the nitrogen sister
+pipeline; only `workflow/scripts/_domain.py` (palette, labels, file names) and
+`workflow/scripts/_cycle_model.py` (the cycle diagram) are sulfur-specific.
 
 ## Pathways & targets
 

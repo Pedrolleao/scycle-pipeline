@@ -116,6 +116,10 @@ def main() -> None:
             # Skip synergies where both halves are absent — uninteresting.
             continue
         any_synergy = True
+        if s.get("forbids_violated"):
+            lines.append(f"  {s['synergy_id']}: ruled out by {s['forbids_violated']} "
+                         "(genes present, but dsrAB runs in the other direction)")
+            continue
         lines.append(f"  {s['synergy_id']}: {s['n_present']}/{s['n_total']} "
                      f"— missing {s['requires_missing']}")
         lines.append(f"    benefit lost: {s['benefit']}")

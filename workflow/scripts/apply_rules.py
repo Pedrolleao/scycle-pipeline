@@ -243,9 +243,20 @@ def evaluate_target(target: dict,
     # Prefer confirmed > domain-only > narrow-no-IPR > disqualified.
     rank = {"confirmed": 0, "domain-only": 1,
             "narrow-no-IPR": 2, "disqualified": 3}
-    best = sorted(candidates,
-                  key=lambda c: (rank[c["status"]],
-                                 c["pfam_evalue"] or c["blast_evalue"] or 1e9))[0]
+    # Tie-breakers after (status, e-value): higher BLAST identity, then protein
+    # id in natural order. Paralog copies often tie on the first two, and
+    # `proteins` is a set, so without these the reported copy changed from run
+    # to run. Status is unaffected either way.
+    ranked = sorted(candidates,
+                    key=lambda c: (rank[c["status"]], _evalue_key(c),
+                                   -float(c["blast_pident"] or 0),
+                                   _natural_key(c["protein_id"])))
+    best = ranked[0]
+    # Other proteins that reach the same status for this target (paralog
+    # copies). Reported, not scored.
+    best["other_copies"] = sorted((c["protein_id"] for c in ranked[1:]
+                                   if c["status"] == best["status"]),
+                                  key=_natural_key)
     return best["status"], best
 
 
@@ -289,6 +300,45 @@ def load_read_presence(path: Path) -> dict[str, dict]:
                 "breadth_pct": float(row["breadth_pct"] or 0.0),
                 "depth_median": float(row["depth_median"] or 0.0),
             }
+    return out
+
+
+def _evalue_key(c: dict) -> float:
+    """E-value used to rank candidates: the signature (HMM) e-value, else the
+    BLAST one. An e-value of exactly 0.0 is the BEST possible score, so it must
+    not be treated as missing (the old `a or b or 1e9` chain ranked it last)."""
+    for v in (c["pfam_evalue"], c["blast_evalue"]):
+        if v not in (None, ""):
+            return float(v)
+    return 1e9
+
+
+def _natural_key(s: str) -> list:
+    """Sort key that orders `contig_2` before `contig_10`."""
+    return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", s)]
+
+
+def parse_prodigal_strands(faa_path: Path | None) -> dict[str, tuple[str, int, int, str]]:
+    """{protein_id: (contig, start, end, strand)} from Prodigal .faa headers, for
+    the gene-coordinate columns of scycle_calls.tsv. Reporting only — the dsr
+    direction logic keeps using parse_prodigal_coords. {} for a pre-called proteome."""
+    out: dict[str, tuple[str, int, int, str]] = {}
+    if not faa_path or not Path(faa_path).exists():
+        return out
+    with open(faa_path) as fh:
+        for line in fh:
+            if not line.startswith(">"):
+                continue
+            parts = [p.strip() for p in line[1:].split("#")]
+            if len(parts) < 4:
+                continue
+            protid = parts[0].split()[0]
+            try:
+                start, end = int(parts[1]), int(parts[2])
+            except ValueError:
+                continue
+            strand = "-" if parts[3] == "-1" else "+"
+            out[protid] = (protid.rsplit("_", 1)[0], start, end, strand)
     return out
 
 
@@ -436,6 +486,7 @@ def main() -> None:
                     "protein_id": "", "pfam_hits": "",
                     "best_pfam_evalue": "", "blast_acc": "",
                     "blast_pident": "", "blast_evalue": "",
+                    "other_copies": "",
                 })
                 continue
             status, ev = res
@@ -450,6 +501,7 @@ def main() -> None:
                 "blast_acc": ev["blast_acc"],
                 "blast_pident": ev["blast_pident"],
                 "blast_evalue": ev["blast_evalue"],
+                "other_copies": ";".join(ev.get("other_copies", [])),
             })
 
         # dsrAB direction call: reductive (dissimilatory sulfate reduction) vs
@@ -481,7 +533,17 @@ def main() -> None:
                 if r and r["status"] != "absent":
                     r.update(status="absent", evidence_source="", protein_id="",
                              pfam_hits="", best_pfam_evalue="", blast_acc="",
-                             blast_pident="", blast_evalue="")
+                             blast_pident="", blast_evalue="", other_copies="")
+
+        # Gene coordinates of each called protein (nucleotide/MAG input only; the
+        # columns stay empty for a pre-called proteome), then the other copies.
+        # Appended last so existing readers of the first 12 columns are unaffected.
+        loci = parse_prodigal_strands(args.gene_coords)
+        for r in rows:
+            contig, start, end, strand = loci.get(r["protein_id"], ("", "", "", ""))
+            copies = r.pop("other_copies", "")
+            r.update(contig=contig, start=start, end=end, strand=strand,
+                     other_copies=copies)
 
         # NOTE: an fccA←fccB co-occurrence rescue was tried (SP4b) but REMOVED after the SP6c
         # specialist audit. K17229 ("fccB") is also assigned by KEGG to the Sox-system soxF

@@ -1,4 +1,12 @@
-name: scycle-pipeline
+# Human-readable env spec for the `cycle-pipeline` conda env, which is SHARED by the
+# nitrogen (ncycle-pipeline) and sulfur (scycle-pipeline) sister tools — the same
+# spec ships in both repos (envs/ncycle.yaml, envs/scycle.yaml).
+# For an EXACT reproduction of the validated baseline, use the pinned lockfile in
+# the nitrogen repo instead:  conda env create -f envs/ncycle.lock.yml
+# The three tools below are PINNED to exact versions because their minor releases
+# change bitscores/heuristics, and the regression gate is threshold-sensitive
+# (HMMER trusted cutoffs, DIAMOND identity gates). The rest keep `>=` floors.
+name: cycle-pipeline
 channels:
   - conda-forge
   - bioconda
@@ -7,12 +15,12 @@ dependencies:
   - python>=3.10
   - snakemake>=8.0
   - snakemake-minimal>=8.0
-  - hmmer>=3.3
+  - hmmer=3.4         # PIN: bitscore-critical (HMM trusted cutoffs); validated baseline
   - mafft>=7.5
   - cd-hit>=4.8
-  - prodigal>=2.6
+  - prodigal=2.6.3    # PIN: gene calls + coords feed synteny; validated baseline
   - blast>=2.14
-  - diamond>=2.1
+  - diamond=2.2.1     # PIN: BLAST identity gates; validated baseline
   - minimap2>=2.26
   - samtools>=1.18
   - seqkit>=2.5

@@ -1,0 +1,69 @@
+# config_p3_mags.yaml — the 8-MAG realism set (validation/metagenomes/*.fna) → results_p3_mags/.
+# Same thresholds as config.yaml; only results_dir and the fixed sample list differ.
+# Run:  SCYCLE_CONFIG=config/config_p3_mags.yaml snakemake --cores 8 --snakefile workflow/Snakefile
+
+paths:
+  hmm_db:        resources/hmm/scycle_targets.hmm
+  tc_cutoffs:    resources/hmm/tc_cutoffs.tsv
+  blast_unstable: resources/blast_db/unstable_refs
+  blast_gated:   resources/blast_db/blast_gated_refs
+  targets_yaml:  config/targets.yaml
+  results_dir:   results_p3_mags
+
+thresholds:
+  hmmer:
+    use_tc_when_available: true     # use the KOfam adaptive per-KO score threshold
+    evalue: 1.0e-10                 # fallback when a profile has no threshold
+    dom_evalue: 1.0e-5
+
+  blast:
+    evalue: 1.0e-10
+    qcov_hsp_perc: 50
+    pident_min: 30                  # default; per-target blast_identity_min overrides
+
+build:
+  # KOfam profile HMMs + adaptive thresholds (primary detection backbone).
+  # Pinned release: the build (workflow/scripts/build_hmm_db.py) verifies the
+  # downloaded profiles.tar.gz against kofam_profiles_sha256 and warns on mismatch.
+  # KEGG's URL is rolling-latest (no embedded version) → we pin by content hash.
+  kofam_profiles_url:    "https://www.genome.jp/ftp/db/kofam/profiles.tar.gz"
+  kofam_ko_list_url:     "https://www.genome.jp/ftp/db/kofam/ko_list.gz"
+  kofam_release:         "2026-05-24 (genome.jp ftp latest at fetch time)"
+  kofam_profiles_sha256: "b03d20b96254d0f04652102ea538087ac36adadf0f807ee7278f8637810ca15a"
+  # Pfam fallback (only used for any target that has a `pfam:` but no KOfam profile).
+  hmm_source_url_template: "https://www.ebi.ac.uk/interpro/wwwapi/entry/pfam/{pf}/?annotation=hmm"
+  uniprot_search_url: "https://rest.uniprot.org/uniprotkb/search"
+
+samples:
+  Bacteroides_fragilis_NCTC9343:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/Bacteroides_fragilis_NCTC9343.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  O1_Sulfurovum_Auka:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/O1_Sulfurovum_Auka.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  O2_Thioglobus_Saanich:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/O2_Thioglobus_Saanich.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  O3_Parabeggiatoa_Guaymas:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/O3_Parabeggiatoa_Guaymas.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  Prochlorococcus_marinus_MED4:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/Prochlorococcus_marinus_MED4.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  R1_Desulfofervidus_Auka:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/R1_Desulfofervidus_Auka.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  R2_Thermodesulfobacterium_AUK139:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/R2_Thermodesulfobacterium_AUK139.fna
+    kind: nucleotide
+    prodigal_mode: meta
+  R3_Desulfobacteraceae_4572-130_Guaymas:
+    path: /home/dmin/Grants/Sulfur_Cycle/scycle-pipeline/validation/metagenomes/R3_Desulfobacteraceae_4572-130_Guaymas.fna
+    kind: nucleotide
+    prodigal_mode: meta

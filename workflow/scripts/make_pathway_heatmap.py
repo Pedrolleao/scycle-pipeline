@@ -28,45 +28,10 @@ import matplotlib.pyplot as plt
 import yaml
 
 
-# ── pathway hue palette (matches make_cross_sample_report.py) ────────────────
-# One distinct hue per pathway; circles in this figure use the pathway's hue.
-PATHWAY_COLOR = {
-    "dissimilatory_sulfate_reduction": "#4477AA",
-    "sulfur_oxidation":                "#EE6677",
-    "assimilatory_sulfate_reduction":  "#228833",
-    "thiosulfate_polysulfide":         "#CCBB44",
-    "organic_sulfur_dmsp":             "#AA3377",
-    "sulfonate_taurine":               "#44AA99",
-}
-LABEL = {
-    2:  "confirmed",
-    1:  "domain-only / narrow-no-IPR",
-    -1: "disqualified",
-    0:  "absent",
-}
+from _viz import (GRID, INK, INK2, MUTED, PATHWAY_COLOR, PATHWAY_LABEL,
+                  draw_status_glyph, draw_status_legend)
 
-
-def draw_status_circle(ax, x, y, code, hue, radius=0.36):
-    """Circle whose fill encodes detection status, hue = pathway colour.
-
-      2 confirmed → solid fill; 1 domain-only/narrow → 45% alpha fill;
-      -1 disqualified → open ring w/ gray edge; 0 absent → faint empty circle.
-    """
-    if code == 2:
-        ax.add_patch(mpatches.Circle((x, y), radius, facecolor=hue,
-                                     edgecolor=hue, linewidth=0.6, zorder=3))
-    elif code == 1:
-        ax.add_patch(mpatches.Circle((x, y), radius, facecolor=hue,
-                                     edgecolor=hue, linewidth=0.6, alpha=0.45,
-                                     zorder=3))
-    elif code == -1:
-        ax.add_patch(mpatches.Circle((x, y), radius, facecolor="white",
-                                     edgecolor="#888888", linewidth=0.9,
-                                     zorder=3))
-    else:
-        ax.add_patch(mpatches.Circle((x, y), radius, facecolor="none",
-                                     edgecolor="#dddddd", linewidth=0.6,
-                                     zorder=2))
+COMPLEX_BAND = INK2      # neutral, so it never reads as a pathway hue
 
 
 def load_matrix(path: Path) -> tuple[list[str], dict[str, dict[str, int]]]:
@@ -110,24 +75,6 @@ def render(
     absent_samples = sorted([s for s in samples if not has_any_signal(s)])
     samples = [s for s in samples if has_any_signal(s)]
 
-    # Empty-pathway guard: if NO genome carries any gene in this pathway, the
-    # row-count is 0 and the layout math below produces bottom >= top. This is a
-    # normal case for a real panel (e.g. no DMSP organism present), so render a
-    # small placeholder figure stating that, and return.
-    if not samples:
-        fig, ax = plt.subplots(figsize=(6.0, 1.6))
-        ax.axis("off")
-        ax.text(0.5, 0.62, f"{pathway.replace('_', ' ').title()}",
-                ha="center", va="center", fontsize=12, fontweight="bold")
-        ax.text(0.5, 0.30, f"no {pathway.replace('_', ' ')} gene detected "
-                f"in any of the {len(absent_samples)} genome(s)",
-                ha="center", va="center", fontsize=9, color="#666666")
-        out.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(out, dpi=300 if str(out).lower().endswith(".png") else 100)
-        plt.close(fig)
-        print(f"[pathway_heatmap] wrote {out}  (0 active rows — empty pathway placeholder)")
-        return
-
     # Sort kept samples: most confirmed → most domain-only → alpha.
     def score(s: str) -> tuple[int, int]:
         row = data.get(s, {})
@@ -139,10 +86,27 @@ def render(
     n_rows = len(samples)
     n_cols = len(target_ids)
 
+    if n_rows == 0:
+        # No genome carries any gene of this pathway: say so instead of
+        # drawing an empty grid (a zero-row axes cannot be laid out).
+        fig = plt.figure(figsize=(7.5, 1.5))
+        fig.text(0.04, 0.68, f"{PATHWAY_LABEL.get(pathway, pathway)} — "
+                 f"{n_cols} genes · 0 genomes", fontsize=13,
+                 fontweight="bold", color=INK, va="center")
+        fig.text(0.04, 0.32, f"No gene of this pathway was found in any of the "
+                 f"{len(absent_samples)} genomes.", fontsize=9, color=INK2,
+                 va="center")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(out, dpi=300 if out.suffix.lower() == ".png" else 100)
+        plt.close(fig)
+        print(f"[pathway_heatmap] wrote {out}  (0 active rows, "
+              f"{len(absent_samples)} all-absent)")
+        return
+
     # ── figure layout (true SVG, no rasterization) ───────────────────────────
     cell_w, cell_h = 0.42, 0.28          # inches per cell
     left_margin   = 2.6                  # for sample names
-    right_margin  = 2.4                  # for legend
+    right_margin  = 3.6                  # for legend
     top_margin    = 1.0                  # title + obligatory-complex band
     bot_margin    = 1.0                  # rotated gene labels (now at bottom)
 
@@ -167,25 +131,26 @@ def render(
         bottom=bot_margin / fig_h,
     )
 
-    hue = PATHWAY_COLOR.get(pathway, "#777777")
+    hue = PATHWAY_COLOR.get(pathway, MUTED)
 
-    # Faint row gridlines for the airy dot-grid look.
+    # Hairline row guides.
     for i in range(n_rows):
-        ax.axhline(n_rows - 1 - i, color="#f0f0f0", lw=0.5, zorder=0)
+        ax.plot([-0.5, n_cols - 0.5], [n_rows - 1 - i] * 2, color=GRID,
+                lw=0.5, zorder=0)
 
     # Draw cells as status circles in the pathway hue.
     for i, s in enumerate(samples):
         row = data.get(s, {})
         for j, tid in enumerate(target_ids):
             v = row.get(tid, 0)
-            draw_status_circle(ax, j, n_rows - 1 - i, v, hue)
+            draw_status_glyph(ax, j, n_rows - 1 - i, v, hue)
 
     # Mark obligatory-complex members above their column with a small tick band.
     for j, tid in enumerate(target_ids):
         if tid in complex_members:
             ax.add_patch(mpatches.Rectangle(
                 (j - 0.4, n_rows - 0.15), 0.8, 0.18,
-                facecolor="#2166ac", edgecolor="none", clip_on=False))
+                facecolor=COMPLEX_BAND, edgecolor="none", clip_on=False))
 
     # Axes / labels.
     ax.set_xlim(-0.8, n_cols - 0.2)
@@ -198,46 +163,31 @@ def render(
     ax.xaxis.set_ticks_position("bottom")
 
     ax.set_yticks([n_rows - 1 - i for i in range(n_rows)])
-    ax.set_yticklabels(samples, fontsize=8)
+    ax.set_yticklabels(samples, fontsize=8, color=INK)
 
     ax.tick_params(axis="both", length=0, pad=3)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
     # Title + subtitle.
-    title = f"{pathway.replace('_', ' ').title()} — {n_cols} targets · {n_rows} samples"
+    title = (f"{PATHWAY_LABEL.get(pathway, pathway)} — {n_cols} genes · "
+             f"{n_rows} genomes")
     fig.text(left_margin / fig_w, 1 - 0.25 / fig_h, title,
-             fontsize=13, fontweight="bold", va="top")
+             fontsize=13, fontweight="bold", va="top", color=INK)
     if complex_members:
-        sub = "blue band marks members of the obligatory complex"
+        sub = "bar above a column = subunit of an obligatory complex"
         fig.text(left_margin / fig_w, 1 - 0.55 / fig_h, sub,
-                 fontsize=8, color="#444444", va="top", style="italic")
+                 fontsize=8, color=INK2, va="top")
 
-    # Legend (status → circle style, in the pathway hue).
-    import matplotlib.lines as mlines
-    handles = [
-        mlines.Line2D([], [], marker="o", linestyle="none", markersize=9,
-                      markerfacecolor=hue, markeredgecolor=hue, label=LABEL[2]),
-        mlines.Line2D([], [], marker="o", linestyle="none", markersize=9,
-                      markerfacecolor=hue, markeredgecolor=hue, alpha=0.45,
-                      label=LABEL[1]),
-        mlines.Line2D([], [], marker="o", linestyle="none", markersize=9,
-                      markerfacecolor="white", markeredgecolor="#888888",
-                      markeredgewidth=1.0, label=LABEL[-1]),
-        mlines.Line2D([], [], marker="o", linestyle="none", markersize=9,
-                      markerfacecolor="none", markeredgecolor="#cccccc",
-                      label=LABEL[0]),
-    ]
+    # Legend: the four status glyphs, stacked to the right of the grid.
+    draw_status_legend(ax, n_cols + 0.3, n_rows - 1, hue, step=1.0, fontsize=8)
     if complex_members:
-        handles.append(mpatches.Patch(
-            facecolor="#2166ac", edgecolor="none",
-            label="obligatory-complex member"))
-    ax.legend(
-        handles=handles,
-        bbox_to_anchor=(1.01, 1.0), loc="upper left",
-        fontsize=8, frameon=False, borderpad=0.5,
-        handlelength=1.2, handleheight=1.0,
-    )
+        ly = n_rows - 1 - 4
+        ax.add_patch(mpatches.Rectangle((n_cols + 0.3 - 0.36, ly - 0.09), 0.72,
+                                        0.18, facecolor=COMPLEX_BAND,
+                                        edgecolor="none", clip_on=False))
+        ax.text(n_cols + 0.3 + 0.36 * 1.9, ly, "obligatory-complex subunit",
+                ha="left", va="center", fontsize=8, color=INK2, clip_on=False)
 
     # Footnote: samples that had no signal in this pathway.
     if absent_samples:
@@ -255,8 +205,8 @@ def render(
 
         head_y = axes_bottom_frac - head_in / fig_h
         fig.text(left_margin / fig_w, head_y,
-                 f"All-absent in this pathway ({n}):",
-                 fontsize=8, color="#555555", style="italic", va="top")
+                 f"No gene of this pathway found ({n}):",
+                 fontsize=8, color=INK2, va="top")
         for k, line in enumerate(wrapped):
             y = head_y - (line_in + k * line_in) / fig_h
             fig.text(left_margin / fig_w, y, line,
@@ -285,10 +235,16 @@ def main() -> None:
         raise SystemExit(f"no targets found in category '{args.pathway}'")
 
     # Find any obligatory complex whose membership lives entirely in this pathway.
+    # Each complex member slot can be a string OR a list (any-of, P5.3.3) — flatten.
     target_id_set = {t["id"] for t in targets}
     complex_members: set[str] = set()
     for cx in cfg.get("complexes", {}).values():
-        members = set(cx.get("members", []))
+        members: set[str] = set()
+        for m in cx.get("members", []):
+            if isinstance(m, str):
+                members.add(m)
+            else:
+                members.update(m)
         if not cx.get("obligatory", True):
             continue
         if members.issubset(target_id_set) and members:

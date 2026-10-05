@@ -1,6 +1,7 @@
 # report.smk — bridges per-sample calls to:
 #   1. per-sample complex/synergy completeness + gap_analysis.txt
-#   2. cross-sample matrix.tsv + heatmap.svg
+#      + S-cycle map + (nucleotide input) gene-neighbourhood maps
+#   2. cross-sample matrix.tsv + heatmap + focused figures + report.html
 
 
 rule complex_completeness:
@@ -73,7 +74,7 @@ rule cross_sample_report:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Focused per-pathway / complex / synergy / applications figures.
+# Focused per-pathway / complex / synergy / S-cycle-map figures.
 # Replace the legacy dense `multisample_heatmap.svg` for daily reading — the
 # legacy heatmap is still produced above as a quick-glance overview.
 #
@@ -151,25 +152,94 @@ rule synergy_heatmap_figure:
         """
 
 
-rule applications_panel:
-    """Per-genome small-multiples breakdown of the dominant industrial
-    application call (the winning complex + its subunit status strip).
-    SVG + 300 DPI PNG."""
+rule scycle_maps_figure:
+    """Small multiples: every genome's calls drawn on the sulfur cycle
+    (replaces the former `applications` panel). SVG + 300 DPI PNG, one render."""
     input:
-        matrix=RESULTS / "multisample_matrix.tsv",
-        complexes=[str(RESULTS / s / "calls" / "complex_completeness.tsv") for s in SAMPLES],
-        targets=config["paths"]["targets_yaml"],
+        calls=[str(RESULTS / s / "calls" / "scycle_calls.tsv") for s in SAMPLES],
+        synergies=[str(RESULTS / s / "calls" / "synergy_completeness.tsv") for s in SAMPLES],
     output:
-        svg=FIGURES_DIR / "applications.svg",
-        png=FIGURES_DIR / "applications.png",
+        svg=FIGURES_DIR / "scycle_maps.svg",
+        png=FIGURES_DIR / "scycle_maps.png",
+    params:
+        samples=",".join(SAMPLES.keys()),
+        results_dir=str(RESULTS),
+    shell:
+        r"""
+        python workflow/scripts/make_cycle_map.py \
+            --results-dir {params.results_dir} --samples {params.samples} \
+            --out {output.svg} {output.png}
+        """
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Per-sample figures: the genome's N-cycle map, and (nucleotide / MAG input
+# only — it needs gene coordinates) the gene-neighbourhood maps.
+# ─────────────────────────────────────────────────────────────────────────────
+
+rule scycle_map:
+    """One genome's calls drawn on the sulfur cycle."""
+    input:
+        calls=RESULTS / "{sample}" / "calls" / "scycle_calls.tsv",
+        synergies=RESULTS / "{sample}" / "calls" / "synergy_completeness.tsv",
+    output:
+        svg=RESULTS / "{sample}" / "report" / "scycle_map.svg",
+        png=RESULTS / "{sample}" / "report" / "scycle_map.png",
     params:
         results_dir=str(RESULTS),
     shell:
         r"""
-        python workflow/scripts/make_applications_panel.py \
-            --matrix {input.matrix} --results-dir {params.results_dir} \
-            --targets {input.targets} --out {output.svg}
-        python workflow/scripts/make_applications_panel.py \
-            --matrix {input.matrix} --results-dir {params.results_dir} \
-            --targets {input.targets} --out {output.png}
+        python workflow/scripts/make_cycle_map.py \
+            --results-dir {params.results_dir} --sample {wildcards.sample} \
+            --out {output.svg} {output.png}
+        """
+
+
+rule locus_maps:
+    """Cluster the called genes into loci and draw their neighbourhoods."""
+    input:
+        calls=RESULTS / "{sample}" / "calls" / "scycle_calls.tsv",
+        faa=RESULTS / "{sample}" / "prodigal" / "{sample}.faa",
+        gff=RESULTS / "{sample}" / "prodigal" / "{sample}.gff",
+        targets=config["paths"]["targets_yaml"],
+    output:
+        tsv=RESULTS / "{sample}" / "calls" / "scycle_loci.tsv",
+        svg=RESULTS / "{sample}" / "report" / "loci.svg",
+        png=RESULTS / "{sample}" / "report" / "loci.png",
+    params:
+        results_dir=str(RESULTS),
+    wildcard_constraints:
+        sample=NUCLEOTIDE_SAMPLES_RE,
+    shell:
+        r"""
+        python workflow/scripts/make_locus_maps.py \
+            --sample {wildcards.sample} --results-dir {params.results_dir} \
+            --targets {input.targets} --tsv {output.tsv} \
+            --out {output.svg} {output.png}
+        """
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Interactive report: one self-contained HTML file for the whole run.
+# ─────────────────────────────────────────────────────────────────────────────
+
+rule html_report:
+    input:
+        calls=[str(RESULTS / s / "calls" / "scycle_calls.tsv") for s in SAMPLES],
+        complexes=[str(RESULTS / s / "calls" / "complex_completeness.tsv") for s in SAMPLES],
+        synergies=[str(RESULTS / s / "calls" / "synergy_completeness.tsv") for s in SAMPLES],
+        coords=[str(RESULTS / s / "prodigal" / f"{s}.{ext}")
+                for s in NUCLEOTIDE_SAMPLES for ext in ("faa", "gff")],
+        targets=config["paths"]["targets_yaml"],
+        template="workflow/scripts/report_template.html",
+    output:
+        html=RESULTS / "report.html",
+    params:
+        samples=",".join(SAMPLES.keys()),
+        results_dir=str(RESULTS),
+    shell:
+        r"""
+        python workflow/scripts/make_html_report.py \
+            --samples {params.samples} --results-dir {params.results_dir} \
+            --targets {input.targets} --out {output.html}
         """

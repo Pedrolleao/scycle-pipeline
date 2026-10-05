@@ -4,7 +4,7 @@ test_regression.py — accuracy regression gate for scycle-pipeline.
 
 Fails (exit 1) if panel accuracy drops below locked-in floors. Run AFTER the pipeline
 has scored the SP1 43-genome panel into `results/multisample_matrix.tsv`
-(`make regression` runs build_ground_truth → pipeline → score → gate).
+(`make regression` runs pipeline → score → gate).
 
 Scores against the curated-FUNCTION GT by default (the SP4 authoritative reference); set env
 GT_FILE=ground_truth.tsv to gate on the fully-automated KEGG-KO GT instead.

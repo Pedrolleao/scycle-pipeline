@@ -84,7 +84,8 @@ regression:
 
 # Fast gate: re-score the EXISTING results/ matrix and check the floors (no
 # pipeline run). Use after a scoring/ground-truth change when calls are current.
-# Scores against the curated-FUNCTION GT (the default); GT_FILE=ground_truth.tsv for KEGG-KO.
+# Scores against the curated-FUNCTION GT (the default); GT_FILE=ground_truth.tsv for KEGG-KO
+# (written to scycle_{metrics,confusion}.ground_truth.tsv, next to the default tables).
 regression-score:
 	python validation/score_scycle.py
 	python validation/test_regression.py

@@ -22,8 +22,11 @@ ROOT = Path(__file__).resolve().parents[1]
 GT = ROOT / "validation" / os.environ.get("GT_FILE", "curated_function_gt.tsv")
 MATRIX = ROOT / "results" / "multisample_matrix.tsv"
 TARGETS = ROOT / "config" / "targets.yaml"
-OUT_M = ROOT / "validation" / "scycle_metrics.tsv"
-OUT_C = ROOT / "validation" / "scycle_confusion.tsv"
+# one pair of output tables per ground truth, so that scoring the KEGG contrast does
+# not overwrite the tables of the default (curated-function) ground truth
+_TAG = "" if GT.name == "curated_function_gt.tsv" else "." + GT.stem
+OUT_M = ROOT / "validation" / f"scycle_metrics{_TAG}.tsv"
+OUT_C = ROOT / "validation" / f"scycle_confusion{_TAG}.tsv"
 
 # BLAST-gated / shared-signature sulfur targets (requires_blast_for_confirmation or
 # broad-Pfam families) — the analogue of the N-tool's homology-trap set.

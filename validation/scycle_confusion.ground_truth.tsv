@@ -140,7 +140,7 @@ Aferrooxidans_ATCC23270	soxZ	absent	0	absent	TN
 Aferrooxidans_ATCC23270	sqr	present	2	present	TP
 Aferrooxidans_ATCC23270	fccB	absent	0	absent	TN
 Aferrooxidans_ATCC23270	fccA	absent	-1	absent	TN
-Aferrooxidans_ATCC23270	sdo	present	2	present	TP
+Aferrooxidans_ATCC23270	sdo	absent	2	present	FP
 Aferrooxidans_ATCC23270	soeA	absent	0	absent	TN
 Aferrooxidans_ATCC23270	soeB	absent	0	absent	TN
 Aferrooxidans_ATCC23270	soeC	absent	0	absent	TN
@@ -164,7 +164,7 @@ Aferrooxidans_ATCC23270	ttrA	absent	0	absent	TN
 Aferrooxidans_ATCC23270	ttrB	absent	0	absent	TN
 Aferrooxidans_ATCC23270	ttrC	absent	0	absent	TN
 Aferrooxidans_ATCC23270	doxA	absent	0	absent	TN
-Aferrooxidans_ATCC23270	doxD	present	2	present	TP
+Aferrooxidans_ATCC23270	doxD	absent	2	present	FP
 Aferrooxidans_ATCC23270	tth	present	2	present	TP
 Aferrooxidans_ATCC23270	sseA	absent	0	absent	TN
 Aferrooxidans_ATCC23270	sreA	absent	0	absent	TN
@@ -1511,7 +1511,7 @@ Rdenitrificans_OCh114	tth	absent	0	absent	TN
 Rdenitrificans_OCh114	sseA	present	2	present	TP
 Rdenitrificans_OCh114	sreA	absent	0	absent	TN
 Rdenitrificans_OCh114	dmdA	present	2	present	TP
-Rdenitrificans_OCh114	dddP	present	2	present	TP
+Rdenitrificans_OCh114	dddP	absent	2	present	FP
 Rdenitrificans_OCh114	mddA	present	1	present	TP
 Rdenitrificans_OCh114	mtoX	present	1	present	TP
 Rdenitrificans_OCh114	tauD	absent	0	absent	TN
@@ -2426,7 +2426,7 @@ Atumefaciens_H13-3	tth	absent	0	absent	TN
 Atumefaciens_H13-3	sseA	present	2	present	TP
 Atumefaciens_H13-3	sreA	absent	0	absent	TN
 Atumefaciens_H13-3	dmdA	absent	0	absent	TN
-Atumefaciens_H13-3	dddP	absent	-1	absent	TN
+Atumefaciens_H13-3	dddP	present	-1	absent	FN
 Atumefaciens_H13-3	mddA	absent	0	absent	TN
 Atumefaciens_H13-3	mtoX	absent	0	absent	TN
 Atumefaciens_H13-3	tauD	absent	0	absent	TN

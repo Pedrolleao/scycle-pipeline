@@ -21,7 +21,7 @@ qmoA	dissimilatory_sulfate_reduction	43	10	0	0	33	1.00	1.00	1.00
 qmoB	dissimilatory_sulfate_reduction	43	10	0	0	33	1.00	1.00	1.00
 qmoC	dissimilatory_sulfate_reduction	43	8	0	0	35	1.00	1.00	1.00
 sat	dissimilatory_sulfate_reduction	43	21	0	2	20	1.00	0.91	0.95
-dddP	organic_sulfur_dmsp	43	1	0	0	42	1.00	1.00	1.00
+dddP	organic_sulfur_dmsp	43	0	1	1	41	0.00	0.00	NA
 dmdA	organic_sulfur_dmsp	43	2	0	0	41	1.00	1.00	1.00
 mddA	organic_sulfur_dmsp	43	4	2	1	36	0.67	0.80	0.73
 mtoX	organic_sulfur_dmsp	43	5	0	0	38	1.00	1.00	1.00
@@ -33,7 +33,7 @@ tauC	sulfonate_taurine	43	7	2	0	34	0.78	1.00	0.88
 tauD	sulfonate_taurine	43	3	2	0	38	0.60	1.00	0.75
 fccA	sulfur_oxidation	43	3	0	2	38	1.00	0.60	0.75
 fccB	sulfur_oxidation	43	10	2	0	31	0.83	1.00	0.91
-sdo	sulfur_oxidation	43	1	0	0	42	1.00	1.00	1.00
+sdo	sulfur_oxidation	43	0	1	0	42	0.00	NA	NA
 soeA	sulfur_oxidation	43	7	1	0	35	0.88	1.00	0.93
 soeB	sulfur_oxidation	43	7	0	0	36	1.00	1.00	1.00
 soeC	sulfur_oxidation	43	7	0	0	36	1.00	1.00	1.00
@@ -49,7 +49,7 @@ soxZ	sulfur_oxidation	43	14	0	0	29	1.00	1.00	1.00
 sqr	sulfur_oxidation	43	22	1	0	20	0.96	1.00	0.98
 tsdA	sulfur_oxidation	43	7	1	0	35	0.88	1.00	0.93
 doxA	thiosulfate_polysulfide	43	3	0	0	40	1.00	1.00	1.00
-doxD	thiosulfate_polysulfide	43	4	1	0	38	0.80	1.00	0.89
+doxD	thiosulfate_polysulfide	43	3	2	0	38	0.60	1.00	0.75
 otr	thiosulfate_polysulfide	43	1	1	0	41	0.50	1.00	0.67
 phsA	thiosulfate_polysulfide	43	5	0	5	33	1.00	0.50	0.67
 phsB	thiosulfate_polysulfide	43	2	0	0	41	1.00	1.00	1.00

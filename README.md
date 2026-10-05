@@ -7,16 +7,24 @@ with custom clade HMMs and DIAMOND-BLAST gating for the homology traps. Covers
 **61 targets** (across 6 sulfur-cycle process modules), **11 obligatory complexes**,
 and **9 process-completeness synergies**.
 
-**Status: reference layer built, runs end-to-end.** Engine cloned + generalized from
-the validated ncycle-pipeline; sulfur biology authored fresh (`config/targets.yaml`,
-[`Info-sulfur.md`](Info-sulfur.md)); curated BLAST seeds + trained custom HMMs
-for `soxB/C/D/X`, `sqr`, `sdo`, `tth`, `doxD`, `dsrA`, `dsrB` **lifted from the
-validated ewaste-pipeline**. Smoke-validated on a 5-genome panel: *D. vulgaris* →
-complete sulfate reduction (1.0, dsrAB **reductive**), *P. denitrificans* → complete
-Sox oxidation (1.0), *A. ferrooxidans* → sqr/sdo/doxD/tth sulfur oxidation,
-*E. coli* → complete assimilatory reduction, *S. pneumoniae* → negative. The accuracy
-validation campaign (reference panel + ground truth + regression gate) is the deferred
-follow-on phase — see [`Info-sulfur.md`](Info-sulfur.md) "Hardening backlog".
+**Status: validated on a 43-genome reference panel (`sp1_panel/`).** Scored against
+the curated-function ground truth (2,623 cells; 95 % genome-cluster bootstrap CIs):
+whole-panel micro-F1 **0.930 [0.91, 0.95]**, precision 0.952 [0.93, 0.97] with 28 false
+positives, homology-trap precision 0.943 [0.90, 0.98]; on the 20 hold-out genomes — not
+a seed or HMM source for any target — micro-F1 **0.934 [0.91, 0.95]**. `make regression`
+reproduces these numbers and checks them against locked floors (13 checks). The
+KEGG-derived ground truth is kept as the automated contrast
+(`GT_FILE=ground_truth.tsv`). The full record — hardening stages, panel expansions,
+comparator benchmark, MAG study — is in [`validation/REPORT.md`](validation/REPORT.md);
+what is open is in [`ROADMAP.md`](ROADMAP.md).
+
+Engine cloned + generalized from the validated ncycle-pipeline; sulfur biology authored
+fresh (`config/targets.yaml`, [`Info-sulfur.md`](Info-sulfur.md)); curated BLAST seeds +
+trained custom HMMs for `soxB/C/D/X`, `sqr`, `sdo`, `tth`, `doxD`, `dsrA`, `dsrB` **lifted
+from the validated ewaste-pipeline**. Textbook examples: *D. vulgaris* → complete sulfate
+reduction (1.0, dsrAB **reductive**), *P. denitrificans* → complete Sox oxidation (1.0),
+*A. ferrooxidans* → sqr/sdo/doxD/tth sulfur oxidation, *E. coli* → complete assimilatory
+reduction, *S. pneumoniae* → negative.
 
 ## Install
 

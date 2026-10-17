@@ -28,6 +28,7 @@ dependencies:
   - wgsim
   - biopython>=1.83
   - pyyaml>=6.0
+  - rich>=13         # terminal output of the launcher (cycle_ui.py)
   - pandas>=2.0
   - numpy>=1.24
   - matplotlib>=3.7

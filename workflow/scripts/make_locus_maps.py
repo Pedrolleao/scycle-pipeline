@@ -28,7 +28,7 @@ import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import yaml
 
-from _loci import loci_for_sample
+from _loci import coords_state, loci_for_sample
 from _cycle_model import DISPLAY
 from _viz import (AXIS, CALLS_TSV, CAT_ORDER, CYCLE_LETTER, INK, INK2,
                   LOCI_TSV, MUTED, PATHWAY_COLOR, PATHWAY_LABEL, STATUS_SHORT,
@@ -244,12 +244,16 @@ def main() -> None:
     calls = load_calls(args.results_dir / args.sample / "calls" / CALLS_TSV)
     loci = loci_for_sample(args.results_dir, args.sample, calls, targets,
                            args.max_gap, args.flank)
-    has_coords = (args.results_dir / args.sample / "prodigal"
-                  / f"{args.sample}.faa").exists()
+    coords = coords_state(args.results_dir, args.sample, calls)
     write_tsv(loci, args.tsv)
-    note = "" if has_coords else (
-        "No gene coordinates: locus maps need nucleotide / MAG input "
-        "(this sample was a pre-called proteome).")
+    note = {
+        "ok": "",
+        "none": "No gene coordinates: locus maps need nucleotide / MAG input or a "
+                "proteome whose FASTA headers carry Prodigal coordinates.",
+        "mismatch": f"The called proteins are not in the proteome stored under "
+                    f"{args.sample}/prodigal/ (left over from an earlier run with another "
+                    "input?) — neighbourhood maps are not drawn.",
+    }[coords]
     render(args.sample, loci, args.out, note)
     print(f"[locus_maps] {args.sample}: {len(loci)} loci → {args.tsv}")
 

@@ -110,12 +110,12 @@ as SVG (vector) and PNG (300 DPI).
 
 | file | what it is |
 |---|---|
-| `calls/scycle_calls.tsv` | one row per target: status, evidence source, protein, HMM hit + E-value, BLAST reference + identity. For nucleotide input the columns `contig`, `start`, `end`, `strand` locate the called gene (empty for a pre-called proteome). One protein is reported per target; `other_copies` lists any further proteins that reach the same status (paralog copies) |
+| `calls/scycle_calls.tsv` | one row per target: status, evidence source, protein, HMM hit + E-value, BLAST reference + identity. The columns `contig`, `start`, `end`, `strand` locate the called gene when the input had coordinates (nucleotide input, or a proteome whose FASTA headers carry Prodigal coordinates); empty otherwise. One protein is reported per target; `other_copies` lists any further proteins that reach the same status (paralog copies) |
 | `calls/complex_completeness.tsv`, `calls/synergy_completeness.tsv` | completeness of the 11 complexes and 9 process modules |
 | `calls/scycle_loci.tsv` | *(nucleotide input only)* called genes grouped into loci: genes on one contig with at most 5 other genes between them. `copy` says whether a gene is the one reported in `scycle_calls.tsv` or an additional copy |
 | `report/gap_analysis.txt` | plain-text summary |
 | `report/scycle_map.svg/.png` | the genome's calls drawn on the sulfur cycle: each reaction arrow is solid (a complete route found), dashed (partial) or grey (absent), with the genes behind it. The sat / aprAB / dsrAB arrows point SO₄²⁻ → H₂S unless the dsrAB direction call is `oxidative` (reverse Dsr), in which case they are drawn the other way |
-| `report/loci.svg/.png` | *(nucleotide input only)* gene-arrow maps of every locus, grouped by pathway, to a common bp scale. Genes outside the target set are blank; a bar marks a contig end (where an operon may run off the assembly) |
+| `report/loci.svg/.png` | *(input with gene coordinates: nucleotide, or a proteome with Prodigal headers)* gene-arrow maps of every locus, filed under the pathway of most of its called genes, each arrow filled with its own gene's pathway, to a common bp scale. Genes outside the target set are blank; a bar marks a contig end (where an operon may run off the assembly) |
 
 **Across samples**
 

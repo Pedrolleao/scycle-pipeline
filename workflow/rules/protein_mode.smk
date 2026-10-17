@@ -22,13 +22,31 @@ rule prodigal:
     params:
         mode=lambda wc: SAMPLES[wc.sample].get("prodigal_mode", "single"),
     wildcard_constraints:
-        sample=PROTEIN_SAMPLES_RE,
+        sample=NUCLEOTIDE_SAMPLES_RE,
     log:
         RESULTS / "{sample}" / "prodigal" / "{sample}.log",
     shell:
         r"""
         prodigal -i {input} -a {output.faa} -f gff -o {output.gff} \
                  -p {params.mode} -q > {log} 2>&1
+        """
+
+
+rule coords_from_headers:
+    """A pre-called proteome whose FASTA headers carry Prodigal coordinates: stage
+    it under prodigal/ so the locus maps and the report can place its genes. The
+    GFF is a stub (no contig lengths, so contig ends are not marked)."""
+    input:
+        lambda wc: sample_path(wc.sample),
+    output:
+        faa=RESULTS / "{sample}" / "prodigal" / "{sample}.faa",
+        gff=RESULTS / "{sample}" / "prodigal" / "{sample}.gff",
+    wildcard_constraints:
+        sample=HEADER_PROTEIN_SAMPLES_RE,
+    shell:
+        r"""
+        cp {input} {output.faa}
+        printf '##gff-version 3\n# gene coordinates come from the FASTA headers of the input proteome; no contig lengths\n' > {output.gff}
         """
 
 

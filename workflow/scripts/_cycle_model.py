@@ -234,6 +234,7 @@ def evaluate(codes: dict[str, int], ctx: dict | None = None) -> dict[str, dict]:
         state = "complete" if route_full else "partial" if any_gene else "absent"
         out[st["id"]] = {
             "state": state,
+            "off": "",          # no step is switched off by genome type in this cycle
             "reversed": bool(st.get("reversible")
                              and (ctx or {}).get("dsr_direction") == "oxidative"),
             "lines": [[_token(s, codes) for s in line] for line in st["lines"]],

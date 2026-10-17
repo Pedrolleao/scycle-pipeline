@@ -65,11 +65,18 @@ def _token_style(code: int) -> tuple[str, str, str]:
     return "", ABSENT_TEXT, "normal"
 
 
-def _draw_label(ax, renderer, x, y, ha, lines, fontsize):
+OFF_MARK = "∅"
+
+
+def _draw_label(ax, renderer, x, y, ha, lines, fontsize, off=False):
     """Write the gene tokens of one step, line by line, each token styled by
-    its call. Tokens are separate Text objects, so widths are measured."""
+    its call. Tokens are separate Text objects, so widths are measured. A step
+    switched off for this genome type gets the OFF_MARK after its first line;
+    its genes still show their own calls."""
     inv = ax.transData.inverted()
     gap = 1.3
+    if off and lines:
+        lines = [list(lines[0]) + [{"label": OFF_MARK, "code": 0}]] + list(lines[1:])
     for k, line in enumerate(lines):
         yy = y - k * model.LINE_STEP
         texts, widths = [], []
@@ -134,7 +141,8 @@ def draw_cycle(ax, renderer, codes: dict[str, int], fontsize: float,
     # Gene labels.
     for st in lay["steps"]:
         x, y, ha = st["label"]
-        _draw_label(ax, renderer, x, y, ha, ev[st["id"]]["lines"], fontsize)
+        _draw_label(ax, renderer, x, y, ha, ev[st["id"]]["lines"], fontsize,
+                    off=bool(ev[st["id"]].get("off")))
 
     if title:
         ax.text(model.XLIM[0] + 1, model.YLIM[1] + 7.5, title, ha="left",
@@ -171,8 +179,10 @@ def draw_legend(ax, fontsize: float) -> None:
             ("gene", INK, "bold", "confirmed"),
             ("gene°", INK, "bold", "domain-only (HMM signature, no BLAST support)"),
             ("gene×", MUTED, "normal", "disqualified (failed the homology-trap gate)"),
-            ("gene", ABSENT_TEXT, "normal", "absent")]):
-        yy = 17.0 - k * 4.0
+            ("gene", ABSENT_TEXT, "normal", "absent"),
+            (OFF_MARK, ABSENT_TEXT, "normal",
+             "step off for this genome type; its genes keep their calls")]):
+        yy = 17.6 - k * 3.9
         ax.text(x0, yy, sample, ha="left", va="center", fontsize=fontsize,
                 color=colour, fontweight=weight)
         ax.text(x0 + 6.5, yy, lab, ha="left", va="center", fontsize=fontsize,

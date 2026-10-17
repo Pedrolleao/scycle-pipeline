@@ -24,6 +24,27 @@ READ_SAMPLES = [n for n, m in SAMPLES.items() if m.get("kind") == "fastq"]
 # Samples with gene coordinates (Prodigal ran) — the only ones that get locus maps.
 NUCLEOTIDE_SAMPLES = [n for n, m in SAMPLES.items() if m.get("kind") == "nucleotide"]
 NUCLEOTIDE_SAMPLES_RE = "|".join(re.escape(s) for s in NUCLEOTIDE_SAMPLES) or "__NONE__"
+
+
+def has_prodigal_headers(path):
+    """True when the first FASTA header carries Prodigal coordinates
+    ('>id # start # end # strand # ...'): a pre-called proteome that still knows
+    where its genes are, so it gets locus maps like nucleotide input."""
+    try:
+        with open(path) as fh:
+            for line in fh:
+                if line.startswith(">"):
+                    return re.match(r">\S+\s+#\s+\d+\s+#\s+\d+\s+#\s+-?1\s+#", line) is not None
+    except OSError:
+        return False
+    return False
+
+
+HEADER_PROTEIN_SAMPLES = [n for n, m in SAMPLES.items()
+                          if m.get("kind") == "protein" and has_prodigal_headers(m["path"])]
+HEADER_PROTEIN_SAMPLES_RE = "|".join(re.escape(s) for s in HEADER_PROTEIN_SAMPLES) or "__NONE__"
+COORD_SAMPLES = NUCLEOTIDE_SAMPLES + HEADER_PROTEIN_SAMPLES
+COORD_SAMPLES_RE = "|".join(re.escape(s) for s in COORD_SAMPLES) or "__NONE__"
 PROTEIN_SAMPLES_RE = "|".join(re.escape(s) for s in PROTEIN_SAMPLES) or "__NONE__"
 READ_SAMPLES_RE = "|".join(re.escape(s) for s in READ_SAMPLES) or "__NONE__"
 
@@ -47,7 +68,7 @@ def per_sample_target(name, meta):
     rep = RESULTS / name / "report"
     out = [str(rep / "gap_analysis.txt"),
            str(rep / "scycle_map.svg"), str(rep / "scycle_map.png")]
-    if meta.get("kind") == "nucleotide":
+    if name in COORD_SAMPLES:
         out += [str(RESULTS / name / "calls" / "scycle_loci.tsv"),
                 str(rep / "loci.svg"), str(rep / "loci.png")]
     return out

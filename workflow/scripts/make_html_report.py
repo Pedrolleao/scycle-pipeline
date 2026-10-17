@@ -30,7 +30,7 @@ import yaml
 
 import _cycle_model as model
 from _completeness import load_complexes, load_synergies, pretty
-from _loci import loci_for_sample
+from _loci import coords_state, loci_for_sample
 from _viz import (CALLS_TSV, CAT_ORDER, CYCLE_LETTER, CYCLE_NAME, LOCI_TSV,
                   RULED_OUT_LABEL,
                   PATHWAY_COLOR, PATHWAY_COLOR_DARK, PATHWAY_LABEL,
@@ -93,15 +93,19 @@ def sample_record(name: str, idx: int, results_dir: Path, targets: list[dict],
            for k, v in load_synergies(cdir / "synergy_completeness.tsv").items()}
 
     ctx = model.genome_context(calls)
+    # [state, lines of [label, code, gene id], reversed, off-reason]
     steps = {sid: [ev["state"],
-                   [[[tok["label"], tok["code"]] for tok in line]
+                   [[[tok["label"], tok["code"], tok["gene"]] for tok in line]
                     for line in ev["lines"]],
-                   int(ev["reversed"])]
+                   int(ev["reversed"]), ev.get("off", "")]
              for sid, ev in model.evaluate(codes, ctx).items()}
 
-    has_coords = (results_dir / name / "prodigal" / f"{name}.faa").exists()
+    coords = coords_state(results_dir, name, calls)
+    # Prodigal ran on this sample (nucleotide input) when its log is there; a
+    # pre-called proteome with coordinates in its headers is staged without one.
+    is_nucleotide = (results_dir / name / "prodigal" / f"{name}.log").exists()
     loci = []
-    if has_coords:
+    if coords == "ok":
         for l in loci_for_sample(results_dir, name, calls, targets, max_gap, flank):
             loci.append({
                 "id": l["locus_id"], "pathway": l["pathway"],
@@ -115,7 +119,8 @@ def sample_record(name: str, idx: int, results_dir: Path, targets: list[dict],
                           for g in l["genes"]],
             })
     return {"name": name, "idx": idx,
-            "kind": "nucleotide" if has_coords else "protein",
+            "kind": "nucleotide" if is_nucleotide else "protein",
+            "coords": coords,
             "note": model.context_note(ctx),
             "calls": rec_calls, "cx": cx, "syn": syn, "steps": steps,
             "loci": loci, "_codes": codes}

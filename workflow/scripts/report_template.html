@@ -695,7 +695,12 @@ function renderCycle(sm) {
     const d = h("div", {class: "pw"}, t); h("i", {style: `background:${pcol(st.pathway)}`}, d);
     d.appendChild(document.createTextNode(PW[st.pathway].label));
     tipRow(t, "step", v[0] + (v[2] ? " — runs in reverse here" : ""));
-    v[1].forEach(line => line.forEach(tok => tipRow(t, tok[0], STATUS[tok[1]])));
+    if (v[3]) tipRow(t, "note", v[3] + " — the genes below keep their own calls");
+    v[1].forEach(line => line.forEach(tok => {
+      const tg = TG[tok[2]];
+      const own = tg && tg.cat !== st.pathway ? ` · ${PW[tg.cat].short} gene` : "";
+      tipRow(t, tok[0], STATUS[tok[1]] + own);
+    }));
   };
   steps.forEach(st => {
     const stt = sm.steps[st.id][0];
@@ -729,6 +734,7 @@ function renderCycle(sm) {
         const ts = s("tspan", {class: tokenClass(tok[1])}, t, tokenText(tok));
         if (ti) ts.setAttribute("dx", 6);
       });
+      if (li === 0 && sm.steps[st.id][3]) s("tspan", {class: "g0", dx: 6}, t, "∅");
     });
     g.addEventListener("pointermove", e => showTip(e, stepTip(st)));
     g.addEventListener("pointerleave", hideTip);
@@ -769,12 +775,17 @@ function geneArrow(x0, x1, y, hgt, strand) {
 function renderLoci(sm) {
   const box = document.getElementById("loci");
   box.replaceChildren();
-  if (sm.kind !== "nucleotide") {
-    h("p", {class: "note"}, box, "No gene coordinates for this sample: neighbourhood maps need nucleotide / MAG input (this one was a pre-called proteome).");
+  if (sm.coords === "none") {
+    h("p", {class: "note"}, box, "No gene coordinates for this sample: neighbourhood maps need nucleotide / MAG input, or a proteome whose FASTA headers carry Prodigal coordinates.");
+    return;
+  }
+  if (sm.coords === "mismatch") {
+    h("p", {class: "note"}, box, `The called proteins are not in the proteome stored under ${sm.name}/prodigal/ (left over from an earlier run with another input?) — neighbourhood maps are not drawn. The calls table below is complete.`);
     return;
   }
   const loci = sm.loci.filter(l => l.np > 0);
   if (!loci.length) { h("p", {class: "note"}, box, `No ${D.labels.letter}-cycle genes were called in this genome.`); return; }
+  h("p", {class: "note"}, box, "Each locus is filed under the pathway of most of its called genes; the arrow fill is each gene's own pathway, so one locus can hold genes of several pathways.");
   const lg = h("div", {class: "legend"}, box);
   const demo = (code) => v => {
     const p = s("polygon", {points: geneArrow(1, 17, 9, 9, "+")}, v);
@@ -802,7 +813,9 @@ function renderLoci(sm) {
     const hd = h("div", {class: "pw-head"}, box); h("i", {style: `background:${pcol(p.id)}`}, hd);
     hd.appendChild(document.createTextNode(p.label));
     ls.forEach(l => {
-      const cap = h("p", {class: "locus-cap"}, box, `${l.id} · ${l.contig} · ${fmt(l.start)}–${fmt(l.end)} bp`);
+      const cats = [...new Set(l.genes.flatMap(gn => gn[4].filter(c => c[1] > 0).map(c => c[2])))];
+      const mixed = cats.length > 1 ? ` · genes of ${cats.map(c => PW[c].short).join(" + ")}` : "";
+      const cap = h("p", {class: "locus-cap"}, box, `${l.id} · ${l.contig} · ${fmt(l.start)}–${fmt(l.end)} bp${mixed}`);
       const L = 34, labH = 58, ah = 15, yc = labH + ah / 2 + 2;
       const X = pos => L + (pos - l.start) * ppb;
       const W = X(l.end) + 90, H = labH + ah + 12;
@@ -839,7 +852,7 @@ function renderLoci(sm) {
           tipRow(t, "protein", gid);
           tipRow(t, "location", `${fmt(gs)}–${fmt(ge)} (${strand})`);
           tipRow(t, "length", fmt(ge - gs + 1) + " bp");
-          calls.forEach(c => tipRow(t, TG[c[0]].label, STATUS[c[1]] + (c[3] ? " — additional copy" : "")));
+          calls.forEach(c => tipRow(t, TG[c[0]].label, STATUS[c[1]] + ` · ${PW[c[2]].short}` + (c[3] ? " — additional copy" : "")));
           if (partial !== "00") tipRow(t, "note", "gene runs off the contig end");
         }));
         hit.addEventListener("pointerleave", hideTip);
@@ -889,7 +902,7 @@ function select(name, scroll) {
 
 // ── static chrome ─────────────────────────────────────────────────────────
 function init() {
-  const nNuc = D.samples.filter(x => x.kind === "nucleotide").length;
+  const nNuc = D.samples.filter(x => x.coords === "ok").length;
   document.getElementById("id-head").textContent = `[ report ~ ${D.labels.cycle}_cycle ]`;
   document.getElementById("meta").textContent =
     "Marker-gene calls, obligatory complexes and process modules, genome by genome.";
@@ -928,7 +941,8 @@ function init() {
   legendItem(ly, arrow(3.2, false, "var(--ink2)"), "complete step");
   legendItem(ly, arrow(1.8, true, "var(--ink2)"), "partial");
   legendItem(ly, arrow(1.1, false, "var(--absent-edge)"), "absent");
-  h("span", {}, ly).append("bold gene = found · ° domain-only · × disqualified · grey = absent");
+  h("span", {}, ly).append("bold gene = found · ° domain-only · × disqualified · grey = absent · ∅ step not drawn for this genome type (hover for why; its genes keep their calls)");
+  h("span", {}, ly).append("arrow colour = pathway of the step; a gene from another pathway block is named as such in the tooltip");
   const sel = document.getElementById("genome");
   D.samples.slice().sort((a, b) => a.name.localeCompare(b.name))
     .forEach(x => h("option", {value: x.name}, sel, x.name));

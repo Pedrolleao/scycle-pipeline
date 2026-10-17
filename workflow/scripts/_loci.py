@@ -155,6 +155,28 @@ def build_loci(calls: dict[str, dict], contigs: dict[str, list[dict]],
     return loci
 
 
+def coords_state(results_dir: Path, sample: str, calls: dict[str, dict]) -> str:
+    """Can the called genes be placed on a genome?
+
+    'ok'       — results/<sample>/prodigal/<sample>.faa exists and holds the called
+                 proteins (Prodigal output, or a pre-called proteome whose headers
+                 carry Prodigal coordinates, staged there by the workflow);
+    'none'     — no such proteome: a pre-called input without coordinates;
+    'mismatch' — the proteome exists but none of the called proteins is in it —
+                 left over from an earlier run of this sample with another input.
+                 Drawing nothing and saying so beats an empty "no genes called".
+    """
+    faa = Path(results_dir) / sample / "prodigal" / f"{sample}.faa"
+    if not faa.exists():
+        return "none"
+    called = {r.get("protein_id") for r in calls.values()
+              if STATUS_CODE.get(r["status"], 0) != 0 and r.get("protein_id")}
+    if not called:
+        return "ok"
+    ids = {g["id"] for genes in parse_prodigal_genes(faa).values() for g in genes}
+    return "ok" if called & ids else "mismatch"
+
+
 def loci_for_sample(results_dir: Path, sample: str, calls: dict[str, dict],
                     targets: list[dict], max_gap: int = 5, flank: int = 2) -> list[dict]:
     """Loci for one sample, or [] when it has no Prodigal output (protein input)."""

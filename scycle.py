@@ -204,6 +204,14 @@ def prompt_prodigal_mode(samples: list[dict],
         for s in nt_samples:
             s["prodigal_mode"] = override
         return
+    if not ui.can_ask():
+        # Batch job (cluster, CI): nothing to answer on. Use the default and say so.
+        for s in nt_samples:
+            s["prodigal_mode"] = "single"
+        ui.warn(f"{len(nt_samples)} nucleotide sample(s) and no --prodigal-mode: no terminal to "
+                "ask on, so Prodigal runs in 'single' mode (isolate genomes). For metagenome "
+                "assemblies pass --prodigal-mode meta.")
+        return
     if len(nt_samples) > 1:
         mode = ui.choose(f"Got {len(nt_samples)} nucleotide samples. Treat all as "
                          "single isolate genomes or metagenome assemblies?",
@@ -507,6 +515,10 @@ def main() -> None:
     # Step 2 — input.
     with ui.stage(2, N_STAGES, "Input"):
         if args.input is None:
+            if not ui.can_ask():
+                ui.err("no --input given and no terminal to ask on (batch job?): "
+                       "run  python scycle.py --input PATH [--prodigal-mode single|meta]")
+                sys.exit(2)
             try:
                 ans = ui.ask("Path to a FASTA file or directory:")
             except (EOFError, KeyboardInterrupt):

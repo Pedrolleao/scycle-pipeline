@@ -170,12 +170,21 @@ def ask(question: str) -> str:
     """Free-text prompt on the terminal."""
     if _plain:
         return input(f"? {question} ").strip()
-    return console().input(f"[secondary]?[/] {question} ").strip()
+    from rich.markup import escape
+    return console().input(f"[secondary]?[/] {escape(question)} ").strip()
+
+
+def can_ask() -> bool:
+    """Questions are only asked on a terminal. In a batch job (cluster, CI, a pipe)
+    nobody can answer, so callers fall back to a default or fail with a clear message."""
+    return sys.stdin.isatty()
 
 
 def choose(question: str, choices: Dict[str, str], default: str) -> str:
     """Prompt for one of `choices` (key -> label); the first letter of the answer picks.
-    Returns the chosen key; an empty answer or end of input gives `default`."""
+    Returns the chosen key; an empty answer, end of input or no terminal gives `default`."""
+    if not can_ask():
+        return default
     hint = " / ".join(f"[{k[0]}]{k[1:]}" for k in choices)
     try:
         ans = ask(f"{question} {hint}").lower()

@@ -59,6 +59,10 @@ python scycle.py --input <dir> --plain > run.log 2>&1                    # plain
 #   SCYCLE_ENV=<env-name> python scycle.py --input <dir>
 ```
 
+On a cluster or in any batch job, pass both `--input` and `--prodigal-mode`: without a
+terminal the launcher asks nothing — a missing `--input` is an error, a missing
+`--prodigal-mode` falls back to `single` with a warning.
+
 `scycle.py` auto-detects protein (`.faa`) vs nucleotide (`.fna`, → Prodigal) input,
 builds the databases on first run, then dispatches Snakemake. It asks whether
 nucleotide input is isolate genomes or metagenome assemblies unless

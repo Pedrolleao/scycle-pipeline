@@ -9,7 +9,14 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
+import _domain
 from _domain import PRETTY_REPLACE
+
+# How a tool's synergy_completeness.tsv counts: True (nitrogen, sulfur) — n_total /
+# n_present include the rule entries listed under forbids_*; False (methane, since
+# the amendment of 2026-11-07) — they count the required slots only. Declared in
+# _domain.py so this file stays identical across the tools.
+RULES_COUNT_AS_SLOTS = getattr(_domain, "MODULE_RULES_COUNT_AS_SLOTS", True)
 
 
 def _split(v: str | None) -> list[str]:
@@ -45,17 +52,22 @@ def load_complexes(path: Path) -> dict[str, dict]:
 
 def load_synergies(path: Path) -> dict[str, dict]:
     """complete / partial follow the TSV status. The "n/N" text counts REQUIRED
-    slots only. `ruled_out` = required genes are there but an excluded gene is
-    present too, so the phenotype does not apply."""
+    slots only (see RULES_COUNT_AS_SLOTS for how that is read from the TSV).
+    `ruled_out` = required genes are there but an excluded gene is present too,
+    so the phenotype does not apply."""
     out: dict[str, dict] = {}
     if not path.exists():
         return out
     with open(path) as fh:
         for r in csv.DictReader(fh, delimiter="\t"):
             violated = _split(r.get("forbids_violated"))
-            n_forbids = len(_split(r.get("forbids_satisfied"))) + len(violated)
-            n_slots = int(r.get("n_total") or 0) - n_forbids
-            filled = n_slots - len(_split(r.get("requires_missing")))
+            if RULES_COUNT_AS_SLOTS:
+                n_forbids = len(_split(r.get("forbids_satisfied"))) + len(violated)
+                n_slots = int(r.get("n_total") or 0) - n_forbids
+                filled = n_slots - len(_split(r.get("requires_missing")))
+            else:
+                n_slots = int(r.get("n_total") or 0)
+                filled = int(r.get("n_present") or 0)
             status = r.get("status") or "absent"
             if status in ("complete", "partial"):
                 state = status

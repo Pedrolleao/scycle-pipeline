@@ -64,3 +64,7 @@ PRETTY_REPLACE = [("aps ", "APS "), ("dsr", "Dsr"), ("sox", "Sox"),
 
 # Legend text for a module that is ruled out by an exclusion rule.
 RULED_OUT_LABEL = "ruled out — dsrAB runs in the other direction"
+
+# How synergy_completeness.tsv counts a module (read by _completeness.load_synergies):
+# n_total / n_present include the forbids entries.
+MODULE_RULES_COUNT_AS_SLOTS = True

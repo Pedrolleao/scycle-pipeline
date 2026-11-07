@@ -17,7 +17,7 @@ from pathlib import Path
 from _domain import (CALLS_TSV, CAT_ORDER, CYCLE_LETTER, CYCLE_NAME,  # noqa: F401
                      LOCI_TSV, PATHWAY_COLOR, PATHWAY_COLOR_DARK,
                      PATHWAY_LABEL, PATHWAY_SHORT, PRETTY_REPLACE,
-                     RULED_OUT_LABEL)
+                     REPORT_HTML, RULED_OUT_LABEL)
 
 # Ink / chrome.
 INK = "#0b0b0b"
@@ -44,6 +44,32 @@ STATUS_LABEL = {
     0:  "absent",
 }
 STATUS_SHORT = {2: "confirmed", 1: "domain-only", -1: "disqualified", 0: "absent"}
+
+
+def save_all(fig, outs, **savefig_kw) -> None:
+    """Save one rendered figure to every path in `outs` — the format follows the
+    extension (PNG at 300 DPI, SVG vector) — and close it. One render, two files:
+    the rules used to call a script twice, once per extension."""
+    import matplotlib.pyplot as plt
+    for out in outs:
+        out = Path(out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(out, dpi=300 if out.suffix.lower() == ".png" else 100, **savefig_kw)
+    plt.close(fig)
+
+
+def save_pointer(outs, n_rows: int, what: str, max_rows: int) -> None:
+    """Above `max_rows` genomes a static grid is unreadable and huge (the gene grid
+    of 500 genomes is a 33 MB SVG): write a small figure that says so and points at
+    the HTML report, whose grids scroll. The matrix TSV is written regardless."""
+    import matplotlib.pyplot as plt
+    fig = plt.figure(figsize=(8, 2))
+    fig.text(0.5, 0.5,
+             f"{n_rows} genomes — too many rows for a static {what} (limit {max_rows}).\n"
+             f"Open {REPORT_HTML} (its grids scroll, the column labels stay in view),\n"
+             f"or re-run the figure script with --max-rows {n_rows}.",
+             ha="center", va="center", fontsize=10, color=INK2)
+    save_all(fig, outs)
 
 
 def load_calls(path: Path) -> dict[str, dict]:

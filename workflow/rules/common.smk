@@ -1,5 +1,7 @@
 # common.smk — shared helpers used by both modes.
 
+# Same pattern as SAMPLE_NAME_RE in scycle.py, which refuses other names before
+# Snakemake starts — change both together.
 wildcard_constraints:
     sample=r"[A-Za-z0-9_.\-]+",
 

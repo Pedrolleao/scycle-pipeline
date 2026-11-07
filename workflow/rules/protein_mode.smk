@@ -63,7 +63,10 @@ rule hmmscan:
         dom_e=config["thresholds"]["hmmer"]["dom_evalue"],
     wildcard_constraints:
         sample=PROTEIN_SAMPLES_RE,
-    threads: 4
+    # One thread: hmmscan's worker threads do not pay off on a 99-profile database
+    # (measured 2026-11-07, 3,049 proteins: --cpu 4 5.1 s, --cpu 1 4.0 s, same
+    # domtblout), so one job per core gives several times the throughput.
+    threads: 1
     log:
         RESULTS / "{sample}" / "hmm" / "{sample}.hmmscan.log",
     shell:

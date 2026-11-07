@@ -1,5 +1,7 @@
 # config.yaml — scycle-pipeline thresholds and paths.
-# The `samples:` block at the bottom is rewritten by scycle.py at each invocation.
+# scycle.py reads this file and writes a per-run copy with the discovered samples to
+# <results_dir>/scycle_run_config.yaml; `samples:` here stays empty (fill it in only
+# to run Snakemake by hand).
 
 paths:
   hmm_db:        resources/hmm/scycle_targets.hmm
@@ -19,6 +21,11 @@ thresholds:
     evalue: 1.0e-10
     qcov_hsp_perc: 50
     pident_min: 30                  # default; per-target blast_identity_min overrides
+
+figures:
+  # Static grids (scycle_heatmap, figures/pathway_*, complexes, synergies) above this many
+  # genomes become a pointer figure; scycle_report.html has no limit (its grids scroll).
+  max_rows: 120
 
 build:
   # KOfam profile HMMs + adaptive thresholds (primary detection backbone).

@@ -6,6 +6,10 @@ import os
 import re
 from pathlib import Path
 
+# The launcher (scycle.py) passes --configfile <results_dir>/scycle_run_config.yaml:
+# the base config below plus `results_dir:` and the `samples:` block, so the files in
+# config/ are never written. This directive is the default for running Snakemake by
+# hand — then fill in `samples:` (name: {path, kind, prodigal_mode}) yourself.
 configfile: os.environ.get("SCYCLE_CONFIG", "config/config.yaml")
 
 SAMPLES = config.get("samples") or {}

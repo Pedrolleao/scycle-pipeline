@@ -63,12 +63,19 @@ On a cluster or in any batch job, pass both `--input` and `--prodigal-mode`: wit
 terminal the launcher asks nothing — a missing `--input` is an error, a missing
 `--prodigal-mode` falls back to `single` with a warning.
 
+A sample is named after its file (`Mx_12.fna` → `Mx_12`); the name may hold letters,
+digits, `_`, `.` and `-` only, two inputs may not share a stem (`a.faa` + `a.fna`), and a
+file that is not FASTA or holds characters outside the FASTA alphabet is refused before
+anything runs.
+
 `scycle.py` auto-detects protein (`.faa`) vs nucleotide (`.fna`, → Prodigal) input,
 builds the databases on first run, then dispatches Snakemake. It asks whether
 nucleotide input is isolate genomes or metagenome assemblies unless
-`--prodigal-mode single|meta` is given, and writes the samples it found into the
-`samples:` block of `config/config.yaml` — so `git status` shows that file as modified
-after a run.
+`--prodigal-mode single|meta` is given, and writes the samples it found, the results directory, the tool version and the command
+line to `scycle_run_config.yaml` inside the results directory, and runs Snakemake with
+that file. `config/config.yaml` is only read, so nothing in the checkout changes and
+two runs with different results directories can run at the same time; the run config
+is also the provenance record of a results directory.
 
 Results go to `scycle_results/` inside this directory unless `--output DIR` is given (a
 path relative to where you run the command). When the run finishes the launcher prints
@@ -114,7 +121,7 @@ as SVG (vector) and PNG (300 DPI).
 
 | file | what it is |
 |---|---|
-| `calls/scycle_calls.tsv` | one row per target: status, evidence source, protein, HMM hit + E-value, BLAST reference + identity. The columns `contig`, `start`, `end`, `strand` locate the called gene when the input had coordinates (nucleotide input, or a proteome whose FASTA headers carry Prodigal coordinates); empty otherwise. One protein is reported per target; `other_copies` lists any further proteins that reach the same status (paralog copies) |
+| `calls/scycle_calls.tsv` | one row per target: status, evidence source, protein, HMM hit + E-value, BLAST reference + identity. The columns `contig`, `start`, `end`, `strand` locate the called gene when the input had coordinates (nucleotide input, or a proteome whose FASTA headers carry Prodigal coordinates); empty otherwise. One protein is reported per target; `other_copies` lists any further proteins that reach the same status (paralog copies). `pfam_hits` names the signature that fired — a KO, a clade model or a Pfam — and `best_pfam_evalue` is its E-value (the column names predate the KOfam backbone) |
 | `calls/complex_completeness.tsv`, `calls/synergy_completeness.tsv` | completeness of the 11 complexes and 9 process modules |
 | `calls/scycle_loci.tsv` | *(nucleotide input only)* called genes grouped into loci: genes on one contig with at most 5 other genes between them. `copy` says whether a gene is the one reported in `scycle_calls.tsv` or an additional copy |
 | `report/gap_analysis.txt` | plain-text summary |
@@ -129,8 +136,9 @@ as SVG (vector) and PNG (300 DPI).
 | `scycle_heatmap.svg/.png` | overview dot grid; genomes ordered by gene-content similarity |
 | `figures/pathway_<pathway>.svg/.png` | one dot grid per pathway |
 | `figures/complexes.svg/.png`, `figures/synergies.svg/.png` | complex / process-module completeness |
+| *(all static grids)* | above 120 genomes (`figures.max_rows` in `config/config.yaml`) each grid is replaced by a small pointer figure and `scycle_report.html` is the place to read the run; `scycle_matrix.tsv` is always written |
 | `figures/scycle_maps.svg/.png` | every genome's S-cycle map side by side (up to 48 genomes) |
-| `scycle_report.html` | self-contained interactive report (no network needed): the gene grid and the complex / module grid with hover evidence, row search / ordering, and a per-genome panel with the S-cycle map, locus maps and the full calls table. Light and dark themes. Every figure in it (gene grid, complex / module grid, cycle map, each locus map) has a **Save PNG (300 dpi)** button: it downloads that figure as currently shown — row filter and order, hidden pathways, selected genome, light or dark theme — with its title and legend, rendered at 300 dpi (a grid too large for a browser canvas is saved at the highest resolution that fits, and says so). The page follows the group's *Simple Terminal* design system (`design/Simple`): JetBrains Mono, hairline `[ bracketed ]` frames, its dark palette or its Light variant according to the system theme, with a LIGHT / DARK selector in the top-right corner to pin either. The font is inlined from `workflow/scripts/fonts/` (SIL OFL 1.1, licence alongside), so the report looks the same offline and the PNG export uses it too; pathway colours stay the validated palette of the static figures. |
+| `scycle_report.html` | self-contained interactive report (no network needed): the gene grid and the complex / module grid with hover evidence (their column labels stay in view while the page scrolls), row search / ordering, and a per-genome panel with the S-cycle map, locus maps and the full calls table. Light and dark themes. Every figure in it (gene grid, complex / module grid, cycle map, each locus map) has a **Save PNG (300 dpi)** button: it downloads that figure as currently shown — row filter and order, hidden pathways, selected genome, light or dark theme — with its title and legend, rendered at 300 dpi (a grid too large for a browser canvas is saved at the highest resolution that fits, and says so). The page follows the group's *Simple Terminal* design system (`design/Simple`): JetBrains Mono, hairline `[ bracketed ]` frames, its dark palette or its Light variant according to the system theme, with a LIGHT / DARK selector in the top-right corner to pin either. The font is inlined from `workflow/scripts/fonts/` (SIL OFL 1.1, licence alongside), so the report looks the same offline and the PNG export uses it too; pathway colours stay the validated palette of the static figures. |
 
 **Reading the glyphs** (same in every figure and in `scycle_report.html`): solid disc =
 confirmed; half-filled = domain-only (HMM signature, no BLAST support); ring with a

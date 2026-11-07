@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 import yaml
 
 
-from _viz import (GRID, INK, INK2, MUTED, PATHWAY_COLOR, PATHWAY_LABEL,
+from _viz import (GRID, INK, INK2, MUTED, PATHWAY_COLOR, PATHWAY_LABEL, save_all, save_pointer,
                   draw_status_glyph, draw_status_legend)
 
 COMPLEX_BAND = INK2      # neutral, so it never reads as a pathway hue
@@ -62,7 +62,8 @@ def render(
     targets: list[dict],
     pathway: str,
     complex_members: set[str],
-    out: Path,
+    outs: list[Path],
+    max_rows: int = 120,
 ) -> None:
     target_ids = [t["id"] for t in targets]
     target_names = [t["name"] for t in targets]
@@ -86,6 +87,11 @@ def render(
     n_rows = len(samples)
     n_cols = len(target_ids)
 
+    if n_rows > max_rows:
+        save_pointer(outs, n_rows, f"{PATHWAY_LABEL.get(pathway, pathway)} grid", max_rows)
+        print(f"[pathway_heatmap] {n_rows} active rows > --max-rows {max_rows}: pointer figure")
+        return
+
     if n_rows == 0:
         # No genome carries any gene of this pathway: say so instead of
         # drawing an empty grid (a zero-row axes cannot be laid out).
@@ -96,10 +102,8 @@ def render(
         fig.text(0.04, 0.32, f"No gene of this pathway was found in any of the "
                  f"{len(absent_samples)} genomes.", fontsize=9, color=INK2,
                  va="center")
-        out.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(out, dpi=300 if out.suffix.lower() == ".png" else 100)
-        plt.close(fig)
-        print(f"[pathway_heatmap] wrote {out}  (0 active rows, "
+        save_all(fig, outs)
+        print(f"[pathway_heatmap] wrote {', '.join(map(str, outs))}  (0 active rows, "
               f"{len(absent_samples)} all-absent)")
         return
 
@@ -212,12 +216,9 @@ def render(
             fig.text(left_margin / fig_w, y, line,
                      fontsize=7, color="#666666", va="top")
 
-    out.parent.mkdir(parents=True, exist_ok=True)
-    # Format inferred from extension. SVG is vector (DPI irrelevant); PNG at 300 DPI for paper-grade rasters.
-    dpi = 300 if out.suffix.lower() == ".png" else 100
-    fig.savefig(out, bbox_inches="tight", dpi=dpi)
-    plt.close(fig)
-    print(f"[pathway_heatmap] wrote {out}  ({n_rows} active rows, "
+    # Format by extension: SVG vector, PNG at 300 DPI (see _viz.save_all).
+    save_all(fig, outs, bbox_inches="tight")
+    print(f"[pathway_heatmap] wrote {', '.join(map(str, outs))}  ({n_rows} active rows, "
           f"{len(absent_samples)} all-absent)")
 
 
@@ -226,7 +227,10 @@ def main() -> None:
     ap.add_argument("--matrix",   required=True, type=Path)
     ap.add_argument("--targets",  required=True, type=Path)
     ap.add_argument("--pathway",  required=True)
-    ap.add_argument("--out",      required=True, type=Path)
+    ap.add_argument("--out",      required=True, type=Path, nargs="+",
+                    help="one or more paths; the extension picks the format")
+    ap.add_argument("--max-rows", type=int, default=120,
+                    help="above this many genomes with a signal write a pointer figure instead")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.targets))
@@ -251,7 +255,7 @@ def main() -> None:
             complex_members |= members
 
     samples, data = load_matrix(args.matrix)
-    render(samples, data, targets, args.pathway, complex_members, args.out)
+    render(samples, data, targets, args.pathway, complex_members, args.out, args.max_rows)
 
 
 if __name__ == "__main__":

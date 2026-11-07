@@ -31,11 +31,11 @@ import yaml
 
 from _completeness import load_synergies, pretty
 from _completeness_grid import render_grid
-from _viz import RULED_OUT_LABEL
+from _viz import RULED_OUT_LABEL, save_pointer
 
 
 def render(samples: list[str], sample_data: dict[str, dict],
-           synergies: list[dict], out: Path) -> None:
+           synergies: list[dict], outs: list[Path]) -> None:
     plain = [s for s in synergies if not s.get("forbids")]
     flags = [s for s in synergies if s.get("forbids")]
     groups = [("process modules — required steps only" if flags else "process modules",
@@ -56,9 +56,9 @@ def render(samples: list[str], sample_data: dict[str, dict],
                 ("ruled_out", "", RULED_OUT_LABEL),
                 ("absent", "", "absent")],
         key=key, key_title="What each module means",
-        out=out,
+        outs=outs,
     )
-    print(f"[synergy_heatmap] wrote {out}  ({len(samples)} samples, "
+    print(f"[synergy_heatmap] wrote {', '.join(map(str, outs))}  ({len(samples)} samples, "
           f"{len(synergies)} synergies)")
 
 
@@ -67,7 +67,10 @@ def main() -> None:
     ap.add_argument("--results-dir", required=True, type=Path)
     ap.add_argument("--targets",     required=True, type=Path)
     ap.add_argument("--samples",     required=True)
-    ap.add_argument("--out",         required=True, type=Path)
+    ap.add_argument("--out",         required=True, type=Path, nargs="+",
+                    help="one or more paths; the extension picks the format")
+    ap.add_argument("--max-rows",    type=int, default=120,
+                    help="above this many genomes write a pointer figure instead of the grid")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.targets))
@@ -80,6 +83,10 @@ def main() -> None:
         sample_data[s] = {k: (v["state"], v["text"])
                           for k, v in load_synergies(p).items()}
 
+    if len(samples) > args.max_rows:
+        save_pointer(args.out, len(samples), "module grid", args.max_rows)
+        print(f"[synergy_heatmap] {len(samples)} genomes > --max-rows {args.max_rows}: pointer figure")
+        return
     render(samples, sample_data, synergies, args.out)
 
 

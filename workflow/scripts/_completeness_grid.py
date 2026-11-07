@@ -17,7 +17,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from _viz import (GRID, INK, INK2, draw_completeness_glyph,
+from _viz import (GRID, INK, INK2, draw_completeness_glyph, save_all,
                   draw_completeness_legend)
 
 CELL = 0.46          # inches per grid step
@@ -30,7 +30,7 @@ def render_grid(samples: list[str],
                 title: str, subtitle: str,
                 legend: list[tuple[str, str, str]],
                 key: list[tuple[str, str]], key_title: str,
-                out: Path) -> None:
+                outs: list[Path]) -> None:
     """groups = [(group label, [(column id, column label), …]), …]
     cells[sample][column id] = (state, text)
     legend = [(state, example text, label), …]
@@ -118,7 +118,4 @@ def render_grid(samples: list[str],
             y -= 0.40
         y -= 0.08
 
-    out.parent.mkdir(parents=True, exist_ok=True)
-    dpi = 300 if out.suffix.lower() == ".png" else 100
-    fig.savefig(out, bbox_inches="tight", pad_inches=0.25, dpi=dpi)
-    plt.close(fig)
+    save_all(fig, outs, bbox_inches="tight", pad_inches=0.25)

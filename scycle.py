@@ -4,8 +4,9 @@ scycle-pipeline launcher.
 
 Maps MAGs / isolate proteomes to their participation in the sulfur cycle.
 Bootstraps the conda environment, detects input type, makes sure the HMM /
-BLAST databases are built, writes the discovered samples into
-config/config.yaml, then invokes Snakemake.
+BLAST databases are built, writes a per-run config (the base config plus the
+discovered samples and the results directory) into the results directory,
+then invokes Snakemake with it. The base config is never written.
 (Same launcher as the methane and nitrogen sister pipelines.)
 
 Inputs are assembled FASTA — .faa proteomes, or .fna assemblies which are
@@ -21,20 +22,27 @@ non-terminal stdout (logs, CI) give plain text with Snakemake's own output passe
 through unchanged. Snakemake's complete log is in .snakemake/log/ either way.
 
 Usage:
-    python scycle.py [--input PATH] [--output DIR] [--mode protein]
+    python scycle.py [--input PATH] [--output DIR]
                   [--cores N] [--dry-run] [--skip-db-setup]
                   [--prodigal-mode single|meta] [--plain]
+
+Before Snakemake starts, the launcher refuses what the workflow could not run:
+a sample name outside the wildcard pattern of workflow/rules/common.smk, two
+inputs with the same stem, a file that is not FASTA, a sequence with characters
+outside the FASTA alphabet (diamond blastp hangs on those).
 """
 
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import cycle_ui as ui
@@ -54,6 +62,14 @@ ENV_NAME = os.environ.get("SCYCLE_ENV", "cycle-pipeline")
 FASTA_AA_EXT = {".faa", ".fap"}
 FASTA_NT_EXT = {".fna", ".fa", ".fasta", ".fas", ".ffn"}
 FASTQ_EXT = {".fastq", ".fq", ".fastq.gz", ".fq.gz"}
+
+# A sample name is the {sample} wildcard of every rule. Same pattern as the
+# `wildcard_constraints` of workflow/rules/common.smk — change both together.
+SAMPLE_NAME_RE = re.compile(r"[A-Za-z0-9_.\-]+")
+SAMPLE_NAME_RULE = "letters, digits, '_', '.', '-' only (no spaces)"
+# Residues a FASTA sequence line may hold (amino acids or nucleotides, IUPAC codes,
+# '*' stop, '-' / '.' gaps). Anything else makes diamond blastp hang.
+FASTA_ALPHABET = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*-.")
 
 REQUIRED_TOOLS = [
     "snakemake", "hmmscan", "hmmpress", "prodigal", "blastp",
@@ -92,7 +108,7 @@ def bootstrap_env_and_reexec(argv: list[str]) -> None:
         ui.info(f"re-running inside conda env '{ENV_NAME}'")
 
     # Re-invoke this script inside the env.
-    args = ["conda", "run", "--no-capture-output", "-n", ENV_NAME,
+    args = [conda, "run", "--no-capture-output", "-n", ENV_NAME,
             "python", str(Path(__file__).resolve()), *argv]
     os.execvp(args[0], args)
 
@@ -115,22 +131,77 @@ def looks_like_fastq(path: Path) -> bool:
     return any(suffixes.endswith(e) for e in FASTQ_EXT)
 
 
-def fasta_is_nucleotide(path: Path, sample_size: int = 3000) -> bool:
-    """Read up to `sample_size` non-header residues; nucleotide if >85% are
-    in {A,C,G,T,N,U} (case-insensitive)."""
-    buf = []
-    with open(path) as fh:
+def sample_fasta(path: Path, sample_size: int = 3000) -> tuple[bool, str]:
+    """(first non-blank line is a '>' header, up to `sample_size` residues of the
+    first records). One read serves the type detection and the sanity check."""
+    buf: list[str] = []
+    has_header = False
+    first = True
+    with open(path, errors="replace") as fh:
         for line in fh:
+            if first and line.strip():
+                has_header = line.startswith(">")
+                first = False
             if line.startswith(">"):
                 continue
             buf.append(line.strip())
             if sum(len(s) for s in buf) >= sample_size:
                 break
-    seq = "".join(buf)[:sample_size].upper()
+    return has_header, "".join(buf)[:sample_size]
+
+
+def fasta_is_nucleotide(path: Path, sample_size: int = 3000) -> bool:
+    """Read up to `sample_size` non-header residues; nucleotide if >85% are
+    in {A,C,G,T,N,U} (case-insensitive)."""
+    _, seq = sample_fasta(path, sample_size)
+    seq = seq.upper()
     if not seq:
         return False
     nt = sum(1 for c in seq if c in "ACGTUN")
     return nt / len(seq) > 0.85
+
+
+def fasta_problem(path: Path) -> str | None:
+    """Why the workflow could not run this file, or None. Looks at the first
+    records only (what sample_fasta reads): no '>' header, no sequence, or a
+    character outside the FASTA alphabet."""
+    has_header, seq = sample_fasta(path)
+    if not has_header:
+        return "not a FASTA file (the first line is not a '>' header)"
+    if not seq:
+        return "no sequence after the first header"
+    bad = next((c for c in seq if c not in FASTA_ALPHABET), None)
+    if bad is not None:
+        return f"illegal character {bad!r} in the sequence (diamond blastp would hang on it)"
+    return None
+
+
+def validate_samples(samples: list[dict], check_sequences: bool = True) -> None:
+    """Refuse what the workflow cannot run; every problem is listed, then exit 1.
+    Names are not fixed silently: the sample name is the row label of every output."""
+    problems: list[str] = []
+    by_name: dict[str, list[str]] = {}
+    for s in samples:
+        by_name.setdefault(s["name"], []).append(s["path"])
+        if not SAMPLE_NAME_RE.fullmatch(s["name"]):
+            problems.append(f"{s['path']}: sample name '{s['name']}' is not allowed — "
+                            f"{SAMPLE_NAME_RULE}; rename the file")
+    for name, paths in by_name.items():
+        if len(paths) > 1:
+            problems.append(f"two inputs would be one sample '{name}': "
+                            + " and ".join(paths) + "; rename or remove one")
+    if check_sequences:
+        for s in samples:
+            if s["kind"] == "fastq":
+                continue
+            why = fasta_problem(Path(s["path"]))
+            if why:
+                problems.append(f"{s['path']}: {why}")
+    if problems:
+        for msg in problems:
+            ui.err(msg)
+        ui.err(f"{len(problems)} input problem(s); nothing was run")
+        sys.exit(1)
 
 
 def discover_samples(input_path: Path) -> list[dict]:
@@ -264,7 +335,7 @@ def _stale(db: Path) -> bool:
     return db.exists() and _TARGETS.exists() and _TARGETS.stat().st_mtime > db.stat().st_mtime
 
 
-def build_databases(skip: bool, modes_present: set[str]) -> None:
+def build_databases(skip: bool) -> None:
     if skip:
         ui.info("database check skipped (--skip-db-setup)")
         return
@@ -291,22 +362,51 @@ def build_databases(skip: bool, modes_present: set[str]) -> None:
 
 # ───────────────────────────── config writing ────────────────────────────────
 
-def write_samples_block(samples: list[dict]) -> None:
-    """Rewrite the `samples:` block at the bottom of config.yaml.
-    Preserves everything else by truncating from the `samples:` marker line."""
+RUN_CONFIG_NAME = f"{TOOL}_run_config.yaml"
+
+
+def write_run_config(samples: list[dict], results_dir: Path, version: str,
+                     explicit_output: bool, dry_run: bool = False) -> Path:
+    """Write <results_dir>/scycle_run_config.yaml: the base config (everything above
+    its `samples:` line) with the discovered `samples:` block and — when --output was
+    given — `results_dir:`; the tool version, date and command line are comments at
+    the top. Snakemake is given this file; the base config is only read, so a tracked
+    config stays clean and two runs with different results directories do not clobber
+    each other. The file doubles as the provenance record of the run, so a dry run
+    writes a temporary file instead of overwriting the record of the last real run."""
     text = CONFIG_PATH.read_text()
     head, _, _ = text.partition("\nsamples:")
-    lines = [head.rstrip("\n"), "", "samples:"]
-    if not samples:
-        lines[-1] = "samples: {}"
-    else:
-        for s in samples:
-            lines.append(f"  {s['name']}:")
-            for k, v in s.items():
-                if k == "name":
-                    continue
+    lines = [
+        f"# {RUN_CONFIG_NAME} — written by {TOOL}.py, do not edit: the next run overwrites it.",
+        f"# base config: {CONFIG_PATH}",
+        f"# results: {results_dir}",
+        f"# tool: {TOOL} {version or '(no git revision)'}",
+        f"# date: {datetime.datetime.now().astimezone().isoformat(timespec='seconds')}",
+        f"# command: {' '.join(sys.argv)}",
+        "",
+        head.rstrip("\n"),
+        "",
+    ]
+    if explicit_output:
+        # Without --output, paths.results_dir of the base config decides (relative to
+        # the pipeline directory, as before), so existing results are not re-keyed.
+        lines += ["# Results directory of this run (--output; overrides paths.results_dir).",
+                  f"results_dir: {results_dir}", ""]
+    lines.append("samples:" if samples else "samples: {}")
+    for s in samples:
+        lines.append(f"  {s['name']}:")
+        for k, v in s.items():
+            if k != "name":
                 lines.append(f"    {k}: {v}")
-    CONFIG_PATH.write_text("\n".join(lines) + "\n")
+    if dry_run:
+        fd, name = tempfile.mkstemp(prefix=f"{TOOL}_run_config.", suffix=".yaml")
+        os.close(fd)
+        out = Path(name)
+    else:
+        results_dir.mkdir(parents=True, exist_ok=True)
+        out = results_dir / RUN_CONFIG_NAME
+    out.write_text("\n".join(lines) + "\n")
+    return out
 
 
 # ───────────────────────────── snakemake ─────────────────────────────────────
@@ -315,8 +415,51 @@ _RE_STEPS = re.compile(r"^(\d+) of (\d+) steps \((\d+)%\) done")
 _RE_RULE = re.compile(r"^(?:local)?rule (\w+):")
 _RE_FINISHED = re.compile(r"^Finished jobid: \d+ \(Rule: (\w+)\)")
 _RE_STAT_ROW = re.compile(r"^(\w+)\s+(\d+)$")
-_RE_LOG = re.compile(r"Complete log(?: file)?:\s*(\S+)")
+# Snakemake 9 prints "Complete log(s):", older versions "Complete log:".
+_RE_LOG = re.compile(r"Complete log(?:\(s\)| file)?:\s*(\S+)")
 _RE_ERROR = re.compile(r"^(Error in rule \w+|\w*Error\b|\w*Exception\b|Shutting down|Exiting because)")
+_RE_ERROR_IN_RULE = re.compile(r"^Error in rule \w+")
+_RE_JOB_LOG = re.compile(r"^\s*log:\s*(\S+)")
+# Snakemake's job header lines: no cause in them, dropped from the context shown.
+_RE_CHATTER = re.compile(r"^(\s+(input|output|log|jobid|reason|wildcards|threads|resources):|"
+                         r"(local)?rule \w+:|\[\w{3} \w{3}|Select jobs|Execute \d|\s*$)")
+
+
+def failure_report(error_block: list[str], context: list[str]) -> tuple[str, str]:
+    """(head line, panel body) for a failed run. The cause of a failed shell job is in
+    the job's log file, not in Snakemake's block (which repeats the command), so the
+    body starts with the last lines of that log when the rule has one; for a rule
+    without `log:` the tool's own output arrived on the pipe just before the block and
+    the last lines of that are shown instead. Snakemake's description of the job
+    follows, up to the `shell:` line, once (Snakemake 9 prints the block twice)."""
+    if not error_block:
+        return "", ""
+    head = next((l for l in error_block if _RE_ERROR_IN_RULE.match(l)), error_block[0])
+    desc: list[str] = []
+    for line in error_block[error_block.index(head):]:
+        if line.strip().startswith("shell:") or line.startswith(("Shutting down", "Exiting because")):
+            break
+        if desc and _RE_ERROR_IN_RULE.match(line):
+            break
+        if line.strip() != "message: None":
+            desc.append(line.rstrip())
+    if any("(command exited with non-zero exit code)" in l for l in error_block):
+        desc.append("    (command exited with non-zero exit code)")
+
+    body: list[str] = []
+    m = next((_RE_JOB_LOG.match(l) for l in error_block if _RE_JOB_LOG.match(l)), None)
+    job_log = Path(m.group(1)) if m else None
+    if job_log is not None and job_log.is_file() and job_log.stat().st_size > 0:
+        tail = job_log.read_text(errors="replace").splitlines()[-15:]
+        body += [f"job log — {job_log}:", *tail, ""]
+    else:
+        ctx = [l.rstrip() for l in context if not _RE_CHATTER.match(l)]
+        if ctx:
+            body += ["last output before the error:", *ctx[-25:], ""]
+        if job_log is not None:
+            body.append(f"(the job log {job_log} is empty)")
+    body += ["Snakemake:", *desc]
+    return head, "\n".join(body)
 
 
 def run_snakemake_live(cmd: list[str]) -> int:
@@ -333,6 +476,7 @@ def run_snakemake_live(cmd: list[str]) -> int:
     plan_shown = False
     running: list[str] = []
     error_block: list[str] = []
+    context: list[str] = []      # pipe lines just before the error block
     in_error = False
     nothing_to_do = False
     log_path = ""
@@ -359,13 +503,14 @@ def run_snakemake_live(cmd: list[str]) -> int:
                     continue
                 if in_error and _RE_STEPS.match(line):
                     # Snakemake went on: the "error" was a tool's own message, not fatal.
-                    in_error, error_block = False, []
+                    in_error, error_block, context = False, [], []
                 elif in_error:
                     if not line.startswith(("Shutting down", "Exiting because")):
                         error_block.append(line)
                     continue
                 if _RE_ERROR.match(line):
                     in_error = True
+                    context = lines[-26:-1]
                     error_block.append(line)
                     continue
 
@@ -427,8 +572,10 @@ def run_snakemake_live(cmd: list[str]) -> int:
     if nothing_to_do:
         ui.ok("nothing to do — the results are already up to date")
     if rc != 0:
-        head = error_block[0] if error_block else f"Snakemake exited with status {rc}"
-        tail = "\n".join(error_block[1:] if error_block else lines[-25:])
+        if error_block:
+            head, tail = failure_report(error_block, context)
+        else:
+            head, tail = f"Snakemake exited with status {rc}", "\n".join(lines[-25:])
         ui.error_panel("Pipeline failed", head, tail,
                        hint=f"complete log: {log_path or '.snakemake/log/'}")
     return rc
@@ -473,9 +620,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output", type=Path, default=None, metavar="DIR",
                    help="Directory for the results (default: scycle_results/ next to "
                         "this script, as set by paths.results_dir in the config)")
+    # Only the protein/assembly mode exists (raw-FASTQ 'read' mode was removed
+    # 2026-06-12); the flag is kept for old command lines and hidden from --help.
     p.add_argument("--mode", choices=["auto", "protein"], default="protein",
-                   help="Pipeline mode (protein/assembly). Raw-FASTQ 'read' mode was "
-                        "removed 2026-06-12; supply .faa proteomes or .fna assemblies.")
+                   help=argparse.SUPPRESS)
+    # Skips the FASTA sanity check (names and duplicates are still checked): lets a
+    # test feed a bad file to the workflow to see how a failing job is reported.
+    p.add_argument("--skip-validation", action="store_true", help=argparse.SUPPRESS)
     p.add_argument("--cores", type=int, default=os.cpu_count() or 4)
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--skip-db-setup", action="store_true")
@@ -499,7 +650,8 @@ def main() -> None:
         ui.err(f"missing tools even in env '{ENV_NAME}': {', '.join(missing)}")
         sys.exit(1)
 
-    ui.banner("run" if not args.dry_run else "dry run", tool_version(), SUBTITLE)
+    version = tool_version()
+    ui.banner("run" if not args.dry_run else "dry run", version, SUBTITLE)
 
     # --output is relative to where the user is; Snakemake runs from ROOT.
     results_dir = (args.output.expanduser().resolve() if args.output is not None
@@ -536,32 +688,25 @@ def main() -> None:
                    f"provide .faa proteomes or .fna assemblies. Offending: {', '.join(fastq)}")
             sys.exit(1)
 
+        validate_samples(samples, check_sequences=not args.skip_validation)
         prompt_prodigal_mode(samples, args.prodigal_mode)
         samples_table(samples)
 
-    # Determine pipeline modes touched.
-    modes_present = set()
-    for s in samples:
-        modes_present.add("read" if s["kind"] == "fastq" else "protein")
-
-    # Step 3–5 — databases.
+    # Step 3 — databases.
     with ui.stage(3, N_STAGES, "Databases"):
-        build_databases(args.skip_db_setup, modes_present)
+        build_databases(args.skip_db_setup)
 
-    # Step 5 — config.
-    write_samples_block(samples)
-
-    # Step 6 — snakemake.
+    # Step 4 — the per-run config, then Snakemake.
+    run_config = write_run_config(samples, results_dir, version, args.output is not None,
+                                  dry_run=args.dry_run)
     cmd = ["snakemake", "--cores", str(args.cores),
-           "--configfile", str(CONFIG_PATH),
+           "--configfile", str(run_config),
            "--snakefile", str(ROOT / "workflow" / "Snakefile")]
-    if args.output is not None:
-        cmd += ["--config", f"results_dir={results_dir}"]
     if args.dry_run:
         cmd.append("--dry-run")
 
     with ui.stage(4, N_STAGES, "Pipeline"):
-        ui.ok(f"{len(samples)} sample(s) written to {CONFIG_PATH.relative_to(ROOT) if CONFIG_PATH.is_relative_to(ROOT) else CONFIG_PATH}")
+        ui.ok(f"{len(samples)} sample(s) written to {run_config}")
         ui.kv("command", " ".join(cmd))
         rc = run_snakemake(cmd, args.dry_run)
     if rc != 0:

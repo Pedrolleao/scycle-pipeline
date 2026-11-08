@@ -483,3 +483,7 @@ SP4 curated-function-GT **KofamScan benchmark** (current KEGG-KO GT makes it nea
   `make_cycle_map.py` and report panel ported from mcycle-pipeline): lines = pathways,
   stations = compounds, stops = genes, partial steps hatched. Presentation only: calls,
   tables and the consistency check unchanged.
+  Layout review (same day): the sulfonate track lengthened (sulfonates at y 14, name
+  on the left) with its six stops grouped towards the sulfonate end, so ssuE clears the
+  S⁰ → SO₃²⁻ diagonal; the phs line dropped to y 6 with its stops shifted east, YLIM
+  (0, 126).

@@ -31,7 +31,7 @@ import re
 
 # Canvas (data units, y up).
 XLIM = (0.0, 276.0)
-YLIM = (4.0, 126.0)
+YLIM = (0.0, 126.0)
 
 # Stations.  id: (label, x, y, (label dx, label dy, ha, va))
 # Lines meet at the station centre; the label offset keeps the name clear of
@@ -43,7 +43,7 @@ NODES = {
     "SO3":  ("SO₃²⁻",      142.0,  70.0, (5.0,   5.0, "left",   "bottom")),
     "H2S":  ("H₂S",        202.0,  70.0, (5.0,   5.0, "left",   "bottom")),
     "S0":   ("S⁰",         238.0,  34.0, (6.5,   0.0, "left",   "center")),
-    "SULF": ("sulfonates", 142.0,  22.0, (6.5,   0.0, "left",   "center")),
+    "SULF": ("sulfonates", 142.0,  14.0, (-6.5,  0.0, "right",  "center")),
     "S2O3": ("S₂O₃²⁻",      82.0,  22.0, (-3.0, -6.5, "center", "top")),
     "S4O6": ("S₄O₆²⁻",      34.0,  22.0, (-6.5,  0.0, "right",  "center")),
     "CYS":  ("cysteine",   250.0,  70.0, (6.5,   0.0, "left",   "center")),
@@ -144,11 +144,12 @@ STEPS = [
      "lines": [["ttrA", "ttrB", "ttrC"], ["otr", "tth"]]},
     {"id": "phs", "name": "Thiosulfate → sulfide + sulfite (thiosulfate reductase)",
      "pathway": _T,
-     "path": ["S2O3", (94.0, 10.0), (190.0, 10.0), (202.0, 22.0), "H2S"], "side": 1,
+     "path": ["S2O3", (98.0, 6.0), (190.0, 6.0), (202.0, 18.0), "H2S"], "side": 1,
+     "stop_shift": 8.0,
      "routes": [["phsA", "phsB", "phsC"]],
      "lines": [["phsA", "phsB", "phsC"]]},
     {"id": "tau", "name": "Sulfonate desulfonation → sulfite", "pathway": _U,
-     "path": ["SULF", "SO3"], "side": -1,
+     "path": ["SULF", "SO3"], "side": -1, "stop_shift": -4.0, "stop_spacing": 6.5,
      "routes": [["tauD"], ["ssuD"]],
      "lines": [["tauA", "tauB", "tauC", "tauD"], ["ssuD", "ssuE"]]},
     {"id": "sse", "name": "Thiosulfate → sulfite (rhodanese, thiosulfate sulfurtransferase)",

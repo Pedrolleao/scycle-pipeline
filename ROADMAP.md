@@ -476,3 +476,10 @@ SP4 curated-function-GT **KofamScan benchmark** (current KEGG-KO GT makes it nea
 - **Risk — KO-shared not gene-shared:** unlike the N tool's `nxrA`/`narG` (one KO, two
   genes), the sulfur traps are mostly *direction* (`dsrAB`) or *broad-family* (Mo-bis-MGD,
   cyt c) — handled by synteny + seed curation rather than per-gene custom HMMs.
+
+## Presentation changes
+
+- **2026-11-08 — cycle map redrawn as a metro map** (`_cycle_model.py` layout; the shared
+  `make_cycle_map.py` and report panel ported from mcycle-pipeline): lines = pathways,
+  stations = compounds, stops = genes, partial steps hatched. Presentation only: calls,
+  tables and the consistency check unchanged.

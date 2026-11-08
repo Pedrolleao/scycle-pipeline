@@ -137,6 +137,8 @@ svg text { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospa
 .g1 { font-weight: 700; fill: var(--ink); }
 .gx { fill: var(--muted); }
 .g0 { fill: var(--absent-text); }
+#cycle text { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+#cycle .station { font-weight: 700; fill: var(--ink); }
 
 /* tables: dashed rules, dim uppercase headers, the key column in full ink */
 table { border-collapse: collapse; width: 100%; font-size: 11px; }
@@ -705,14 +707,15 @@ function renderProc() {
 function tokenClass(code) { return code === 2 ? "g2" : code === 1 ? "g1" : code === -1 ? "gx" : "g0"; }
 function tokenText(tok) { return tok[0] + (tok[1] === 1 ? "°" : tok[1] === -1 ? "×" : ""); }
 function renderCycle(sm) {
+  // Metro map: lines = pathways, stations = compounds, stops = genes.
   const svg = document.getElementById("cycle");
   svg.replaceChildren();
-  const C = D.cycle, k = 6;
+  const C = D.cycle, G = C.geom, k = 6;
   const W = (C.xlim[1] - C.xlim[0]) * k, H = (C.ylim[1] - C.ylim[0]) * k;
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.setAttribute("width", "100%");
   svg.style.maxWidth = W + "px";
-  const X = x => (x - C.xlim[0]) * k, Y = y => (C.ylim[1] - y) * k;
+  const X = x => (x - C.xlim[0]) * k, Y = y => (C.ylim[1] - y) * k, f = v => v.toFixed(1);
   const order = {absent: 0, partial: 1, complete: 2};
   const steps = C.steps.slice().sort((a, b) => order[sm.steps[a.id][0]] - order[sm.steps[b.id][0]]);
   const stepTip = st => t => {
@@ -728,42 +731,60 @@ function renderCycle(sm) {
       tipRow(t, tok[0], STATUS[tok[1]] + own);
     }));
   };
+  const anchorOf = ha => ha === "right" ? "end" : ha === "center" ? "middle" : "start";
+  const dyOf = va => va === "center" ? 0.35 : va === "top" ? 0.95 : -0.25;
+  const gLines = s("g", {}, svg), gStops = s("g", {}, svg), gSt = s("g", {}, svg);
   steps.forEach(st => {
-    const stt = sm.steps[st.id][0];
-    const colour = stt === "absent" ? "var(--absent-edge)" : pcol(st.pathway);
-    const g = s("g", {}, svg);
-    (sm.steps[st.id][2] ? st.arrows_rev : st.arrows).forEach(a => {
-      if (!a.line.length) return;
-      const d = a.line.map((p, i) => (i ? "L" : "M") + X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("");
-      const attrs = {d, fill: "none", stroke: colour, "stroke-linejoin": "round",
-        "stroke-width": stt === "complete" ? 3.4 : stt === "partial" ? 2 : 1.2};
-      if (stt === "partial") attrs["stroke-dasharray"] = "5 4";
+    const v = sm.steps[st.id], stt = v[0], rev = v[2];
+    const hue = pcol(st.pathway), colour = stt === "absent" ? "var(--absent-edge)" : hue;
+    const pts = rev ? st.path.slice().reverse() : st.path;
+    const g = s("g", {}, gLines);
+    const track = (pts, stripes, c) => {
+      const d = pts.map((p, i) => (i ? "L" : "M") + f(X(p[0])) + "," + f(Y(p[1]))).join("");
+      const attrs = {d, fill: "none", stroke: colour, "stroke-width": G.line_w * k,
+        "stroke-linecap": "round", "stroke-linejoin": "round"};
+      if (stt === "partial") attrs["stroke-opacity"] = G.partial_alpha;
       s("path", attrs, g);
-      s("polygon", {points: a.head.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join(" "), fill: colour}, g);
+      // partial step: full-colour 45-degree stripes over the tinted line
+      if (stt === "partial") stripes.forEach(q =>
+        s("polygon", {points: q.map(p => f(X(p[0])) + "," + f(Y(p[1]))).join(" "), fill: hue}, g));
+      // direction chevron: a light V inside the line, before the arrival station
+      const L = G.chevron * k, tx = c.tx, ty = -c.ty, nx = -ty, ny = tx, px = X(c.x), py = Y(c.y);
+      s("polyline", {points: `${f(px - (tx - nx * 0.9) * L)},${f(py - (ty - ny * 0.9) * L)} ${f(px)},${f(py)} ${f(px - (tx + nx * 0.9) * L)},${f(py - (ty + ny * 0.9) * L)}`,
+        fill: "none", stroke: "var(--surface)", "stroke-width": 0.45 * k, "stroke-linecap": "round",
+        "stroke-linejoin": "round", opacity: 0.95}, g);
       s("path", {d, fill: "none", stroke: "transparent", "stroke-width": 16}, g);
-    });
+    };
+    track(pts, st.stripes, rev ? st.chevron_rev : st.chevron);
+    st.feeders.forEach(fd => track(fd.path, fd.stripes, fd.chevron));
     g.addEventListener("pointermove", e => showTip(e, stepTip(st)));
     g.addEventListener("pointerleave", hideTip);
+    // stops: one per gene, in the order of the step's gene lines
+    const toks = v[1].flat();
+    const gs = s("g", {}, gStops);
+    st.stops.forEach((sp, i) => {
+      const tok = toks[i]; if (!tok) return;
+      const code = tok[1], cx = X(sp.x), cy = Y(sp.y);
+      const ring = code === 2 || code === 1 ? hue : code === -1 ? "var(--muted)" : "var(--absent-edge)";
+      s("circle", {cx: f(cx), cy: f(cy), r: G.stop_r * (code === 0 ? 0.8 : 1) * k, fill: "var(--surface)",
+        stroke: ring, "stroke-width": (code === 0 ? 0.35 : 0.5) * k}, gs);
+      if (code === 1) s("circle", {cx: f(cx), cy: f(cy), r: 0.38 * k, fill: hue}, gs);
+      if (code === -1) { const q = 0.5 * k; s("path", {d: `M${f(cx - q)},${f(cy - q)}L${f(cx + q)},${f(cy + q)}M${f(cx - q)},${f(cy + q)}L${f(cx + q)},${f(cy - q)}`,
+        stroke: "var(--muted)", "stroke-width": 0.3 * k}, gs); }
+      const lx = X(sp.lx), ly = Y(sp.ly);
+      const ta = {x: f(lx), y: f(ly), "text-anchor": anchorOf(sp.ha), dy: `${dyOf(sp.va)}em`, "font-size": 13, class: tokenClass(code)};
+      if (sp.rot) ta.transform = `rotate(${-sp.rot} ${f(lx)} ${f(ly)})`;
+      const t = s("text", ta, gs, tokenText(tok));
+      if (i === 0 && v[3]) s("tspan", {class: "g0", dx: 5}, t, "∅");
+    });
+    gs.addEventListener("pointermove", e => showTip(e, stepTip(st)));
+    gs.addEventListener("pointerleave", hideTip);
   });
   C.nodes.forEach(n => {
-    s("rect", {x: X(n.x - n.w / 2), y: Y(n.y + n.h / 2), width: n.w * k, height: n.h * k,
-      fill: "var(--surface)", stroke: "var(--axis)", "stroke-width": 1}, svg);
-    s("text", {x: X(n.x), y: Y(n.y) + 4.5, "text-anchor": "middle", "font-size": 13, fill: "var(--ink)"}, svg, n.label);
-  });
-  C.steps.forEach(st => {
-    const [lx, ly, ha] = st.label;
-    const anchor = ha === "right" ? "end" : ha === "center" ? "middle" : "start";
-    const g = s("g", {}, svg);
-    sm.steps[st.id][1].forEach((line, li) => {
-      const t = s("text", {x: X(lx), y: Y(ly - li * C.line_step) + 4, "text-anchor": anchor, "font-size": 11}, g);
-      line.forEach((tok, ti) => {
-        const ts = s("tspan", {class: tokenClass(tok[1])}, t, tokenText(tok));
-        if (ti) ts.setAttribute("dx", 6);
-      });
-      if (li === 0 && sm.steps[st.id][3]) s("tspan", {class: "g0", dx: 6}, t, "∅");
-    });
-    g.addEventListener("pointermove", e => showTip(e, stepTip(st)));
-    g.addEventListener("pointerleave", hideTip);
+    s("circle", {cx: f(X(n.x)), cy: f(Y(n.y)), r: G.station_r * k, fill: "var(--surface)",
+      stroke: "var(--ink)", "stroke-width": 0.75 * k}, gSt);
+    s("text", {x: f(X(n.x + n.ldx)), y: f(Y(n.y + n.ldy)), "text-anchor": anchorOf(n.ha),
+      dy: `${dyOf(n.va)}em`, "font-size": 14.5, class: "station"}, gSt, n.label);
   });
 }
 
@@ -959,16 +980,31 @@ function init() {
    ["ruled_out", "", D.labels.ruled_out], ["absent", "", "absent"]]
     .forEach(it => legendItem(lc, v => compGlyph(v, 9, 9, 8.5, it[0], it[1]), it[2]));
   const ly = document.getElementById("leg-cycle");
-  const arrow = (w, dash, col) => v => {
-    const a = {x1: 0, x2: 13, y1: 9, y2: 9, stroke: col, "stroke-width": w};
-    if (dash) a["stroke-dasharray"] = "4 3";
-    s("line", a, v); s("polygon", {points: "18,9 12,5.5 12,12.5", fill: col}, v);
+  const track = (state, col) => v => {
+    const a = {x1: 1, x2: 17, y1: 9, y2: 9, stroke: col, "stroke-width": 6, "stroke-linecap": "round"};
+    if (state === "partial") a["stroke-opacity"] = D.cycle.geom.partial_alpha;
+    s("line", a, v);
+    if (state === "partial") [4, 9, 14].forEach(x =>
+      s("polygon", {points: `${x - 3},12 ${x - 1},12 ${x + 2},6 ${x},6`, fill: col}, v));
+    s("polyline", {points: "11,5.5 14.5,9 11,12.5", fill: "none", stroke: "var(--surface)",
+      "stroke-width": 1.8, "stroke-linecap": "round", "stroke-linejoin": "round"}, v);
   };
-  legendItem(ly, arrow(3.2, false, "var(--ink2)"), "complete step");
-  legendItem(ly, arrow(1.8, true, "var(--ink2)"), "partial");
-  legendItem(ly, arrow(1.1, false, "var(--absent-edge)"), "absent");
-  h("span", {}, ly).append("bold gene = found · ° domain-only · × disqualified · grey = absent · ∅ step not drawn for this genome type (hover for why; its genes keep their calls)");
-  h("span", {}, ly).append("arrow colour = pathway of the step; a gene from another pathway block is named as such in the tooltip");
+  const stop = code => v => {
+    s("line", {x1: 1, x2: 17, y1: 9, y2: 9, stroke: code === 0 ? "var(--absent-edge)" : "var(--ink2)",
+      "stroke-width": 6, "stroke-linecap": "round"}, v);
+    const ring = code === 0 ? "var(--absent-edge)" : code === -1 ? "var(--muted)" : "var(--ink2)";
+    s("circle", {cx: 9, cy: 9, r: code === 0 ? 3.2 : 4, fill: "var(--surface)", stroke: ring, "stroke-width": 2}, v);
+    if (code === 1) s("circle", {cx: 9, cy: 9, r: 1.6, fill: "var(--ink2)"}, v);
+    if (code === -1) s("path", {d: "M6.5,6.5L11.5,11.5M6.5,11.5L11.5,6.5", stroke: "var(--muted)", "stroke-width": 1.2}, v);
+  };
+  legendItem(ly, track("complete", "var(--ink2)"), "complete step — every gene of one route found");
+  legendItem(ly, track("partial", "var(--ink2)"), "partial — some route genes found (hatched)");
+  legendItem(ly, track("absent", "var(--absent-edge)"), "absent");
+  legendItem(ly, stop(2), "gene found");
+  legendItem(ly, stop(1), "domain-only (°)");
+  legendItem(ly, stop(-1), "disqualified (×)");
+  legendItem(ly, stop(0), "absent gene");
+  h("span", {}, ly).append("stations = compounds · lines = pathways, in the pathway colour · stops = genes · chevron = direction of travel · ∅ step not drawn for this genome type (hover for why; its genes keep their calls)");
   const sel = document.getElementById("genome");
   D.samples.slice().sort((a, b) => a.name.localeCompare(b.name))
     .forEach(x => h("option", {value: x.name}, sel, x.name));

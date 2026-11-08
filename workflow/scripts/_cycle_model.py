@@ -44,8 +44,8 @@ NODES = {
     "H2S":  ("H₂S",        202.0,  70.0, (5.0,   5.0, "left",   "bottom")),
     "S0":   ("S⁰",         238.0,  34.0, (6.5,   0.0, "left",   "center")),
     "SULF": ("sulfonates", 142.0,  14.0, (-6.5,  0.0, "right",  "center")),
-    "S2O3": ("S₂O₃²⁻",      82.0,  22.0, (-3.0, -6.5, "center", "top")),
-    "S4O6": ("S₄O₆²⁻",      34.0,  22.0, (-6.5,  0.0, "right",  "center")),
+    "S2O3": ("S₂O₃²⁻",      82.0,  22.0, (-1.5, -9.5, "center", "top")),
+    "S4O6": ("S₄O₆²⁻",      26.0,  22.0, (-6.5,  0.0, "right",  "center")),
     "CYS":  ("cysteine",   250.0,  70.0, (6.5,   0.0, "left",   "center")),
     "MESH": ("MeSH",       202.0, 106.0, (-6.5,  0.0, "right",  "center")),
     "DMSP": ("DMSP",       250.0, 106.0, (6.5,   0.0, "left",   "center")),
@@ -72,6 +72,8 @@ _U = "sulfonate_taurine"
 # feeders: extra lines of the same step that bring a second substrate to the
 #   product station (waypoint lists, drawn in the step's colour and state, with
 #   a chevron and no stops; never reversed).
+# flat:   write the stop labels horizontally even on a horizontal stretch (a
+#   lone stop between parallel strands, where 45° text would cross them).
 # stop_shift: moves the group of stops along the path (units, towards the end).
 # stop_spacing: this step's own cap on the distance between stops (default
 #   STOP_SPACING_MAX).
@@ -128,18 +130,22 @@ STEPS = [
      "routes": [["soeA", "soeB", "soeC"], ["sorA"]],
      "lines": [["soeA", "soeB", "soeC", "sorA"]]},
     {"id": "sox", "name": "Thiosulfate → sulfate (Sox system)", "pathway": _O,
-     "path": ["S2O3", "SO4"], "side": -1, "stop_shift": -8.0,
+     "path": ["S2O3", "SO4"], "side": -1, "stop_spacing": 7.5,
      "routes": [["soxA", "soxB", "soxX", "soxY", "soxZ"]],
      "lines": [["soxA", "soxB", "soxX"], ["soxY", "soxZ"], ["soxC", "soxD"]]},
     {"id": "tsd", "name": "Thiosulfate → tetrathionate (TsdA)", "pathway": _O,
-     "path": ["S2O3", "S4O6"], "side": -1,
+     "path": ["S2O3", "S4O6"], "side": -1, "flat": True,
      "routes": [["tsdA"]], "lines": [["tsdA"]]},
     {"id": "dox", "name": "Thiosulfate → tetrathionate (TQO, DoxDA)", "pathway": _T,
-     "path": ["S2O3", "S4O6"], "offset": 3.2, "side": 1,
+     # fans in to a close parallel of the TsdA strand at the S₂O₃²⁻ disc: a 45°
+     # approach from the upper left would lie on the Sox line.
+     "path": [(82.0, 25.2), (73.8, 25.2), (70.0, 29.0), (33.0, 29.0), "S4O6"], "side": -1,
+     "stop_shift": 10.0,
      "routes": [["doxA", "doxD"]], "lines": [["doxA", "doxD"]]},
     {"id": "ttr", "name": "Tetrathionate → thiosulfate (Ttr / Otr / Tth)",
      "pathway": _T,
-     "path": ["S4O6", "S2O3"], "offset": 3.2, "side": 1, "stop_shift": -8.0,
+     "path": ["S4O6", (33.0, 15.0), (75.0, 15.0), "S2O3"], "side": -1, "stop_shift": -4.0,
+     "stop_spacing": 6.0,
      "routes": [["ttrA", "ttrB", "ttrC"], ["otr"], ["tth"]],
      "lines": [["ttrA", "ttrB", "ttrC"], ["otr", "tth"]]},
     {"id": "phs", "name": "Thiosulfate → sulfide + sulfite (thiosulfate reductase)",
@@ -362,7 +368,9 @@ def step_geometry(st) -> dict:
     """Polyline, stops (one per gene token, in `lines` order) and the chevron
     positions of one step. Stop labels: on a vertical or diagonal stretch the
     text is horizontal beside the stop; on a horizontal stretch it is written
-    at 45° so dense stops do not collide (the metro-map convention)."""
+    at 45° so dense stops do not collide (the metro-map convention), unless
+    the step is `flat` (a lone stop between parallel strands: horizontal text
+    centred over or under the stop)."""
     pts = _offset_polyline([_pt(p) for p in st["path"]], st.get("offset", 0.0))
     L = _length(pts)
     tokens = [g for line in st["lines"] for g in line]
@@ -376,7 +384,11 @@ def step_geometry(st) -> dict:
         side = side or (1 if i % 2 == 0 else -1)
         nx, ny = -ty * side, tx * side          # left normal × side
         o = _orient((tx, ty))
-        if o == "h":
+        if o == "h" and st.get("flat"):
+            up = 1 if ny > 0 else -1
+            stops.append({"x": x, "y": y, "lx": x, "ly": y + LABEL_GAP * up, "rot": 0,
+                          "ha": "center", "va": "bottom" if up > 0 else "top"})
+        elif o == "h":
             # 45° label: starts above the stop reading up-right, or ends below
             # it reading up to the stop.
             up = 1 if ny > 0 else -1

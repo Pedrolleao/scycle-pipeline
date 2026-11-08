@@ -487,3 +487,9 @@ SP4 curated-function-GT **KofamScan benchmark** (current KEGG-KO GT makes it nea
   on the left) with its six stops grouped towards the sulfonate end, so ssuE clears the
   S⁰ → SO₃²⁻ diagonal; the phs line dropped to y 6 with its stops shifted east, YLIM
   (0, 126).
+  The S₄O₆²⁻ ⇄ S₂O₃²⁻ bundle redrawn as three separate strands (tetrathionate
+  reduction below, TsdA in the middle, DoxDA above, joined to the stations by 45°
+  stubs, the upper one fanning in beside TsdA at S₂O₃²⁻ because the Sox line owns that
+  diagonal; S₄O₆²⁻ moved to x 26): the tsdA label is horizontal between the strands (new
+  shared `flat` option), the ttr labels sit under the bundle, and the sox stops are
+  grouped (spacing 7.5) so soxA is clear of the bundle.
